@@ -279,9 +279,10 @@
 
 
   /* ---- pure-CSS page switching (no JavaScript) ---- */
-  .page { display: none; scroll-margin-top: 90px; }
-  .page:target { display: block; }
-  body:has(.page:target) .home { display: none; }
+  .page { display: none; }
+  .pg-anchor { display: block; height: 0; scroll-margin-top: 90px; }
+  .pg-anchor:target + .page { display: block; }
+  body:has(.pg-anchor:target) .home { display: none; }
 
 
   /* embedded document viewer (boohoo case study) */
@@ -774,7 +775,8 @@
 </div>
 </div>
 
-<section class="page" id="case-7-eleven">
+<span class="pg-anchor" id="case-7-eleven"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">7-Eleven<span class="dot">.</span></h1>
@@ -806,7 +808,8 @@
 
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-aquafina">
+<span class="pg-anchor" id="case-aquafina"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">Aquafina<span class="dot">.</span></h1>
@@ -833,7 +836,8 @@
 
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-avion">
+<span class="pg-anchor" id="case-avion"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">Avión<span class="dot">.</span></h1>
@@ -870,7 +874,8 @@
 
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-brisk">
+<span class="pg-anchor" id="case-brisk"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">Brisk<span class="dot">.</span></h1>
@@ -902,7 +907,8 @@
 
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-bud-light">
+<span class="pg-anchor" id="case-bud-light"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">Bud Light<span class="dot">.</span></h1>
@@ -943,7 +949,8 @@
 </div>
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-capitol-theatre">
+<span class="pg-anchor" id="case-capitol-theatre"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">The Capitol Theatre<span class="dot">.</span></h1>
@@ -972,7 +979,8 @@
 
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-creative-force">
+<span class="pg-anchor" id="case-creative-force"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">Creative Force<span class="dot">.</span></h1>
@@ -1033,7 +1041,8 @@
 
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-family-dollar">
+<span class="pg-anchor" id="case-family-dollar"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">Family Dollar<span class="dot">.</span></h1>
@@ -1083,7 +1092,8 @@
 
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-fernet-branca">
+<span class="pg-anchor" id="case-fernet-branca"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">Fernet-Branca<span class="dot">.</span></h1>
@@ -1122,7 +1132,8 @@
 
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-ge">
+<span class="pg-anchor" id="case-ge"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">GE<span class="dot">.</span></h1>
@@ -1160,7 +1171,8 @@
 
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-hello-retail">
+<span class="pg-anchor" id="case-hello-retail"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">Hello Retail<span class="dot">.</span></h1>
@@ -1205,7 +1217,8 @@
 
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-iheartmedia">
+<span class="pg-anchor" id="case-iheartmedia"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">iHeartMedia<span class="dot">.</span></h1>
@@ -1263,7 +1276,8 @@
 
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-jukely">
+<span class="pg-anchor" id="case-jukely"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">Jukely<span class="dot">.</span></h1>
@@ -1318,7 +1332,8 @@
 
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-kindle">
+<span class="pg-anchor" id="case-kindle"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">Kindle<span class="dot">.</span></h1>
@@ -1349,7 +1364,8 @@
 
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-kubbco">
+<span class="pg-anchor" id="case-kubbco"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">Kubbco<span class="dot">.</span></h1>
@@ -1402,7 +1418,8 @@
 
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-marketing-combat">
+<span class="pg-anchor" id="case-marketing-combat"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">Marketing Combat<span class="dot">.</span></h1>
@@ -1428,7 +1445,8 @@
 </div>
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-moxso">
+<span class="pg-anchor" id="case-moxso"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">Moxso<span class="dot">.</span></h1>
@@ -1548,7 +1566,8 @@
 
 <div class="wrap"><footer class="mono"><span>&copy; 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-mountain-dew">
+<span class="pg-anchor" id="case-mountain-dew"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">Mountain Dew<span class="dot">.</span></h1>
@@ -1575,7 +1594,8 @@
 
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-pharmaceutical">
+<span class="pg-anchor" id="case-pharmaceutical"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">Pharmaceutical Radio<span class="dot">.</span></h1>
@@ -1617,7 +1637,8 @@
 
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-pure-leaf">
+<span class="pg-anchor" id="case-pure-leaf"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">Pure Leaf<span class="dot">.</span></h1>
@@ -1649,7 +1670,8 @@
 
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-quaker">
+<span class="pg-anchor" id="case-quaker"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">Quaker<span class="dot">.</span></h1>
@@ -1678,7 +1700,8 @@
 
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-remy-martin">
+<span class="pg-anchor" id="case-remy-martin"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">Rémy Martin<span class="dot">.</span></h1>
@@ -1710,7 +1733,8 @@
 
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-remy-v">
+<span class="pg-anchor" id="case-remy-v"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">Rémy V<span class="dot">.</span></h1>
@@ -1744,7 +1768,8 @@
 
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-shock-top">
+<span class="pg-anchor" id="case-shock-top"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">Shock Top<span class="dot">.</span></h1>
@@ -1783,7 +1808,8 @@
 
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-space-vikings">
+<span class="pg-anchor" id="case-space-vikings"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">Space Vikings<span class="dot">.</span></h1>
@@ -1815,7 +1841,8 @@
 
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-spotify">
+<span class="pg-anchor" id="case-spotify"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">Spotify<span class="dot">.</span></h1>
@@ -1850,7 +1877,8 @@
 </div>
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-twisted-tea">
+<span class="pg-anchor" id="case-twisted-tea"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">Twisted Tea<span class="dot">.</span></h1>
@@ -1884,7 +1912,8 @@
 
 <div class="wrap"><footer class="mono"><span>© 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></footer></div>
 </section>
-<section class="page" id="case-usa-network">
+<span class="pg-anchor" id="case-usa-network"></span>
+<section class="page">
 <div class="wrap">
   <header class="case-hero">
     <h1 class="case-h">USA Network<span class="dot">.</span></h1>
