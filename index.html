@@ -504,6 +504,13 @@
   /* nav */
   nav { background: color-mix(in srgb, #0b0b0a 80%, transparent); }
   nav .name { font-weight: 800; text-transform: uppercase; letter-spacing: -0.01em; }
+
+  /* ai experiments */
+  .aisec { padding-bottom: 96px; }
+  .ai-lede { max-width: 56ch; margin-bottom: 36px; }
+  .ai-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; }
+  .ai-grid .feat:first-child { min-height: 300px; }
+  @media (max-width: 760px) { .ai-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -516,6 +523,7 @@
     <a href="#work">Work</a>
     <a href="#voiceover">Voiceover</a>
     <a href="#fiction">Fiction</a>
+    <a href="#ai">AI</a>
     <a href="#facts">About</a>
     <a href="https://www.linkedin.com/in/fluential" target="_blank" rel="noopener">CV</a>
   </div>
@@ -667,10 +675,32 @@
   </div>
 </section>
 
+<!-- ============ PLAYING WITH AI ============ -->
+<section id="ai" class="aisec">
+  <div class="wrap">
+    <div class="sh"><h2>Playing<br><em>with AI</em></h2><span class="sh-n mono">04 / Live experiments</span></div>
+    <p class="lead ai-lede">Things I'm building with AI. They're live. They're rough. They're just the beginning.</p>
+    <div class="ai-grid">
+      <a class="feat" href="https://listening-room-nu.vercel.app/" target="_blank" rel="noopener">
+        <div class="meta mono"><span class="cat">WIP</span><span class="agency">Web app &middot; Neural TTS</span></div>
+        <h3>Listening Room</h3>
+        <p>An audiobook reader built for my own manuscripts. Neural TTS reads the books back to me, so I hear them the way a reader does.</p>
+        <span class="go mono">Try it <span class="arrow">&rarr;</span></span>
+      </a>
+      <a class="feat" href="https://jasonwdonnelly.vercel.app/super-family.html" target="_blank" rel="noopener">
+        <div class="meta mono"><span class="cat">WIP</span><span class="agency">Browser game</span></div>
+        <h3>Super Family</h3>
+        <p>A browser game built for my son on a single train ride. He remains my toughest client.</p>
+        <span class="go mono">Try it <span class="arrow">&rarr;</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- ============ FACTS ============ -->
 <section id="facts" class="xsec">
   <div class="wrap">
-    <div class="sh"><h2>Things that<br><em>are true</em></h2><span class="sh-n mono">04 / All pulled from real life</span></div>
+    <div class="sh"><h2>Things that<br><em>are true</em></h2><span class="sh-n mono">05 / All pulled from real life</span></div>
     <div class="fxgrid">
       <div class="fx"><span class="fx-n">01</span><span class="fx-t">Recruited himself into his first copywriting job. It worked.</span></div>
       <div class="fx"><span class="fx-n">02</span><span class="fx-t">Holds three master's degrees. One of them is an MFA in fiction.</span></div>
