@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Red Pen · Score your website copy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=Archivo+Black&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDEFF2; --panel:#FFFFFF; --ink:#15171C; --muted:#5E6673;
+  --line:#D9DEE5; --mark:#FF4D00; --mark-soft:#FFE8DE;
+  --ok:#1B8A5A; --warn:#B25E00; --bad:#C8321E;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Archivo',sans-serif;font-size:15px;line-height:1.5}
+.mono{font-family:'Spline Sans Mono',monospace}
+:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+
+.specbar{display:flex;justify-content:space-between;align-items:center;padding:10px 24px;border-bottom:1px solid var(--line);font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.specbar b{color:var(--mark);font-weight:500}
+.masthead{padding:36px 24px 24px;max-width:1100px;margin:0 auto}
+.masthead h1{font-family:'Archivo Black',sans-serif;font-size:clamp(2.1rem,5vw,3.4rem);letter-spacing:-.02em;line-height:1}
+.masthead p{color:var(--muted);margin-top:10px;max-width:60ch}
+
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px 80px}
+.inputpanel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}
+.urlrow{display:flex;gap:10px;flex-wrap:wrap}
+.urlrow input{flex:1;min-width:240px;border:1px solid var(--line);border-radius:10px;padding:12px 14px;font:400 15px 'Spline Sans Mono',monospace;background:#FAFBFC}
+.urlrow input:focus{border-color:var(--ink)}
+button{font:500 13px 'Spline Sans Mono',monospace;letter-spacing:.04em;border:1px solid var(--ink);background:var(--ink);color:#fff;border-radius:10px;padding:12px 20px;cursor:pointer}
+button.accent{background:var(--mark);border-color:var(--mark)}
+button.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+button:hover{opacity:.88}
+button:disabled{opacity:.5;cursor:wait}
+.altmode{margin-top:12px;font-size:13px;color:var(--muted)}
+.altmode a{color:var(--ink);cursor:pointer;border-bottom:1px solid var(--mark);text-decoration:none}
+#pasteArea{display:none;margin-top:12px}
+#pasteArea textarea{width:100%;min-height:180px;border:1px solid var(--line);border-radius:10px;padding:14px;font:400 14px/1.55 'Archivo',sans-serif;background:#FAFBFC;resize:vertical}
+.status{margin-top:12px;font-family:'Spline Sans Mono',monospace;font-size:12px;color:var(--muted)}
+.status.err{color:var(--bad)}
+
+/* results */
+#results{display:none;margin-top:28px}
+.scorehero{display:grid;grid-template-columns:200px 1fr;gap:24px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;align-items:center}
+@media(max-width:640px){.scorehero{grid-template-columns:1fr;justify-items:center;text-align:center}}
+.dialwrap{position:relative;width:180px;height:180px}
+.dialwrap svg{transform:rotate(-90deg)}
+.dialnum{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.dialnum b{font-family:'Archivo Black',sans-serif;font-size:52px;line-height:1}
+.dialnum span{font-family:'Spline Sans Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-top:2px}
+.verdict h2{font-family:'Archivo Black',sans-serif;font-size:clamp(1.3rem,3vw,1.9rem);letter-spacing:-.01em;line-height:1.15}
+.verdict p{color:var(--muted);margin-top:8px;max-width:58ch}
+.srcline{font-family:'Spline Sans Mono',monospace;font-size:11px;color:var(--muted);margin-top:12px;letter-spacing:.04em}
+
+.fixfirst{margin-top:18px;background:var(--ink);color:#fff;border-radius:14px;padding:22px}
+.fixfirst h3{font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mark);font-weight:500;margin-bottom:12px}
+.fixfirst ol{list-style:none;counter-reset:fx}
+.fixfirst li{counter-increment:fx;display:flex;gap:14px;padding:10px 0;border-top:1px solid rgba(255,255,255,.12);font-size:14px;line-height:1.5}
+.fixfirst li:first-child{border-top:none}
+.fixfirst li::before{content:counter(fx,decimal-leading-zero);font-family:'Spline Sans Mono',monospace;color:var(--mark);font-size:12px;padding-top:2px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}
+.card h3{font-family:'Spline Sans Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.dot{width:9px;height:9px;border-radius:50%;flex:none}
+.dot.ok{background:var(--ok)}.dot.warn{background:var(--warn)}.dot.bad{background:var(--bad)}
+.card .lead{font-weight:600;font-size:15px;margin-bottom:8px}
+.card p{font-size:13.5px;color:var(--muted);line-height:1.55}
+.card table{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
+.card td{padding:6px 0;border-top:1px solid var(--line)}
+.card td:last-child{text-align:right;font-family:'Spline Sans Mono',monospace;font-size:12.5px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.wchip{font-family:'Spline Sans Mono',monospace;font-size:11.5px;background:var(--mark-soft);color:var(--mark);border:1px solid var(--mark);border-radius:999px;padding:4px 10px}
+.wchip i{font-style:normal;opacity:.7}
+.ex{border-left:3px solid var(--line);padding:6px 10px;margin-top:8px;font-size:13px;color:var(--ink);background:#FAFBFC;border-radius:0 8px 8px 0;line-height:1.5}
+.ex.flag{border-left-color:var(--mark)}
+.bignum{font-family:'Archivo Black',sans-serif;font-size:30px;line-height:1;margin:4px 0 2px}
+.sub{font-family:'Spline Sans Mono',monospace;font-size:11px;color:var(--muted)}
+
+.cta{margin-top:18px;background:var(--mark);border-radius:14px;padding:26px 24px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+.cta h3{font-family:'Archivo Black',sans-serif;color:#fff;font-size:clamp(1.15rem,2.6vw,1.5rem);letter-spacing:-.01em}
+.cta p{color:#FFE3D6;font-size:13.5px;margin-top:4px;max-width:50ch}
+.cta a{font:500 13px 'Spline Sans Mono',monospace;background:#fff;color:var(--mark);border-radius:10px;padding:13px 22px;text-decoration:none;white-space:nowrap}
+.cta a:hover{opacity:.9}
+
+footer{border-top:1px solid var(--line);padding:18px 24px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:'Spline Sans Mono',monospace;font-size:11px;color:var(--muted)}
+footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--mark)}
+</style>
+</head>
+<body>
+
+<div class="specbar"><span>TOOL <b>NO. 05</b> · COPY DIAGNOSTICS</span><span>NO AI · NO ACCOUNT · MATH AND OPINIONS ONLY</span></div>
+
+<header class="masthead">
+  <h1>The Red Pen</h1>
+  <p>Drop in a URL. Get the copy feedback nobody at the company will say out loud: how hard it is to read, how much of it is filler, and who the page is actually about. Every score is computed in your browser. No model, no magic, no mercy.</p>
+</header>
+
+<main class="wrap">
+  <section class="inputpanel">
+    <div class="urlrow">
+      <input id="urlInput" type="url" placeholder="https://yourcompany.com" autocomplete="off" spellcheck="false" aria-label="Website URL">
+      <button id="runBtn" class="accent" type="button">Mark it up</button>
+    </div>
+    <div class="altmode">Site behind a wall or heavy on JavaScript? <a id="pasteToggle">Paste the copy instead.</a></div>
+    <div id="pasteArea">
+      <textarea id="pasteInput" placeholder="Paste the page copy here, then hit the button." aria-label="Pasted copy"></textarea>
+      <div style="margin-top:10px"><button id="runPasteBtn" type="button">Mark up the paste</button></div>
+    </div>
+    <div class="status" id="status"></div>
+  </section>
+
+  <section id="results">
+    <div class="scorehero">
+      <div class="dialwrap">
+        <svg width="180" height="180" viewBox="0 0 180 180">
+          <circle cx="90" cy="90" r="78" fill="none" stroke="#E5E8EC" stroke-width="14"/>
+          <circle id="dialArc" cx="90" cy="90" r="78" fill="none" stroke="#FF4D00" stroke-width="14" stroke-linecap="round" stroke-dasharray="490" stroke-dashoffset="490"/>
+        </svg>
+        <div class="dialnum"><b id="scoreNum">0</b><span>out of 100</span></div>
+      </div>
+      <div class="verdict">
+        <h2 id="verdictTitle"></h2>
+        <p id="verdictBody"></p>
+        <div class="srcline" id="srcLine"></div>
+      </div>
+    </div>
+
+    <div class="fixfirst">
+      <h3>Fix these first</h3>
+      <ol id="fixList"></ol>
+    </div>
+
+    <div class="grid" id="cards"></div>
+
+    <div class="cta">
+      <div>
+        <h3>Scored worse than you hoped?</h3>
+        <p>Want someone to actually make your page readable? That is a job. Reach out to Jason, here.</p>
+      </div>
+      <a id="ctaMail" href="mailto:jasonwdonnelly@gmail.com?subject=Make%20my%20page%20readable">Email Jason</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>THE RED PEN · part of a small set of pre-publish tools</span>
+  <span>built by <a href="https://jasonwdonnelly.vercel.app" rel="noopener">Jason Donnelly</a></span>
+</footer>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+
+  /* ---------- word lists ---------- */
+  var BUZZ = ["seamless","seamlessly","robust","leverage","leverages","leveraging","empower","empowers","empowering","unlock","unlocks","unlocking","elevate","elevates","elevating","cutting-edge","innovative","innovation","world-class","best-in-class","holistic","synergy","synergies","revolutionize","revolutionary","game-changing","game-changer","next-generation","next-gen","state-of-the-art","end-to-end","turnkey","frictionless","supercharge","streamline","streamlined","transformative","disruptive","paradigm","scalable","mission-critical","actionable","delve","unparalleled","unrivaled","industry-leading","market-leading","bespoke","value-add","data-driven","ai-powered","customer-centric","results-driven","hyper-personalized","effortlessly","intuitively"];
+  var HEDGE = ["arguably","perhaps","maybe","somewhat","fairly","quite","rather","relatively","generally","typically","usually","probably","possibly","seemingly","essentially","basically","virtually"];
+  var IRREG = ["made","done","seen","known","given","taken","found","built","brought","bought","caught","chosen","driven","drawn","grown","held","kept","led","left","lost","meant","put","read","said","sent","set","shown","sold","spent","taught","thought","told","understood","won","written","designed","created","developed","launched","trusted","used","loved","powered","backed","built"];
+
+  /* ---------- text math ---------- */
+  function syllables(w){
+    w = w.toLowerCase().replace(/[^a-z]/g,'');
+    if (!w) return 0;
+    if (w.length <= 3) return 1;
+    w = w.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/,'').replace(/^y/,'');
+    var m = w.match(/[aeiouy]{1,2}/g);
+    return m ? m.length : 1;
+  }
+  function splitSentences(t){
+    return t.replace(/\s+/g,' ')
+            .split(/(?<=[.!?])\s+(?=[A-Z0-9\u201C"'])/)
+            .map(function(s){ return s.trim(); })
+            .filter(function(s){ return s.split(/\s+/).length > 2; });
+  }
+  function countMatches(text, list){
+    var found = {}, total = 0, lower = text.toLowerCase();
+    list.forEach(function(w){
+      var re = new RegExp('\\b' + w.replace(/[-]/g,'[- ]') + '\\b','g');
+      var m = lower.match(re);
+      if (m){ found[w] = m.length; total += m.length; }
+    });
+    return { found: found, total: total };
+  }
+
+  function analyze(text){
+    var sentences = splitSentences(text);
+    var words = text.match(/[A-Za-z\u00C0-\u024F'’-]+/g) || [];
+    var W = words.length, S = Math.max(1, sentences.length);
+    var sylTotal = 0, complex = 0, letters = 0;
+    words.forEach(function(w){
+      var sy = syllables(w);
+      sylTotal += sy;
+      if (sy >= 3 && !/[-]/.test(w)) complex++;
+      letters += w.replace(/[^A-Za-z]/g,'').length;
+    });
+    var ASL = W / S, ASW = sylTotal / Math.max(1,W);
+
+    var flesch = 206.835 - 1.015 * ASL - 84.6 * ASW;
+    var fk     = 0.39 * ASL + 11.8 * ASW - 15.59;
+    var fog    = 0.4 * (ASL + 100 * complex / Math.max(1,W));
+    var smog   = 1.043 * Math.sqrt(complex * (30 / S)) + 3.1291;
+    var cli    = 0.0588 * (letters / W * 100) - 0.296 * (S / W * 100) - 15.8;
+    var ari    = 4.71 * (letters / W) + 0.5 * ASL - 21.43;
+
+    var buzz  = countMatches(text, BUZZ);
+    var hedge = countMatches(text, HEDGE);
+
+    // passive voice (heuristic)
+    var passiveRe = new RegExp('\\b(am|is|are|was|were|be|been|being)\\s+(\\w+ed|' + IRREG.join('|') + ')\\b','gi');
+    var passiveEx = [];
+    var passiveCount = 0;
+    sentences.forEach(function(s){
+      var m = s.match(passiveRe);
+      if (m){ passiveCount++; if (passiveEx.length < 4) passiveEx.push(s); }
+    });
+    var passivePct = passiveCount / S * 100;
+
+    // pronoun focus
+    var weCount  = (text.match(/\b(we|we're|our|ours|us)\b/gi) || []).length;
+    var youCount = (text.match(/\b(you|you're|your|yours)\b/gi) || []).length;
+
+    // tics
+    var emd = (text.match(/\u2014/g) || []).length;
+    var excl = (text.match(/!/g) || []).length;
+    var notJust = (text.match(/\b(?:isn['’]t|not)\s+just\b/gi) || []).length;
+    var todayWorld = (text.match(/in today['’]s\s+(?:fast-paced\s+|ever-changing\s+|digital\s+)?(?:world|landscape|market|environment|economy)/gi) || []).length;
+    var triads = (text.match(/\b[\w'-]+,\s+[\w'-]+,?\s+and\s+[\w'-]+\b/g) || []).length;
+
+    var longSentences = sentences.filter(function(s){ return s.split(/\s+/).length > 25; });
+    var longest = sentences.slice().sort(function(a,b){ return b.split(/\s+/).length - a.split(/\s+/).length; }).slice(0,3);
+
+    var per1k = function(n){ return n / Math.max(1,W) * 1000; };
+
+    /* ---------- score ---------- */
+    var score = 100, penalties = [];
+    function pen(amount, label){ if (amount > 0){ score -= amount; penalties.push({amt: amount, label: label}); } }
+
+    if (flesch < 30) pen(20,'Copy reads like an academic paper. Cut sentence length and word length hard.');
+    else if (flesch < 50) pen(12,'Reading ease is below where conversion copy should sit. Shorten sentences, swap latinate words for plain ones.');
+    else if (flesch < 60) pen(6,'Readable, but still working harder than it needs to. Tighten the longest sentences.');
+
+    if (ASL > 28) pen(10,'Average sentence runs ' + ASL.toFixed(0) + ' words. Web copy should average under 18. Break them up.');
+    else if (ASL > 22) pen(5,'Sentences average ' + ASL.toFixed(0) + ' words. Trim toward 15 to 18.');
+
+    var bp = per1k(buzz.total);
+    if (bp > 0) pen(Math.min(25, Math.round(bp * 4)),'Buzzword density is ' + bp.toFixed(1) + ' per 1,000 words. Replace each one with the specific thing it is hiding.');
+
+    if (passivePct > 25) pen(12,'Roughly ' + passivePct.toFixed(0) + '% of sentences are passive. Name who does what.');
+    else if (passivePct > 12) pen(6,'Passive voice shows up in about ' + passivePct.toFixed(0) + '% of sentences. Flip the worst ones to active.');
+
+    var hp = per1k(hedge.total);
+    if (hp > 1) pen(Math.min(8, Math.round(hp * 2)),'Hedging language softens every claim. Either commit to the sentence or cut it.');
+
+    var weShare = weCount / Math.max(1, weCount + youCount);
+    if (weCount + youCount > 6){
+      if (weShare > 0.75) pen(10,'The page talks about the company ' + weCount + ' times and the customer ' + youCount + ' times. Flip the ratio.');
+      else if (weShare > 0.6) pen(5,'More "we" than "you." Rewrite the openers to lead with the reader.');
+      else if (youCount > weCount) score = Math.min(100, score + 4);
+    }
+
+    if (per1k(emd) > 3) pen(5,'Em dashes everywhere. The single most recognizable AI tell in 2026. Periods work.');
+    if (per1k(excl) > 2) pen(3,'Too many exclamation points. Confidence does not shout.');
+    if (notJust + todayWorld > 0) pen(4,'"Not just X" and "in today\u2019s world" constructions found. These are template phrases. Cut them.');
+
+    score = Math.max(0, Math.min(100, Math.round(score)));
+
+    return { score: score, penalties: penalties.sort(function(a,b){ return b.amt - a.amt; }),
+      W:W, S:S, ASL:ASL, sylTotal:sylTotal, complex:complex,
+      flesch:flesch, fk:fk, fog:fog, smog:smog, cli:cli, ari:ari,
+      buzz:buzz, hedge:hedge, passivePct:passivePct, passiveEx:passiveEx,
+      weCount:weCount, youCount:youCount, emd:emd, excl:excl, notJust:notJust,
+      todayWorld:todayWorld, triads:triads, longSentences:longSentences, longest:longest,
+      readMin: W / 230 };
+  }
+
+  /* ---------- fetch via public proxies ---------- */
+  function normUrl(u){
+    u = u.trim();
+    if (!u) return '';
+    if (!/^https?:\/\//i.test(u)) u = 'https://' + u;
+    return u;
+  }
+  function fetchWithTimeout(url, ms){
+    var ctrl = new AbortController();
+    var t = setTimeout(function(){ ctrl.abort(); }, ms);
+    return fetch(url, { signal: ctrl.signal }).finally(function(){ clearTimeout(t); });
+  }
+  // Routes, most reliable first. Route 1 only works once api/fetch.js is
+  // deployed next to this page on Vercel; the rest are public, keyless proxies.
+  function routes(u){
+    var enc = encodeURIComponent(u);
+    return [
+      { name: 'same-origin relay', url: '/api/fetch?url=' + enc,                          kind: 'html' },
+      { name: 'reader proxy',      url: 'https://r.jina.ai/' + u,                          kind: 'text' },
+      { name: 'allorigins raw',    url: 'https://api.allorigins.win/raw?url=' + enc,       kind: 'html' },
+      { name: 'allorigins json',   url: 'https://api.allorigins.win/get?url=' + enc,       kind: 'json' },
+      { name: 'corsproxy',         url: 'https://corsproxy.io/?url=' + enc,                kind: 'html' },
+      { name: 'codetabs',          url: 'https://api.codetabs.com/v1/proxy?quest=' + enc,  kind: 'html' }
+    ];
+  }
+  async function fetchPage(url, onTry){
+    var list = routes(url);
+    for (var i = 0; i < list.length; i++){
+      var r = list[i];
+      if (onTry) onTry(i + 1, list.length, r.name);
+      try{
+        var res = await fetchWithTimeout(r.url, 12000);
+        if (!res.ok) continue;
+        var body = await res.text();
+        var kind = r.kind;
+        if (kind === 'json'){
+          try{ body = (JSON.parse(body) || {}).contents || ''; }catch(e){ body = ''; }
+          kind = 'html';
+        }
+        if (body && body.length > 250) return { content: body, kind: kind };
+      }catch(e){ /* try next route */ }
+    }
+    throw new Error('unreachable');
+  }
+  // The reader proxy returns "Title: ...\nURL Source: ...\nMarkdown Content:\n..."
+  function cleanReaderText(t){
+    var title = '';
+    var m = t.match(/^Title:\s*(.+)$/m);
+    if (m) title = m[1].trim();
+    var idx = t.indexOf('Markdown Content:');
+    if (idx > -1) t = t.slice(idx + 'Markdown Content:'.length);
+    t = t.replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
+         .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+         .replace(/^#{1,6}\s*/gm, '')
+         .replace(/^[-=_*]{3,}\s*$/gm, ' ')
+         .replace(/[*_`>|]+/g, ' ')
+         .replace(/https?:\/\/\S+/g, ' ')
+         .replace(/[ \t]+/g, ' ');
+    return { text: t.trim(), title: title };
+  }
+  function extractCopy(html){
+    var doc = new DOMParser().parseFromString(html, 'text/html');
+    ['script','style','noscript','svg','iframe','form','template','nav','footer'].forEach(function(sel){
+      doc.querySelectorAll(sel).forEach(function(n){ n.remove(); });
+    });
+    var root = doc.querySelector('main') || doc.body;
+    var parts = [], seen = {};
+    root.querySelectorAll('h1,h2,h3,h4,p,li,blockquote,figcaption').forEach(function(n){
+      var t = n.textContent.replace(/\s+/g,' ').trim();
+      if (t.length > 8 && !seen[t]){ seen[t] = 1; parts.push(t); }
+    });
+    var title = (doc.querySelector('title') || {}).textContent || '';
+    return { text: parts.join('\n'), title: title.trim() };
+  }
+
+  /* ---------- render ---------- */
+  function verdictFor(score){
+    if (score >= 90) return ['Clean. Suspiciously clean.','High-clarity copy with almost no filler. Either a very good writer worked on this or someone deleted three rounds of stakeholder feedback. Respect either way.'];
+    if (score >= 75) return ['Solid. A human fought for this.','Mostly clear, mostly specific. The remaining issues below are the kind that survive because nobody pushed back in the review.'];
+    if (score >= 60) return ['Fine. Forgettable, but fine.','Nothing is broken, and nothing sticks. The copy reads like it was written to avoid disapproval rather than to be remembered.'];
+    if (score >= 40) return ['Slop-adjacent.','The buzzwords are doing the load-bearing work and the customer is a guest star on their own homepage. Salvageable, but it needs a rewrite, not a polish.'];
+    return ['Marketing did this.','This copy was assembled, not written. Every flag below fired. The good news: when everything is generic, every fix is an upgrade.'];
+  }
+
+  function esc(s){ return s.replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  function card(state, title, leadHtml, bodyHtml){
+    return '<div class="card"><h3><span class="dot ' + state + '"></span>' + title + '</h3>' +
+           (leadHtml ? '<div class="lead">' + leadHtml + '</div>' : '') + (bodyHtml || '') + '</div>';
+  }
+
+  function render(a, sourceLabel){
+    $('results').style.display = 'block';
+
+    // dial
+    var c = 2 * Math.PI * 78;
+    var arc = $('dialArc');
+    arc.setAttribute('stroke-dasharray', c.toFixed(0));
+    arc.setAttribute('stroke-dashoffset', (c * (1 - a.score / 100)).toFixed(0));
+    arc.setAttribute('stroke', a.score >= 75 ? '#1B8A5A' : a.score >= 50 ? '#B25E00' : '#FF4D00');
+    $('scoreNum').textContent = a.score;
+
+    var v = verdictFor(a.score);
+    $('verdictTitle').textContent = v[0];
+    $('verdictBody').textContent = v[1];
+    $('srcLine').textContent = sourceLabel + ' \u00b7 ' + a.W.toLocaleString() + ' words \u00b7 ' + a.S + ' sentences \u00b7 ' + Math.max(1, Math.round(a.readMin)) + ' min read';
+
+    // fix first
+    var fixes = a.penalties.slice(0,3);
+    $('fixList').innerHTML = fixes.length
+      ? fixes.map(function(p){ return '<li>' + esc(p.label) + '</li>'; }).join('')
+      : '<li>Nothing urgent. Now go make it interesting, which no formula can score.</li>';
+
+    // cards
+    var html = '';
+
+    // readability formulas
+    var fState = a.flesch >= 60 ? 'ok' : a.flesch >= 45 ? 'warn' : 'bad';
+    html += card(fState, 'Readability, six ways',
+      'Flesch reading ease: ' + a.flesch.toFixed(0) + ' / 100',
+      '<p>Six standard formulas, because one is easy to argue with. Grade means US school grade needed to read comfortably. Homepage copy should land around grade 7 to 9.</p>' +
+      '<table><tr><td>Flesch-Kincaid grade</td><td>' + a.fk.toFixed(1) + '</td></tr>' +
+      '<tr><td>Gunning Fog</td><td>' + a.fog.toFixed(1) + '</td></tr>' +
+      '<tr><td>SMOG</td><td>' + a.smog.toFixed(1) + '</td></tr>' +
+      '<tr><td>Coleman-Liau</td><td>' + a.cli.toFixed(1) + '</td></tr>' +
+      '<tr><td>Automated Readability</td><td>' + a.ari.toFixed(1) + '</td></tr></table>');
+
+    // slop index
+    var buzzKeys = Object.keys(a.buzz.found).sort(function(x,y){ return a.buzz.found[y] - a.buzz.found[x]; });
+    var bState = a.buzz.total === 0 ? 'ok' : a.buzz.total <= 3 ? 'warn' : 'bad';
+    html += card(bState, 'Slop index',
+      a.buzz.total === 0 ? 'Zero buzzwords found. Rare.' : a.buzz.total + ' buzzword' + (a.buzz.total>1?'s':'') + ' doing the work specifics should do',
+      '<p>Each of these words exists so a sentence can sound finished without saying anything. Every one is replaceable with the actual fact it is covering for.</p>' +
+      (buzzKeys.length ? '<div class="chips">' + buzzKeys.slice(0,18).map(function(k){ return '<span class="wchip">' + esc(k) + ' <i>\u00d7' + a.buzz.found[k] + '</i></span>'; }).join('') + '</div>' : ''));
+
+    // who is it about
+    var total = a.weCount + a.youCount;
+    var wState = total < 6 ? 'ok' : (a.weCount / total > 0.6 ? 'bad' : 'ok');
+    html += card(wState, 'Who the page is about',
+      '"We / our": ' + a.weCount + ' \u00b7 "You / your": ' + a.youCount,
+      '<p>Readers scan for themselves. Every "we" is a sentence about the company; every "you" is a sentence about the person deciding whether to care. The best-converting pages lead with the reader and earn the "we" later.</p>');
+
+    // passive voice
+    var pState = a.passivePct <= 10 ? 'ok' : a.passivePct <= 22 ? 'warn' : 'bad';
+    html += card(pState, 'Passive voice',
+      a.passivePct.toFixed(0) + '% of sentences (heuristic)',
+      '<p>Passive constructions hide who does what, which is usually the most persuasive part of the sentence.</p>' +
+      a.passiveEx.map(function(s){ return '<div class="ex flag">' + esc(s.slice(0,180)) + (s.length>180?'\u2026':'') + '</div>'; }).join(''));
+
+    // sentence discipline
+    var sState = a.ASL <= 18 ? 'ok' : a.ASL <= 24 ? 'warn' : 'bad';
+    html += card(sState, 'Sentence discipline',
+      'Average ' + a.ASL.toFixed(1) + ' words \u00b7 ' + a.longSentences.length + ' sentences over 25 words',
+      '<p>The three longest sentences on the page. Read them out loud. If you run out of breath, so does the reader.</p>' +
+      a.longest.map(function(s){ var n = s.split(/\s+/).length; return '<div class="ex' + (n>25?' flag':'') + '"><span class="sub">' + n + ' words</span><br>' + esc(s.slice(0,220)) + (s.length>220?'\u2026':'') + '</div>'; }).join(''));
+
+    // hedging
+    var hedgeKeys = Object.keys(a.hedge.found);
+    var hState = a.hedge.total === 0 ? 'ok' : a.hedge.total <= 3 ? 'warn' : 'bad';
+    html += card(hState, 'Hedging',
+      a.hedge.total === 0 ? 'No hedging. The page commits.' : a.hedge.total + ' hedge word' + (a.hedge.total>1?'s':''),
+      '<p>Hedges are claims with the spine removed. A reader trusts "it does X" and skims past "it can typically help with X."</p>' +
+      (hedgeKeys.length ? '<div class="chips">' + hedgeKeys.map(function(k){ return '<span class="wchip">' + esc(k) + ' <i>\u00d7' + a.hedge.found[k] + '</i></span>'; }).join('') + '</div>' : ''));
+
+    // template tells
+    var tells = a.emd + a.notJust + a.todayWorld;
+    var tState = tells === 0 ? 'ok' : tells <= 2 ? 'warn' : 'bad';
+    html += card(tState, 'Template tells',
+      tells === 0 ? 'No stock constructions found' : tells + ' stock construction' + (tells>1?'s':'') + ' found',
+      '<table><tr><td>Em dashes</td><td>' + a.emd + '</td></tr>' +
+      '<tr><td>"Not just X" framing</td><td>' + a.notJust + '</td></tr>' +
+      '<tr><td>"In today\u2019s \u2026 world"</td><td>' + a.todayWorld + '</td></tr>' +
+      '<tr><td>Rule-of-three lists</td><td>' + a.triads + '</td></tr>' +
+      '<tr><td>Exclamation points</td><td>' + a.excl + '</td></tr></table>' +
+      '<p style="margin-top:8px">None of these prove who or what wrote the page. They prove nobody edited it with intent. That is the part a reader can feel.</p>');
+
+    // raw stats
+    html += card('ok', 'Raw numbers', '',
+      '<table><tr><td>Words</td><td>' + a.W.toLocaleString() + '</td></tr>' +
+      '<tr><td>Sentences</td><td>' + a.S + '</td></tr>' +
+      '<tr><td>Syllables per word</td><td>' + (a.sylTotal / Math.max(1,a.W)).toFixed(2) + '</td></tr>' +
+      '<tr><td>Complex words (3+ syllables)</td><td>' + (a.complex / Math.max(1,a.W) * 100).toFixed(0) + '%</td></tr>' +
+      '<tr><td>Reading time</td><td>' + Math.max(1, Math.round(a.readMin)) + ' min</td></tr></table>');
+
+    $('cards').innerHTML = html;
+
+    var subj = 'My copy scored ' + a.score + '/100. Help.';
+    var mailBody = 'Page: ' + sourceLabel + '\nScore: ' + a.score + '/100';
+    $('ctaMail').href = 'mailto:jasonwdonnelly@gmail.com?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(mailBody);
+
+    $('results').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+
+  /* ---------- wiring ---------- */
+  function setStatus(msg, isErr){
+    var s = $('status');
+    s.textContent = msg;
+    s.className = 'status' + (isErr ? ' err' : '');
+  }
+
+  async function runUrl(){
+    var url = normUrl($('urlInput').value);
+    if (!url){ setStatus('Give it a URL first.', true); return; }
+    var btn = $('runBtn');
+    btn.disabled = true;
+    try{
+      var got = await fetchPage(url, function(n, total, name){
+        setStatus('Fetching\u2026 route ' + n + ' of ' + total + ' (' + name + ')');
+      });
+      var ex = got.kind === 'text' ? cleanReaderText(got.content) : extractCopy(got.content);
+      var wordCount = (ex.text.match(/\S+/g) || []).length;
+      if (wordCount < 40){
+        setStatus('Reached the site but found almost no copy. Probably rendered with JavaScript. Paste the copy instead.', true);
+        $('pasteArea').style.display = 'block';
+        btn.disabled = false;
+        return;
+      }
+      setStatus('Pulled ' + wordCount.toLocaleString() + ' words' + (ex.title ? ' from \u201c' + ex.title.slice(0,70) + '\u201d' : '') + '.');
+      render(analyze(ex.text), url.replace(/^https?:\/\//,''));
+    }catch(e){
+      setStatus('Every route to the site failed. Some sites block fetches, some networks block the proxies. Paste the copy below instead. Deploying the api/fetch.js relay next to this page makes route 1 work every time.', true);
+      $('pasteArea').style.display = 'block';
+    }
+    btn.disabled = false;
+  }
+
+  function runPaste(){
+    var text = $('pasteInput').value.trim();
+    var wc = (text.match(/\S+/g) || []).length;
+    if (wc < 30){ setStatus('Need at least 30 words to score anything honestly.', true); return; }
+    setStatus('Scoring ' + wc.toLocaleString() + ' pasted words.');
+    render(analyze(text), 'pasted copy');
+  }
+
+  $('runBtn').addEventListener('click', runUrl);
+  $('urlInput').addEventListener('keydown', function(e){ if (e.key === 'Enter') runUrl(); });
+  $('runPasteBtn').addEventListener('click', runPaste);
+  $('pasteToggle').addEventListener('click', function(){
+    var p = $('pasteArea');
+    p.style.display = p.style.display === 'block' ? 'none' : 'block';
+  });
+})();
+</script>
+</body>
+</html>
