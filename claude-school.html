@@ -364,7 +364,7 @@ button{font:inherit;cursor:pointer}
   <div class="enroll" id="enroll">
     <div class="enroll-card">
       <h2>Enrollment</h2>
-      <p>Your progress saves in this browser, on this device. Nothing is sent anywhere. We could not lose your data if we tried.</p>
+      <p>Your name, email, and chapter progress are stored with the registrar so the course follows you across devices. Used for nothing else. Sold to no one.</p>
       <form id="enrollForm" novalidate>
         <div class="field">
           <label for="inName">Full name, as it should appear on the certificate</label>
@@ -377,7 +377,7 @@ button{font:inherit;cursor:pointer}
         <button class="btn btn-solid" type="submit" style="width:100%;padding:.85rem">Begin Chapter I</button>
         <p class="form-error" id="formError" role="alert"></p>
       </form>
-      <p class="enroll-fine">Returning? Type the same email and you will be exactly where you left off. That is the entire security model. Govern yourself accordingly.</p>
+      <p class="enroll-fine">Returning? Type the same email on any device and you will be exactly where you left off. That is the entire security model. Govern yourself accordingly.</p>
     </div>
   </div>
 </section>
@@ -424,14 +424,24 @@ button{font:inherit;cursor:pointer}
 <section id="view-admin" class="hidden">
   <div class="admin-wrap">
     <h2>The Registry</h2>
-    <p class="admin-note">Enrollment records from this browser only. localStorage does not gossip across devices. If you want real numbers, that is a backend conversation.</p>
+    <p class="admin-note">Live enrollment records from the registrar. The passphrase is set in Vercel as ADMIN_SECRET and never appears in this page's source.</p>
+    <form id="adminForm" class="admin-gate" novalidate>
+      <div class="field" style="max-width:22rem">
+        <label for="adminKey">Registrar passphrase</label>
+        <input id="adminKey" name="adminKey" type="password" autocomplete="current-password" maxlength="120">
+      </div>
+      <button class="btn btn-solid" type="submit">Open the registry</button>
+      <p class="form-error" id="adminError" role="alert"></p>
+    </form>
+    <div id="adminData" class="hidden">
     <table class="admin-table">
       <thead>
         <tr><th scope="col">Name</th><th scope="col">Email</th><th scope="col">Logins</th><th scope="col">Last seen</th><th scope="col">Progress</th></tr>
       </thead>
       <tbody id="adminRows"></tbody>
     </table>
-    <p class="admin-empty hidden" id="adminEmpty">No enrollments on this device yet. The school awaits its first pupil.</p>
+    <p class="admin-empty hidden" id="adminEmpty">No enrollments yet. The school awaits its first pupil.</p>
+    </div>
   </div>
 </section>
 
@@ -771,45 +781,59 @@ quiz:[
 /* ===== APP LOGIC ===== */
 const PASS_MARK = 3;            /* of 4 questions */
 const ADMIN_EMAIL = "jasonwdonnelly@gmail.com";
-const LS_USERS = "mfs_users";
-const LS_SESSION = "mfs_session";
+const LS_CACHE = "mfs_cache";
+const SS_ADMIN = "mfs_admin_key";
+const API = "/api";
 
 const $ = (id) => document.getElementById(id);
 
-/* --- storage (guarded: private mode throws) --- */
-function readUsers(){
-  try { return JSON.parse(localStorage.getItem(LS_USERS)) || {}; }
-  catch(e){ return {}; }
-}
-function writeUsers(users){
-  try { localStorage.setItem(LS_USERS, JSON.stringify(users)); return true; }
-  catch(e){ return false; }
-}
-function readSession(){
-  try { return localStorage.getItem(LS_SESSION) || null; } catch(e){ return null; }
-}
-function writeSession(email){
-  try {
-    if(email === null) localStorage.removeItem(LS_SESSION);
-    else localStorage.setItem(LS_SESSION, email);
-  } catch(e){ /* private mode: session lives only in memory */ }
-}
-
-let currentEmail = null;
+/* --- state --- */
+let currentUser = null;   /* the signed-in user record */
+let localMode = false;    /* true when the registrar is unreachable */
 let currentChapter = 0;
 
-function getUser(){
-  if(!currentEmail) return null;
-  return readUsers()[currentEmail] || null;
+/* --- local cache (session restore + offline fallback) --- */
+function cacheUser(u){
+  try { localStorage.setItem(LS_CACHE, JSON.stringify(u)); } catch(e){ /* private mode */ }
 }
-function saveUser(user){
-  const users = readUsers();
-  users[user.email] = user;
-  if(!writeUsers(users)){
-    alert("This browser is blocking storage (private mode?). The course works, but progress will not survive a refresh.");
+function readCache(){
+  try { return JSON.parse(localStorage.getItem(LS_CACHE)); } catch(e){ return null; }
+}
+function clearCache(){
+  try { localStorage.removeItem(LS_CACHE); } catch(e){}
+}
+
+/* --- registrar API --- */
+async function apiLogin(name, email, mode){
+  const r = await fetch(API + "/course-login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, email, mode })
+  });
+  const data = await r.json().catch(() => ({}));
+  if(!r.ok){
+    const err = new Error(data.error || ("HTTP " + r.status));
+    err.status = r.status;
+    throw err;
   }
+  return data;
 }
-function isAdmin(){ return currentEmail === ADMIN_EMAIL; }
+function pushProgress(){
+  if(localMode || !currentUser) return;
+  fetch(API + "/course-progress", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email: currentUser.email, passed: currentUser.passed, current: currentUser.current })
+  }).catch(() => { localMode = true; });
+}
+
+function getUser(){ return currentUser; }
+function saveUser(user){
+  currentUser = user;
+  cacheUser(user);
+  pushProgress();
+}
+function isAdmin(){ return currentUser && currentUser.email === ADMIN_EMAIL; }
 function passedCount(user){ return user.passed.filter(Boolean).length; }
 function chapterUnlocked(user, i){ return i === 0 || user.passed[i-1] === true; }
 
@@ -848,7 +872,7 @@ function renderSyllabusGrid(){
 }
 
 /* --- enrollment --- */
-function handleEnroll(ev){
+async function handleEnroll(ev){
   ev.preventDefault();
   const name = $("inName").value.trim();
   const email = $("inEmail").value.trim().toLowerCase();
@@ -857,33 +881,41 @@ function handleEnroll(ev){
   if(name.length < 2){ err.textContent = "A name, please. The certificate needs one."; return; }
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ err.textContent = "That email does not parse. Try again."; return; }
 
-  const users = readUsers();
-  let user = users[email];
-  if(user){
-    user.logins += 1;
-    user.lastLogin = Date.now();
-    if(name) user.name = name;
-  } else {
-    user = {
-      name, email,
-      logins: 1,
-      firstLogin: Date.now(),
-      lastLogin: Date.now(),
-      passed: new Array(CHAPTERS.length).fill(false),
-      current: 0
+  const submitBtn = ev.target.querySelector("button[type=submit]");
+  submitBtn.disabled = true;
+  try {
+    const user = await apiLogin(name, email, "login");
+    localMode = false;
+    saveUser(user);
+  } catch(e){
+    if(e.status === 400){
+      err.textContent = e.message;
+      submitBtn.disabled = false;
+      return;
+    }
+    /* Registrar unreachable: continue in this browser only. */
+    localMode = true;
+    const cached = readCache();
+    const user = (cached && cached.email === email) ? cached : {
+      name, email, logins: 1, firstLogin: Date.now(), lastLogin: Date.now(),
+      passed: new Array(CHAPTERS.length).fill(false), current: 0
     };
+    if(name) user.name = name;
+    currentUser = user;
+    cacheUser(user);
+    err.textContent = "The registrar is unreachable. Continuing in this browser only; progress will sync next time it answers.";
   }
-  currentEmail = email;
-  saveUser(user);
-  writeSession(email);
+  submitBtn.disabled = false;
   refreshNav();
-  currentChapter = Math.min(user.current, CHAPTERS.length - 1);
+  currentChapter = Math.min(currentUser.current, CHAPTERS.length - 1);
   openCourse();
 }
 
 function logout(){
-  currentEmail = null;
-  writeSession(null);
+  currentUser = null;
+  localMode = false;
+  clearCache();
+  try { sessionStorage.removeItem(SS_ADMIN); } catch(e){}
   refreshNav();
   $("enrollForm").reset();
   show("view-landing");
@@ -1178,18 +1210,47 @@ function downloadCert(){
 /* --- admin --- */
 function renderAdmin(){
   if(!isAdmin()){ openCourse(); return; }
+  show("view-admin");
+  $("adminError").textContent = "";
+  let saved = null;
+  try { saved = sessionStorage.getItem(SS_ADMIN); } catch(e){}
+  if(saved){ loadRegistry(saved); }
+}
+
+async function loadRegistry(key){
+  const err = $("adminError");
+  err.textContent = "";
+  try {
+    const r = await fetch(API + "/course-registry", { headers: { "x-admin-key": key } });
+    const data = await r.json().catch(() => ({}));
+    if(!r.ok){
+      try { sessionStorage.removeItem(SS_ADMIN); } catch(e){}
+      err.textContent = data.error || ("Registry error " + r.status);
+      $("adminData").classList.add("hidden");
+      return;
+    }
+    try { sessionStorage.setItem(SS_ADMIN, key); } catch(e){}
+    renderRegistryRows(data.users || []);
+  } catch(e){
+    err.textContent = "The registrar is unreachable.";
+    $("adminData").classList.add("hidden");
+  }
+}
+
+function renderRegistryRows(users){
   const rows = $("adminRows");
   rows.textContent = "";
-  const users = Object.values(readUsers()).sort((a,b) => b.lastLogin - a.lastLogin);
+  $("adminData").classList.remove("hidden");
   $("adminEmpty").classList.toggle("hidden", users.length > 0);
   users.forEach(u => {
     const tr = document.createElement("tr");
+    const done = passedCount(u);
     const cells = [
       u.name,
       u.email,
       String(u.logins),
       new Date(u.lastLogin).toLocaleString("en-US"),
-      passedCount(u) === CHAPTERS.length ? "Completed" : "Chapter " + ROMAN[Math.min(u.current, CHAPTERS.length-1)] + " \u00b7 " + passedCount(u) + "/" + CHAPTERS.length + " passed"
+      done === CHAPTERS.length ? "Completed" : "Chapter " + ROMAN[Math.min(u.current, CHAPTERS.length-1)] + " \u00b7 " + done + "/" + CHAPTERS.length + " passed"
     ];
     cells.forEach((val, ci) => {
       const td = document.createElement("td");
@@ -1199,7 +1260,6 @@ function renderAdmin(){
     });
     rows.appendChild(tr);
   });
-  show("view-admin");
 }
 
 /* --- wiring --- */
@@ -1232,14 +1292,33 @@ function init(){
     const open = toc.classList.toggle("open");
     $("tocToggle").setAttribute("aria-expanded", String(open));
   });
+  $("adminForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const key = $("adminKey").value.trim();
+    if(!key){ $("adminError").textContent = "The passphrase field is empty."; return; }
+    loadRegistry(key);
+  });
 
-  const sessionEmail = readSession();
-  if(sessionEmail && readUsers()[sessionEmail]){
-    currentEmail = sessionEmail;
-    const u = getUser();
-    currentChapter = Math.min(u.current, CHAPTERS.length - 1);
+  /* Session restore: render from cache instantly, refresh from the
+     registrar in the background. "resume" mode does not count a login. */
+  const cached = readCache();
+  if(cached && cached.email){
+    currentUser = cached;
+    currentChapter = Math.min(cached.current, CHAPTERS.length - 1);
     refreshNav();
     openCourse();
+    apiLogin(cached.name, cached.email, "resume").then(user => {
+      localMode = false;
+      currentUser = user;
+      cacheUser(user);
+      currentChapter = Math.min(user.current, CHAPTERS.length - 1);
+      refreshNav();
+      if(!$("view-course").classList.contains("hidden")) { renderToc(); renderChapter(currentChapter); }
+      else if(!$("view-cert").classList.contains("hidden")) { renderCertificate(); }
+    }).catch(e => {
+      if(e.status === 404){ logout(); }
+      else { localMode = true; }
+    });
   } else {
     refreshNav();
     show("view-landing");
