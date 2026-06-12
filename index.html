@@ -510,6 +510,7 @@
   .ai-lede { max-width: 56ch; margin-bottom: 36px; }
   .ai-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; }
   .ai-grid .feat:first-child { min-height: 300px; }
+  .ai-grid .feat:last-child:nth-child(odd) { grid-column: 1 / -1; }
   @media (max-width: 760px) { .ai-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
@@ -691,6 +692,24 @@
         <div class="meta mono"><span class="cat">WIP</span><span class="agency">Browser game</span></div>
         <h3>Super Family</h3>
         <p>A browser game built for my son on a single train ride. He remains my toughest client.</p>
+        <span class="go mono">Try it <span class="arrow">&rarr;</span></span>
+      </a>
+      <a class="feat" href="https://jasonwdonnelly.vercel.app/the-fold.html" target="_blank" rel="noopener">
+        <div class="meta mono"><span class="cat">WIP</span><span class="agency">Pre-publish tool &middot; LinkedIn</span></div>
+        <h3>The Fold</h3>
+        <p>Shows where LinkedIn cuts your post on a phone and a laptop. Before you publish, not after.</p>
+        <span class="go mono">Try it <span class="arrow">&rarr;</span></span>
+      </a>
+      <a class="feat" href="https://jasonwdonnelly.vercel.app/the-deck.html" target="_blank" rel="noopener">
+        <div class="meta mono"><span class="cat">WIP</span><span class="agency">Pre-publish tool &middot; Carousels</span></div>
+        <h3>The Deck</h3>
+        <p>A LinkedIn carousel planner. Up to twenty slides in the browser, out as the exact PDF you post.</p>
+        <span class="go mono">Try it <span class="arrow">&rarr;</span></span>
+      </a>
+      <a class="feat" href="https://jasonwdonnelly.vercel.app/the-red-pen.html" target="_blank" rel="noopener">
+        <div class="meta mono"><span class="cat">WIP</span><span class="agency">Copy diagnostics</span></div>
+        <h3>The Red Pen</h3>
+        <p>Scores any page's copy for readability, filler, and who it's actually about. Math and opinions. No AI involved.</p>
         <span class="go mono">Try it <span class="arrow">&rarr;</span></span>
       </a>
     </div>
