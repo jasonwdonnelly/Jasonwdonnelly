@@ -2009,11 +2009,12 @@
 
   /* case pages: scroll to top + quick header settle; content never hidden on scroll */
   function caseIn() {
-    window.scrollTo(0, 0);
     var id = location.hash;
     if (/^#case-/.test(id)) {
-      var sec = document.querySelector(id);
-      if (sec) gsap.from(sec.querySelector('.case-hero'), { autoAlpha: 0, y: 22, duration: 0.5, ease: EASE });
+      var a = document.querySelector(id);
+      var sec = a && a.nextElementSibling;
+      var hero = sec && sec.querySelector('.case-hero');
+      if (hero) gsap.from(hero, { autoAlpha: 0, y: 22, duration: 0.5, ease: EASE });
     }
     ScrollTrigger.refresh();
   }
@@ -2027,6 +2028,22 @@
   addEventListener('load', function () { ScrollTrigger.refresh(); });
 })();
 
+</script>
+<script>
+/* Navigation scroll fix. Runs regardless of reduced-motion: this is wayfinding, not animation. */
+(function () {
+  addEventListener('hashchange', function () {
+    var hash = location.hash;
+    var el = hash && document.querySelector(hash);
+    requestAnimationFrame(function () {
+      if (/^#case-/.test(hash)) {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      } else if (el) {
+        el.scrollIntoView();
+      }
+    });
+  });
+})();
 </script>
 </body>
 </html>
