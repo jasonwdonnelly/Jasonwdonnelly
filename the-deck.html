@@ -81,6 +81,8 @@ button.primary:disabled{opacity:.5;cursor:wait}
 .bgbtns{display:flex;gap:6px;flex-wrap:wrap}
 .bgbtns button,.bgbtns label{font:500 11.5px 'Spline Sans Mono',monospace;border:1px solid var(--line);background:#FAFBFC;border-radius:8px;padding:8px 11px;cursor:pointer;color:var(--ink);display:inline-block}
 .bgbtns label:hover,.bgbtns button:hover{border-color:var(--ink)}
+.bgbtns button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.slide .logo{position:absolute;bottom:5%;height:6%;width:auto;max-width:30%;object-fit:contain;z-index:1}
 .moverow{display:flex;gap:6px;margin-top:4px}
 .moverow button{flex:1;font:500 12px 'Spline Sans Mono',monospace;border:1px solid var(--line);background:#FAFBFC;border-radius:8px;padding:8px;cursor:pointer}
 .moverow button.danger{border-color:#C8321E;color:#C8321E}
@@ -155,6 +157,15 @@ footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--mar
         <button type="button" id="bgRemove">Remove image</button>
       </div></div>
 
+    <div class="fld"><label>Logo · all slides</label>
+      <div class="bgbtns">
+        <label for="logoUpload">Upload</label>
+        <input type="file" id="logoUpload" accept="image/*" style="display:none">
+        <button type="button" id="logoLeft">Bottom left</button>
+        <button type="button" id="logoRight" class="on">Bottom right</button>
+        <button type="button" id="logoRemove">Remove</button>
+      </div></div>
+
     <div class="fld"><label>Slide</label>
       <div class="moverow">
         <button type="button" id="moveL">← Earlier</button>
@@ -201,7 +212,7 @@ footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--mar
   var TEXT_COLORS = ['#FFFFFF','#15171C','#FF3B30','#FF4D00','#FFD60A','#2EC25B','#2F7CFF','#5856D6','#A23BEC'];
   var BG_COLORS   = ['#15171C','#FFFFFF','#C8321E','#FF4D00','#FFC53D','#1F8A4C','#1D5FD1','#3B2FA8','#7A2BBF'];
 
-  var state = { format: 'portrait', type: 'archivoBlack', sel: 0, slides: [] };
+  var state = { format: 'portrait', type: 'archivoBlack', sel: 0, slides: [], logo: { src: null, pos: 'right' } };
 
   function blankSlide(){
     return { head:'', body:'', color:'#FFFFFF', bgColor:'#15171C', align:'left', pos:'middle', overlay:30, bg:null, include:true };
@@ -218,7 +229,7 @@ footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--mar
   function save(){
     try{
       var lite = state.slides.map(function(s){ var c = Object.assign({}, s); delete c.bg; return c; });
-      localStorage.setItem('thedeck-v2', JSON.stringify({ format: state.format, type: state.type, slides: lite }));
+      localStorage.setItem('thedeck-v2', JSON.stringify({ format: state.format, type: state.type, logoPos: state.logo.pos, slides: lite }));
     }catch(e){}
   }
   function load(){
@@ -231,6 +242,7 @@ footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--mar
         var migrate = { grotesque:'archivoBlack', serif:'playfair', mono:'mono' };
         state.type = FONTS[d.type] ? d.type : (migrate[d.type] || 'archivoBlack');
       }
+      if (d.logoPos === 'left' || d.logoPos === 'right') state.logo.pos = d.logoPos;
       if (Array.isArray(d.slides) && d.slides.length){
         state.slides = d.slides.slice(0, MAX).map(function(s){ return Object.assign(blankSlide(), s, { bg: null }); });
       }
@@ -251,16 +263,21 @@ footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--mar
       var posCls = s.pos === 'top' ? 'vtop' : s.pos === 'bottom' ? 'vbot' : 'vmid';
       var alCls = s.align === 'center' ? 'acenter' : 'aleft';
       var bgStyle = 'background-color:' + s.bgColor + ';' + (s.bg ? 'background-image:url(' + s.bg + ');' : '');
+      var logoHtml = state.logo.src
+        ? '<img class="logo" src="' + state.logo.src + '" alt="" style="' + (state.logo.pos === 'left' ? 'left:7%' : 'right:7%') + '">'
+        : '';
+      var pnSide = (state.logo.src && state.logo.pos === 'right') ? 'left:7%;right:auto;' : '';
       html += '<div class="slide' + (i === state.sel ? ' sel' : '') + (s.include ? '' : ' skip') + '" data-i="' + i + '" style="' + bgStyle + '">' +
         '<div class="ratio" style="aspect-ratio:' + ratio + '"></div>' +
         '<div class="veil" style="opacity:' + (s.bg ? s.overlay / 100 : 0) + '"></div>' +
         '<span class="num">' + (i + 1) + '</span>' +
         '<span class="inc"><input type="checkbox" data-inc="' + i + '"' + (s.include ? ' checked' : '') + ' aria-label="Include slide ' + (i + 1) + '"></span>' +
-        '<div class="txt ' + posCls + ' ' + alCls + '" style="color:' + s.color + '">' +
+        '<div class="txt ' + posCls + ' ' + alCls + '" style="color:' + s.color + (state.logo.src ? ';padding-bottom:15%' : '') + '">' +
           (s.head ? '<div class="h" style="font-family:\'' + f.headFam + '\', sans-serif;font-weight:' + f.headW + ';line-height:' + (f.headLH || 1.08) + ';font-size:clamp(11px,1.35vw,17px)">' + esc(s.head) + '</div>' : '') +
           (s.body ? '<div class="b" style="font-family:\'' + f.bodyFam + '\', sans-serif;font-size:clamp(8px,0.95vw,12px)">' + esc(s.body) + '</div>' : '') +
         '</div>' +
-        (i > 0 ? '<span class="pagenum" style="color:' + s.color + ';font-size:clamp(7px,0.7vw,10px)">' + (i + 1) + '/' + len + '</span>' : '') +
+        logoHtml +
+        (i > 0 ? '<span class="pagenum" style="color:' + s.color + ';font-size:clamp(7px,0.7vw,10px);' + pnSide + '">' + (i + 1) + '/' + len + '</span>' : '') +
       '</div>';
     }
     if (len < MAX){
@@ -369,6 +386,23 @@ footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--mar
   });
   $('bgRemove').addEventListener('click', function(){ state.slides[state.sel].bg = null; renderSlides(); });
 
+  function syncLogoBtns(){
+    $('logoLeft').classList.toggle('on', state.logo.pos === 'left');
+    $('logoRight').classList.toggle('on', state.logo.pos === 'right');
+  }
+  $('logoUpload').addEventListener('change', function(){
+    var file = this.files && this.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(ev){ state.logo.src = ev.target.result; renderSlides(); };
+    reader.readAsDataURL(file);
+    this.value = '';
+  });
+  $('logoLeft').addEventListener('click', function(){ state.logo.pos = 'left'; syncLogoBtns(); renderSlides(); save(); });
+  $('logoRight').addEventListener('click', function(){ state.logo.pos = 'right'; syncLogoBtns(); renderSlides(); save(); });
+  $('logoRemove').addEventListener('click', function(){ state.logo.src = null; renderSlides(); });
+  syncLogoBtns();
+
   function move(dir){
     var i = state.sel, j = i + dir;
     if (j < 0 || j >= state.slides.length) return;
@@ -474,6 +508,18 @@ footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--mar
     canvas.width = W; canvas.height = H;
     var ctx = canvas.getContext('2d');
 
+    // Logo sizing: 60px tall against 44px body copy, with a width cap for
+    // wide wordmarks. Visible brand mark, not a billboard.
+    var logoImg = null, logoW = 0, logoH = 0;
+    if (state.logo.src){
+      try{
+        logoImg = await loadImg(state.logo.src);
+        logoH = 60;
+        logoW = logoImg.width / logoImg.height * logoH;
+        if (logoW > 280){ logoW = 280; logoH = logoImg.height / logoImg.width * logoW; }
+      }catch(e){ logoImg = null; }
+    }
+
     for (var n = 0; n < included.length; n++){
       var s = included[n].s, idx = included[n].i;
       stat.textContent = 'Rendering slide ' + (n + 1) + ' of ' + included.length + '\u2026';
@@ -510,7 +556,8 @@ footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--mar
 
       var gap = (headLines.length && bodyLines.length) ? 36 : 0;
       var blockH = headLines.length * headLH + gap + bodyLines.length * bodyLH;
-      var y = s.pos === 'top' ? pad : s.pos === 'bottom' ? H - pad - blockH : (H - blockH) / 2;
+      var padBottom = logoImg ? pad + 90 : pad; // keep bottom-positioned text clear of the logo zone
+      var y = s.pos === 'top' ? pad : s.pos === 'bottom' ? H - padBottom - blockH : (H - blockH) / 2;
 
       ctx.fillStyle = s.color;
       ctx.font = headFont;
@@ -519,12 +566,19 @@ footer a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--mar
       ctx.font = bodyFont;
       bodyLines.forEach(function(line){ ctx.fillText(line, x, y); y += bodyLH; });
 
-      // page number, skip cover
+      // logo, every slide
+      if (logoImg){
+        var lx = state.logo.pos === 'left' ? 70 : W - 70 - logoW;
+        ctx.drawImage(logoImg, lx, H - 60 - logoH, logoW, logoH);
+      }
+
+      // page number, skip cover; sits opposite the logo when the logo is bottom right
       if (idx > 0){
+        var pnRight = !(logoImg && state.logo.pos === 'right');
         ctx.globalAlpha = 0.6;
         ctx.font = '500 28px "Spline Sans Mono"';
-        ctx.textAlign = 'right';
-        ctx.fillText((idx + 1) + '/' + len, W - 70, H - 88);
+        ctx.textAlign = pnRight ? 'right' : 'left';
+        ctx.fillText((idx + 1) + '/' + len, pnRight ? W - 70 : 70, H - 88);
         ctx.globalAlpha = 1;
       }
 
