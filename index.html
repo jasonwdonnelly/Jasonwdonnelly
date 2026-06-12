@@ -368,16 +368,17 @@
 
   /* ================= V3 STRUCTURE ================= */
   /* hero */
-  .hv { min-height: 0; display: block; padding: 0 0 64px; border-bottom: none; }
+  .hv { min-height: 0; display: block; padding: 0; border-bottom: none; }
   .hv-strip { display: flex; justify-content: space-between; gap: 16px; padding: 14px 4vw; border-bottom: 1.5px solid var(--line); color: var(--muted); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; }
-  .hv-h { font-family: "Archivo", "Helvetica Neue", Arial, sans-serif; font-weight: 400; font-size: clamp(3.2rem, 11.5vw, 11rem); line-height: 0.98; letter-spacing: -0.035em; margin: 7vh 0 6vh; }
+  .hv-h { font-family: "Archivo", "Helvetica Neue", Arial, sans-serif; letter-spacing: -0.03em; margin: 0 0 34px; }
   .hv-h .hl { display: block; overflow: clip; padding-bottom: 0.14em; margin-bottom: -0.14em; }
   .hv-h em { font-style: italic; color: var(--accent); }
-  .hv-row { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 48px; align-items: end; }
+  .hv-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 48px; align-items: center; padding: 64px 0 56px; }
+  .hv-row { display: block; }
   .hv-sub { font-family: "Archivo", "Helvetica Neue", Arial, sans-serif; font-size: clamp(1.15rem, 2vw, 1.5rem); line-height: 1.5; color: var(--ink-soft); max-width: 36ch; }
   .hv-sub b { color: var(--ink); }
-  .hv-video { margin: 0; justify-self: end; width: min(300px, 70vw); }
-  @media (max-width: 760px) { .hv-row { grid-template-columns: 1fr; } .hv-video { justify-self: start; } .hv-h { margin: 5vh 0 4vh; } }
+  .hv-video { margin: 0; justify-self: end; width: min(300px, 38vw); }
+  @media (max-width: 700px) { .hv-grid { grid-template-columns: 1fr; gap: 36px; padding: 44px 0 48px; } .hv-video { justify-self: start; width: min(300px, 78vw); } }
 
   /* proof marquee band */
   .proof { border-top: 1.5px solid var(--line); border-bottom: 1.5px solid var(--line); padding: 22px 0; overflow: clip; }
@@ -448,10 +449,11 @@
   /* display voice: heavy, tight, uppercase */
   .hv-h, .sh h2, .ix-t, .cx-h, .case-h, .contact-h {
     font-weight: 860; text-transform: uppercase; letter-spacing: -0.018em; }
-  .hv-h { font-size: clamp(3rem, 12.2vw, 12rem); line-height: 0.92; }
+  .hv-h { font-size: clamp(1.9rem, 4.3vw, 3.9rem); line-height: 0.95; }
   .hv-h em, .sh h2 em, .cx-h em { font-style: italic; color: var(--accent); margin-right: 0.09em; }
   .hv-strip { border-top: 1.5px solid var(--line); font-weight: 500; }
   .hv-sub b { color: var(--accent); }
+  .hv-row .btn-hire-lg { margin-top: 26px; }
 
   .marquee span { font-weight: 800; text-transform: uppercase; letter-spacing: 0.01em; }
   .marquee span::after { color: var(--accent); }
@@ -524,11 +526,13 @@
 <header class="hv" id="top">
   <div class="hv-strip mono"><span>Writer · Creative Director · Recovering juggler</span><span>Copenhagen, DK</span></div>
   <div class="wrap">
-    <h1 class="hv-h"><span class="hl">That <em>American</em></span><span class="hl"><em>guy</em> you keep</span><span class="hl">seeing on LinkedIn&hellip;</span></h1>
-    <div class="hv-row">
-      <div class="hv-left">
-        <p class="hv-sub"><b>Thinks it, writes it, ships it.</b> Copenhagen-based, agency-trained, allergic to boring.</p>
-        <a class="btn-hire-lg" href="mailto:jasonwdonnelly@gmail.com?subject=I%20want%20to%20hire%20you">Reach out <span class="arrow">&rarr;</span></a>
+    <div class="hv-grid">
+      <div class="hv-text">
+        <h1 class="hv-h"><span class="hl">That <em>American</em></span><span class="hl"><em>guy</em> you keep</span><span class="hl">seeing on LinkedIn&hellip;</span></h1>
+        <div class="hv-row">
+          <p class="hv-sub"><b>Thinks it, writes it, ships it.</b> Copenhagen-based, agency-trained, allergic to boring.</p>
+          <a class="btn-hire-lg" href="mailto:jasonwdonnelly@gmail.com?subject=I%20want%20to%20hire%20you">Reach out <span class="arrow">&rarr;</span></a>
+        </div>
       </div>
       <figure class="hv-video"><div class="hero-video"><iframe src="https://www.youtube.com/embed/lgOkwo2nhWE" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></figure>
     </div>
@@ -1769,7 +1773,7 @@
 
   /* hero: fast line rise, never blocks reading for more than ~0.8s */
   gsap.from('.hv-h .hl', { yPercent: 110, duration: 0.85, ease: EASE, stagger: 0.09 });
-  gsap.from('.hv-row', { autoAlpha: 0, y: 18, duration: 0.6, ease: EASE, delay: 0.5 });
+  gsap.from('.hv-row, .hv-video', { autoAlpha: 0, y: 18, duration: 0.6, ease: EASE, delay: 0.45 });
 
   /* cursor (desktop only) */
   if (fine) {
