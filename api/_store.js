@@ -2,8 +2,10 @@
 const CHAPTER_COUNT = 16;
 
 function storeConfig(){
-  const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+  /* trim() guards against invisible whitespace or line breaks picked up
+     when values are pasted into the Vercel dashboard. */
+  const url = (process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL || "").trim();
+  const token = (process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN || "").trim();
   if(!url || !token) throw new Error("Storage env vars missing");
   return { url, token };
 }
