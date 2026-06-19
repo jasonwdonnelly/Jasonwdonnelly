@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Best Burgers in Denmark · Ranked by Jason Donnelly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* flat-top grill charcoal, bone, mustard amber (structure), ketchup red (heat) */
+    --char-900:#181410;
+    --char-800:#211b16;
+    --char-700:#2b231c;
+    --char-600:#372d24;
+    --bone:#f3ecdf;
+    --bone-dim:#b8ac98;
+    --bone-faint:#7d735f;
+    --mustard:#e8a32a;
+    --mustard-deep:#c47e12;
+    --ketchup:#d23b22;
+    --ketchup-deep:#9c2412;
+    --line:#3a2f25;
+    --ok:#7fae57;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:
+      radial-gradient(120% 80% at 50% -10%, #221b15 0%, var(--char-900) 60%) fixed,
+      var(--char-900);
+    color:var(--bone);
+    font-family:"Barlow",system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.45;
+    -webkit-font-smoothing:antialiased;
+    padding:0 0 80px;
+  }
+  a{color:var(--mustard);text-decoration:none;border-bottom:1px solid transparent}
+  a:hover{border-bottom-color:var(--mustard)}
+  .wrap{max-width:780px;margin:0 auto;padding:0 22px}
+
+  /* ---- Masthead ---- */
+  header{padding:54px 0 26px;border-bottom:3px solid var(--line)}
+  .kicker{
+    font-family:"Barlow";font-weight:700;text-transform:uppercase;
+    letter-spacing:.28em;font-size:12px;color:var(--mustard);margin:0 0 14px
+  }
+  h1{
+    font-family:"Anton";font-weight:400;text-transform:uppercase;
+    font-size:clamp(40px,9.5vw,82px);line-height:.92;letter-spacing:.01em;
+    margin:0;color:var(--bone)
+  }
+  h1 .dk{color:var(--ketchup)}
+  .byline{font-family:"Barlow";font-weight:600;font-style:italic;font-size:clamp(15px,2.6vw,19px);color:var(--bone-dim);margin:12px 0 0;letter-spacing:.02em}
+  .meta{
+    display:flex;flex-wrap:wrap;gap:8px 22px;align-items:baseline;
+    margin-top:20px;font-family:"Barlow";font-size:14px;color:var(--bone-dim);
+    text-transform:uppercase;letter-spacing:.1em
+  }
+  .meta b{color:var(--bone);font-weight:700}
+  .grade{
+    display:inline-flex;align-items:center;gap:8px;
+    border:2px solid var(--mustard);color:var(--mustard);
+    padding:4px 10px;border-radius:2px;font-weight:700;letter-spacing:.14em;font-size:12px
+  }
+
+  /* ---- Controls bar ---- */
+  .editfab{position:fixed;top:16px;right:16px;z-index:60}
+  .editfab .btn{box-shadow:0 6px 18px rgba(0,0,0,.45)}
+  @media(max-width:560px){.editfab{top:10px;right:10px}}
+  .bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:22px 0 6px}
+  .btn{
+    font-family:"Barlow";font-weight:600;font-size:14px;letter-spacing:.04em;
+    cursor:pointer;border:2px solid var(--line);background:var(--char-800);
+    color:var(--bone);padding:9px 15px;border-radius:3px;transition:.12s
+  }
+  .btn:hover{border-color:var(--bone-faint)}
+  .btn:focus-visible{outline:3px solid var(--mustard);outline-offset:2px}
+  .btn.primary{background:var(--mustard);border-color:var(--mustard);color:#1a1206}
+  .btn.primary:hover{background:var(--mustard-deep);border-color:var(--mustard-deep)}
+  .btn.danger{color:var(--ketchup);border-color:var(--ketchup-deep)}
+  .btn.tiny{padding:6px 9px;font-size:12.5px}
+  .editflag{
+    margin-left:auto;font-size:12px;color:var(--bone-faint);
+    text-transform:uppercase;letter-spacing:.12em;max-width:340px;text-align:right
+  }
+
+  /* ---- List ---- */
+  ol.list{list-style:none;margin:14px 0 0;padding:0}
+  .row{
+    display:grid;grid-template-columns:64px 1fr auto;gap:18px;align-items:start;
+    padding:22px 0;border-bottom:1px solid var(--line);position:relative
+  }
+  .row.closed{opacity:.62}
+  .stamp{
+    font-family:"Anton";font-size:34px;line-height:1;color:var(--char-900);
+    background:var(--mustard);width:64px;height:64px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:inset 0 0 0 3px var(--char-900), 0 0 0 2px var(--mustard);
+    font-variant-numeric:tabular-nums
+  }
+  .row:nth-child(-n+3) .stamp{background:var(--ketchup);box-shadow:inset 0 0 0 3px var(--char-900),0 0 0 2px var(--ketchup);color:var(--bone)}
+  .mid{min-width:0}
+  .name{
+    font-family:"Anton";font-weight:400;text-transform:uppercase;
+    font-size:clamp(22px,4.6vw,30px);line-height:1.02;margin:0;letter-spacing:.01em
+  }
+  .name a{color:var(--bone);border:0}
+  .name a:hover{color:var(--mustard)}
+  .goto{
+    display:inline-block;margin-top:8px;font-family:"Barlow";font-weight:600;
+    font-size:12.5px;text-transform:uppercase;letter-spacing:.08em;
+    color:var(--mustard);border:1px solid var(--mustard-deep);
+    padding:3px 9px;border-radius:2px
+  }
+  .addr{
+    margin-top:9px;font-family:ui-monospace,"SFMono-Regular",Menlo,monospace;
+    font-size:12.5px;color:var(--bone-dim);line-height:1.4
+  }
+  .addr a{color:var(--bone-dim);border-bottom:1px dotted var(--bone-faint)}
+  .addr a:hover{color:var(--mustard);border-bottom-color:var(--mustard)}
+  .cmt{margin-top:11px;font-size:15.5px;color:var(--bone);max-width:46ch}
+  .closed-tag{
+    display:inline-block;margin-top:9px;font-family:"Anton";font-size:13px;
+    letter-spacing:.18em;color:var(--ketchup);border:2px solid var(--ketchup-deep);
+    padding:2px 9px;transform:rotate(-3deg)
+  }
+  /* rating */
+  .rate{text-align:right;min-width:96px}
+  .score{font-family:"Anton";font-size:40px;line-height:.9;color:var(--bone);font-variant-numeric:tabular-nums}
+  .score .out{font-size:15px;color:var(--bone-faint);font-family:"Barlow";font-weight:600}
+  .score.none{font-size:18px;color:var(--bone-faint);font-family:"Barlow";font-weight:600}
+  .sear{margin-top:8px;height:7px;width:96px;background:var(--char-600);border-radius:99px;overflow:hidden;margin-left:auto}
+  .sear>i{display:block;height:100%;background:linear-gradient(90deg,var(--mustard),var(--ketchup))}
+
+  /* editor row tools */
+  .tools{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
+  .order{display:flex;flex-direction:column;gap:4px;margin-top:2px}
+
+  /* ---- forms ---- */
+  .panel{background:var(--char-800);border:2px solid var(--line);border-radius:5px;padding:18px;margin:18px 0}
+  .panel h3{font-family:"Anton";text-transform:uppercase;letter-spacing:.04em;margin:0 0 14px;font-size:18px;color:var(--mustard)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .field{display:flex;flex-direction:column;gap:5px}
+  .field.full{grid-column:1/-1}
+  label{font-family:"Barlow";font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--bone-dim)}
+  input,textarea{
+    font-family:"Barlow";font-size:15px;color:var(--bone);background:var(--char-900);
+    border:1.5px solid var(--line);border-radius:3px;padding:9px 11px;width:100%
+  }
+  input:focus,textarea:focus{outline:2px solid var(--mustard);outline-offset:1px;border-color:var(--mustard)}
+  textarea{resize:vertical;min-height:62px}
+  .check{flex-direction:row;align-items:center;gap:9px}
+  .check input{width:auto}
+  .formbtns{display:flex;gap:10px;margin-top:16px}
+
+  .empty{padding:40px 0;color:var(--bone-faint);font-style:italic}
+  .loading{padding:60px 0;text-align:center;color:var(--bone-faint);font-family:"Anton";letter-spacing:.1em;text-transform:uppercase}
+  footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--line);font-size:12.5px;color:var(--bone-faint);font-family:ui-monospace,monospace}
+
+  @media (max-width:560px){
+    .row{grid-template-columns:48px 1fr;gap:13px}
+    .stamp{width:48px;height:48px;font-size:25px}
+    .rate{grid-column:2;text-align:left;margin-top:6px}
+    .sear{margin-left:0}
+    .score{font-size:32px}
+    .grid{grid-template-columns:1fr}
+    .editflag{margin-left:0;text-align:left}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head><body>
+<div class="wrap">
+<header>
+    <p class="kicker">A standing ranking · updated continuously</p>
+    <h1>Best Burgers in <span class="dk">Denmark</span></h1>
+    <p class="byline">Ranked by Jason Donnelly</p>
+    <div class="meta">
+      <span><b id="count">32</b> spots ranked</span>
+      <span>Updated <b id="updated">19 Jun 2026</b></span>
+      <span class="grade">PRIME GRADE</span>
+    </div>
+  </header>
+<ol class="list" id="list"><li class="row ">
+    <div class="stamp">1</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/PK1uRbPsgDmBVm7J6" target="_blank" rel="noopener">Dandelion Burger</a></h2>
+      <span class="goto">Go-to · "The Burger"</span><div class="addr">Copenhagen · <a href="https://maps.app.goo.gl/PK1uRbPsgDmBVm7J6" target="_blank" rel="noopener">map</a></div><div class="cmt">"The Burger" is the best, with aged cheddar and 25% bone marrow. It's the richest burger in Denmark and cooked to perfection on a BUKA bun. 
+
+Remove the vegetable relish and add extra cheddar for my order.</div>
+    </div>
+    <div class="rate"><div class="score">9.7<span class="out">/10</span></div><div class="sear"><i style="width:97%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">2</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/YzeDpbp6AESgpU8k7" target="_blank" rel="noopener">Smash Burgers</a></h2>
+      <div class="addr">Nørrebro, Copenhagen · <a href="https://maps.app.goo.gl/YzeDpbp6AESgpU8k7" target="_blank" rel="noopener">map</a></div><div class="cmt">Perfect crusted patties, great flavor, tons of cheese. Eat it on the picnic benches after you order. Doesn't travel well.</div>
+    </div>
+    <div class="rate"><div class="score">9.5<span class="out">/10</span></div><div class="sear"><i style="width:95%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">3</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/5An59gGnSNkHWxuk9" target="_blank" rel="noopener">Hungry Dane</a></h2>
+      <div class="addr">Bellevue · <a href="https://maps.app.goo.gl/5An59gGnSNkHWxuk9" target="_blank" rel="noopener">map</a></div><div class="cmt">The first burger I had from Hungry Dane was perfection with cheese melting up and down the bun, like a royal crown. They continue to push the limits of great burgers in Denmark.</div>
+    </div>
+    <div class="rate"><div class="score">9.4<span class="out">/10</span></div><div class="sear"><i style="width:94%"></i></div></div>
+  </li><li class="row closed">
+    <div class="stamp">4</div>
+    <div class="mid">
+      <h2 class="name">Bock's Burgers</h2>
+      <div class="cmt">The best part of this burger was it's simplicity. Bacon, cheese, lettuce, tomato, and exactly the same every time. Never a bad burger.</div><span class="closed-tag">Closed</span>
+    </div>
+    <div class="rate"><div class="score">9.1<span class="out">/10</span></div><div class="sear"><i style="width:90.99999999999999%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">5</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/acBgNzCxswAaEyEP6" target="_blank" rel="noopener">Gasoline Grill</a></h2>
+      <span class="goto">Go-to · Butter burger</span><div class="addr">Copenhagen · <a href="https://maps.app.goo.gl/acBgNzCxswAaEyEP6" target="_blank" rel="noopener">map</a></div><div class="cmt">The butter burger is out of this world juicy. Great meat, soft buns, and ordering at the original spot at the gas station is iconic. Must stop burger spot.</div>
+    </div>
+    <div class="rate"><div class="score">9<span class="out">/10</span></div><div class="sear"><i style="width:90%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">6</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/wRzi5qevZiCSgtSc6" target="_blank" rel="noopener">CPH Smash</a></h2>
+      <div class="addr">Copenhagen · <a href="https://maps.app.goo.gl/wRzi5qevZiCSgtSc6" target="_blank" rel="noopener">map</a></div><div class="cmt">Top tier smash burger. Super crispy yet somehow still juicy. Great flavor and looking forward to checking out their new permanent location.</div>
+    </div>
+    <div class="rate"><div class="score">8.9<span class="out">/10</span></div><div class="sear"><i style="width:89%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">7</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/FiBanCKAKFdTvBU8A" target="_blank" rel="noopener">Cocks &amp; Cows</a></h2>
+      <div class="addr">Tisvilde · <a href="https://maps.app.goo.gl/FiBanCKAKFdTvBU8A" target="_blank" rel="noopener">map</a></div><div class="cmt">Definitely a top 10 burger with bacon. Great location by the beach too.</div>
+    </div>
+    <div class="rate"><div class="score">8.8<span class="out">/10</span></div><div class="sear"><i style="width:88.00000000000001%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">8</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/CCvT9GZye8ZPLkLL7" target="_blank" rel="noopener">Curly Burger</a></h2>
+      <div class="addr">TBD · <a href="https://maps.app.goo.gl/CCvT9GZye8ZPLkLL7" target="_blank" rel="noopener">map</a></div><div class="cmt">Food truck burger perfection with enough onions to sink a ship (in a good way). Good luck on finding it out in the real world, I got lucky.</div>
+    </div>
+    <div class="rate"><div class="score">8.7<span class="out">/10</span></div><div class="sear"><i style="width:86.99999999999999%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">9</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/S6HknvuSmi3RUnVq5" target="_blank" rel="noopener">Naervaer</a></h2>
+      <div class="addr">Copenhagen · <a href="https://maps.app.goo.gl/S6HknvuSmi3RUnVq5" target="_blank" rel="noopener">map</a></div><div class="cmt">Super high end burger with great cheese and incredible fries. The location on the water is also a great place to enjoy it.</div>
+    </div>
+    <div class="rate"><div class="score">8.6<span class="out">/10</span></div><div class="sear"><i style="width:86%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">10</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/qoJmfYQgKcFRqmo5A" target="_blank" rel="noopener">Fatty's</a></h2>
+      <span class="goto">Go-to · Bacon cheese</span><div class="addr">Copenhagen · <a href="https://maps.app.goo.gl/qoJmfYQgKcFRqmo5A" target="_blank" rel="noopener">map</a></div><div class="cmt">Just a classic great burger. Can't find a flaw.</div>
+    </div>
+    <div class="rate"><div class="score">8.5<span class="out">/10</span></div><div class="sear"><i style="width:85%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">11</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/ZaKs8kse78UBBSF96" target="_blank" rel="noopener">Bob's Streetfood</a></h2>
+      <div class="addr">Copenhagen · <a href="https://maps.app.goo.gl/ZaKs8kse78UBBSF96" target="_blank" rel="noopener">map</a></div><div class="cmt">Another classic delicious burger. Swing through.</div>
+    </div>
+    <div class="rate"><div class="score">8.4<span class="out">/10</span></div><div class="sear"><i style="width:84.00000000000001%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">12</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/Rq6mt8qTWdsAeDPy5" target="_blank" rel="noopener">Yoburger</a></h2>
+      <span class="goto">Go-to · Double bacon cheese</span><div class="addr">Copenhagen · <a href="https://maps.app.goo.gl/Rq6mt8qTWdsAeDPy5" target="_blank" rel="noopener">map</a></div><div class="cmt">Another classic delicious burger. Swing through.</div>
+    </div>
+    <div class="rate"><div class="score">8.4<span class="out">/10</span></div><div class="sear"><i style="width:84.00000000000001%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">13</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/3HXpPeJhVMvCcvse7" target="_blank" rel="noopener">Popl</a></h2>
+      <div class="addr">Copenhagen · <a href="https://maps.app.goo.gl/3HXpPeJhVMvCcvse7" target="_blank" rel="noopener">map</a></div><div class="cmt">It's great, but it's way too expensive if you stay in and eat there. If you're saving money, find somewhere else.</div>
+    </div>
+    <div class="rate"><div class="score">8.2<span class="out">/10</span></div><div class="sear"><i style="width:82%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">14</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/rvjDHPjRf3qp51su9" target="_blank" rel="noopener">Square Burger</a></h2>
+      <div class="addr">Copenhagen · <a href="https://maps.app.goo.gl/rvjDHPjRf3qp51su9" target="_blank" rel="noopener">map</a></div><div class="cmt">Super good burger. Quality ingredients. Awesome location in Christiania.</div>
+    </div>
+    <div class="rate"><div class="score">8<span class="out">/10</span></div><div class="sear"><i style="width:80%"></i></div></div>
+  </li><li class="row closed">
+    <div class="stamp">15</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/J2FK33mnWz3xG6p69" target="_blank" rel="noopener">Bøff Burgerbar</a></h2>
+      <div class="addr">Allerød · <a href="https://maps.app.goo.gl/J2FK33mnWz3xG6p69" target="_blank" rel="noopener">map</a></div><div class="cmt">Just quality.</div><span class="closed-tag">Closed</span>
+    </div>
+    <div class="rate"><div class="score">7.9<span class="out">/10</span></div><div class="sear"><i style="width:79%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">16</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/riAqSS6divH6uytz5" target="_blank" rel="noopener">Smash Burger Roskilde</a></h2>
+      <span class="goto">Go-to · Triple burger</span><div class="addr">Roskilde · <a href="https://maps.app.goo.gl/riAqSS6divH6uytz5" target="_blank" rel="noopener">map</a></div><div class="cmt">Big. Juicy. Smashed.</div>
+    </div>
+    <div class="rate"><div class="score">7.9<span class="out">/10</span></div><div class="sear"><i style="width:79%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">17</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/xG8kRnXXq747L5FT6" target="_blank" rel="noopener">Nordic Smash</a></h2>
+      <div class="addr">Copenhagen · <a href="https://maps.app.goo.gl/xG8kRnXXq747L5FT6" target="_blank" rel="noopener">map</a></div><div class="cmt">Just a good smash burger.</div>
+    </div>
+    <div class="rate"><div class="score">7.8<span class="out">/10</span></div><div class="sear"><i style="width:78%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">18</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/PHPmcyguqpZybwAK7" target="_blank" rel="noopener">Burger Bomben</a></h2>
+      <div class="addr">Smørum · <a href="https://maps.app.goo.gl/PHPmcyguqpZybwAK7" target="_blank" rel="noopener">map</a></div><div class="cmt">BIG BOY BURGER. It's huge and that's part of the charm. Highly recommend.</div>
+    </div>
+    <div class="rate"><div class="score">7.8<span class="out">/10</span></div><div class="sear"><i style="width:78%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">19</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/AptsLSDZENSx7YLn8" target="_blank" rel="noopener">Burger Factory</a></h2>
+      <span class="goto">Go-to · Truffle burger</span><div class="addr">Kokkedal · <a href="https://maps.app.goo.gl/AptsLSDZENSx7YLn8" target="_blank" rel="noopener">map</a></div><div class="cmt">Is there anything better than truffle on burgers? Super good burger, really moist.</div>
+    </div>
+    <div class="rate"><div class="score">7.7<span class="out">/10</span></div><div class="sear"><i style="width:77%"></i></div></div>
+  </li><li class="row closed">
+    <div class="stamp">20</div>
+    <div class="mid">
+      <h2 class="name">Kentucky Double Smash</h2>
+      <div class="cmt">Great burger spot, used to be right next to CPH Smash, but looks like it closed.</div><span class="closed-tag">Closed</span>
+    </div>
+    <div class="rate"><div class="score">7.7<span class="out">/10</span></div><div class="sear"><i style="width:77%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">21</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/czbEyakpJWUNC3SaA" target="_blank" rel="noopener">Burger 161</a></h2>
+      <span class="goto">Go-to · Hot Mexican</span><div class="addr">Copenhagen · <a href="https://maps.app.goo.gl/czbEyakpJWUNC3SaA" target="_blank" rel="noopener">map</a></div><div class="cmt">Great burger. Super big.</div>
+    </div>
+    <div class="rate"><div class="score">7.5<span class="out">/10</span></div><div class="sear"><i style="width:75%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">22</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/Fve7PpkKKdQbA2yL7" target="_blank" rel="noopener">Kristinedal Burgers</a></h2>
+      <div class="addr">Copenhagen · <a href="https://maps.app.goo.gl/Fve7PpkKKdQbA2yL7" target="_blank" rel="noopener">map</a></div><div class="cmt">Tiny burger but lots of flavor. Also super fun design and location.</div>
+    </div>
+    <div class="rate"><div class="score">7.5<span class="out">/10</span></div><div class="sear"><i style="width:75%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">23</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/mJ6taNZkxi7CBWTSA" target="_blank" rel="noopener">Halifax</a></h2>
+      <span class="goto">Go-to · Biarritz</span><div class="addr">Hillerød · <a href="https://maps.app.goo.gl/mJ6taNZkxi7CBWTSA" target="_blank" rel="noopener">map</a></div><div class="cmt">Delicious burger chain, find it all throughout Denmark. BIG burgers. Great options.</div>
+    </div>
+    <div class="rate"><div class="score">7.4<span class="out">/10</span></div><div class="sear"><i style="width:74%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">24</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/BiELhyeWcTm6pYU2A" target="_blank" rel="noopener">Tommi's Burger Joint</a></h2>
+      <div class="addr">Copenhagen · <a href="https://maps.app.goo.gl/BiELhyeWcTm6pYU2A" target="_blank" rel="noopener">map</a></div><div class="cmt">Nothing to complain about here. Great burger. Super fun location.</div>
+    </div>
+    <div class="rate"><div class="score">7.4<span class="out">/10</span></div><div class="sear"><i style="width:74%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">25</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/Ea1W4bDxBWaSn2tV7" target="_blank" rel="noopener">Louis</a></h2>
+      <span class="goto">Go-to · Bacon cheese</span><div class="addr"><a href="https://maps.app.goo.gl/Ea1W4bDxBWaSn2tV7" target="_blank" rel="noopener">map</a></div><div class="cmt">They're not the worst.</div>
+    </div>
+    <div class="rate"><div class="score">7.1<span class="out">/10</span></div><div class="sear"><i style="width:71%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">26</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/z53iKQWdCovfonzU6" target="_blank" rel="noopener">Smash N Eat</a></h2>
+      <div class="addr"><a href="https://maps.app.goo.gl/z53iKQWdCovfonzU6" target="_blank" rel="noopener">map</a></div><div class="cmt">It wasn't very crispy, but they're doing their best. I was told that the guy who made mine was in training... will try again.</div>
+    </div>
+    <div class="rate"><div class="score">7<span class="out">/10</span></div><div class="sear"><i style="width:70%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">27</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/YrTu2pXr7m4rbzmb7" target="_blank" rel="noopener">Skovgrillen</a></h2>
+      <div class="addr"><a href="https://maps.app.goo.gl/YrTu2pXr7m4rbzmb7" target="_blank" rel="noopener">map</a></div><div class="cmt">They have a massive burger eating competition. Not made as the best burger ever, but super fun, and the challenge looks insane.</div>
+    </div>
+    <div class="rate"><div class="score">6.9<span class="out">/10</span></div><div class="sear"><i style="width:69%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">28</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/irHUEAyFKkZsDKuNA" target="_blank" rel="noopener">The Burger</a></h2>
+      <span class="goto">Go-to · Hot &amp; spicy</span><div class="addr">Farum · <a href="https://maps.app.goo.gl/irHUEAyFKkZsDKuNA" target="_blank" rel="noopener">map</a></div><div class="cmt">It's a mall burger, but one of the best you'll find in a mall...</div>
+    </div>
+    <div class="rate"><div class="score">6.7<span class="out">/10</span></div><div class="sear"><i style="width:67%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">29</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/vPMabYqNZJjVgL7C9" target="_blank" rel="noopener">Café Kaiser</a></h2>
+      <div class="addr">Farum · <a href="https://maps.app.goo.gl/vPMabYqNZJjVgL7C9" target="_blank" rel="noopener">map</a></div><div class="cmt">Just a good cafe burger. Nothing to write home about.</div>
+    </div>
+    <div class="rate"><div class="score">6.6<span class="out">/10</span></div><div class="sear"><i style="width:65.99999999999999%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">30</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/CQns9AKZr7NaRqvH7" target="_blank" rel="noopener">Østgrillen Pølsevogn</a></h2>
+      <div class="addr"><a href="https://maps.app.goo.gl/CQns9AKZr7NaRqvH7" target="_blank" rel="noopener">map</a></div><div class="cmt">It's a burger... if you're hungry for a burger...</div>
+    </div>
+    <div class="rate"><div class="score">6.6<span class="out">/10</span></div><div class="sear"><i style="width:65.99999999999999%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">31</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/oLb5B7t7FuzsX3au6" target="_blank" rel="noopener">Sliders</a></h2>
+      <div class="addr"><a href="https://maps.app.goo.gl/oLb5B7t7FuzsX3au6" target="_blank" rel="noopener">map</a></div><div class="cmt">Was really looking forward to this one, but they weren't anything special.</div>
+    </div>
+    <div class="rate"><div class="score">6.5<span class="out">/10</span></div><div class="sear"><i style="width:65%"></i></div></div>
+  </li><li class="row ">
+    <div class="stamp">32</div>
+    <div class="mid">
+      <h2 class="name"><a href="https://maps.app.goo.gl/cfDg6faoakeUX9Ez9" target="_blank" rel="noopener">Jagger</a></h2>
+      <div class="addr">Valby · <a href="https://maps.app.goo.gl/cfDg6faoakeUX9Ez9" target="_blank" rel="noopener">map</a></div><div class="cmt">Fast food burger. Nothing special. Their chicken burgers are better than their beef.</div>
+    </div>
+    <div class="rate"><div class="score">5<span class="out">/10</span></div><div class="sear"><i style="width:50%"></i></div></div>
+  </li></ol>
+<footer>Best Burgers in Denmark · Ranked by Jason Donnelly</footer>
+</div>
+<script type="application/json" id="burger-data">[{"name":"Dandelion Burger","url":"https://maps.app.goo.gl/PK1uRbPsgDmBVm7J6","address":"Copenhagen","goto":"\"The Burger\"","rating":9.7,"comments":"\"The Burger\" is the best, with aged cheddar and 25% bone marrow. It's the richest burger in Denmark and cooked to perfection on a BUKA bun. \n\nRemove the vegetable relish and add extra cheddar for my order.","closed":false,"id":"mqkwfxgc1mwnc"},{"name":"Smash Burgers","url":"https://maps.app.goo.gl/YzeDpbp6AESgpU8k7","address":"Nørrebro, Copenhagen","goto":"","rating":9.5,"comments":"Perfect crusted patties, great flavor, tons of cheese. Eat it on the picnic benches after you order. Doesn't travel well.","closed":false,"id":"mqkwfxgcjglgk"},{"name":"Hungry Dane","url":"https://maps.app.goo.gl/5An59gGnSNkHWxuk9","address":"Bellevue","goto":"","rating":9.4,"comments":"The first burger I had from Hungry Dane was perfection with cheese melting up and down the bun, like a royal crown. They continue to push the limits of great burgers in Denmark.","closed":false,"id":"mqkwfxgcix8ve"},{"name":"Bock's Burgers","url":"","address":"","goto":"","rating":9.1,"comments":"The best part of this burger was it's simplicity. Bacon, cheese, lettuce, tomato, and exactly the same every time. Never a bad burger.","closed":true,"id":"mqkwfxgc285vd"},{"name":"Gasoline Grill","url":"https://maps.app.goo.gl/acBgNzCxswAaEyEP6","address":"Copenhagen","goto":"Butter burger","rating":9,"comments":"The butter burger is out of this world juicy. Great meat, soft buns, and ordering at the original spot at the gas station is iconic. Must stop burger spot.","closed":false,"id":"mqkwfxgcg0mqp"},{"name":"CPH Smash","url":"https://maps.app.goo.gl/wRzi5qevZiCSgtSc6","address":"Copenhagen","goto":"","rating":8.9,"comments":"Top tier smash burger. Super crispy yet somehow still juicy. Great flavor and looking forward to checking out their new permanent location.","closed":false,"id":"mqkwfxgcrx9ja"},{"name":"Cocks & Cows","url":"https://maps.app.goo.gl/FiBanCKAKFdTvBU8A","address":"Tisvilde","goto":"","rating":8.8,"comments":"Definitely a top 10 burger with bacon. Great location by the beach too.","closed":false,"id":"mqkwfxgc8opzt"},{"name":"Curly Burger","url":"https://maps.app.goo.gl/CCvT9GZye8ZPLkLL7","address":"TBD","goto":"","rating":8.7,"comments":"Food truck burger perfection with enough onions to sink a ship (in a good way). Good luck on finding it out in the real world, I got lucky.","closed":false,"id":"mqkwfxgc6y9xl"},{"name":"Naervaer","url":"https://maps.app.goo.gl/S6HknvuSmi3RUnVq5","address":"Copenhagen","goto":"","rating":8.6,"comments":"Super high end burger with great cheese and incredible fries. The location on the water is also a great place to enjoy it.","closed":false,"id":"mqkwfxgcqfeqg"},{"name":"Fatty's","url":"https://maps.app.goo.gl/qoJmfYQgKcFRqmo5A","address":"Copenhagen","goto":"Bacon cheese","rating":8.5,"comments":"Just a classic great burger. Can't find a flaw.","closed":false,"id":"mqkwfxgcon45o"},{"name":"Bob's Streetfood","url":"https://maps.app.goo.gl/ZaKs8kse78UBBSF96","address":"Copenhagen","goto":"","rating":8.4,"comments":"Another classic delicious burger. Swing through.","closed":false,"id":"mqkwfxgczhklk"},{"name":"Yoburger","url":"https://maps.app.goo.gl/Rq6mt8qTWdsAeDPy5","address":"Copenhagen","goto":"Double bacon cheese","rating":8.4,"comments":"Another classic delicious burger. Swing through.","closed":false,"id":"mqkwfxgc40taw"},{"name":"Popl","url":"https://maps.app.goo.gl/3HXpPeJhVMvCcvse7","address":"Copenhagen","goto":"","rating":8.2,"comments":"It's great, but it's way too expensive if you stay in and eat there. If you're saving money, find somewhere else.","closed":false,"id":"mqkwfxgc7dyrs"},{"name":"Square Burger","url":"https://maps.app.goo.gl/rvjDHPjRf3qp51su9","address":"Copenhagen","goto":"","rating":8,"comments":"Super good burger. Quality ingredients. Awesome location in Christiania.","closed":false,"id":"mqkwfxgc0eoav"},{"name":"Bøff Burgerbar","url":"https://maps.app.goo.gl/J2FK33mnWz3xG6p69","address":"Allerød","goto":"","rating":7.9,"comments":"Just quality.","closed":true,"id":"mqkwfxgcg9j8p"},{"name":"Smash Burger Roskilde","url":"https://maps.app.goo.gl/riAqSS6divH6uytz5","address":"Roskilde","goto":"Triple burger","rating":7.9,"comments":"Big. Juicy. Smashed.","closed":false,"id":"mqkwfxgcvohel"},{"name":"Nordic Smash","url":"https://maps.app.goo.gl/xG8kRnXXq747L5FT6","address":"Copenhagen","goto":"","rating":7.8,"comments":"Just a good smash burger.","closed":false,"id":"mqkwfxgc917un"},{"name":"Burger Bomben","url":"https://maps.app.goo.gl/PHPmcyguqpZybwAK7","address":"Smørum","goto":"","rating":7.8,"comments":"BIG BOY BURGER. It's huge and that's part of the charm. Highly recommend.","closed":false,"id":"mqkwfxgcvd8db"},{"name":"Burger Factory","url":"https://maps.app.goo.gl/AptsLSDZENSx7YLn8","address":"Kokkedal","goto":"Truffle burger","rating":7.7,"comments":"Is there anything better than truffle on burgers? Super good burger, really moist.","closed":false,"id":"mqkwfxgcwpgzs"},{"name":"Kentucky Double Smash","url":"","address":"","goto":"","rating":7.7,"comments":"Great burger spot, used to be right next to CPH Smash, but looks like it closed.","closed":true,"id":"mqkwfxgck5e57"},{"name":"Burger 161","url":"https://maps.app.goo.gl/czbEyakpJWUNC3SaA","address":"Copenhagen","goto":"Hot Mexican","rating":7.5,"comments":"Great burger. Super big.","closed":false,"id":"mqkwfxgc6nbtq"},{"name":"Kristinedal Burgers","url":"https://maps.app.goo.gl/Fve7PpkKKdQbA2yL7","address":"Copenhagen","goto":"","rating":7.5,"comments":"Tiny burger but lots of flavor. Also super fun design and location.","closed":false,"id":"mqkwfxgc56qyv"},{"name":"Halifax","url":"https://maps.app.goo.gl/mJ6taNZkxi7CBWTSA","address":"Hillerød","goto":"Biarritz","rating":7.4,"comments":"Delicious burger chain, find it all throughout Denmark. BIG burgers. Great options.","closed":false,"id":"mqkwfxgcfmmtb"},{"name":"Tommi's Burger Joint","url":"https://maps.app.goo.gl/BiELhyeWcTm6pYU2A","address":"Copenhagen","goto":"","rating":7.4,"comments":"Nothing to complain about here. Great burger. Super fun location.","closed":false,"id":"mqkwfxgd5k1pu"},{"name":"Louis","url":"https://maps.app.goo.gl/Ea1W4bDxBWaSn2tV7","address":"","goto":"Bacon cheese","rating":7.1,"comments":"They're not the worst.","closed":false,"id":"mqkwfxgde6q5o"},{"name":"Smash N Eat","url":"https://maps.app.goo.gl/z53iKQWdCovfonzU6","address":"","goto":"","rating":7,"comments":"It wasn't very crispy, but they're doing their best. I was told that the guy who made mine was in training... will try again.","closed":false,"id":"mqkwfxgdnklaw"},{"name":"Skovgrillen","url":"https://maps.app.goo.gl/YrTu2pXr7m4rbzmb7","address":"","goto":"","rating":6.9,"comments":"They have a massive burger eating competition. Not made as the best burger ever, but super fun, and the challenge looks insane.","closed":false,"id":"mqkwfxgdtxwsk"},{"name":"The Burger","url":"https://maps.app.goo.gl/irHUEAyFKkZsDKuNA","address":"Farum","goto":"Hot & spicy","rating":6.7,"comments":"It's a mall burger, but one of the best you'll find in a mall...","closed":false,"id":"mqkwfxgduujbc"},{"name":"Café Kaiser","url":"https://maps.app.goo.gl/vPMabYqNZJjVgL7C9","address":"Farum","goto":"","rating":6.6,"comments":"Just a good cafe burger. Nothing to write home about.","closed":false,"id":"mqkwfxgdafylw"},{"name":"Østgrillen Pølsevogn","url":"https://maps.app.goo.gl/CQns9AKZr7NaRqvH7","address":"","goto":"","rating":6.6,"comments":"It's a burger... if you're hungry for a burger...","closed":false,"id":"mqkwfxgd1efeb"},{"name":"Sliders","url":"https://maps.app.goo.gl/oLb5B7t7FuzsX3au6","address":"","goto":"","rating":6.5,"comments":"Was really looking forward to this one, but they weren't anything special.","closed":false,"id":"mqkwfxgdnpqek"},{"name":"Jagger","url":"https://maps.app.goo.gl/cfDg6faoakeUX9Ez9","address":"Valby","goto":"","rating":5,"comments":"Fast food burger. Nothing special. Their chicken burgers are better than their beef.","closed":false,"id":"mqkwfxgdjbtzw"}]</script>
+</body></html>
