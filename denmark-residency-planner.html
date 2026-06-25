@@ -48,13 +48,11 @@
   .opts button:hover{border-color:var(--red)}
   .opts button.sel{background:var(--red);border-color:var(--red);color:#fff;font-weight:600}
 
-
   .go{display:block;width:100%;margin-top:24px;padding:15px;background:var(--red);color:#fff;border:none;
       border-radius:12px;font-size:1.02rem;font-weight:700;cursor:pointer;font-family:inherit}
   .go:hover{background:var(--red-dk)}
   .go:disabled{background:#c9ced6;cursor:not-allowed}
 
-  /* results */
   #results{display:none}
   .resbar{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
   .tab{flex:1;min-width:150px;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff;
@@ -90,18 +88,6 @@
   .resources{margin:6px 0 2px;padding:0;list-style:none}
   .resources li{padding:7px 0;border-bottom:1px solid #f0f2f4;font-size:.9rem}
   .resources li:last-child{border-bottom:none}
-  .tracks{display:flex;gap:12px;margin:8px 0 4px;flex-wrap:wrap}
-  .track{flex:1;min-width:210px;border:2px solid var(--line);border-radius:12px;padding:14px 15px;background:#fafbfc}
-  .track.on{border-color:var(--ok);background:var(--okbg)}
-  .track-tag{display:inline-block;font-size:.7rem;font-weight:700;padding:2px 9px;border-radius:20px;margin-bottom:9px;letter-spacing:.3px}
-  .track-tag.on{background:var(--ok);color:#fff}
-  .track-tag.off{background:#e3e6ea;color:var(--mut)}
-  .track-h{font-size:.8rem;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);font-weight:700;margin-bottom:3px}
-  .track.on .track-h{color:var(--ok)}
-  .track-date{font-size:1.5rem;font-weight:800;letter-spacing:-.5px;margin-bottom:2px}
-  .track-cap{font-size:.78rem;color:var(--mut);margin-bottom:10px}
-  .track-need{font-size:.87rem;line-height:1.45}
-  .track-need b{color:var(--ink)}
   .blockbasics{background:#fcebed;border:1px solid #f3c0c8;border-radius:10px;padding:10px 13px;font-size:.85rem;color:#8a1226;margin:10px 0 0}
   .progress{height:12px;background:#edf0f3;border-radius:8px;overflow:hidden;margin:14px 0 6px}
   .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--red),#e0506a)}
@@ -122,11 +108,11 @@
   .faster ul{margin:10px 0;padding-left:20px}
   .faster li{margin:7px 0;font-size:.9rem}
   .faster li b{color:var(--blue)}
+  a{color:var(--blue)}
 
   .restart{background:none;border:1px solid #cfd5dd;color:var(--mut);padding:11px 16px;border-radius:10px;
            cursor:pointer;font-size:.9rem;font-family:inherit;margin-top:8px}
   .src{font-size:.78rem;color:var(--mut);margin-top:26px;border-top:1px solid var(--line);padding-top:14px}
-  .src a{color:var(--blue)}
   @media(max-width:560px){.verdict .big{font-size:1.25rem}}
 </style>
 </head>
@@ -134,7 +120,7 @@
 <header class="top">
   <div class="inner">
     <h1><span class="flag"></span>Denmark Residency Planner</h1>
-    <p>Answer a few questions and get a personalised plan for the two routes to a secure life in Denmark: permanent residence and citizenship — including the conditions that make each one faster.</p>
+    <p>Answer a few questions and get a personalized plan for the two routes to a secure life in Denmark: permanent residence and citizenship — including the conditions that make each one faster.</p>
   </div>
 </header>
 
@@ -266,8 +252,7 @@ const L = {
   citTestReg: "https://danskogproever.dk/borger/indfoedsretsproeve-statsborgerskab/proevedato-tilmelding-og-pris-ved-indfoedsretsproeven/",
   prApply: "https://www.nyidanmark.dk/en-GB/You-want-to-apply/Permanent-residence-permit/Permanent-residence",
   prForm: "https://nyidanmark.dk/tu1-4online",
-  citApply: "https://lifeindenmark.borger.dk/settle-in-denmark/danish-citizenship/guidance-on-how-to-apply-for-danish-citizenship",
-  activeCitizenship: "https://www.nyidanmark.dk/en-GB/You-want-to-apply/Permanent-residence-permit/Permanent-residence"
+  citApply: "https://lifeindenmark.borger.dk/settle-in-denmark/danish-citizenship/guidance-on-how-to-apply-for-danish-citizenship"
 };
 const ext = (url,txt)=>`<a href="${url}" target="_blank" rel="noopener">${txt} ↗</a>`;
 
@@ -306,9 +291,7 @@ function check(){
 }
 
 /* ---------- helpers ---------- */
-function monthsBetween(y,m){ // from start date to today, in months
-  return (now.getFullYear()-y)*12 + (now.getMonth()-m);
-}
+function monthsBetween(y,m){ return (now.getFullYear()-y)*12 + (now.getMonth()-m); }
 function addMonths(y,m,addMonthsCount){
   const total = m + addMonthsCount;
   return { y: y + Math.floor(total/12), m: ((total%12)+12)%12 };
@@ -330,14 +313,12 @@ function compute(){
   const monthsHere = monthsBetween(startY,startM);
   const yearsHere = monthsHere/12;
 
-  /* shared gates */
   const gAge   = A.age==="yes";
   const gCrime = A.crime==="no";
   const gDebt  = A.debt==="no";
   const gBenef = A.benefits==="no";
 
   /* ===== PERMANENT RESIDENCE ===== */
-  // supplementary points (need >=2; ==4 => 4-yr fast track)
   const sLang   = A.lang==="pd3";
   const sWork4  = A.work==="ge4";
   const sActive = A.active==="yes";
@@ -348,13 +329,11 @@ function compute(){
   const prResidenceMet = monthsHere >= prReqMonths;
   const prResidenceDate = addMonths(startY,startM,prReqMonths);
   const prMonthsLeft = Math.max(0, prReqMonths - monthsHere);
-  // both tracks computed regardless of current points
   const prDate8 = addMonths(startY,startM,96);
   const prDate4 = addMonths(startY,startM,48);
   const prLeft8 = Math.max(0, 96 - monthsHere);
   const prLeft4 = Math.max(0, 48 - monthsHere);
 
-  // basic requirements
   const bLang = (A.lang==="pd2"||A.lang==="pd3");
   const bWork = (A.work==="ge35"||A.work==="ge4");
   const bNow  = A.now==="yes";
@@ -372,7 +351,6 @@ function compute(){
   const prAllMet = prBasicMet && supp>=2 && prResidenceMet;
 
   /* ===== CITIZENSHIP ===== */
-  // residence requirement by category
   let citReqYears = 9, citNote="Standard route: 9 years.";
   if(A.special==="nordic"){ citReqYears=2; citNote="Nordic citizen: 2 years."; }
   else if(A.special==="spouse"){ citReqYears=6; citNote="Spouse of a Danish citizen: 6–8 yrs (using 6)."; }
@@ -380,19 +358,16 @@ function compute(){
   else if(A.permit==="refugee"||A.special==="refugee"){ citReqYears=8; citNote="Refugee / stateless: 8 years."; }
   const citReqMonths = citReqYears*12;
 
-  // must hold PR for 2 years (1 yr refugees/stateless) when bill passes
   const prHoldYears = (A.permit==="refugee")?1:2;
-  const prDateMonthsFromStart = prReqMonths;               // when PR is realistically earned
-  const citByPR = prDateMonthsFromStart + prHoldYears*12;  // earliest cit via PR-hold rule
+  const citByPR = prReqMonths + prHoldYears*12;
   const citEffMonths = (A.special==="nordic") ? citReqMonths : Math.max(citReqMonths, citByPR);
   const citMonthsLeft = Math.max(0, citEffMonths - monthsHere);
   const citDate = addMonths(startY,startM,citEffMonths);
   const citResidenceMet = monthsHere >= citEffMonths;
 
-  // language: PD3 (or PD2 if no major social assistance)
   const citLangMet = (A.lang==="pd3") || (A.lang==="pd2" && gBenef);
   const citEmpMet  = (A.work==="ge35"||A.work==="ge4");
-  const citSelfSuff = gBenef; // simplified: no Active Social Policy / Integration benefits
+  const citSelfSuff = gBenef;
 
   const citChecks = [
     [citResidenceMet?"ok":"no","Continuous residence requirement", citNote + (citResidenceMet?"":` ~${fmtShort(citMonthsLeft)} to go.`)],
@@ -403,7 +378,7 @@ function compute(){
     [citSelfSuff?"ok":"no","Self-sufficiency", citSelfSuff?"No disqualifying welfare.":"No Active Social Policy/Integration benefits in last 2 yrs (max 4 mths in 5 yrs)."],
     [gDebt?"ok":"no","No qualifying overdue public debt", gDebt?"":"Must be cleared."],
     [gCrime?"ok":"no","Clean criminal record", gCrime?"":"Convictions trigger waiting periods or a permanent bar."],
-    ["warn","Sign loyalty declaration & attend the ceremony","Handshake ceremony with the mayor after Parliament passes your naturalisation bill (twice a year)."]
+    ["warn","Sign loyalty declaration & attend the ceremony","Handshake ceremony with the mayor after Parliament passes your naturalization bill (twice a year)."]
   ];
   const citHardFail = !citResidenceMet || !citLangMet || !citEmpMet || !citSelfSuff || !gDebt || !gCrime;
 
@@ -511,9 +486,9 @@ function render(){
   } else {
     citFaster += `<li><b>Your shortened clock is already applied:</b> ${C.citNote}</li>`;
   }
-  citFaster += `<li><b>PR is the bottleneck, not residence.</b> You must hold permanent residence for ~${C.prHoldYears} years before your naturalisation bill passes — so getting PR early (via the 4-year fast track) is the single biggest lever on citizenship timing.</li>`;
+  citFaster += `<li><b>PR is the bottleneck, not residence.</b> You must hold permanent residence for ~${C.prHoldYears} years before your naturalization bill passes — so getting PR early (via the 4-year fast track) is the single biggest lever on citizenship timing.</li>`;
   citFaster += `<li><b>Bank the exams early:</b> Prøve i Dansk 3 and the Indfødsretsprøven both have fixed sitting dates and can gate you for months. Take them well before you hit the residence mark.</li>`;
-  citFaster += `<li><b>Parliament naturalises in batches</b> (≈ twice a year) and a ceremony follows — build in a few extra months beyond the date above.</li></ul>`;
+  citFaster += `<li><b>Parliament naturalizes in batches</b> (≈ twice a year) and a ceremony follows — build in a few extra months beyond the date above.</li></ul>`;
 
   document.getElementById("pane-cit").innerHTML = `
     <div class="verdict"><span class="lbl">Earliest realistic eligibility</span></div>
