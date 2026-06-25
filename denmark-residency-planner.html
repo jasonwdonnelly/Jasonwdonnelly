@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Denmark Residency Planner — Permanent Residence & Citizenship</title>
+<style>
+  :root{
+    --red:#c8102e; --red-dk:#9e0c24; --ink:#1a1a1a; --mut:#5b6470;
+    --line:#e3e6ea; --bg:#f5f6f8; --card:#ffffff; --ok:#1d8a4c; --okbg:#e7f5ec;
+    --no:#b0182f; --nobg:#fcebed; --warn:#9a6700; --warnbg:#fff4d6;
+    --blue:#1b5fb0; --bluebg:#e8f0fb; --rad:14px; --sh:0 2px 10px rgba(20,30,50,.06);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:0 18px 80px}
+  header.top{background:linear-gradient(135deg,var(--red),var(--red-dk));color:#fff;padding:30px 18px 26px;margin-bottom:22px}
+  header.top .inner{max-width:880px;margin:0 auto}
+  header.top h1{margin:0 0 6px;font-size:1.55rem;letter-spacing:-.3px}
+  header.top p{margin:0;opacity:.92;font-size:.95rem;max-width:620px}
+  .flag{display:inline-block;width:22px;height:16px;background:var(--red);position:relative;border-radius:2px;vertical-align:-2px;margin-right:8px}
+  .flag::before{content:"";position:absolute;top:0;bottom:0;left:7px;width:3px;background:#fff}
+  .flag::after{content:"";position:absolute;left:0;right:0;top:6.5px;height:3px;background:#fff}
+
+  .disclaimer{background:var(--warnbg);border:1px solid #f0d98a;border-radius:var(--rad);
+              padding:13px 15px;font-size:.84rem;color:#7a5600;margin-bottom:22px}
+  .disclaimer b{color:#5e4300}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--rad);
+        box-shadow:var(--sh);padding:22px 22px;margin-bottom:18px}
+  h2.step{font-size:1.12rem;margin:0 0 4px;display:flex;align-items:center;gap:9px}
+  .stepnum{background:var(--red);color:#fff;width:25px;height:25px;border-radius:50%;
+           display:inline-flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;flex:none}
+  .sub{color:var(--mut);font-size:.9rem;margin:0 0 16px}
+
+  label.q{display:block;font-weight:600;font-size:.94rem;margin:18px 0 7px}
+  label.q .hint{display:block;font-weight:400;color:var(--mut);font-size:.83rem;margin-top:2px}
+  select{width:100%;padding:11px 12px;border:1px solid #cfd5dd;border-radius:10px;
+          font-size:.95rem;background:#fff;color:var(--ink);font-family:inherit}
+  select:focus{outline:2px solid var(--red);border-color:var(--red)}
+  .row{display:flex;gap:12px;flex-wrap:wrap}
+  .row > div{flex:1;min-width:140px}
+
+  .opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
+  .opts button{flex:1 1 auto;min-width:90px;padding:10px 12px;border:1.5px solid #cfd5dd;background:#fff;
+       border-radius:10px;font-size:.9rem;cursor:pointer;font-family:inherit;color:var(--ink);transition:.12s}
+  .opts button:hover{border-color:var(--red)}
+  .opts button.sel{background:var(--red);border-color:var(--red);color:#fff;font-weight:600}
+
+
+  .go{display:block;width:100%;margin-top:24px;padding:15px;background:var(--red);color:#fff;border:none;
+      border-radius:12px;font-size:1.02rem;font-weight:700;cursor:pointer;font-family:inherit}
+  .go:hover{background:var(--red-dk)}
+  .go:disabled{background:#c9ced6;cursor:not-allowed}
+
+  /* results */
+  #results{display:none}
+  .resbar{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+  .tab{flex:1;min-width:150px;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff;
+       cursor:pointer;text-align:left}
+  .tab.active{border-color:var(--red);background:#fff;box-shadow:var(--sh)}
+  .tab .tt{font-weight:700;font-size:1rem;margin-bottom:2px}
+  .tab .td{font-size:.82rem;color:var(--mut)}
+  .pane{display:none}
+  .pane.active{display:block}
+
+  .verdict{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:4px 0 4px}
+  .verdict .big{font-size:1.5rem;font-weight:800;letter-spacing:-.4px}
+  .verdict .lbl{color:var(--mut);font-size:.9rem}
+  .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.78rem;font-weight:700}
+  .badge.ok{background:var(--okbg);color:var(--ok)} .badge.no{background:#fcebed;color:var(--no)}
+  .badge.warn{background:var(--warnbg);color:var(--warn)}
+
+  .subtabs{display:flex;gap:10px;margin:10px 0 4px;flex-wrap:wrap}
+  .subtab{flex:1;min-width:170px;text-align:left;padding:13px 15px;border:2px solid var(--line);
+          background:#fafbfc;border-radius:12px;cursor:pointer;font-family:inherit;color:var(--ink);transition:.12s}
+  .subtab:hover{border-color:#b9c1cc}
+  .subtab.sel{border-color:var(--red);background:#fff;box-shadow:var(--sh)}
+  .subtab .st-h{font-size:.78rem;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);font-weight:700}
+  .subtab.sel .st-h{color:var(--red)}
+  .subtab .st-d{font-size:1.32rem;font-weight:800;letter-spacing:-.4px;margin-top:2px}
+  .trackdetail{border:1px solid var(--line);border-radius:12px;padding:15px 16px;margin:12px 0 4px;background:#fff}
+  .trackdetail .td-date{font-size:1.45rem;font-weight:800;letter-spacing:-.4px}
+  .trackdetail .td-cap{color:var(--mut);font-size:.84rem;margin-bottom:10px}
+  .trackdetail .td-need{font-size:.92rem;line-height:1.5}
+  .trackdetail .td-need b{color:var(--ink)}
+  .needlist{margin:8px 0 0;padding-left:19px}
+  .needlist li{margin:6px 0;font-size:.9rem}
+  .resources{margin:6px 0 2px;padding:0;list-style:none}
+  .resources li{padding:7px 0;border-bottom:1px solid #f0f2f4;font-size:.9rem}
+  .resources li:last-child{border-bottom:none}
+  .tracks{display:flex;gap:12px;margin:8px 0 4px;flex-wrap:wrap}
+  .track{flex:1;min-width:210px;border:2px solid var(--line);border-radius:12px;padding:14px 15px;background:#fafbfc}
+  .track.on{border-color:var(--ok);background:var(--okbg)}
+  .track-tag{display:inline-block;font-size:.7rem;font-weight:700;padding:2px 9px;border-radius:20px;margin-bottom:9px;letter-spacing:.3px}
+  .track-tag.on{background:var(--ok);color:#fff}
+  .track-tag.off{background:#e3e6ea;color:var(--mut)}
+  .track-h{font-size:.8rem;text-transform:uppercase;letter-spacing:.5px;color:var(--mut);font-weight:700;margin-bottom:3px}
+  .track.on .track-h{color:var(--ok)}
+  .track-date{font-size:1.5rem;font-weight:800;letter-spacing:-.5px;margin-bottom:2px}
+  .track-cap{font-size:.78rem;color:var(--mut);margin-bottom:10px}
+  .track-need{font-size:.87rem;line-height:1.45}
+  .track-need b{color:var(--ink)}
+  .blockbasics{background:#fcebed;border:1px solid #f3c0c8;border-radius:10px;padding:10px 13px;font-size:.85rem;color:#8a1226;margin:10px 0 0}
+  .progress{height:12px;background:#edf0f3;border-radius:8px;overflow:hidden;margin:14px 0 6px}
+  .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--red),#e0506a)}
+  .ptext{font-size:.82rem;color:var(--mut);margin-bottom:18px}
+
+  .check{list-style:none;padding:0;margin:0}
+  .check li{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid #f0f2f4;font-size:.92rem;align-items:flex-start}
+  .check li:last-child{border-bottom:none}
+  .ic{flex:none;width:21px;height:21px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+      font-size:.74rem;font-weight:800;color:#fff;margin-top:1px}
+  .ic.ok{background:var(--ok)} .ic.no{background:var(--no)} .ic.warn{background:var(--warn)}
+  .check li .x{flex:1}
+  .check li .x small{display:block;color:var(--mut);font-size:.81rem;margin-top:1px}
+
+  h3.sec{font-size:.78rem;text-transform:uppercase;letter-spacing:.6px;color:var(--mut);
+         margin:24px 0 6px;font-weight:700}
+  .faster{background:var(--bluebg);border:1px solid #c5dbf5;border-radius:12px;padding:6px 16px;margin-top:6px}
+  .faster ul{margin:10px 0;padding-left:20px}
+  .faster li{margin:7px 0;font-size:.9rem}
+  .faster li b{color:var(--blue)}
+
+  .restart{background:none;border:1px solid #cfd5dd;color:var(--mut);padding:11px 16px;border-radius:10px;
+           cursor:pointer;font-size:.9rem;font-family:inherit;margin-top:8px}
+  .src{font-size:.78rem;color:var(--mut);margin-top:26px;border-top:1px solid var(--line);padding-top:14px}
+  .src a{color:var(--blue)}
+  @media(max-width:560px){.verdict .big{font-size:1.25rem}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="inner">
+    <h1><span class="flag"></span>Denmark Residency Planner</h1>
+    <p>Answer a few questions and get a personalised plan for the two routes to a secure life in Denmark: permanent residence and citizenship — including the conditions that make each one faster.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="disclaimer">
+    <b>Read this first.</b> This is an <b>unofficial planning tool</b>, not legal advice and not a decision from any authority. Rules change and individual cases vary. The logic reflects official Danish rules as published on <b>nyidanmark.dk (16 June 2026)</b> and <b>lifeindenmark.borger.dk (11 June 2026)</b>. Always confirm your own situation with SIRI / the Danish Immigration Service before acting.
+  </div>
+
+  <!-- ===================== FORM ===================== -->
+  <div id="form">
+    <div class="card">
+      <h2 class="step"><span class="stepnum">1</span>When did your clock start?</h2>
+      <p class="sub">Both routes count <b>continuous legal residence</b> from the day your first qualifying residence permit began (work, study, family reunification, asylum, etc.) — not the day you were born or first visited. Pick the month and year your first qualifying permit took effect.</p>
+
+      <label class="q">Start of your continuous legal residence
+        <span class="hint">The month your first qualifying permit took effect.</span>
+      </label>
+      <div class="row">
+        <div><select id="month" aria-label="Month"></select></div>
+        <div><select id="year" aria-label="Year"></select></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="step"><span class="stepnum">2</span>A few pertinent questions</h2>
+      <p class="sub">These map directly onto the official requirements. Answer for your situation today.</p>
+
+      <label class="q">Are you 18 or older?</label>
+      <div class="opts" data-q="age"><button data-v="yes">Yes</button><button data-v="no">No</button></div>
+
+      <label class="q">What is your residence permit based on?
+        <span class="hint">Asylum/refugee and Nordic status shorten the citizenship clock.</span></label>
+      <div class="opts" data-q="permit">
+        <button data-v="work">Work / study</button>
+        <button data-v="family">Family reunification</button>
+        <button data-v="refugee">Asylum / refugee / stateless</button>
+        <button data-v="eu">EU rules</button>
+        <button data-v="other">Other</button>
+      </div>
+
+      <label class="q">Do any of these special situations apply to you?
+        <span class="hint">These can dramatically shorten the citizenship route.</span></label>
+      <div class="opts" data-q="special">
+        <button data-v="none">None</button>
+        <button data-v="nordic">Nordic citizen</button>
+        <button data-v="spouse">Married 3+ yrs to a Danish citizen</button>
+        <button data-v="edu">Substantial Danish education (3+ yrs)</button>
+      </div>
+
+      <label class="q">Highest Danish language exam you've passed?
+        <span class="hint">PD2 is the baseline for PR; PD3 is needed for citizenship and counts as a PR "fast-track" point.</span></label>
+      <div class="opts" data-q="lang">
+        <button data-v="none">None yet</button>
+        <button data-v="pd1">Prøve i Dansk 1</button>
+        <button data-v="pd2">Prøve i Dansk 2</button>
+        <button data-v="pd3">Prøve i Dansk 3 or higher</button>
+      </div>
+
+      <label class="q">Full-time work in Denmark (30+ hrs/week) within the last 4 years?
+        <span class="hint">3 yrs 6 mths is a basic requirement; 4 yrs is a fast-track point.</span></label>
+      <div class="opts" data-q="work">
+        <button data-v="lt35">Under 3 yrs 6 mths</button>
+        <button data-v="ge35">3 yrs 6 mths – 4 yrs</button>
+        <button data-v="ge4">4 years or more</button>
+      </div>
+
+      <label class="q">Are you employed right now (at least 15 hrs/week, or self-employed)?</label>
+      <div class="opts" data-q="now"><button data-v="yes">Yes</button><button data-v="no">No</button></div>
+
+      <label class="q">Has your average taxable income over the last 2 years been ≥ DKK 346,156/yr?
+        <span class="hint">2026 threshold. A PR fast-track point.</span></label>
+      <div class="opts" data-q="income"><button data-v="yes">Yes</button><button data-v="no">No / not sure</button></div>
+
+      <label class="q">Active citizenship: passed the active-citizen exam, or 1+ year on a board / association / youth work?
+        <span class="hint">A PR fast-track point.</span></label>
+      <div class="opts" data-q="active"><button data-v="yes">Yes</button><button data-v="no">No</button></div>
+
+      <label class="q">In the last few years, have you received social assistance (kontanthjælp / integration benefits)?
+        <span class="hint">Cash welfare under the Active Social Policy Act or Integration Act — not SU, pension, or unemployment insurance.</span></label>
+      <div class="opts" data-q="benefits"><button data-v="yes">Yes</button><button data-v="no">No</button></div>
+
+      <label class="q">Any overdue public debt (taxes, overpaid benefits, childcare, etc.)?</label>
+      <div class="opts" data-q="debt"><button data-v="yes">Yes</button><button data-v="no">No</button></div>
+
+      <label class="q">Any criminal conviction, or current charge, in Denmark or abroad?</label>
+      <div class="opts" data-q="crime"><button data-v="yes">Yes</button><button data-v="no">No</button></div>
+    </div>
+
+    <button class="go" id="go" disabled>Build my plan</button>
+  </div>
+
+  <!-- ===================== RESULTS ===================== -->
+  <div id="results">
+    <div class="resbar">
+      <div class="tab active" data-pane="pr">
+        <div class="tt">🏠 Permanent residence</div>
+        <div class="td">A secure, indefinite right to live &amp; work here</div>
+      </div>
+      <div class="tab" data-pane="cit">
+        <div class="tt">🇩🇰 Citizenship</div>
+        <div class="td">A Danish passport &amp; full rights</div>
+      </div>
+    </div>
+
+    <div class="card pane active" id="pane-pr"></div>
+    <div class="card pane" id="pane-cit"></div>
+
+    <button class="restart" id="restart">← Start over / edit answers</button>
+
+    <div class="src">
+      Rules sourced from the official Danish authorities:
+      <a href="https://www.nyidanmark.dk/en-GB/You-want-to-apply/Permanent-residence-permit/Permanent-residence" target="_blank" rel="noopener">nyidanmark.dk — permanent residence</a> (updated 16 Jun 2026) ·
+      <a href="https://lifeindenmark.borger.dk/settle-in-denmark/danish-citizenship/conditions-for-foreign-citizens--acquisition-of-danish-citizenship" target="_blank" rel="noopener">lifeindenmark.borger.dk — citizenship conditions</a> (updated 11 Jun 2026).
+      This tool does not transmit or store your answers.
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+/* ---------- official links (verified June 2026) ---------- */
+const L = {
+  pd2:  "https://www.nyidanmark.dk/en-GB/Words-and-concepts/US/Diverse-US/Tests-equivalent-to-or-higher-than-the-Danish-language-test-2",
+  pd3:  "https://www.nyidanmark.dk/en-GB/Words-and-concepts/US/Diverse-US/Tests-equivalent-to-or-higher-than-the-Danish-language-test-3",
+  danskTest: "https://danskogproever.dk/borger/danskproever/proevedato-tilmelding-og-pris/",
+  activeExam: "https://danskogproever.dk/borger/medborgerskabsproeve-permanent-ophold/forberedelse-til-medborgerskabsproeven/",
+  activeReg: "https://danskogproever.dk/tilmeldingsfrister-og-proevedatoer/",
+  citTest: "https://danskogproever.dk/borger/indfoedsretsproeve-statsborgerskab/",
+  citTestReg: "https://danskogproever.dk/borger/indfoedsretsproeve-statsborgerskab/proevedato-tilmelding-og-pris-ved-indfoedsretsproeven/",
+  prApply: "https://www.nyidanmark.dk/en-GB/You-want-to-apply/Permanent-residence-permit/Permanent-residence",
+  prForm: "https://nyidanmark.dk/tu1-4online",
+  citApply: "https://lifeindenmark.borger.dk/settle-in-denmark/danish-citizenship/guidance-on-how-to-apply-for-danish-citizenship",
+  activeCitizenship: "https://www.nyidanmark.dk/en-GB/You-want-to-apply/Permanent-residence-permit/Permanent-residence"
+};
+const ext = (url,txt)=>`<a href="${url}" target="_blank" rel="noopener">${txt} ↗</a>`;
+
+/* ---------- state ---------- */
+const A = { age:null, permit:null, special:null, lang:null, work:null, now:null,
+            income:null, active:null, benefits:null, debt:null, crime:null,
+            month:null, year:null };
+
+/* ---------- date selectors ---------- */
+const MONTHS = ["January","February","March","April","May","June","July",
+                "August","September","October","November","December"];
+const now = new Date();
+const mSel = document.getElementById("month"), ySel = document.getElementById("year");
+mSel.innerHTML = '<option value="">Month…</option>' +
+  MONTHS.map((m,i)=>`<option value="${i}">${m}</option>`).join("");
+let yopts = '<option value="">Year…</option>';
+for(let y=now.getFullYear(); y>=now.getFullYear()-40; y--) yopts += `<option value="${y}">${y}</option>`;
+ySel.innerHTML = yopts;
+mSel.onchange = ()=>{ A.month = mSel.value===""?null:+mSel.value; check(); };
+ySel.onchange = ()=>{ A.year  = ySel.value===""?null:+ySel.value; check(); };
+
+/* ---------- option buttons ---------- */
+document.querySelectorAll(".opts").forEach(grp=>{
+  const key = grp.dataset.q;
+  grp.querySelectorAll("button").forEach(b=>{
+    b.onclick = ()=>{
+      grp.querySelectorAll("button").forEach(x=>x.classList.remove("sel"));
+      b.classList.add("sel"); A[key] = b.dataset.v; check();
+    };
+  });
+});
+
+function check(){
+  const done = Object.values(A).every(v=>v!==null);
+  document.getElementById("go").disabled = !done;
+}
+
+/* ---------- helpers ---------- */
+function monthsBetween(y,m){ // from start date to today, in months
+  return (now.getFullYear()-y)*12 + (now.getMonth()-m);
+}
+function addMonths(y,m,addMonthsCount){
+  const total = m + addMonthsCount;
+  return { y: y + Math.floor(total/12), m: ((total%12)+12)%12 };
+}
+function fmt(d){ return MONTHS[d.m] + " " + d.y; }
+function fmtShort(monthsLeft){
+  if(monthsLeft<=0) return "now";
+  const y=Math.floor(monthsLeft/12), mo=monthsLeft%12;
+  return (y?y+" yr ":"")+(mo?mo+" mth":"") || "soon";
+}
+const li = (state,title,detail)=>{
+  const sym = state==="ok"?"✓":state==="no"?"✕":"!";
+  return `<li><span class="ic ${state}">${sym}</span><span class="x">${title}${detail?`<small>${detail}</small>`:""}</span></li>`;
+};
+
+/* ---------- engine ---------- */
+function compute(){
+  const startY=A.year, startM=A.month;
+  const monthsHere = monthsBetween(startY,startM);
+  const yearsHere = monthsHere/12;
+
+  /* shared gates */
+  const gAge   = A.age==="yes";
+  const gCrime = A.crime==="no";
+  const gDebt  = A.debt==="no";
+  const gBenef = A.benefits==="no";
+
+  /* ===== PERMANENT RESIDENCE ===== */
+  // supplementary points (need >=2; ==4 => 4-yr fast track)
+  const sLang   = A.lang==="pd3";
+  const sWork4  = A.work==="ge4";
+  const sActive = A.active==="yes";
+  const sIncome = A.income==="yes";
+  const supp = [sLang,sWork4,sActive,sIncome].filter(Boolean).length;
+  const prReqYears = (supp===4)?4:8;
+  const prReqMonths = prReqYears*12;
+  const prResidenceMet = monthsHere >= prReqMonths;
+  const prResidenceDate = addMonths(startY,startM,prReqMonths);
+  const prMonthsLeft = Math.max(0, prReqMonths - monthsHere);
+  // both tracks computed regardless of current points
+  const prDate8 = addMonths(startY,startM,96);
+  const prDate4 = addMonths(startY,startM,48);
+  const prLeft8 = Math.max(0, 96 - monthsHere);
+  const prLeft4 = Math.max(0, 48 - monthsHere);
+
+  // basic requirements
+  const bLang = (A.lang==="pd2"||A.lang==="pd3");
+  const bWork = (A.work==="ge35"||A.work==="ge4");
+  const bNow  = A.now==="yes";
+
+  const prChecks = [
+    [gAge,"basic","Be 18 or older"],
+    [bLang,"basic","Pass Prøve i Dansk 2 (or higher)", A.lang==="pd3"?"You have PD3 — exceeds this.":(bLang?"":"Currently below PD2.")],
+    [bWork,"basic","3 yrs 6 mths full-time work in the last 4 yrs", A.work==="ge4"?"You have 4+ yrs.":(bWork?"":"Not yet met.")],
+    [bNow,"basic","Be employed (15+ hrs/wk) when they decide", bNow?"":"You said you're not currently employed."],
+    [gBenef,"basic","No social assistance in the last 4 yrs", gBenef?"":"Resets to 4 yrs after your last payment."],
+    [gDebt,"basic","No overdue public debt", gDebt?"":"Must be cleared or formally deferred."],
+    [gCrime,"basic","No disqualifying criminal record", gCrime?"":"A conviction/charge can impose a waiting period or bar."]
+  ];
+  const prBasicMet = prChecks.every(c=>c[0]);
+  const prAllMet = prBasicMet && supp>=2 && prResidenceMet;
+
+  /* ===== CITIZENSHIP ===== */
+  // residence requirement by category
+  let citReqYears = 9, citNote="Standard route: 9 years.";
+  if(A.special==="nordic"){ citReqYears=2; citNote="Nordic citizen: 2 years."; }
+  else if(A.special==="spouse"){ citReqYears=6; citNote="Spouse of a Danish citizen: 6–8 yrs (using 6)."; }
+  else if(A.special==="edu"){ citReqYears=5; citNote="Substantial Danish education: 5 years."; }
+  else if(A.permit==="refugee"||A.special==="refugee"){ citReqYears=8; citNote="Refugee / stateless: 8 years."; }
+  const citReqMonths = citReqYears*12;
+
+  // must hold PR for 2 years (1 yr refugees/stateless) when bill passes
+  const prHoldYears = (A.permit==="refugee")?1:2;
+  const prDateMonthsFromStart = prReqMonths;               // when PR is realistically earned
+  const citByPR = prDateMonthsFromStart + prHoldYears*12;  // earliest cit via PR-hold rule
+  const citEffMonths = (A.special==="nordic") ? citReqMonths : Math.max(citReqMonths, citByPR);
+  const citMonthsLeft = Math.max(0, citEffMonths - monthsHere);
+  const citDate = addMonths(startY,startM,citEffMonths);
+  const citResidenceMet = monthsHere >= citEffMonths;
+
+  // language: PD3 (or PD2 if no major social assistance)
+  const citLangMet = (A.lang==="pd3") || (A.lang==="pd2" && gBenef);
+  const citEmpMet  = (A.work==="ge35"||A.work==="ge4");
+  const citSelfSuff = gBenef; // simplified: no Active Social Policy / Integration benefits
+
+  const citChecks = [
+    [citResidenceMet?"ok":"no","Continuous residence requirement", citNote + (citResidenceMet?"":` ~${fmtShort(citMonthsLeft)} to go.`)],
+    [(A.special==="nordic")?"ok":"warn","Hold permanent residence first", A.special==="nordic"?"Nordic citizens are exempt.":`You must hold PR for ~${prHoldYears} yrs before the bill passes — so PR is step one.`],
+    [citLangMet?"ok":"no","Danish language: Prøve i Dansk 3", citLangMet? (A.lang==="pd2"?"PD2 accepted (no major welfare history).":"Met."):`Need PD3 (PD2 only if no significant welfare use). ${ext(L.pd3,"accepted tests")} · ${ext(L.danskTest,"sign up")}`],
+    ["warn","Pass the citizenship test (Indfødsretsprøven 2021)",`40 questions on society, history & culture. Not asked here — plan to sit it. ${ext(L.citTest,"exam info")} · ${ext(L.citTestReg,"dates & price")}`],
+    [citEmpMet?"ok":"no","3 yrs 6 mths full-time work in last 4 yrs", citEmpMet?"Met.":"Not yet met."],
+    [citSelfSuff?"ok":"no","Self-sufficiency", citSelfSuff?"No disqualifying welfare.":"No Active Social Policy/Integration benefits in last 2 yrs (max 4 mths in 5 yrs)."],
+    [gDebt?"ok":"no","No qualifying overdue public debt", gDebt?"":"Must be cleared."],
+    [gCrime?"ok":"no","Clean criminal record", gCrime?"":"Convictions trigger waiting periods or a permanent bar."],
+    ["warn","Sign loyalty declaration & attend the ceremony","Handshake ceremony with the mayor after Parliament passes your naturalisation bill (twice a year)."]
+  ];
+  const citHardFail = !citResidenceMet || !citLangMet || !citEmpMet || !citSelfSuff || !gDebt || !gCrime;
+
+  return {monthsHere,yearsHere,
+    pr:{supp,prReqYears,prResidenceMet,prResidenceDate,prMonthsLeft,prChecks,prBasicMet,prAllMet,
+        prDate8,prDate4,prLeft8,prLeft4,
+        sLang,sWork4,sActive,sIncome,bLang,bWork,bNow},
+    cit:{citReqYears,citNote,citEffMonths,citMonthsLeft,citDate,citResidenceMet,citChecks,citHardFail,prHoldYears}
+  };
+}
+
+/* ---------- PR track picker ---------- */
+let LASTP=null, LASTR=null;
+function fillPRTrack(tr){
+  const P=LASTP, r=LASTR; if(!P) return;
+  document.querySelectorAll("#prtabs .subtab").forEach(b=>b.classList.toggle("sel", b.dataset.tr===tr));
+  const isFast = tr==="4";
+  const date = isFast?P.prDate4:P.prDate8;
+  const left = isFast?P.prLeft4:P.prLeft8;
+  const missBasics = P.prChecks.filter(c=>!c[0]).map(c=>c[2]);
+  const ptItems=[];
+  if(!P.sLang)   ptItems.push(`Pass ${ext(L.pd3,"Prøve i Dansk 3")} — ${ext(L.danskTest,"see dates & sign up")}`);
+  if(!P.sWork4)  ptItems.push("Reach <b>4 years</b> of full-time work within the last 4 yrs 6 mths");
+  if(!P.sActive) ptItems.push(`Pass the ${ext(L.activeExam,"active-citizen exam")} (${ext(L.activeReg,"dates")}) — or do 1 yr of board / association / youth work`);
+  if(!P.sIncome) ptItems.push("Average <b>≥ DKK 346,156/yr</b> taxable income over 2 yrs");
+
+  let need, showList;
+  if(isFast){
+    showList = P.supp<4;
+    need = P.supp>=4
+      ? `<b>You have all 4 points.</b> ${left>0?`About ${fmtShort(left)} of residence still to go.`:"Residence time is met."}`
+      : `You have <b>${P.supp}/4</b> points. To get on the 4-year track, add <b>all</b> of these:`;
+  } else {
+    showList = P.supp<2;
+    need = P.supp>=2
+      ? `<b>You have enough points (${P.supp}/4).</b> ${left>0?`About ${fmtShort(left)} of residence still to go.`:"Residence time is met."}`
+      : `You have <b>${P.supp}/4</b> points. To get on the 8-year track, add <b>${2-P.supp} more</b> from:`;
+  }
+  const listHtml = showList ? `<ul class="needlist">${ptItems.map(x=>`<li>${x}</li>`).join("")}</ul>` : "";
+  const basicWarn = missBasics.length
+    ? `<div class="blockbasics" style="margin-top:10px">⚠ <b>Also required for this track:</b> ${missBasics.join("; ")} — see the basic-requirements checklist below.</div>` : "";
+
+  document.getElementById("prtrack").innerHTML =
+    `<div class="trackdetail">
+       <div class="td-date">${fmt(date)}</div>
+       <div class="td-cap">${isFast?"Fast track — all basics + all 4 supplementary points":"Standard — all basics + 2 of 4 supplementary points"}</div>
+       <div class="td-need">${need}${listHtml}</div>
+       ${basicWarn}
+     </div>`;
+}
+
+/* ---------- render ---------- */
+function render(){
+  const r = compute();
+  const P=r.pr, C=r.cit;
+
+  /* ----- PR pane (selectable tracks) ----- */
+  document.getElementById("pane-pr").innerHTML = `
+    <div class="verdict"><span class="lbl">Two routes to permanent residence — tap one to see how to get it</span></div>
+    <div class="subtabs" id="prtabs">
+      <button class="subtab" data-tr="8"><div class="st-h">Standard · 8 years</div><div class="st-d">${fmt(P.prDate8)}</div></button>
+      <button class="subtab" data-tr="4"><div class="st-h">⚡ Fast track · 4 years</div><div class="st-d">${fmt(P.prDate4)}</div></button>
+    </div>
+    <div id="prtrack"></div>
+    <div class="ptext">You have <b>${P.supp}/4</b> supplementary points and <b>${(r.yearsHere).toFixed(1)} yrs</b> in Denmark so far.</div>
+
+    <h3 class="sec">Basic requirements — mandatory for BOTH tracks</h3>
+    <ul class="check">${P.prChecks.map(c=>li(c[0]?"ok":"no",c[2],c[3]||"")).join("")}</ul>
+
+    <h3 class="sec">The 4 supplementary points — 2 unlock standard, all 4 unlock fast track</h3>
+    <ul class="check">
+      ${li(P.sLang?"ok":"warn","Prøve i Dansk 3 passed", P.sLang?"":`${ext(L.pd3,"Accepted tests")} · ${ext(L.danskTest,"dates & sign-up")}`)}
+      ${li(P.sWork4?"ok":"warn","4 yrs full-time work in last 4.5 yrs", P.sWork4?"":"Not yet.")}
+      ${li(P.sActive?"ok":"warn","Active-citizen exam / 1 yr active citizenship", P.sActive?"":`${ext(L.activeExam,"Exam info & prep")} · ${ext(L.activeReg,"dates")}`)}
+      ${li(P.sIncome?"ok":"warn","Income ≥ DKK 346,156/yr (2-yr avg)", P.sIncome?"":"Not met / unsure.")}
+    </ul>
+
+    <h3 class="sec">⚡ Strategy</h3>
+    <div class="faster"><ul>
+      <li><b>Most controllable points</b> are the ${ext(L.danskTest,"language exam (PD3)")} and the ${ext(L.activeExam,"active-citizen exam")} — they don't depend on salary or employer.</li>
+      <li><b>Apply on time:</b> always re-apply <b>before</b> your current permit expires, or the residence clock can reset to zero.</li>
+    </ul></div>
+
+    <h3 class="sec">Official links</h3>
+    <ul class="resources">
+      <li>${ext(L.prApply,"Permanent residence — full requirements (nyidanmark)")}</li>
+      <li>${ext(L.prForm,"Start the PR application — form TU1-4")}</li>
+      <li>${ext(L.danskTest,"Danish language tests PD2 / PD3 — dates, sign-up, price")}</li>
+      <li>${ext(L.activeExam,"Active-citizen exam — info & preparation")}</li>
+    </ul>`;
+  LASTP=P; LASTR=r;
+  fillPRTrack(P.supp>=4?"4":"8");
+  document.querySelectorAll("#prtabs .subtab").forEach(b=>{ b.onclick=()=>fillPRTrack(b.dataset.tr); });
+
+  /* ----- Citizenship pane ----- */
+  const citPct = Math.min(100, Math.round(r.monthsHere/C.citEffMonths*100));
+  let citVerdict, citBadge;
+  if(C.citResidenceMet && !C.citHardFail){ citVerdict="Conditions look met"; citBadge='<span class="badge ok">Ready to prepare</span>'; }
+  else if(C.citResidenceMet){ citVerdict=fmt(C.citDate); citBadge='<span class="badge warn">Time met, conditions pending</span>'; }
+  else { citVerdict=fmt(C.citDate); citBadge='<span class="badge no">Time remaining</span>'; }
+
+  let citFaster="<ul>";
+  if(A.special==="none" && A.permit!=="refugee"){
+    citFaster += `<li><b>Shorter clocks exist</b> if your situation changes: marrying a Danish citizen (6–8 yrs), or completing 3+ yrs of Danish education (5 yrs). Refugees/stateless qualify at 8 yrs.</li>`;
+  } else {
+    citFaster += `<li><b>Your shortened clock is already applied:</b> ${C.citNote}</li>`;
+  }
+  citFaster += `<li><b>PR is the bottleneck, not residence.</b> You must hold permanent residence for ~${C.prHoldYears} years before your naturalisation bill passes — so getting PR early (via the 4-year fast track) is the single biggest lever on citizenship timing.</li>`;
+  citFaster += `<li><b>Bank the exams early:</b> Prøve i Dansk 3 and the Indfødsretsprøven both have fixed sitting dates and can gate you for months. Take them well before you hit the residence mark.</li>`;
+  citFaster += `<li><b>Parliament naturalises in batches</b> (≈ twice a year) and a ceremony follows — build in a few extra months beyond the date above.</li></ul>`;
+
+  document.getElementById("pane-cit").innerHTML = `
+    <div class="verdict"><span class="lbl">Earliest realistic eligibility</span></div>
+    <div class="verdict"><span class="big">${citVerdict}</span>${citBadge}</div>
+    <div class="progress"><i style="width:${citPct}%"></i></div>
+    <div class="ptext">${C.citResidenceMet?"Residence time met":`About ${fmtShort(C.citMonthsLeft)} to go`} ·
+      ${C.citReqYears}-yr base · ${C.citNote}</div>
+
+    <h3 class="sec">What citizenship requires</h3>
+    <ul class="check">${C.citChecks.map(c=>li(c[0],c[1],c[2]||"")).join("")}</ul>
+
+    <h3 class="sec">⚡ Make it faster</h3>
+    <div class="faster">${citFaster}</div>
+
+    <h3 class="sec">Official links</h3>
+    <ul class="resources">
+      <li>${ext(L.citApply,"How to apply for citizenship (borger.dk)")}</li>
+      <li>${ext(L.citTest,"Indfødsretsprøven 2021 — citizenship test info & prep")}</li>
+      <li>${ext(L.citTestReg,"Citizenship test — dates, registration & price")}</li>
+      <li>${ext(L.pd3,"Prøve i Dansk 3 — accepted tests")} · ${ext(L.danskTest,"sign up")}</li>
+    </ul>`;
+
+  document.getElementById("form").style.display="none";
+  document.getElementById("results").style.display="block";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* ---------- nav ---------- */
+document.getElementById("go").onclick = render;
+document.querySelectorAll(".tab").forEach(t=>{
+  t.onclick=()=>{
+    document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+    document.querySelectorAll(".pane").forEach(x=>x.classList.remove("active"));
+    t.classList.add("active");
+    document.getElementById("pane-"+t.dataset.pane).classList.add("active");
+  };
+});
+document.getElementById("restart").onclick = ()=>{
+  document.getElementById("results").style.display="none";
+  document.getElementById("form").style.display="block";
+  window.scrollTo({top:0,behavior:"smooth"});
+};
+</script>
+</body>
+</html>
