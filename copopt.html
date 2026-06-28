@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+  COPENHAGEN OPTIMIZATION · CONTENT OPS
+  A spec content strategy hub. Built by Jason Donnelly as an interview artifact.
+
+  DEPENDENCIES:
+  - None. Zero external requests. Fonts are system stacks. Split-flap + clock are vanilla JS.
+-->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'">
+<title>Connected Content · A strategy for Copenhagen Optimization</title>
+<meta name="description" content="A spec content strategy for Copenhagen Optimization: turning the deepest operator expertise in aviation into category authority, an AI-search advantage, and a scalable content engine.">
+<link rel="canonical" href="https://www.jasonwdonnelly.com/copopt">
+<meta property="og:title" content="Connected Content · A strategy for Copenhagen Optimization">
+<meta property="og:description" content="From vendor to category authority. A content operating system built on the one asset no competitor has: 40+ of the world's airports already taking your calls.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.jasonwdonnelly.com/copopt">
+<meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'%3E%3Crect width='1200' height='630' fill='%230e1830'/%3E%3Ctext x='80' y='320' fill='%23ffb000' font-family='monospace' font-size='84' font-weight='bold'%3ECONNECTED CONTENT%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%230e1830'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='%23ffb000' font-family='monospace' font-size='20' font-weight='bold'%3E%E2%9C%88%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --navy-deep: #0c1628;
+    --navy: #14233f;
+    --navy-700: #1d3258;
+    --navy-card: #16273f;
+    --navy-line: #284069;
+    --amber: #ffb000;
+    --amber-soft: #ffca5e;
+    --paper: #e9eff8;
+    --paper-dim: #c4d0e4;
+    --muted: #95a7c6;
+    --green: #3fd089;
+    --red: #ff6b70;
+    --blue: #6db4ff;
+
+    --mono: ui-monospace, "JetBrains Mono", "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    --maxw: 1080px;
+    --gap: clamp(1rem, 4vw, 2.5rem);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    margin: 0;
+    background: var(--navy-deep);
+    color: var(--paper);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* faint runway-grid atmosphere */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(var(--navy-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--navy-line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    opacity: 0.05;
+    mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 78%);
+  }
+
+  .wrap { width: min(var(--maxw), 92vw); margin: 0 auto; position: relative; z-index: 1; }
+
+  a { color: var(--amber-soft); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible, .dep-row:focus-visible {
+    outline: 2px solid var(--amber);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* ===== STATUS BAR ===== */
+  .statusbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(8, 17, 33, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--navy-line);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+  .statusbar .wrap {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    height: 46px;
+    width: min(var(--maxw), 96vw);
+  }
+  .sb-brand { color: var(--amber); font-weight: 700; white-space: nowrap; }
+  .sb-brand .dot { color: var(--green); animation: blink 2.4s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0.25; } }
+  @media (prefers-reduced-motion: reduce) { .sb-brand .dot { animation: none; } }
+  .sb-spacer { flex: 1; }
+  .sb-meta { color: var(--muted); white-space: nowrap; }
+  .sb-clock { color: var(--paper); }
+  @media (max-width: 640px) { .sb-meta.hide-sm { display: none; } }
+
+  /* ===== HERO ===== */
+  .hero { padding: clamp(2.5rem, 8vw, 5rem) 0 1.5rem; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin: 0 0 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .eyebrow::before { content: "▸"; color: var(--green); }
+
+  .flap-line {
+    font-family: var(--mono);
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: 0.01em;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.16em 0.42em;
+    align-items: flex-start;
+  }
+  .flap-line.l1 { font-size: clamp(2.1rem, 7.6vw, 4.6rem); }
+  .flap-line.l2 { font-size: clamp(2.1rem, 7.6vw, 4.6rem); color: var(--amber); margin-top: 0.18em; }
+
+  .flap-word { display: inline-flex; gap: 0.1em; }
+  .flap {
+    display: inline-block;
+    min-width: 0.62em;
+    text-align: center;
+    background: linear-gradient(180deg, #0a1326 0%, #0a1326 49.5%, #060c19 50.5%, #060c19 100%);
+    border: 1px solid var(--navy-line);
+    border-radius: 4px;
+    padding: 0.06em 0.04em;
+    position: relative;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+
+  .hero-sub {
+    margin: 1.8rem 0 0;
+    max-width: 40ch;
+    font-size: clamp(1.05rem, 2.6vw, 1.3rem);
+    color: var(--paper-dim);
+  }
+  .hero-sub strong { color: var(--paper); font-weight: 600; }
+
+  /* ===== DEPARTURE BOARD ===== */
+  .board { margin: clamp(2rem, 6vw, 3.5rem) 0 1rem; }
+  .board-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 2px solid var(--amber);
+    padding-bottom: 0.6rem;
+    margin-bottom: 0.4rem;
+  }
+  .board-head .count { color: var(--amber); }
+
+  .departures { font-family: var(--mono); }
+  .dep-row {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr 3rem 7rem;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--navy-line);
+    color: var(--paper);
+    padding: 0.85rem 0.4rem;
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 0.92rem;
+    transition: background 0.15s ease, padding-left 0.15s ease;
+  }
+  .dep-row:hover { background: var(--navy-card); padding-left: 0.9rem; }
+  .dep-flight { color: var(--muted); letter-spacing: 0.05em; }
+  .dep-dest { color: var(--paper); font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; }
+  .dep-gate { color: var(--amber); text-align: right; }
+  .dep-status {
+    text-align: right;
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+  .s-ontime { color: var(--green); }
+  .s-board { color: var(--amber); }
+  .s-final { color: var(--red); }
+  .s-sched { color: var(--blue); }
+  .dep-dest .sub { display: block; font-family: var(--sans); font-weight: 400; font-size: 0.72rem; color: var(--muted); text-transform: none; letter-spacing: 0; margin-top: 0.15rem; }
+
+  @media (max-width: 600px) {
+    .dep-row { grid-template-columns: 3.4rem 1fr 5.4rem; font-size: 0.82rem; }
+    .dep-gate { display: none; }
+  }
+
+  /* ===== SECTIONS / GATES ===== */
+  .gate { padding: clamp(3rem, 9vw, 5.5rem) 0 0.5rem; scroll-margin-top: 56px; }
+  .gate-tag {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem 1rem;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-top: 1px solid var(--navy-line);
+    padding-top: 1.1rem;
+    margin-bottom: 1.4rem;
+  }
+  .gate-num { color: var(--amber); font-weight: 700; }
+  .gate-route { color: var(--paper-dim); }
+  .gate-route .arrow { color: var(--green); padding: 0 0.2rem; }
+  .gate-chip {
+    margin-left: auto;
+    border: 1px solid var(--navy-line);
+    border-radius: 999px;
+    padding: 0.15rem 0.7rem;
+    font-size: 11px;
+  }
+  .chip-final { color: var(--red); border-color: rgba(255,107,112,0.45); }
+  .chip-board { color: var(--amber); border-color: rgba(255,176,0,0.45); }
+  .chip-delay { color: var(--red); border-color: rgba(255,107,112,0.45); }
+  .chip-ontime { color: var(--green); border-color: rgba(63,208,137,0.4); }
+
+  h1 { margin: 0; }
+  h2.gate-title {
+    font-family: var(--mono);
+    font-size: clamp(1.6rem, 5vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: 0.01em;
+    margin: 0 0 1rem;
+    max-width: 22ch;
+  }
+  h3 {
+    font-family: var(--mono);
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
+    color: var(--amber-soft);
+    margin: 2.2rem 0 0.6rem;
+  }
+
+  .lede { font-size: clamp(1.15rem, 2.8vw, 1.45rem); color: var(--paper); max-width: 44ch; line-height: 1.4; margin: 0 0 1.6rem; }
+  .gate p { max-width: 65ch; color: var(--paper-dim); }
+  .gate p strong { color: var(--paper); font-weight: 600; }
+  .pull { color: var(--amber); }
+
+  /* cards / grids */
+  .grid { display: grid; gap: 1rem; margin: 1.6rem 0; }
+  .grid.two { grid-template-columns: repeat(2, 1fr); }
+  .grid.three { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 720px) { .grid.two, .grid.three { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--navy-card);
+    border: 1px solid var(--navy-line);
+    border-radius: 8px;
+    padding: 1.2rem 1.3rem;
+  }
+  .card h4 {
+    margin: 0 0 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+  .card p { margin: 0; font-size: 0.95rem; color: var(--paper-dim); max-width: none; }
+  .card .role { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; display: block; margin-bottom: 0.4rem; }
+
+  /* boarding-pass callout */
+  .pass {
+    display: grid;
+    grid-template-columns: 1fr;
+    background: linear-gradient(135deg, #18294a 0%, #102038 100%);
+    border: 1px dashed var(--navy-line);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1.8rem 0;
+  }
+  .pass-body { padding: 1.3rem 1.4rem; }
+  .pass-body .k { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .pass-body .v { font-family: var(--mono); color: var(--amber); font-size: 1.05rem; margin-top: 0.1rem; }
+
+  /* before/after AI demo */
+  .demo {
+    border: 1px solid var(--navy-line);
+    border-radius: 10px;
+    background: var(--navy-card);
+    overflow: hidden;
+    margin: 1.8rem 0;
+  }
+  .demo-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--navy-line);
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+  .demo-bar .prompt { color: var(--paper); }
+  .demo-q {
+    background: var(--navy);
+    border: 1px solid var(--navy-line);
+    color: var(--paper-dim);
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .demo-q[aria-pressed="true"] { border-color: var(--amber); color: var(--amber); }
+  .demo-toggle { margin-left: auto; display: flex; border: 1px solid var(--navy-line); border-radius: 6px; overflow: hidden; }
+  .demo-toggle button { background: none; border: none; color: var(--muted); font-family: var(--mono); font-size: 0.72rem; padding: 0.3rem 0.7rem; cursor: pointer; }
+  .demo-toggle button[aria-pressed="true"] { background: var(--amber); color: #0c1628; font-weight: 700; }
+  .demo-body { padding: 1.1rem 1.2rem; min-height: 7rem; }
+  .demo-answer { margin: 0; color: var(--paper-dim); font-size: 0.95rem; }
+  .demo-answer .miss { color: var(--red); }
+  .demo-answer .hit { color: var(--green); }
+  .demo-note { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); padding: 0 1.2rem 0.9rem; }
+
+  /* lists */
+  .ticklist { list-style: none; padding: 0; margin: 1.2rem 0; max-width: 65ch; }
+  .ticklist li { position: relative; padding-left: 1.7rem; margin-bottom: 0.8rem; color: var(--paper-dim); }
+  .ticklist li::before { content: "→"; position: absolute; left: 0; color: var(--amber); font-family: var(--mono); }
+  .ticklist li strong { color: var(--paper); }
+
+  /* do/don't table */
+  .dd { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.4rem 0; }
+  @media (max-width: 640px){ .dd { grid-template-columns: 1fr; } }
+  .dd-col h4 { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 0.7rem; }
+  .dd-do h4 { color: var(--green); }
+  .dd-dont h4 { color: var(--red); }
+  .dd-col ul { list-style: none; padding: 0; margin: 0; }
+  .dd-col li { font-size: 0.9rem; color: var(--paper-dim); padding: 0.4rem 0; border-bottom: 1px solid var(--navy-line); }
+
+  /* timeline */
+  .phases { margin: 1.6rem 0; }
+  .phase { display: grid; grid-template-columns: 8rem 1fr; gap: 1rem; padding: 1.2rem 0; border-top: 1px solid var(--navy-line); }
+  @media (max-width: 640px){ .phase { grid-template-columns: 1fr; gap: 0.4rem; } }
+  .phase-when { font-family: var(--mono); color: var(--amber); font-size: 0.85rem; letter-spacing: 0.04em; }
+  .phase-when .sub { display: block; color: var(--muted); font-size: 0.72rem; margin-top: 0.2rem; }
+  .phase ul { margin: 0; padding-left: 1.1rem; }
+  .phase li { color: var(--paper-dim); margin-bottom: 0.4rem; }
+
+  /* sample post */
+  .sample { background: var(--navy-card); border-left: 3px solid var(--amber); border-radius: 0 8px 8px 0; padding: 1.1rem 1.3rem; margin: 1rem 0; }
+  .sample .meta { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .sample p { font-size: 0.95rem; color: var(--paper); margin: 0; }
+
+  .note { font-size: 0.85rem; color: var(--muted); font-style: italic; max-width: 60ch; }
+
+  /* ===== STAT BAND (sourced data) ===== */
+  .statband { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--navy-line); border: 1px solid var(--navy-line); border-radius: 10px; overflow: hidden; margin: 1.5rem 0 0.6rem; }
+  @media (max-width: 640px) { .statband { grid-template-columns: 1fr; } }
+  .stat { background: var(--navy-card); padding: 1.1rem 1.15rem; }
+  .stat .num { font-family: var(--mono); font-size: clamp(1.7rem, 4.4vw, 2.3rem); font-weight: 700; color: var(--amber); line-height: 1; }
+  .stat .lbl { font-size: 0.85rem; color: var(--paper-dim); margin-top: 0.55rem; line-height: 1.38; }
+  .stat-src { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.04em; color: var(--muted); margin: 0 0 0.4rem; }
+  .stat-src a { color: var(--amber-soft); }
+
+  /* ===== ONE-PAGER (seat-back card) ===== */
+  .onepager { padding: clamp(2.5rem, 7vw, 4rem) 0 0.5rem; scroll-margin-top: 56px; }
+  .op-card {
+    border: 1px solid var(--navy-line);
+    border-radius: 14px;
+    background:
+      linear-gradient(180deg, rgba(255,176,0,0.04), transparent 30%),
+      var(--navy);
+    overflow: hidden;
+  }
+  .op-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem 1rem;
+    padding: 1rem 1.4rem;
+    border-bottom: 1px solid var(--navy-line);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--navy-deep);
+  }
+  .op-top .tag { color: var(--amber); font-weight: 700; }
+  .op-top .safe { margin-left: auto; color: var(--green); }
+  .op-inner { padding: clamp(1.3rem, 4vw, 2.2rem); }
+  .op-pitch {
+    font-size: clamp(1.3rem, 3.6vw, 2rem);
+    line-height: 1.3;
+    font-weight: 600;
+    color: var(--paper);
+    margin: 0 0 0.4rem;
+    max-width: 30ch;
+  }
+  .op-pitch .hl { color: var(--amber); }
+  .op-pitch-sub { color: var(--muted); font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.04em; margin: 0 0 1.8rem; }
+
+  .op-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--navy-line); border: 1px solid var(--navy-line); border-radius: 10px; overflow: hidden; }
+  @media (max-width: 680px){ .op-grid { grid-template-columns: 1fr; } }
+  .op-block { background: var(--navy); padding: 1.2rem 1.3rem; }
+  .op-block.span { grid-column: 1 / -1; }
+  .op-block h3 {
+    margin: 0 0 0.7rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--amber);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .op-block h3 .ico { color: var(--muted); }
+  .op-list { list-style: none; margin: 0; padding: 0; }
+  .op-list li { position: relative; padding-left: 1.2rem; margin-bottom: 0.55rem; font-size: 0.92rem; color: var(--paper-dim); line-height: 1.45; }
+  .op-list li:last-child { margin-bottom: 0; }
+  .op-list li::before { content: "›"; position: absolute; left: 0; top: -0.03em; color: var(--amber); font-family: var(--mono); }
+  .op-list li strong { color: var(--paper); font-weight: 600; }
+  .op-vs { display: grid; gap: 0.7rem; }
+  .op-vs-row { font-size: 0.92rem; color: var(--paper-dim); line-height: 1.45; }
+  .op-vs-row .who { color: var(--paper); font-weight: 600; }
+  .op-vs-row .win { color: var(--green); }
+  .op-foot {
+    border-top: 1px solid var(--navy-line);
+    padding: 1.1rem 1.4rem;
+    font-family: var(--mono);
+    font-size: 0.92rem;
+    color: var(--paper);
+    background: var(--navy-deep);
+  }
+  .op-foot .lbl { color: var(--amber); }
+  .op-block p.desc { color: var(--paper-dim); font-size: 0.92rem; line-height: 1.45; margin: 0 0 0.7rem; }
+  .op-block .gates { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--amber-soft); margin: 0; }
+
+  /* reveal */
+  .reveal { opacity: 0; transform: translateY(12px); transition: opacity 0.4s ease, transform 0.4s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce){ .reveal { opacity: 1; transform: none; transition: none; } }
+
+  /* ===== FOOTER / ARRIVALS ===== */
+  footer { margin-top: 4rem; border-top: 2px solid var(--amber); background: var(--navy-deep); padding: 3rem 0 4rem; }
+  .arrivals-tag { font-family: var(--mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); margin-bottom: 1rem; }
+  footer h2 { font-family: var(--mono); font-size: clamp(1.5rem, 5vw, 2.3rem); margin: 0 0 1rem; max-width: 20ch; }
+  footer p { color: var(--paper-dim); max-width: 55ch; }
+  .sig { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); margin-top: 2rem; letter-spacing: 0.04em; }
+  .sig a { color: var(--amber-soft); }
+
+  ::selection { background: var(--amber); color: #0c1628; }
+</style>
+</head>
+<body>
+
+<!-- ===== STATUS BAR ===== -->
+<header class="statusbar">
+  <div class="wrap">
+    <span class="sb-brand"><span class="dot">●</span> COPOPT&nbsp;//&nbsp;CONTENT OPS</span>
+    <span class="sb-meta hide-sm">SPEC STRATEGY · NOT AFFILIATED</span>
+    <span class="sb-spacer"></span>
+    <span class="sb-meta hide-sm">CPH GATE</span>
+    <span class="sb-clock" id="clock" aria-label="Local time">--:--:--</span>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Final approach · A content strategy for Copenhagen Optimization</p>
+    <h1 class="flap-line l1" id="flap1" aria-label="We are airport people.">WE ARE AIRPORT PEOPLE.</h1>
+    <p class="flap-line l2" id="flap2" aria-label="This is how we prove it." role="presentation">THIS IS HOW WE PROVE IT.</p>
+    <p class="hero-sub">You already have the one thing money can't buy in this category: <strong>40+ of the world's airports take your calls.</strong> Here's the system that turns that into market position, not just renewals.</p>
+  </div>
+</section>
+
+<!-- ===== ONE-PAGER ===== -->
+<section class="onepager" id="g00" aria-label="Company one-pager">
+  <div class="wrap reveal">
+    <div class="op-card">
+      <div class="op-top">
+        <span class="tag">The one-pager</span>
+        <span>Keep this in every seat-back pocket</span>
+        <span class="safe">● One story · every seat</span>
+      </div>
+      <div class="op-inner">
+        <p class="op-pitch">We are <span class="hl">airport people</span> who happen to write software. That is the entire advantage.</p>
+        <p class="op-pitch-sub">The story everyone tells, the same way, every day. Sales, support, marketing, the founders. One page.</p>
+
+        <div class="op-grid">
+          <div class="op-block">
+            <h3>Who we are</h3>
+            <ul class="op-list">
+              <li>Founded <strong>2014</strong>. Offices in Copenhagen and Boston. Around 60 people, many of them former airport operators.</li>
+              <li>Backed by <strong>InfraVia</strong> since 2025 to scale globally.</li>
+              <li>Trusted by <strong>40+ airports</strong>, from Heathrow and Changi to JFK Terminal 4 and Dallas Fort Worth.</li>
+            </ul>
+          </div>
+
+          <div class="op-block">
+            <h3>What we do</h3>
+            <ul class="op-list">
+              <li><strong>Better Airport:</strong> one cloud platform, nine modules you mix and match. Forecasting, check-in, security, baggage, stand and gate, border, shift planning, queuing.</li>
+              <li>Plus hands-on <strong>consultancy</strong> from people who have run operations themselves.</li>
+              <li>In one line: we forecast what's coming, then help you put the right people and resources in the right place, curb to gate.</li>
+            </ul>
+          </div>
+
+          <div class="op-block">
+            <h3>What makes us different</h3>
+            <ul class="op-list">
+              <li><strong>We are operators who built software,</strong> not a software company that learned airports.</li>
+              <li><strong>Connected Operations:</strong> one source of truth across the whole airport, so a problem in security doesn't blindside baggage. Most tools fix one silo. We connect them.</li>
+              <li><strong>Software and consultancy together.</strong> We don't hand over a login and leave.</li>
+            </ul>
+          </div>
+
+          <div class="op-block">
+            <h3>Who we're up against</h3>
+            <div class="op-vs">
+              <p class="op-vs-row"><span class="who">The big suites</span> (SITA, Amadeus, ADB SAFEGATE, TAV, Indra): the rip-and-replace-everything option. <span class="win">We win</span> by being best-of-breed and connected, so you never bet the whole airport on one rigid system.</p>
+              <p class="op-vs-row"><span class="who">The specialists</span> (Veovo, INFORM, Amorph): closest head-to-head on forecasting and resource management. <span class="win">We win</span> on operator DNA and connecting the full journey, not just one process.</p>
+              <p class="op-vs-row"><span class="who">The status quo</span> (spreadsheets, gut feel): still how most airports run. <span class="win">We win</span> by naming its cost: the 10% and the bad peak days you don't have to accept.</p>
+            </div>
+          </div>
+
+          <div class="op-block span">
+            <h3>Why airports choose us</h3>
+            <ul class="op-list">
+              <li><strong>Grow without building.</strong> More throughput from the terminal you already have.</li>
+              <li><strong>Cut cost.</strong> Proven to reduce personnel costs by over 10%.</li>
+              <li><strong>Smoother for passengers.</strong> Right-sized queues, fewer surprises.</li>
+              <li><strong>Calmer peak days.</strong> See the cascade coming, recover faster.</li>
+              <li><strong>Proven where it's hardest.</strong> Live at some of the busiest, most demanding hubs on earth.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="op-foot">
+        <span class="lbl">If you remember one thing:</span> we are airport people who built the software. Everything above is just the proof.
+      </div>
+    </div>
+    <p class="note">Competitive names are accurate as of this build and worth a quick internal sanity-check before they harden into talking points. The category buckets matter more than any single logo.</p>
+  </div>
+</section>
+
+<!-- ===== DEPARTURE BOARD (TOC) ===== -->
+<section class="board" aria-label="Contents">
+  <div class="wrap">
+    <div class="board-head">
+      <span>Departures · Today</span>
+      <span class="count">12 SCHEDULED</span>
+    </div>
+    <nav class="departures" aria-label="Jump to section">
+      <button class="dep-row" data-go="g00"><span class="dep-flight">CO 00</span><span class="dep-dest">The one-pager<span class="sub">The story everyone tells, every day</span></span><span class="dep-gate">G00</span><span class="dep-status s-sched">BRIEFING</span></button>
+      <button class="dep-row" data-go="g01"><span class="dep-flight">CO 01</span><span class="dep-dest">Where they stand<span class="sub">The honest pre-flight read</span></span><span class="dep-gate">G01</span><span class="dep-status s-ontime">ON TIME</span></button>
+      <button class="dep-row" data-go="g02"><span class="dep-flight">CO 02</span><span class="dep-dest">Vendor → category king<span class="sub">Why they're the go-to, not a product</span></span><span class="dep-gate">G02</span><span class="dep-status s-board">BOARDING</span></button>
+      <button class="dep-row" data-go="g03"><span class="dep-flight">CO 03</span><span class="dep-dest">The AI-search gap<span class="sub">When operators ask the machine</span></span><span class="dep-gate">G03</span><span class="dep-status s-final">FINAL CALL</span></button>
+      <button class="dep-row" data-go="g04"><span class="dep-flight">CO 04</span><span class="dep-dest">The website<span class="sub">What's quietly leaking pipeline</span></span><span class="dep-gate">G04</span><span class="dep-status s-final">DELAYED</span></button>
+      <button class="dep-row" data-go="g05"><span class="dep-flight">CO 05</span><span class="dep-dest">The voices<span class="sub">Thought leadership and EGC</span></span><span class="dep-gate">G05</span><span class="dep-status s-ontime">ON TIME</span></button>
+      <button class="dep-row" data-go="g06"><span class="dep-flight">CO 06</span><span class="dep-dest">The operators' network<span class="sub">Your clients are your content engine</span></span><span class="dep-gate">G06</span><span class="dep-status s-board">BOARDING</span></button>
+      <button class="dep-row" data-go="g07"><span class="dep-flight">CO 07</span><span class="dep-dest">The roundtable<span class="sub">Webinars with airport leaders</span></span><span class="dep-gate">G07</span><span class="dep-status s-ontime">ON TIME</span></button>
+      <button class="dep-row" data-go="g08"><span class="dep-flight">CO 08</span><span class="dep-dest">The ground crew<span class="sub">A Reddit play for the people actually there</span></span><span class="dep-gate">G08</span><span class="dep-status s-board">NOW BOARDING</span></button>
+      <button class="dep-row" data-go="g09"><span class="dep-flight">CO 09</span><span class="dep-dest">The persona<span class="sub">Who they are on LinkedIn</span></span><span class="dep-gate">G09</span><span class="dep-status s-ontime">ON TIME</span></button>
+      <button class="dep-row" data-go="g10"><span class="dep-flight">CO 10</span><span class="dep-dest">The flight plan<span class="sub">First 90 days</span></span><span class="dep-gate">G10</span><span class="dep-status s-sched">SCHEDULED</span></button>
+      <button class="dep-row" data-go="g11"><span class="dep-flight">CO 11</span><span class="dep-dest">Turnaround<span class="sub">How this was built</span></span><span class="dep-gate">G11</span><span class="dep-status s-sched">CLEARED</span></button>
+    </nav>
+  </div>
+</section>
+
+<!-- ===== G01 ===== -->
+<section class="gate" id="g01">
+  <div class="wrap reveal">
+    <div class="gate-tag"><span class="gate-num">G01</span><span class="gate-route">Parked at the gate <span class="arrow">→</span> Wheels up</span><span class="gate-chip chip-ontime">Pre-flight</span></div>
+    <h2 class="gate-title">Your best asset barely leaves the building.</h2>
+    <p class="lede">"We are airport people" is not a slogan. It is the most valuable thing this company owns. Today it is a caption under a video.</p>
+    <p>It is the one claim in this category that cannot be faked, and the proof is in who started the company. Your two co-CEOs came up inside Copenhagen Airport, where they built its operational analysis function and ran its security resource planning, before they wrote a line of software. Then look at the field. Veovo, your closest rival, is the airport brand of a software group, assembled from a Danish sensor startup and a stack of acquired tools. INFORM is a half-century-old optimization house that sells to banks, ports, and logistics firms too. Good companies, both. Neither came from inside an airport. Your specialist rivals are built <em>for</em> operators by software companies. You are the one built <em>by</em> operators. And most of that hard-won difference is sitting in a meta description.</p>
+    <p>The proof is everywhere and it leaves the building nowhere. Your consultants spend their weeks embedded in the busiest airports on earth and publish almost none of what they see. You gathered the industry at a summit and turned it into a single blog post. You hold operational data across forty-plus airports and there is no number the industry quotes back to you. The expertise is real. The output from it is missing.</p>
+    <p>Here is why that is urgent and not just untidy. In 2025, InfraVia took a majority stake to accelerate commercial growth, which is another way of saying a clock started. The role you are hiring for is the answer to that clock: <strong>turn quiet authority into pipeline, and do it fast.</strong> The asset has never been more valuable, or more wasted, than at the moment it finally needs to pay.</p>
+    <div class="grid two">
+      <div class="card">
+        <h4>What you own</h4>
+        <p>The deepest operator credibility in aviation. Forty-plus airports, most of the revenue earned outside Europe, and a decade spent fixing the exact problems your buyers live with every day. It is the one input a rival can't reverse-engineer.</p>
+      </div>
+      <div class="card">
+        <h4>What's missing</h4>
+        <p>A system that turns all of it into demand and reputation. The content is improving on its own, but the expertise still mostly stays in implementation calls and private rooms. The authority is real. The engine that compounds it isn't built yet.</p>
+      </div>
+    </div>
+    <p>The job, in one line: <strong>take the most trusted name in the category and make it the loudest and most quoted one too,</strong> without spending the credibility that makes it worth hearing. Everything after this is how. This gate is the stakes.</p>
+  </div>
+</section>
+
+<!-- ===== G02 ===== -->
+<section class="gate" id="g02">
+  <div class="wrap reveal">
+    <div class="gate-tag"><span class="gate-num">G02</span><span class="gate-route">Vendor <span class="arrow">→</span> Category authority</span><span class="gate-chip chip-board">Boarding</span></div>
+    <h2 class="gate-title">Why they're the go-to, not just a product</h2>
+    <p class="lede">Every airport software company on earth says the same four words: data-driven, AI-powered, optimized operations. Right now that includes your own homepage. It isn't a position, it's wallpaper, and peeling it off is the opportunity.</p>
+    <p>Feature parity is the floor in B2B SaaS, not the finish line. The moment a competitor ships the same forecasting module, the spec sheet stops persuading anyone. What a rival can't match on a spec sheet is <strong>authority over the category itself</strong>: being the company that defines what good airport operations even means. That authority is yours to take, because you earned the standing the hard way. The only open question is whether you start acting like it.</p>
+
+    <h3>The move: stop being a vendor with opinions, become the standard everyone measures against</h3>
+    <ul class="ticklist">
+      <li><strong>Own "Connected Operations" as a category, not a feature.</strong> They coined it, along with the "airport horseshoe model." Most companies would kill for language like that. Treat it as a space they define, with a manifesto, a maturity model, and a point of view competitors are forced to answer.</li>
+      <li><strong>Publish the number the industry quotes.</strong> An annual <span class="pull">State of Airport Operations</span> index, built on proprietary data across 40+ airports plus the summit network. Pick three or four metrics only you can credibly own: average security wait at peak, stand and gate utilization, irregular-operations recovery time, passengers handled per square meter of terminal. Put a benchmark on each, refreshed every year. When ACI panels and trade press cite "according to Copenhagen Optimization's index," the position stops being a claim. It becomes infrastructure. No competitor can copy a dataset they don't have.</li>
+      <li><strong>Sell the outcome, not the modules.</strong> Their own data point (over 10% reduction in personnel costs) is a CFO's entire decision, and it's buried. Lead with the operational truth, let the nine modules be the how.</li>
+    </ul>
+    <p>Why this matters commercially, in one line: in a multi-year, multi-stakeholder, mission-critical buy, <strong>airports buy the authority before they buy the software.</strong> Category leaders get the inbound, the shortlist slot by default, and the benefit of the doubt in the room. That is what PE money is actually paying to build.</p>
+  </div>
+</section>
+
+<!-- ===== PILLAR FRAME ===== -->
+<section class="onepager" id="owns" aria-label="What this strategy owns">
+  <div class="wrap reveal">
+    <div class="op-card">
+      <div class="op-top">
+        <span class="tag">The mandate</span>
+        <span>What you're actually hiring</span>
+        <span class="safe">● Voice · leadership · positioning</span>
+      </div>
+      <div class="op-inner">
+        <p class="op-pitch">The role owns three things in the global airport industry. Here's how the plan maps to each.</p>
+        <p class="op-pitch-sub">One airport-people truth, three jobs. Every gate that follows sits under one of them. The whole program runs roughly ninety percent give, ten percent ask, because trust is the asset and the ask is what spends it.</p>
+        <div class="op-grid">
+          <div class="op-block">
+            <h3>Category positioning</h3>
+            <p class="desc">Own where you stand and why you're the standard, not a vendor with features. The wasted asset, the category move and the index, the demand you have to meet, and the site that carries all of it.</p>
+            <p class="gates">Gates 01 · 02 · 03 · 04</p>
+          </div>
+          <div class="op-block">
+            <h3>Thought leadership</h3>
+            <p class="desc">Turn operator expertise into authority that travels. Named human voices, your own client network as co-authors, the recurring roundtable, and real standing where operators actually talk.</p>
+            <p class="gates">Gates 05 · 06 · 07 · 08</p>
+          </div>
+          <div class="op-block span">
+            <h3>Voice</h3>
+            <p class="desc">One airport-people character, spoken the same way by every person and every channel. The persona is its home, the per-person voice docs make it scale, and the document you're reading is it in practice.</p>
+            <p class="gates">Gate 09 · woven through 04, 05, and every line here</p>
+          </div>
+        </div>
+      </div>
+      <div class="op-foot">
+        <span class="lbl">The order is the argument:</span> positioning sets what you stand for, thought leadership proves it, voice makes all of it sound like one company. And it starts with demand, which is the next gate.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== G03 ===== -->
+<section class="gate" id="g03">
+  <div class="wrap reveal">
+    <div class="gate-tag"><span class="gate-num">G03</span><span class="gate-route">Our story <span class="arrow">→</span> Their questions</span><span class="gate-chip chip-final">Final call</span></div>
+    <h2 class="gate-title">Start where the buyer is already looking</h2>
+    <p class="lede">Content strategy doesn't begin with what you want to say. It begins with what the buyer is already trying to find out. So before any plan, the demand: the questions the global airport buyer actually asks, sorted by who's asking.</p>
+    <div class="grid three">
+      <div class="card">
+        <span class="role">The operator · the champion</span>
+        <ul class="op-list">
+          <li>How do we cut security waits without adding lanes?</li>
+          <li>How do we forecast a real peak day?</li>
+          <li>How do we recover faster when irregular ops hit?</li>
+          <li>How do we push more flights through the same stands?</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="role">The integrator · IT and data</span>
+        <ul class="op-list">
+          <li>Best airport resource management systems?</li>
+          <li>How do we connect AODB, RMS, and baggage data?</li>
+          <li>Build or buy for airport operations?</li>
+          <li>What actually integrates with what we run?</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="role">The check-writer · CFO and exec</span>
+        <ul class="op-list">
+          <li>What is the ROI of optimization software?</li>
+          <li>How do we add capacity without building?</li>
+          <li>What does this do to cost per passenger?</li>
+          <li>The business case, in board language?</li>
+        </ul>
+      </div>
+    </div>
+    <p>Read it by stage and the gap gets specific. Top of funnel, the problem questions ("why are the queues this bad"), you can win on empathy and operator credibility. The middle ("what is Connected Operations," "what is an airport RMS") and the bottom ("Copenhagen Optimization vs Veovo," "best airport RMS") are where you are close to invisible today, and a competitor or an aggregator is writing the answer for you. <strong>Owning the category means owning the answer to every one of these, in the buyer's words, at the moment they ask.</strong> That is the spine the rest of this plan hangs on.</p>
+    <p>Now the uncomfortable part. When they go looking, they increasingly skip Google and ask a machine. The answer ChatGPT or Perplexity gives shapes the shortlist before a single salesperson is involved, and the question is whether Copenhagen Optimization is in that answer or watching it from the runway.</p>
+    <p>Most B2B content is still optimized for the old game: keyword listicles that win a Google SERP. Answer engines reward something different. They quote <strong>clear definitions, structured claims, comparison pages, and original data</strong>, and they trust sources the industry already cites. Try it yourself:</p>
+
+    <div class="demo" aria-label="Illustrative AI answer comparison">
+      <div class="demo-bar">
+        <span class="prompt">ask&nbsp;▸</span>
+        <button class="demo-q" data-q="0" aria-pressed="true">cut security waits without adding lanes</button>
+        <button class="demo-q" data-q="1" aria-pressed="false">best airport RMS</button>
+        <button class="demo-q" data-q="2" aria-pressed="false">forecast a peak day</button>
+        <span class="demo-toggle" role="group" aria-label="Toggle state">
+          <button id="t-now" data-state="now" aria-pressed="true">NOW</button>
+          <button id="t-after" data-state="after" aria-pressed="false">AFTER</button>
+        </span>
+      </div>
+      <div class="demo-body">
+        <p class="demo-answer" id="demo-answer">Pick a question.</p>
+      </div>
+      <p class="demo-note">Illustrative simulation, not a live model. The point is the structural gap, not the exact wording.</p>
+    </div>
+
+    <h3>What changes</h3>
+    <ul class="ticklist">
+      <li><strong>Definitional, citable content.</strong> "What is Connected Operations." "What is an airport RMS." Written to be quoted verbatim by a model, with the kind of crisp, sourced claims answer engines lift.</li>
+      <li><strong>Comparison and alternatives pages.</strong> LLMs love these for vendor questions, and right now they're being written by third parties who don't have your data or your framing. Reclaim that narrative.</li>
+      <li><strong>Structured data and clean architecture.</strong> Schema, FAQ blocks, unambiguous headings. Make the content trivially machine-readable.</li>
+      <li><strong>Become a cited source.</strong> The index from G02 is the single best GEO investment available, because proprietary statistics are exactly what models reach for, and getting cited by International Airport Review or Future Travel Experience compounds it.</li>
+    </ul>
+    <p class="note">This gate is deliberately a hypothesis, not a finished audit. The demand map is what I'd validate against your real search data and sales-call logs in week one. The answer-engine gap is what I'd diagnose live. Both show the thinking without pretending to know your numbers from the outside.</p>
+  </div>
+</section>
+
+<!-- ===== G04 ===== -->
+<section class="gate" id="g04">
+  <div class="wrap reveal">
+    <div class="gate-tag"><span class="gate-num">G04</span><span class="gate-route">Brochure <span class="arrow">→</span> Pipeline instrument</span><span class="gate-chip chip-delay">Delayed</span></div>
+    <h2 class="gate-title">The website, read like an operator would read a terminal</h2>
+    <p class="lede">It's a good site. That's the problem with critiquing it: the issues are editorial architecture, not taste. Five specific things are quietly costing conversions.</p>
+    <div class="grid two">
+      <div class="card">
+        <span class="role">Finding 01 · The hook</span>
+        <h4>The best line is a caption</h4>
+        <p>"We. are. airport. people." is the most differentiated asset on the entire site, and it's treated as a video subtitle. The hero leads with "mitigate capacity congestion" instead, which is exactly the generic SaaS phrasing every competitor also uses. Lead with the human truth. Defer the jargon.</p>
+      </div>
+      <div class="card">
+        <span class="role">Finding 02 · The proof</span>
+        <h4>The CFO's answer is buried</h4>
+        <p>The proof that closes the deal, the 10% personnel-cost cut and the extra flights per terminal, sits below the fold. On a homepage, the buyer's whole business case should be the first thing they see, in their own units, not a reward for scrolling past the features.</p>
+      </div>
+      <div class="card">
+        <span class="role">Finding 03 · The maze</span>
+        <h4>Nine "Better" modules, one "where do I start?"</h4>
+        <p>The sales motion is "start where the pain is biggest." The information architecture doesn't reflect that. Reorganize the entry points around problems (security queues, baggage chaos, capacity ceilings), not product names. Let buyers self-identify by their worst day.</p>
+      </div>
+      <div class="card">
+        <span class="role">Finding 04 · The library</span>
+        <h4>A rich resource hub with no current</h4>
+        <p>Blog, news, case studies, e-books, webinars: genuinely strong inventory, presented flat. No clear journey, nothing tied to buyer stage, and (per G03) not structured for AI discovery. A library is not the same as a path.</p>
+      </div>
+    </div>
+    <div class="pass">
+      <div class="pass-body">
+        <span class="k">Finding 05 · The platform</span>
+        <span class="v">"Airport people" is a brand, not a tagline</span>
+        <p style="color:var(--paper-dim); margin:0.6rem 0 0; max-width:60ch;">The single highest-leverage move on the whole site is to take that one true, ownable idea and build the homepage, the about page, and the entire content voice on top of it. Right now it's a flourish. It should be the foundation. The platform, not the garnish.</p>
+      </div>
+    </div>
+    <p class="note">Caveat worth saying out loud in the room: this is an outside read of the front end, not the analytics. The fixes are hypotheses to validate against their funnel data, not verdicts.</p>
+  </div>
+</section>
+
+<!-- ===== G05 ===== -->
+<section class="gate" id="g05">
+  <div class="wrap reveal">
+    <div class="gate-tag"><span class="gate-num">G05</span><span class="gate-route">Logo voice <span class="arrow">→</span> Human voices</span><span class="gate-chip chip-ontime">On time</span></div>
+    <h2 class="gate-title">The voices: who actually gets pushed out</h2>
+    <p class="lede">Thought leadership from a company page is a press release wearing a hoodie. People follow people. So the question isn't "what do we post," it's "whose name is on it."</p>
+    <p>This isn't a hunch. Across 1.3 million LinkedIn posts, the formats that win are the ones that deliver real depth under a credible human name. Documents (the carousel format) now lead every other format, while brand-page follower growth has quietly collapsed, which is exactly why employee and founder voices are the engine now, not the logo.</p>
+    <div class="statband">
+      <div class="stat"><div class="num">7.0%</div><div class="lbl">Engagement on native documents, LinkedIn's top format, up 14% year over year. Substance beats slogans.</div></div>
+      <div class="stat"><div class="num">6.4%</div><div class="lbl">Yearly follower growth for large brand pages, down from 21.6%. The company page alone has stalled.</div></div>
+      <div class="stat"><div class="num">+12%</div><div class="lbl">Rise in plain-text post engagement year over year. A clear idea, well said, still travels.</div></div>
+    </div>
+    <p class="stat-src">Source: <a href="https://www.socialinsider.io/social-media-benchmarks/linkedin" target="_blank" rel="noopener noreferrer">Socialinsider 2026 LinkedIn Benchmarks</a> (1.3M posts, 16,645 pages).</p>
+    <p>The takeaway for a company sitting on genuine operator expertise is almost too on the nose: publish the knowledge, under real names, in formats people can save. Which means the people are the strategy.</p>
+    <h3>Internal voices, mapped to what only they can say</h3>
+    <div class="grid three">
+      <div class="card"><span class="role">The vision</span><p><strong>Founders and CEO.</strong> The "why this category exists and where it goes next" voice. Ten years of watching airports hit the same walls. This is the long-arc, category-defining seat.</p></div>
+      <div class="card"><span class="role">The commercial lens</span><p><strong>Chief Growth Officer.</strong> The market-shape, where-the-money-moves voice. Speaks to the airport director and the CFO, not the analyst.</p></div>
+      <div class="card"><span class="role">The gold</span><p><strong>The consultants and delivery team.</strong> They sit inside Heathrow and Changi on a Tuesday. The byline alone makes the post land. This is "insights only airport people can bring," turned into a content stream.</p></div>
+    </div>
+    <p>The consultancy team is the most under-used content asset in the building. They are operators, in the field, with stories no competitor's marketing department can manufacture. The catch: they are busy and they don't think of themselves as writers. So you don't ask them to write.</p>
+    <h3>EGC, built as a system the busy operator can survive</h3>
+    <ul class="ticklist">
+      <li><strong>Capture, don't commission.</strong> A 15-minute voice memo after a site visit becomes a LinkedIn post, a blog note, and a webinar clip. The operator talks. The engine writes. They approve. Total cost to them: the length of a coffee.</li>
+      <li><strong>One voice doc per person.</strong> A short fingerprint of how each SME actually talks, so ghostwritten drafts sound like them and not like the brand. (This is the exact discipline I run for executives.)</li>
+      <li><strong>Map voice to pillar.</strong> Forecasting and data → one person. Security and border → another. Capacity strategy → the CGO. No random posting. A grid.</li>
+    </ul>
+    <p class="note">Names and current titles to be verified against the live org chart before anything ships publicly. The roles are the strategy; the bylines are a detail to confirm, not assume.</p>
+  </div>
+</section>
+
+<!-- ===== G06 ===== -->
+<section class="gate" id="g06">
+  <div class="wrap reveal">
+    <div class="gate-tag"><span class="gate-num">G06</span><span class="gate-route">Your experts <span class="arrow">→</span> The industry's experts</span><span class="gate-chip chip-board">Boarding</span></div>
+    <h2 class="gate-title">Your clients are the content engine. You just haven't put them on the masthead.</h2>
+    <p class="lede">There's a second asset hiding in plain sight, and this one no competitor can assemble: the most credible operators on the planet already take your calls. That is a content network worth more than any agency retainer.</p>
+    <p>Think about who's in the contact list. Operations leaders at Heathrow, Changi, JFK Terminal 4, Dallas Fort Worth, Sydney, Brisbane, Manchester, Denver. In most industries you'd pay a fortune to get those people in a room. Copenhagen Optimization gets them on implementation calls. The strategy is to turn that relationship from a renewal pipeline into a <strong>publishing network.</strong></p>
+    <h3>The build</h3>
+    <ul class="ticklist">
+      <li><strong>The Operators' Circle.</strong> Productize the summit they already ran. A standing council of operator-clients who shape an agenda, contribute to research, and get a platform in return. That endorsement is something a competitor can't simply go buy.</li>
+      <li><strong>Co-authored case studies that read peer-to-peer.</strong> Not "Copenhagen Optimization helped Airport X." Instead, the airport's own operator telling the story to other operators, with CopOpt as the enabler. The most persuasive B2B content is one practitioner talking to another.</li>
+      <li><strong>Original research, drawn from the network.</strong> This is what feeds the State of Airport Operations index in G02. The network is the data source. The data is the authority. The authority is the inbound.</li>
+      <li><strong>Seats, not asks.</strong> A webinar chair, a guest post, a podcast slot, a research credit. You give operators a stage, and they bring their credibility to your brand for free.</li>
+    </ul>
+    <p>The flywheel: <span class="pull">convene the best operators → produce insight nobody else has → become the authority → attract the next operators who want in.</span> That's a scalable content engine that gets stronger with every airport you sign, and it runs on an asset that's already yours.</p>
+  </div>
+</section>
+
+<!-- ===== G07 ===== -->
+<section class="gate" id="g07">
+  <div class="wrap reveal">
+    <div class="gate-tag"><span class="gate-num">G07</span><span class="gate-route">One webinar <span class="arrow">→</span> Ten assets</span><span class="gate-chip chip-ontime">On time</span></div>
+    <h2 class="gate-title">The roundtable: airport leaders, on the record, around the world</h2>
+    <p class="lede">They've already proven the format works. The European airports summit happened and they published the findings. The move is to make it recurring, global, and built to cascade.</p>
+    <p>Not product demos. Demos are where webinars go to die. These are <strong>real discussions among airport leaders from different regions</strong> on a genuine operational tension, where Copenhagen Optimization is the convener and the smartest voice at the table, not the salesperson at the front of it.</p>
+    <h3>A sample season, grounded in their own POV and the calendar the industry is already worried about</h3>
+    <div class="grid two">
+      <div class="card"><span class="role">Q1 · EMEA + North America</span><h4>Growth without expansion</h4><p>Capacity in a capex-constrained era. Built straight off their own thesis. The CFO-facing flagship.</p></div>
+      <div class="card"><span class="role">Q2 · Europe</span><h4>The EES border shock</h4><p>Staffing the EU Entry/Exit reality. A live regulatory deadline operators are genuinely anxious about. Timeliness is the hook.</p></div>
+      <div class="card"><span class="role">Q3 · Global</span><h4>Peak days fail in an order</h4><p>Their own blog series, brought to life as a panel on operational resilience and time-to-recovery.</p></div>
+      <div class="card"><span class="role">Q4 · North America + APAC</span><h4>The new normal at the checkpoint</h4><p>US security operations and what APAC has already solved. Cross-region tension makes the best panels.</p></div>
+    </div>
+    <h3>One event, ten assets (this is the engine, not the event)</h3>
+    <p>Each roundtable becomes: the live session → the on-demand recording → a clip reel for social → three blog posts → a LinkedIn carousel → a data nugget for the index → a sales-enablement one-pager. You don't produce a webinar. You produce a quarter of content and host it live once. Regional rotation also respects the fact that the majority of revenue lives outside Europe, so the time zones and the panelists reflect a genuinely global company.</p>
+    <h3>Why a roundtable and a cascade, not just "post more video"</h3>
+    <p>Because the data is blunt about it. LinkedIn video views fell 36% year over year even as engagement held, so volume for its own sake is a losing bet. What the platform rewards now is either a quick hit or real depth, not the forgettable middle. And unlike Instagram or Facebook, where video engagement collapses as you scale, LinkedIn's barely dips, because people come here for value, not entertainment. A roundtable with real airport leaders is that depth, and it spins off the carousels and short clips that actually travel.</p>
+    <div class="statband">
+      <div class="stat"><div class="num">7.2%</div><div class="lbl">Peak LinkedIn video engagement, hit in the 90 to 120 second window. Long enough to teach something.</div></div>
+      <div class="stat"><div class="num">2x</div><div class="lbl">Views for videos past three minutes versus two-minute ones. LinkedIn wants quick hits or depth, not the middle.</div></div>
+      <div class="stat"><div class="num">36%</div><div class="lbl">Yearly drop in LinkedIn video views. Chasing virality is the wrong game. Authority is the play.</div></div>
+    </div>
+    <p class="stat-src">Source: Socialinsider <a href="https://www.socialinsider.io/social-media-benchmarks/social-media-video-statistics" target="_blank" rel="noopener noreferrer">2025 Video Performance Statistics</a> and <a href="https://www.socialinsider.io/social-media-benchmarks/linkedin" target="_blank" rel="noopener noreferrer">2026 LinkedIn Benchmarks</a>.</p>
+  </div>
+</section>
+
+<!-- ===== G08 ===== -->
+<section class="gate" id="g08">
+  <div class="wrap reveal">
+    <div class="gate-tag"><span class="gate-num">G08</span><span class="gate-route">Broadcasting <span class="arrow">→</span> Belonging</span><span class="gate-chip chip-board">Now boarding</span></div>
+    <h2 class="gate-title">The ground crew: a Reddit play for the people who are actually there</h2>
+    <p class="lede">First, the truth that kills most Reddit strategies before they start: Reddit despises marketers. A B2B SaaS brand posting promo there gets flamed, downvoted, and screenshotted as a warning to others. So this is not a posting plan. It's something better.</p>
+    <p>The people who actually run airports are on Reddit being honest in a way they never are on LinkedIn. Controllers, ground handlers, gate agents, TSA and security staff, ops planners. They trade war stories, complaints, and dark humor in communities built around aviation and the working life of a terminal. That is the unfiltered voice of the exact people "airport people" claims to be. Three layers, in order of safety:</p>
+    <h3>Layer 1 · Listen (the only layer with zero risk)</h3>
+    <p>Treat these communities as the richest qualitative research source in the category. Mine the language, the recurring pain, the inside jokes, the things operators say when no vendor is watching. Feed that straight into every other channel so the brand sounds like it has actually stood on a jet bridge at 5am. <strong>Reddit as an input, not a channel.</strong> This alone is worth the effort.</p>
+    <h3>Layer 2 · Show up as humans, never as the logo</h3>
+    <p>Not the brand account shilling. The ex-operator consultants from G05, participating as real people with disclosed identities, answering genuine questions in threads where they have actual expertise, and never once pitching. The reputation you're building is "those people clearly get it," earned one helpful comment at a time.</p>
+    <h3>Layer 3 · Contribute something the community would actually upvote</h3>
+    <p>Rare, high-bar, value-first. A genuinely useful data visualization. An AMA with a named operator about what running a terminal is really like. The kind of thing that gets awarded, not reported.</p>
+    <div class="pass"><div class="pass-body"><span class="k">The guardrail</span><span class="v">One whiff of astroturf and "airport people" is dead everywhere</span><p style="color:var(--paper-dim); margin:0.6rem 0 0; max-width:60ch;">Real humans. Real handles. Value first. No links unless asked. The credibility you'd risk here is the same credibility the entire brand is built on, so the rules are absolute. Done right, you're the only company in the category with genuine standing where the actual operators talk. And being first to earn that trust is almost impossible for a competitor to undo.</p></div></div>
+  </div>
+</section>
+
+<!-- ===== G09 ===== -->
+<section class="gate" id="g09">
+  <div class="wrap reveal">
+    <div class="gate-tag"><span class="gate-num">G09</span><span class="gate-route">Tone <span class="arrow">→</span> Character</span><span class="gate-chip chip-ontime">On time</span></div>
+    <h2 class="gate-title">The persona: who Copenhagen Optimization is on LinkedIn</h2>
+    <p class="lede">A brand voice without a character is just a font choice. So give the company page a person to be, and the whole team can write as one.</p>
+    <div class="pass"><div class="pass-body">
+      <span class="k">The character</span>
+      <span class="v">The operator in the room</span>
+      <p style="color:var(--paper-dim); margin:0.6rem 0 0; max-width:62ch;">The one person at the industry conference who has actually run a terminal. Dry. Generous with what they know. Allergic to hype. Quietly the smartest one there, and never needs you to notice. Confident enough to be calm when everyone else is announcing things in all caps.</p>
+    </div></div>
+    <h3>How the operator responds to the world</h3>
+    <div class="dd">
+      <div class="dd-col dd-do">
+        <h4>Does</h4>
+        <ul>
+          <li>Reacts to an airport meltdown in the news with the calm "here's what operators should actually watch" take</li>
+          <li>Credits the airport, not itself, on a win</li>
+          <li>Uses real numbers and specific operational detail</li>
+          <li>Answers criticism factually and graciously, because it's secure</li>
+          <li>Reframes competitor noise up to the category, never down at the rival</li>
+        </ul>
+      </div>
+      <div class="dd-col dd-dont">
+        <h4>Doesn't</h4>
+        <ul>
+          <li>Say "thrilled to announce" with nothing behind it</li>
+          <li>Ambulance-chase a bad day at someone else's airport for engagement</li>
+          <li>Punch down at competitors</li>
+          <li>Post a graphic with eleven emojis and a rocket</li>
+          <li>Use forty words where the operator would use eight</li>
+        </ul>
+      </div>
+    </div>
+    <h3>In voice, for example</h3>
+    <div class="sample"><div class="meta">Reacting to a major airport's disruption</div><p>"Days like this don't fail all at once. They fail in an order. Security backs up, the knock-on hits stands, then baggage, then everyone's improvising. The airports that recover fastest aren't the ones with the most staff. They're the ones who saw the cascade coming an hour earlier. That hour is the whole game."</p></div>
+    <div class="sample"><div class="meta">On a customer go-live</div><p>"Manchester's team did the hard part. We just gave them one version of the truth to plan from. Proud of what they're running now."</p></div>
+    <p class="note">A house-style footnote worth a real decision: their current voice leans on em dashes and punchy fragments. That's a legitimate signature. The persona above is voice-agnostic on punctuation, so the team can keep the dashes or drop them. Either way, the character is the part that scales.</p>
+  </div>
+</section>
+
+<!-- ===== G10 ===== -->
+<section class="gate" id="g10">
+  <div class="wrap reveal">
+    <div class="gate-tag"><span class="gate-num">G10</span><span class="gate-route">Strategy <span class="arrow">→</span> In the air</span><span class="gate-chip chip-ontime">Scheduled</span></div>
+    <h2 class="gate-title">The flight plan: first 90 days</h2>
+    <p class="lede">Ideas are cheap at this altitude. Here's the order I'd actually fly it, so it reads as execution, not a wish list.</p>
+    <div class="phases">
+      <div class="phase">
+        <div class="phase-when">Weeks 1–4<span class="sub">Taxi</span></div>
+        <ul>
+          <li>GEO and website diagnostic against real funnel data (G03, G04)</li>
+          <li>Quick wins: surface the ROI proof, lead with the human hook on the homepage</li>
+          <li>Persona doc live, so every channel speaks as one character (G09)</li>
+          <li>EGC pilot with two or three consultant voices, capture-not-commission (G05)</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-when">Weeks 5–8<span class="sub">Takeoff</span></div>
+        <ul>
+          <li>First Operators' Roundtable booked and promoted (G07)</li>
+          <li>First definitional and comparison pages shipped for answer engines (G03)</li>
+          <li>Reddit listening operation running, feeding language into everything (G08)</li>
+          <li>First co-authored, peer-to-peer operator case study (G06)</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-when">Weeks 9–12<span class="sub">Climb</span></div>
+        <ul>
+          <li>First cut of the State of Airport Operations index drafted (G02)</li>
+          <li>EGC scaled to six to eight voices with a live editorial calendar (G05)</li>
+          <li>The full engine documented and handed to the team, not held in one head</li>
+        </ul>
+      </div>
+    </div>
+    <h3>The rhythm, once it's running</h3>
+    <p>Phases get you airborne. This is the heartbeat that keeps it there, built around the formats the data actually rewards (documents and depth, per G05 and G07).</p>
+    <div class="grid three">
+      <div class="card">
+        <span class="role">Weekly</span>
+        <p>Three to four posts across named human voices, Tuesday to Thursday. At least one saveable document or carousel. Consultant EGC interleaved from voice memos, never from asks.</p>
+      </div>
+      <div class="card">
+        <span class="role">Monthly</span>
+        <p>One pillar piece that owns a category term or POV, plus its cluster of derivative posts and clips that all link back to it. One co-authored operator story.</p>
+      </div>
+      <div class="card">
+        <span class="role">Quarterly</span>
+        <p>One Operators' Roundtable and its ten-asset cascade. One refresh of the index. A look back at what earned attention and what to retire. Compounding is the goal, never volume.</p>
+      </div>
+    </div>
+    <h3>Measured against pipeline, not vanity</h3>
+    <p>Impressions are altitude with no destination. The metrics that matter to a PE-backed company are content-influenced pipeline, share of category presence in both search and answer engines, inbound from target airports, and qualified opportunities the content actually touched. That's the language the new owners speak, so that's the scoreboard.</p>
+  </div>
+</section>
+
+<!-- ===== G11 ===== -->
+<section class="gate" id="g11">
+  <div class="wrap reveal">
+    <div class="gate-tag"><span class="gate-num">G11</span><span class="gate-route">Talk <span class="arrow">→</span> Proof</span><span class="gate-chip chip-ontime">Cleared</span></div>
+    <h2 class="gate-title">Turnaround time</h2>
+    <p class="lede">The brief asks for someone who uses AI naturally to research, structure, create, and ship smarter content systems. Not slop at scale. Actual leverage.</p>
+    <p>So here's the proof, sitting in your browser. This entire hub, the strategy, the research on InfraVia and the blog and the buyer behavior, the writing, the design, the build, was produced by one person in a few days using exactly that kind of AI-native workflow. The container is the closing argument. This is the operating speed.</p>
+    <p>And it isn't theory. At Moxso, a B2B SaaS company with a technical buyer and a long sale, I ran this same playbook: narrative architecture, a real content system, demand-gen built to touch pipeline, and shipped browser-based tools to back it. Different category, identical problem. Turn hard-won expertise into content that pays you back for years.</p>
+    <p>Copenhagen Optimization has the harder thing to find: genuine authority and the best operators in the world already on the line. What's missing is the engine to compound it at the speed your next chapter demands. <span class="pull">That part, I build.</span></p>
+  </div>
+</section>
+
+</main>
+
+<!-- ===== FOOTER / ARRIVALS ===== -->
+<footer>
+  <div class="wrap">
+    <p class="arrivals-tag">● Arrivals</p>
+    <h2>The smartest name in the category should be the most quoted one too.</h2>
+    <p>Eleven gates, one thesis: the trust is already yours. The work is building the system that spends it well. Cleared for departure whenever you are.</p>
+    <p class="sig">Prepared by Jason Donnelly · creative director, copywriter, B2B SaaS content systems · <a href="https://www.jasonwdonnelly.com" target="_blank" rel="noopener noreferrer">jasonwdonnelly.com</a><br>A speculative strategy artifact. Not affiliated with or endorsed by Copenhagen Optimization. All company facts drawn from public sources.</p>
+  </div>
+</footer>
+
+<script>
+  // ===== LOCAL CLOCK =====
+  (function clock() {
+    var el = document.getElementById('clock');
+    if (!el) return;
+    function tick() {
+      var d = new Date();
+      var p = function (n) { return String(n).padStart(2, '0'); };
+      el.textContent = p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds());
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+
+  // ===== SPLIT-FLAP HERO =====
+  (function splitFlap() {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ.";
+    function build(el) {
+      var text = el.getAttribute('aria-label') || el.textContent;
+      el.textContent = '';
+      var cells = [];
+      text.split(' ').forEach(function (word) {
+        if (!word.length) return;
+        var w = document.createElement('span');
+        w.className = 'flap-word';
+        w.setAttribute('aria-hidden', 'true');
+        for (var i = 0; i < word.length; i++) {
+          var span = document.createElement('span');
+          span.className = 'flap';
+          span.textContent = reduce ? word[i] : charset[0];
+          w.appendChild(span);
+          cells.push({ node: span, target: word[i].toUpperCase() });
+        }
+        el.appendChild(w);
+      });
+      return cells;
+    }
+    function animate(cells) {
+      cells.forEach(function (cell, idx) {
+        var steps = 16 + (idx % 9);
+        setTimeout(function () {
+          var count = 0;
+          var iv = setInterval(function () {
+            count++;
+            if (count >= steps) {
+              cell.node.textContent = cell.target;
+              clearInterval(iv);
+            } else {
+              cell.node.textContent = charset[Math.floor(Math.random() * (charset.length - 1))];
+            }
+          }, 40);
+        }, idx * 22);
+      });
+    }
+    ['flap1', 'flap2'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var cells = build(el);
+      if (!reduce) animate(cells);
+    });
+  })();
+
+  // ===== DEPARTURE BOARD NAV =====
+  (function boardNav() {
+    document.querySelectorAll('.dep-row').forEach(function (row) {
+      row.addEventListener('click', function () {
+        var target = document.getElementById(row.getAttribute('data-go'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  })();
+
+  // ===== AI ANSWER DEMO =====
+  (function aiDemo() {
+    var answers = {
+      0: {
+        now: "Generic listicles and a couple of consultancies surface. <span class='miss'>Copenhagen Optimization is not named.</span> The buyer leaves with three vendors to research, and you're not one of them.",
+        after: "<span class='hit'>Copenhagen Optimization is cited by name,</span> with a definitional answer on Connected Operations and a stat from their index. You're on the shortlist before a salesperson exists."
+      },
+      1: {
+        now: "The model lists whoever wrote the best comparison page. <span class='miss'>Often that's a competitor or an aggregator,</span> framing the category on their terms, not yours.",
+        after: "<span class='hit'>Your own comparison and definition pages are the source,</span> so the model explains the category in your language, with Better Airport as the reference implementation."
+      },
+      2: {
+        now: "Broad textbook answer about historical averages. <span class='miss'>No mention of peak-day behavior, no vendor,</span> no path from question to solution.",
+        after: "<span class='hit'>The answer reflects your published thinking</span> on why the same passenger count produces a totally different day, and points to the people who model it."
+      }
+    };
+    var state = 'now';
+    var q = '0';
+    var answerEl = document.getElementById('demo-answer');
+    function render() {
+      if (!answerEl) return;
+      // content is from a fixed internal lookup, not user input
+      answerEl.innerHTML = answers[q][state];
+    }
+    document.querySelectorAll('.demo-q').forEach(function (b) {
+      b.addEventListener('click', function () {
+        document.querySelectorAll('.demo-q').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+        b.setAttribute('aria-pressed', 'true');
+        q = b.getAttribute('data-q');
+        render();
+      });
+    });
+    ['t-now', 't-after'].forEach(function (id) {
+      var btn = document.getElementById(id);
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        document.getElementById('t-now').setAttribute('aria-pressed', 'false');
+        document.getElementById('t-after').setAttribute('aria-pressed', 'false');
+        btn.setAttribute('aria-pressed', 'true');
+        state = btn.getAttribute('data-state');
+        render();
+      });
+    });
+    render();
+  })();
+
+  // ===== SCROLL REVEAL =====
+  (function reveal() {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var items = document.querySelectorAll('.reveal');
+    if (reduce || !('IntersectionObserver' in window)) {
+      items.forEach(function (el) { el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0, rootMargin: '0px 0px 25% 0px' });
+    items.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+</body>
+</html>

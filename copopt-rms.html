@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'none'">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+  COPENHAGEN OPTIMIZATION · RMS CONTENT STRATEGY
+  Content Strategist case deliverable. Built by Jason Donnelly.
+  Structured against the four tasks. Anchored on "the end of the manual rebuild."
+
+  DEPENDENCIES:
+  - None. Zero external requests. Fonts are system stacks. Split-flap, clock, and demos are vanilla JS.
+-->
+<title>The End of the Manual Rebuild · RMS content strategy for Copenhagen Optimization</title>
+<meta name="description" content="A content strategy for Copenhagen Optimization's RMS. Built on the one idea their best customer already gave them: the end of the manual rebuild. Champion-first, depth over volume, calibrated to a 700-airport market.">
+<link rel="canonical" href="https://www.jasonwdonnelly.com/copopt-rms">
+<meta property="og:title" content="The End of the Manual Rebuild · RMS content strategy">
+<meta property="og:description" content="Their best content sounds least like the category. A content strategy that brings the operator truth outward, for a finite 700-airport market.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.jasonwdonnelly.com/copopt-rms">
+<meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='630'%3E%3Crect width='1200' height='630' fill='%230e1830'/%3E%3Ctext x='80' y='300' fill='%23ffb000' font-family='monospace' font-size='76' font-weight='bold'%3ETHE END OF THE%3C/text%3E%3Ctext x='80' y='390' fill='%23ffb000' font-family='monospace' font-size='76' font-weight='bold'%3EMANUAL REBUILD%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%230e1830'/%3E%3Ctext x='16' y='23' text-anchor='middle' fill='%23ffb000' font-family='monospace' font-size='20' font-weight='bold'%3E%E2%9C%88%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --navy-deep: #0c1628;
+    --navy: #14233f;
+    --navy-700: #1d3258;
+    --navy-card: #16273f;
+    --navy-line: #284069;
+    --amber: #ffb000;
+    --amber-soft: #ffca5e;
+    --paper: #e9eff8;
+    --paper-dim: #c4d0e4;
+    --muted: #95a7c6;
+    --green: #3fd089;
+    --red: #ff6b70;
+    --blue: #6db4ff;
+
+    --mono: ui-monospace, "JetBrains Mono", "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    --maxw: 1080px;
+    --gap: clamp(1rem, 4vw, 2.5rem);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    margin: 0;
+    background: var(--navy-deep);
+    color: var(--paper);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* faint runway-grid atmosphere */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(var(--navy-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--navy-line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    opacity: 0.05;
+    mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 78%);
+  }
+
+  .wrap { width: min(var(--maxw), 92vw); margin: 0 auto; position: relative; z-index: 1; }
+
+  a { color: var(--amber-soft); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible, .dep-row:focus-visible {
+    outline: 2px solid var(--amber);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* ===== STATUS BAR ===== */
+  .statusbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(8, 17, 33, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--navy-line);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+  .statusbar .wrap {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    height: 46px;
+    width: min(var(--maxw), 96vw);
+  }
+  .sb-brand { color: var(--amber); font-weight: 700; white-space: nowrap; }
+  .sb-brand .dot { color: var(--green); animation: blink 2.4s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0.25; } }
+  @media (prefers-reduced-motion: reduce) { .sb-brand .dot { animation: none; } }
+  .sb-spacer { flex: 1; }
+  .sb-meta { color: var(--muted); white-space: nowrap; }
+  .sb-clock { color: var(--paper); }
+  @media (max-width: 680px) { .sb-meta.hide-sm { display: none; } }
+
+  /* ===== HERO ===== */
+  .hero { padding: clamp(2.5rem, 8vw, 5rem) 0 1.5rem; }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin: 0 0 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .eyebrow::before { content: "▸"; color: var(--green); }
+
+  .flap-line {
+    font-family: var(--mono);
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: 0.01em;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.16em 0.42em;
+    align-items: flex-start;
+  }
+  .flap-line.l1 { font-size: clamp(2rem, 7.2vw, 4.4rem); }
+  .flap-line.l2 { font-size: clamp(2rem, 7.2vw, 4.4rem); color: var(--amber); margin-top: 0.18em; }
+
+  .flap-word { display: inline-flex; gap: 0.1em; }
+  .flap {
+    display: inline-block;
+    min-width: 0.62em;
+    text-align: center;
+    background: linear-gradient(180deg, #0a1326 0%, #0a1326 49.5%, #060c19 50.5%, #060c19 100%);
+    border: 1px solid var(--navy-line);
+    border-radius: 4px;
+    padding: 0.06em 0.04em;
+    position: relative;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+
+  .hero-sub {
+    margin: 1.8rem 0 0;
+    max-width: 46ch;
+    font-size: clamp(1.05rem, 2.6vw, 1.3rem);
+    color: var(--paper-dim);
+  }
+  .hero-sub strong { color: var(--paper); font-weight: 600; }
+
+  /* ===== DEPARTURE BOARD ===== */
+  .board { margin: clamp(2rem, 6vw, 3.5rem) 0 1rem; }
+  .board-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 2px solid var(--amber);
+    padding-bottom: 0.6rem;
+    margin-bottom: 0.4rem;
+  }
+  .board-head .count { color: var(--amber); }
+
+  .departures { font-family: var(--mono); }
+  .dep-row {
+    display: grid;
+    grid-template-columns: 3.6rem 1fr 7rem;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--navy-line);
+    color: var(--paper);
+    padding: 0.85rem 0.4rem;
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 0.92rem;
+    transition: background 0.15s ease, padding-left 0.15s ease;
+  }
+  .dep-row:hover { background: var(--navy-card); padding-left: 0.9rem; }
+  .dep-dest { color: var(--paper); font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; }
+  .dep-gate { color: var(--amber); text-align: left; font-size: 0.82rem; letter-spacing: 0.04em; }
+  .dep-status {
+    text-align: right;
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+  .s-ontime { color: var(--green); }
+  .s-board { color: var(--amber); }
+  .s-final { color: var(--red); }
+  .s-sched { color: var(--blue); }
+  .dep-dest .sub { display: block; font-family: var(--sans); font-weight: 400; font-size: 0.72rem; color: var(--muted); text-transform: none; letter-spacing: 0; margin-top: 0.15rem; }
+
+  @media (max-width: 600px) {
+    .dep-row { grid-template-columns: 2.9rem 1fr 4.8rem; font-size: 0.82rem; }
+  }
+
+  .dep-group {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1.5rem 0.4rem 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+  .dep-group:first-child { padding-top: 0.5rem; }
+  .dep-group .gtask { font-weight: 700; white-space: nowrap; }
+  .dep-group .gname { color: var(--paper-dim); letter-spacing: 0.08em; white-space: nowrap; }
+  .dep-group .grule { flex: 1; height: 1px; background: var(--navy-line); min-width: 1rem; }
+  .dep-group.is-aux { color: var(--muted); }
+  .dep-group.is-aux .gname { color: var(--muted); }
+  @media (max-width: 480px) { .dep-group .gname { display: none; } }
+
+  .dep-star { background: linear-gradient(90deg, rgba(255,176,0,0.10), transparent 72%); border-bottom-color: rgba(255,176,0,0.35); }
+  .dep-star:hover { background: linear-gradient(90deg, rgba(255,176,0,0.18), var(--navy-card)); }
+  .dep-star .dep-dest { color: var(--amber-soft); }
+  .dep-star .dep-gate { color: var(--amber); }
+
+  /* ===== SECTIONS / GATES ===== */
+  .gate { padding: clamp(3rem, 9vw, 5.5rem) 0 0.5rem; scroll-margin-top: 56px; }
+  .gate-tag {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem 1rem;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-top: 1px solid var(--navy-line);
+    padding-top: 1.1rem;
+    margin-bottom: 1.4rem;
+  }
+  .gate-num { color: var(--amber); font-weight: 700; }
+  .gate-route { color: var(--paper-dim); }
+  .gate-route .arrow { color: var(--green); padding: 0 0.2rem; }
+  .gate-chip {
+    margin-left: auto;
+    border: 1px solid var(--navy-line);
+    border-radius: 999px;
+    padding: 0.15rem 0.7rem;
+    font-size: 11px;
+  }
+  .chip-final { color: var(--red); border-color: rgba(255,107,112,0.45); }
+  .chip-board { color: var(--amber); border-color: rgba(255,176,0,0.45); }
+  .chip-delay { color: var(--red); border-color: rgba(255,107,112,0.45); }
+  .chip-ontime { color: var(--green); border-color: rgba(63,208,137,0.4); }
+  .chip-task { color: var(--blue); border-color: rgba(109,180,255,0.45); }
+
+  h1 { margin: 0; }
+  h2.gate-title {
+    font-family: var(--mono);
+    font-size: clamp(1.6rem, 5vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: 0.01em;
+    margin: 0 0 1rem;
+    max-width: 24ch;
+  }
+  h3 {
+    font-family: var(--mono);
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
+    color: var(--amber-soft);
+    margin: 2.2rem 0 0.6rem;
+  }
+
+  .lede { font-size: clamp(1.15rem, 2.8vw, 1.45rem); color: var(--paper); max-width: 46ch; line-height: 1.4; margin: 0 0 1.6rem; }
+  .gate p { max-width: 66ch; color: var(--paper-dim); }
+  .gate p strong { color: var(--paper); font-weight: 600; }
+  .pull { color: var(--amber); }
+  blockquote.quote {
+    margin: 1.6rem 0;
+    padding: 0.2rem 0 0.2rem 1.4rem;
+    border-left: 3px solid var(--amber);
+    font-family: var(--mono);
+    font-size: clamp(1.1rem, 2.7vw, 1.35rem);
+    line-height: 1.4;
+    color: var(--paper);
+    max-width: 50ch;
+  }
+  blockquote.quote cite { display: block; margin-top: 0.7rem; font-family: var(--sans); font-style: normal; font-size: 0.82rem; color: var(--muted); letter-spacing: 0.04em; }
+
+  /* cards / grids */
+  .grid { display: grid; gap: 1rem; margin: 1.6rem 0; }
+  .grid.two { grid-template-columns: repeat(2, 1fr); }
+  .grid.three { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 720px) { .grid.two, .grid.three { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--navy-card);
+    border: 1px solid var(--navy-line);
+    border-radius: 8px;
+    padding: 1.2rem 1.3rem;
+  }
+  .card h4 {
+    margin: 0 0 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--amber);
+  }
+  .card p { margin: 0; font-size: 0.95rem; color: var(--paper-dim); max-width: none; }
+  .card p + p { margin-top: 0.6rem; }
+  .card .role { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; display: block; margin-bottom: 0.4rem; }
+
+  /* boarding-pass callout */
+  .pass {
+    display: grid;
+    grid-template-columns: 1fr;
+    background: linear-gradient(135deg, #18294a 0%, #102038 100%);
+    border: 1px dashed var(--navy-line);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1.8rem 0;
+  }
+  .pass-body { padding: 1.3rem 1.4rem; }
+  .pass-body .k { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .pass-body .v { font-family: var(--mono); color: var(--amber); font-size: 1.05rem; margin-top: 0.1rem; display: block; }
+
+  /* before/after demo */
+  .demo {
+    border: 1px solid var(--navy-line);
+    border-radius: 10px;
+    background: var(--navy-card);
+    overflow: hidden;
+    margin: 1.8rem 0;
+  }
+  .demo-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--navy-line);
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+  .demo-bar .prompt { color: var(--paper); }
+  .demo-q {
+    background: var(--navy);
+    border: 1px solid var(--navy-line);
+    color: var(--paper-dim);
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .demo-q[aria-pressed="true"] { border-color: var(--amber); color: var(--amber); }
+  .demo-toggle { margin-left: auto; display: flex; border: 1px solid var(--navy-line); border-radius: 6px; overflow: hidden; }
+  .demo-toggle button { background: none; border: none; color: var(--muted); font-family: var(--mono); font-size: 0.72rem; padding: 0.3rem 0.7rem; cursor: pointer; }
+  .demo-toggle button[aria-pressed="true"] { background: var(--amber); color: #0c1628; font-weight: 700; }
+  .demo-body { padding: 1.2rem 1.2rem; min-height: 8rem; }
+  .demo-label { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 0.5rem; }
+  .demo-label.is-now { color: var(--red); }
+  .demo-label.is-after { color: var(--green); }
+  .demo-answer { margin: 0; color: var(--paper); font-size: 1rem; line-height: 1.5; }
+  .demo-answer .miss { color: var(--red); }
+  .demo-answer .hit { color: var(--green); }
+  .demo-note { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); padding: 0 1.2rem 0.9rem; }
+
+  /* lists */
+  .ticklist { list-style: none; padding: 0; margin: 1.2rem 0; max-width: 66ch; }
+  .ticklist li { position: relative; padding-left: 1.7rem; margin-bottom: 0.8rem; color: var(--paper-dim); }
+  .ticklist li::before { content: "→"; position: absolute; left: 0; color: var(--amber); font-family: var(--mono); }
+  .ticklist li strong { color: var(--paper); }
+
+  /* keep/improve/stop/missing table */
+  .audit { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--navy-line); border: 1px solid var(--navy-line); border-radius: 10px; overflow: hidden; margin: 1.5rem 0; }
+  @media (max-width: 720px){ .audit { grid-template-columns: 1fr; } }
+  .audit-cell { background: var(--navy-card); padding: 1.2rem 1.3rem; }
+  .audit-cell h4 { margin: 0 0 0.7rem; font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .audit-keep h4 { color: var(--green); }
+  .audit-improve h4 { color: var(--amber); }
+  .audit-stop h4 { color: var(--red); }
+  .audit-missing h4 { color: var(--blue); }
+  .audit-cell ul { list-style: none; padding: 0; margin: 0; }
+  .audit-cell li { font-size: 0.9rem; color: var(--paper-dim); padding: 0.5rem 0; border-bottom: 1px solid var(--navy-line); line-height: 1.4; }
+  .audit-cell li:last-child { border-bottom: none; }
+  .audit-cell li strong { color: var(--paper); font-weight: 600; }
+
+  /* do/don't */
+  .dd { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.4rem 0; }
+  @media (max-width: 640px){ .dd { grid-template-columns: 1fr; } }
+  .dd-col h4 { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 0.7rem; }
+  .dd-do h4 { color: var(--green); }
+  .dd-dont h4 { color: var(--red); }
+  .dd-col ul { list-style: none; padding: 0; margin: 0; }
+  .dd-col li { font-size: 0.9rem; color: var(--paper-dim); padding: 0.4rem 0; border-bottom: 1px solid var(--navy-line); }
+
+  /* timeline */
+  .phases { margin: 1.6rem 0; }
+  .phase { display: grid; grid-template-columns: 8rem 1fr; gap: 1rem; padding: 1.2rem 0; border-top: 1px solid var(--navy-line); }
+  @media (max-width: 640px){ .phase { grid-template-columns: 1fr; gap: 0.4rem; } }
+  .phase-when { font-family: var(--mono); color: var(--amber); font-size: 0.85rem; letter-spacing: 0.04em; }
+  .phase-when .sub { display: block; color: var(--muted); font-size: 0.72rem; margin-top: 0.2rem; }
+  .phase ul { margin: 0; padding-left: 1.1rem; }
+  .phase li { color: var(--paper-dim); margin-bottom: 0.4rem; }
+
+  /* sample post */
+  .sample { background: var(--navy-card); border-left: 3px solid var(--amber); border-radius: 0 8px 8px 0; padding: 1.2rem 1.4rem; margin: 1.2rem 0; max-width: 60ch; }
+  .sample .meta { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.7rem; }
+  .sample p { font-size: 0.98rem; color: var(--paper); margin: 0 0 0.7rem; max-width: none; }
+  .sample p:last-child { margin-bottom: 0; }
+  .sample .lead-line { color: var(--paper); font-weight: 600; }
+
+  .note { font-size: 0.85rem; color: var(--muted); font-style: italic; max-width: 62ch; }
+
+  /* stat band */
+  .statband { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--navy-line); border: 1px solid var(--navy-line); border-radius: 10px; overflow: hidden; margin: 1.5rem 0 0.6rem; }
+  @media (max-width: 640px) { .statband { grid-template-columns: 1fr; } }
+  .stat { background: var(--navy-card); padding: 1.1rem 1.15rem; }
+  .stat .num { font-family: var(--mono); font-size: clamp(1.7rem, 4.4vw, 2.3rem); font-weight: 700; color: var(--amber); line-height: 1; }
+  .stat .lbl { font-size: 0.85rem; color: var(--paper-dim); margin-top: 0.55rem; line-height: 1.38; }
+  .stat-src { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.04em; color: var(--muted); margin: 0 0 0.4rem; }
+
+  /* one-pager / seat-back card */
+  .onepager { padding: clamp(2.5rem, 7vw, 4rem) 0 0.5rem; scroll-margin-top: 56px; }
+  .op-card {
+    border: 1px solid var(--navy-line);
+    border-radius: 14px;
+    background:
+      linear-gradient(180deg, rgba(255,176,0,0.04), transparent 30%),
+      var(--navy);
+    overflow: hidden;
+  }
+  .op-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem 1rem;
+    padding: 1rem 1.4rem;
+    border-bottom: 1px solid var(--navy-line);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--navy-deep);
+  }
+  .op-top .tag { color: var(--amber); font-weight: 700; }
+  .op-top .safe { margin-left: auto; color: var(--green); }
+  .op-inner { padding: clamp(1.3rem, 4vw, 2.2rem); }
+  .op-pitch {
+    font-size: clamp(1.3rem, 3.6vw, 2rem);
+    line-height: 1.3;
+    font-weight: 600;
+    color: var(--paper);
+    margin: 0 0 0.4rem;
+    max-width: 32ch;
+  }
+  .op-pitch .hl { color: var(--amber); }
+  .op-pitch-sub { color: var(--muted); font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.04em; margin: 0 0 1.8rem; max-width: 60ch; line-height: 1.5; }
+
+  .op-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--navy-line); border: 1px solid var(--navy-line); border-radius: 10px; overflow: hidden; }
+  @media (max-width: 680px){ .op-grid { grid-template-columns: 1fr; } }
+  .op-block { background: var(--navy); padding: 1.2rem 1.3rem; }
+  .op-block.span { grid-column: 1 / -1; }
+  .op-block h3 {
+    margin: 0 0 0.7rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--amber);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .op-list { list-style: none; margin: 0; padding: 0; }
+  .op-list li { position: relative; padding-left: 1.2rem; margin-bottom: 0.55rem; font-size: 0.92rem; color: var(--paper-dim); line-height: 1.45; }
+  .op-list li:last-child { margin-bottom: 0; }
+  .op-list li::before { content: "›"; position: absolute; left: 0; top: -0.03em; color: var(--amber); font-family: var(--mono); }
+  .op-list li strong { color: var(--paper); font-weight: 600; }
+  .op-foot {
+    border-top: 1px solid var(--navy-line);
+    padding: 1.1rem 1.4rem;
+    font-family: var(--mono);
+    font-size: 0.92rem;
+    color: var(--paper);
+    background: var(--navy-deep);
+  }
+  .op-foot .lbl { color: var(--amber); }
+  .op-block p.desc { color: var(--paper-dim); font-size: 0.92rem; line-height: 1.45; margin: 0 0 0.7rem; }
+  .op-block .gates { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--amber-soft); margin: 0; }
+
+  /* reveal */
+  .reveal { opacity: 0; transform: translateY(12px); transition: opacity 0.4s ease, transform 0.4s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce){ .reveal { opacity: 1; transform: none; transition: none; } }
+
+  /* footer */
+  footer { margin-top: 4rem; border-top: 2px solid var(--amber); background: var(--navy-deep); padding: 3rem 0 4rem; }
+  .arrivals-tag { font-family: var(--mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); margin-bottom: 1rem; }
+  footer h2 { font-family: var(--mono); font-size: clamp(1.5rem, 5vw, 2.3rem); margin: 0 0 1rem; max-width: 24ch; }
+  footer p { color: var(--paper-dim); max-width: 58ch; }
+  .sig { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); margin-top: 2rem; letter-spacing: 0.04em; }
+  .sig a { color: var(--amber-soft); }
+
+  /* collapsible brief */
+  .brief { margin: clamp(1.6rem, 5vw, 2.6rem) 0 0; }
+  .brief details {
+    border: 1px solid var(--navy-line);
+    border-radius: 10px;
+    background: var(--navy-card);
+    overflow: hidden;
+  }
+  .brief summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 1rem 1.3rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--paper);
+  }
+  .brief summary::-webkit-details-marker { display: none; }
+  .brief summary::before { content: "▸"; color: var(--green); transition: transform 0.2s ease; }
+  .brief details[open] summary::before { transform: rotate(90deg); }
+  .brief summary .tag { color: var(--amber); font-weight: 700; }
+  .brief summary .hint { margin-left: auto; color: var(--muted); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: none; }
+  @media (prefers-reduced-motion: reduce){ .brief summary::before { transition: none; } }
+  .brief-body { padding: 0.4rem 1.4rem 1.5rem; border-top: 1px solid var(--navy-line); }
+  .brief-body h4 { font-family: var(--mono); color: var(--amber-soft); font-size: 0.82rem; letter-spacing: 0.04em; margin: 1.3rem 0 0.4rem; text-transform: uppercase; }
+  .brief-body h4:first-child { margin-top: 0.6rem; }
+  .brief-body p { color: var(--paper-dim); font-size: 0.92rem; max-width: 72ch; margin: 0.4rem 0; }
+  .brief-body ul { padding-left: 1.2rem; margin: 0.4rem 0; }
+  .brief-body li { color: var(--paper-dim); font-size: 0.92rem; margin-bottom: 0.3rem; max-width: 70ch; }
+  .brief-body li strong { color: var(--paper); }
+
+  .ns { font-family: var(--mono); font-size: 0.92rem; color: var(--amber-soft); border-left: 2px solid var(--amber); padding-left: 0.85rem; margin: 1.6rem 0 0; max-width: 62ch; }
+  .ns strong { color: var(--amber); }
+
+  ::selection { background: var(--amber); color: #0c1628; }
+</style>
+
+</head>
+<body class="">
+
+
+<!-- ===== STATUS BAR ===== -->
+<header class="statusbar">
+  <div class="wrap">
+    <span class="sb-brand"><span class="dot">●</span> COPOPT&nbsp;//&nbsp;RMS CONTENT STRATEGY</span>
+    <span class="sb-meta hide-sm">CONTENT STRATEGIST CASE</span>
+    <span class="sb-spacer"></span>
+    <span class="sb-meta hide-sm">CPH GATE</span>
+    <span class="sb-clock" id="clock" aria-label="Local time">--:--:--</span>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Final approach · RMS content strategy for Copenhagen Optimization</p>
+    <h1 class="flap-line l1" id="flap1" aria-label="THE END OF THE">THE END OF THE</h1>
+    <p class="flap-line l2" id="flap2" aria-label="MANUAL REBUILD." role="presentation">MANUAL REBUILD.</p>
+    <p class="hero-sub">At an airport, the day never holds still. A flight lands early, a belt breaks, and someone redoes the whole resource plan by hand. Again. That's the manual rebuild. Ending it's the truest story you own, and <strong>this is the content strategy built on it.</strong></p>
+
+    <div class="pass" style="margin-top:1.9rem;">
+      <div class="pass-body">
+        <span class="k">Pre-flight check</span>
+        <span class="v">Before the strategy, I distrusted the documents</span>
+        <p style="color:var(--paper-dim); margin:0.7rem 0 0; max-width:62ch;">The first thing I did with this brief wasn't strategy. It was a fact-check. I ran your own materials against the public record, across two AI models, and found two errors in your own numbers. So everything that follows has been checked the same way. The full story is in Gate 05, but it sets up everything before it.</p>
+      </div>
+    </div>
+
+    <div class="brief">
+      <details>
+        <summary><span class="tag">The brief</span> <span class="label">Open the original case prompt</span> <span class="hint">click to expand · close to ignore</span></summary>
+        <div class="brief-body">
+          <h4>What you asked for</h4>
+          <p>You make software that helps airports make and maintain better operational decisions, across resource management, planning and forecasting, and staffing. The case tests how a content strategist thinks, decides, and approaches a new domain, and where AI creates leverage.</p>
+          <h4>The market context you gave</h4>
+          <ul>
+            <li>Roughly <strong>700 airports globally</strong> fit the target profile. A finite market where high-volume lead gen alone won't work.</li>
+            <li>Buying decisions involve <strong>multiple stakeholders</strong> across operations, IT, planning, commercial, and leadership. Sales cycles run in months.</li>
+            <li>Global across EMEA, Americas, and APAC. Current activities: events, LinkedIn (organic and paid), customer stories, email nurture, thought leadership, and account-based work.</li>
+            <li>Demand is created through <strong>relationships, reputation, expertise, and account relevance.</strong></li>
+          </ul>
+          <h4>The four tasks</h4>
+          <ul>
+            <li><strong>Task 1 · RMS content strategy.</strong> Insights, stories worth telling, priority audiences, content to create, how it's structured and connected, how it serves marketing and sales, distribution, measurement, and the tie to commercial outcomes. Plus a critique of existing assets: keep, improve, stop, missing, and why.</li>
+            <li><strong>Task 2 · Customer insight to content.</strong> The three most commercially valuable insights from the DFW interview (why each matters, which audience, how it supports marketing or sales). Then take one and build it into thought leadership, a customer story, and sales enablement.</li>
+            <li><strong>Task 3 · Writing exercise.</strong> One customer-facing asset, under 300 words, with a short note on format choice, fit, and objective.</li>
+            <li><strong>Task 4 · AI usage.</strong> How AI was used, what it helped with, what it wouldn't be trusted for, and how it shaped the output.</li>
+          </ul>
+          <h4>Practical</h4>
+          <p>A 30 to 40 minute presentation in any format, followed by discussion and Q&amp;A. The instruction was explicit: focus on communicating thinking clearly rather than building a polished design deliverable. Reasonable assumptions are encouraged, and so is AI.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== G00 · ONE-PAGER ===== -->
+<section class="onepager" id="g00" aria-label="The bet">
+  <div class="wrap reveal">
+    <div class="op-card">
+      <div class="op-top">
+        <span class="tag">Read this first</span>
+        <span>The thesis, and the three calls it leads to</span>
+        <span class="safe">● One idea</span>
+      </div>
+      <div class="op-inner">
+        <p class="op-pitch">The best content you can make is the content that <span class="hl">sounds least like the category.</span></p>
+        <p class="op-pitch-sub">Your internal messaging is sharper and more differentiated than your public copy. The whole strategy is one act of translation: bring the operator truth outward.</p>
+
+        <div class="op-grid">
+          <div class="op-block span">
+            <h3>The three calls this deck makes</h3>
+            <ul class="op-list">
+              <li><strong>Champion-first.</strong> Lead with the operator who feels the pain, not the C-suite. In a finite, ~700-airport market, the champion is who multi-threads you into the deal.</li>
+              <li><strong>Depth over volume.</strong> You can't buy reach in a market this small, so authority is the growth engine. Be the most operationally credible voice in the category.</li>
+              <li><strong>Own a problem, not a benefit.</strong> Name the villain, the manual rebuild, so everything ladders to one idea instead of a content calendar.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="op-foot">
+        <span class="lbl">If you remember one thing:</span> the manual rebuild is how you start the conversation. Becoming the global standard is where it lands. You already own the story; this is the system that tells it. The board below is your map.
+      </div>
+    </div>
+    <p class="note">A note on format: this is a website, not a slide file, so the deck is also a living artifact you can open and keep the strategy inside. The brief asked for clear thinking over polish. The aim here is both.</p>
+  </div>
+</section>
+
+<!-- ===== DEPARTURE BOARD (TOC) ===== -->
+<section class="board" aria-label="Contents">
+  <div class="wrap">
+    <div class="board-head">
+      <span>Departures · Today</span>
+      <span class="count">4 TASKS · ONE DESTINATION</span>
+    </div>
+    <nav class="departures" aria-label="Jump to section">
+      <div class="dep-group is-aux"><span class="gtask">Pre-flight</span><span class="gname">orientation</span><span class="grule"></span></div>
+      <button class="dep-row" data-go="g00"><span class="dep-gate">G00</span><span class="dep-dest">The bet<span class="sub">The thesis, the calls, the win</span></span><span class="dep-status s-sched">BRIEFING</span></button>
+
+      <div class="dep-group"><span class="gtask">Task 1</span><span class="gname">RMS content strategy</span><span class="grule"></span></div>
+      <button class="dep-row" data-go="g01"><span class="dep-gate">G01</span><span class="dep-dest">The play<span class="sub">The insight, the audience, the engine</span></span><span class="dep-status s-board">BOARDING</span></button>
+      <button class="dep-row" data-go="g02"><span class="dep-gate">G02</span><span class="dep-dest">Ship it, fix it<span class="sub">Distribution, measurement, and the audit</span></span><span class="dep-status s-ontime">ON TIME</span></button>
+
+      <div class="dep-group"><span class="gtask">Task 2</span><span class="gname">Customer insight to content</span><span class="grule"></span></div>
+      <button class="dep-row" data-go="g03"><span class="dep-gate">G03</span><span class="dep-dest">Transcript to assets<span class="sub">Three insights, one built three ways</span></span><span class="dep-status s-board">BOARDING</span></button>
+
+      <div class="dep-group"><span class="gtask">Task 3</span><span class="gname">Writing exercise</span><span class="grule"></span></div>
+      <button class="dep-row" data-go="g04"><span class="dep-gate">G04</span><span class="dep-dest">The writing sample<span class="sub">One post, under 300 words</span></span><span class="dep-status s-final">FINAL CALL</span></button>
+
+      <div class="dep-group"><span class="gtask">Task 4</span><span class="gname">AI usage</span><span class="grule"></span></div>
+      <button class="dep-row" data-go="g05"><span class="dep-gate">G05</span><span class="dep-dest">How AI was used<span class="sub">Distrust first, then leverage</span></span><span class="dep-status s-board">BOARDING</span></button>
+
+      <div class="dep-group is-aux"><span class="gtask">The landing</span><span class="gname">your call, after wheels-down</span><span class="grule"></span></div>
+      <button class="dep-row dep-star" data-go="g06"><span class="dep-gate">★</span><span class="dep-dest">Seat upgrade<span class="sub">Five debates, first 90 days, the win</span></span><span class="dep-status s-ontime">ARRIVING</span></button>
+    </nav>
+  </div>
+</section>
+
+<!-- ===== G01 · TASK 1 · THE PLAY ===== -->
+<section class="gate" id="g01">
+  <div class="wrap reveal">
+    <div class="gate-tag"><span class="gate-num">G01</span><span class="gate-route">Public vapor <span class="arrow">→</span> Operator truth</span><span class="gate-chip chip-task">Task 1 · the play</span></div>
+    <h2 class="gate-title">Your sharpest story is the one you only tell internally</h2>
+    <p class="lede">The whole strategy in one line: the best content you can make is the content that sounds least like the category. Bring the operator truth outward.</p>
+
+    <h3>The insight</h3>
+    <p>Your public e-book leads with "intelligent, real-time optimization," "single source of truth," "adapt and thrive." Your internal framework is braver: <strong>"Anyone can create a plan. We make sure decisions hold when it matters,"</strong> and it warns the team not to sound like "a planning tool, an optimization engine, or an AI system." So your public copy leads with the exact three things you told yourself to avoid. The product is sharper internally too: <strong>"the RMS in itself is not a thing. It's only a common denominator,"</strong> the connective layer that keeps decisions aligned across Better Stand &amp; Gate, Baggage, and Check-in. You don't sell another resource tool. You sell coherence across the operation. Name the villain those decisions fight every day: <span class="pull">the manual rebuild.</span></p>
+
+    <h3>Who it's for: the champion, first</h3>
+    <p>The DFW deal didn't start with a COO. It started with one operator asking so many sharp questions he became the decision-maker, then the super-user. Lead with the champion who feels the manual rebuild every week. They advocate internally, carry credibility no salesperson can fake, and multi-thread you up to the COO and CIO.</p>
+    <div class="grid three">
+      <div class="card"><span class="role">The champion · lead here</span><p>Resource and capacity planners, stand and gate management, super-users. They live the rebuild. Content for them is deep, operator-to-operator.</p></div>
+      <div class="card"><span class="role">The economic buyer · second</span><p>COO, VP Operations, Head of Airport Operations. They ask: capacity without capex? Labor cost? Content turns the operator's pain into a business case.</p></div>
+      <div class="card"><span class="role">The integrator · third</span><p>CIO, IT Director. They carry the vendor-dependency risk and the abandonment scar: will it integrate, stay supported, will you be here in three years?</p></div>
+    </div>
+
+    <h3>The engine: one idea, many shapes</h3>
+    <p>Hub-and-spoke, not a content calendar. At the center, the manual rebuild, with "decisions that hold when reality changes" underneath. The stories worth telling cascade from there, the manual rebuild itself, proving capacity without new concrete, and the shift from babysitting the board to managing exceptions, each becoming thought leadership (authority), a customer story (credibility), and a sales asset (arms the rep). The raw material is already in your building, and the brief names it: customer conversations, consultants, solution architects, product experts, and sales-call notes. The flagship program, <strong>Behind the Board:</strong> a weekly profile of one real operator, in their own words. Capture, don't commission, one interview becomes a week of cuts.</p>
+    <div class="statband">
+      <div class="stat"><div class="num">17 yrs</div><div class="lbl">How long DFW searched for a real RMS. Not budget. Nothing on the market could handle a real hub.</div></div>
+      <div class="stat"><div class="num">7 days</div><div class="lbl">Weekly resource plotting was a full-time, seven-day job for one person. As one plan shipped, the next began.</div></div>
+      <div class="stat"><div class="num">5–27%</div><div class="lbl">Staff hours cut in a proof-of-concept, in the customer's own words (Brisbane).</div></div>
+    </div>
+    <p class="ns"><strong>The win:</strong> every operator you profile is another voice in the network you're building. That's the North Star, and it lands at the end.</p>
+  </div>
+</section>
+
+<!-- ===== G02 · TASK 1 · SHIP IT, FIX IT ===== -->
+<section class="gate" id="g02">
+  <div class="wrap reveal">
+    <div class="gate-tag"><span class="gate-num">G02</span><span class="gate-route">Reach <span class="arrow">→</span> Relevance</span><span class="gate-chip chip-task">Task 1 · ship it, fix it</span></div>
+    <h2 class="gate-title">Be unmissable to a known few, not seen by everyone</h2>
+    <p class="lede">With ~700 accounts on the planet, reach is the wrong target. Distribution is depth, and the scoreboard is accounts, not leads.</p>
+
+    <h3>How it travels</h3>
+    <ul class="ticklist">
+      <li><strong>LinkedIn, under human names.</strong> Founders and consultants, not the logo. The byline is the differentiator no competitor can copy.</li>
+      <li><strong>ACI and the industry bodies.</strong> Webinars, publications, panels. In a relationship market the trade association is a channel, and it matters most in Asia-Pacific (APAC).</li>
+      <li><strong>Account-based microcontent.</strong> The same insight, cut for a named target airport. ABM is distribution here, not a separate program.</li>
+      <li><strong>Answer-engine visibility (GEO).</strong> When an ops director asks an LLM "best airport resource management system," you should be in the answer. Beats broad SEO when you're defending a shortlist.</li>
+    </ul>
+
+    <h3>This isn't taste. The data agrees.</h3>
+    <p>Across 1.3M LinkedIn posts, the platform rewards exactly these moves: saveable depth, human voices, authority over virality.</p>
+    <div class="statband">
+      <div class="stat"><div class="num">7.0%</div><div class="lbl">Engagement on native documents, LinkedIn's top format, up 14% year over year. Saveable depth wins.</div></div>
+      <div class="stat"><div class="num">6.4%</div><div class="lbl">Yearly follower growth for the largest brand pages, down from 21.6%. The logo has stalled; human voices are the engine.</div></div>
+      <div class="stat"><div class="num">36%</div><div class="lbl">Year-over-year drop in LinkedIn video views, across every page size. Chasing reach is the losing bet. Authority is the play.</div></div>
+    </div>
+    <p class="stat-src">Source: <a href="https://www.socialinsider.io/social-media-benchmarks/linkedin" target="_blank" rel="noopener noreferrer">Socialinsider 2026 LinkedIn Benchmarks</a> (1.3M posts across 16,645 pages).</p>
+
+    <h3>Marketing and sales, one scoreboard</h3>
+    <p>Content does double duty: thought leadership builds awareness, customer stories build credibility, and sales enablement (mapped to logged objections like "we already use Excel," "we already have an RMS," the abandonment fear) arms reps. Ninety percent give, ten percent ask. Drop MQL volume; measure <strong>account penetration, multi-threading depth, content-influenced pipeline,</strong> and <strong>sales-cycle velocity.</strong> Tie content to outcomes through account-level attribution. That's the scoreboard a PE-backed owner speaks.</p>
+
+    <h3>The audit: keep, improve, stop, missing</h3>
+    <p>Every current asset has the same problem: it's proofless and voiceless. Not one customer appears. For a company run by real airport operators, the marketing reads like it was written by people who never were.</p>
+    <div class="audit">
+      <div class="audit-cell audit-keep"><h4>● Keep</h4><ul>
+        <li>Your <strong>customer-story program and the DFW relationship.</strong> The richest raw material you own.</li>
+        <li>Your e-book's three operator-true instincts: <strong>"allocation is not optimization," "sitting on a goldmine of capacity," "the real risk is doing nothing."</strong></li>
+        <li>The <strong>Super User</strong> idea in your e-book checklist. It maps onto a real, nameable person at DFW.</li>
+      </ul></div>
+      <div class="audit-cell audit-improve"><h4>◐ Improve</h4><ul>
+        <li>Your <strong>e-book.</strong> Swap the logo and nothing breaks. Ground every claim in an operator example; lead with the manual rebuild.</li>
+        <li>Your <strong>nurture flow.</strong> Fix the factual slips (see Gate 05) and the clunky "depends almost entirely on internal processes" line.</li>
+        <li>Your <strong>landing and ad copy.</strong> Interchangeable with any cloud vendor. Point it at "decisions that hold."</li>
+      </ul></div>
+      <div class="audit-cell audit-stop"><h4>▲ Stop</h4><ul>
+        <li><strong>"Single source of truth"</strong> sold as delivered. Your e-book claims it three times; DFW lists it as an unsolved wish.</li>
+        <li><strong>"Rapid onboarding, built for all airport sizes."</strong> It sits next to a customer whose build ran ten months.</li>
+        <li>Leading with <strong>AI and "intelligent, real-time optimization."</strong> Your own framework says that's not where you win.</li>
+      </ul></div>
+      <div class="audit-cell audit-missing"><h4>＋ Missing</h4><ul>
+        <li><strong>Customers.</strong> The whole set is proofless. No DFW, no Brisbane, no operator voice.</li>
+        <li><strong>Expert-led operator content,</strong> the one advantage a competitor can't reverse-engineer.</li>
+        <li><strong>Sales enablement, AI-search visibility, APAC content,</strong> and a <strong>capacity/ROI proof tool.</strong></li>
+      </ul></div>
+    </div>
+    <p><strong>The wedge, in one line:</strong> your e-book argues an airport should switch RMS vendors. Your best reference customer spent seventeen years and a ten-month build proving how hard that is. The most persuasive content you could publish is the true version of that story, already sitting in a transcript.</p>
+
+    <h3>Proof of the fix: your copy, rewritten</h3>
+    <p>Toggle between the line as published and the same claim told as operator truth.</p>
+    <div class="demo" aria-label="Their copy versus a rewrite">
+      <div class="demo-bar">
+        <span class="prompt">line&nbsp;▸</span>
+        <button class="demo-q" data-q="0" aria-pressed="true">the promise</button>
+        <button class="demo-q" data-q="1" aria-pressed="false">single source of truth</button>
+        <button class="demo-q" data-q="2" aria-pressed="false">rapid onboarding</button>
+        <span class="demo-toggle" role="group" aria-label="Toggle version">
+          <button id="t-now" data-state="now" aria-pressed="true">PUBLISHED</button>
+          <button id="t-after" data-state="after" aria-pressed="false">REWRITE</button>
+        </span>
+      </div>
+      <div class="demo-body">
+        <p class="demo-label is-now" id="demo-label">Published copy</p>
+        <p class="demo-answer" id="demo-answer">Pick a line.</p>
+      </div>
+      <p class="demo-note">"Published" lines are quoted from the current RMS e-book. "Rewrite" is illustrative.</p>
+    </div>
+    <p class="ns"><strong>The win:</strong> every account you go deep on becomes another node in the global network.</p>
+  </div>
+</section>
+
+<!-- ===== G03 · TASK 2 ===== -->
+<section class="gate" id="g03">
+  <div class="wrap reveal">
+    <div class="gate-tag"><span class="gate-num">G03</span><span class="gate-route">A transcript <span class="arrow">→</span> Commercial assets</span><span class="gate-chip chip-task">Task 2 · insight to content</span></div>
+    <h2 class="gate-title">Three insights from the DFW interview, one built three ways</h2>
+    <p class="lede">Part A: the three with the most commercial weight. Part B: take the flagship and adapt it for three jobs.</p>
+
+    <h3>Part A · the three insights</h3>
+    <div class="grid three">
+      <div class="card"><span class="role">01 · the flagship</span><h4>The end of the manual rebuild</h4><p>Every allocation needed human hands. Weekly plotting was a seven-day job. A 17-year search. "Describing it to a colleague is like putting myself out of a job."</p><p><strong>Why:</strong> the truest articulation of the value, in an operator's words. <strong>Who:</strong> champion, then COO. <strong>How:</strong> answers "we already use Excel."</p></div>
+      <div class="card"><span class="role">02 · the buying criterion</span><h4>Won on trust, not features</h4><p>DFW was burned twice; their fear was a capable system with no support. The partnership won it: "a vendor focused on a quick deployment would have walked away. They didn't."</p><p><strong>Why:</strong> the real buying criterion, and your public copy undercuts it. <strong>Who:</strong> COO, IT. <strong>How:</strong> turns ten months into proof.</p></div>
+      <div class="card"><span class="role">03 · the expansion engine</span><h4>Your best customers build on you</h4><p>DFW's super-user built his own tools on your APIs and measures success by modules adopted. A customer who builds on you doesn't churn.</p><p><strong>Why:</strong> module expansion is the growth engine in a finite market. <strong>Who:</strong> CIO, commercial. <strong>How:</strong> powers land-and-expand.</p></div>
+    </div>
+
+    <h3>Part B · the manual rebuild, built three ways</h3>
+    <div class="grid three">
+      <div class="card"><span class="role">1 · Thought leadership</span><h4>"The End of the Manual Rebuild"</h4><p>Co-bylined with an ex-operator on your team, so the byline is the part no competitor can fake. The argument: airports don't struggle to make a plan, they struggle because the plan dies the second the day moves and a human rebuilds it by hand.</p><p><strong>Opening line:</strong> "The best RMS isn't the one with the smartest plan. It's the one nobody has to rebuild."</p></div>
+      <div class="card"><span class="role">2 · Customer story</span><h4>The airport that ended it</h4><p>Not a glossy "DFW loves us." The honest version a burned buyer believes, framed as the search: seventeen years looking, abandoned twice, then the ten-month build that finally retired the rebuild.</p><p><strong>The outcome to land:</strong> not a vanity stat, the human one. One person's seven-day plotting job became exception handling, and that time moved to airline relationships in the terminal.</p></div>
+      <div class="card"><span class="role">3 · Sales enablement</span><h4>The Manual Rebuild Audit</h4><p>A one-page discovery tool reps use early. It walks a prospect through every point their plan dies and gets rebuilt by hand, each mapped to a real DFW failure point, and turns the status quo into a number.</p><p><strong>The five lines:</strong> monthly schedule uploads, weekly counter plots, day-of tracking across three flight-status feeds, the manual billing spreadsheet, delays that cascade with no reallocation. Flips "do you want software" into "here's what your process costs you," the counter to "we already have an RMS."</p></div>
+    </div>
+    <p class="ns"><strong>The win:</strong> this is the engine in miniature, and Behind the Board runs it weekly, sourcing the network.</p>
+  </div>
+</section>
+
+<!-- ===== G04 · TASK 3 ===== -->
+<section class="gate" id="g04">
+  <div class="wrap reveal">
+    <div class="gate-tag"><span class="gate-num">G04</span><span class="gate-route">A draft <span class="arrow">→</span> A position</span><span class="gate-chip chip-task">Task 3 · writing exercise</span></div>
+    <h2 class="gate-title">The writing sample: one post, under 300 words</h2>
+    <p class="lede">A LinkedIn post, operator-truth voice, on the manual-rebuild insight.</p>
+    <div class="sample">
+      <div class="meta">LinkedIn · Copenhagen Optimization · ~210 words</div>
+      <p class="lead-line">One of our customers told us that explaining our software to a colleague felt like putting himself out of a job.</p>
+      <p>That line should worry every vendor in our category. It doesn't. We put it on a slide.</p>
+      <p>Before this airport found a system that worked, one person spent seven days a week plotting resources by hand. Counters. Gates. Baggage. Makeup units. Every week. The moment one week's plan was published, the next one started.</p>
+      <p>They searched seventeen years for something better. Not because they lacked budget. Because nothing on the market could handle the mess of a real hub operation.</p>
+      <p>Here's what no one in this category likes to admit. Airports don't struggle to make a plan. They struggle because the plan dies the second the day starts moving. A flight lands early. A belt breaks. And a person rebuilds the whole thing by hand. Again.</p>
+      <p>There's a name for that. The manual rebuild.</p>
+      <p>Most vendors sell you a faster one and call it "intelligent, real-time optimization." We don't think the smartest thing this software can do is run the rebuild faster.</p>
+      <p>It's to make sure no one runs it again.</p>
+      <p>He didn't lose his job. He got it back. The part that needs a human. On the floor, with the airlines, on the exceptions a machine shouldn't touch.</p>
+      <p>That's the end of the manual rebuild.</p>
+    </div>
+    <div class="grid three">
+      <div class="card"><span class="role">Why this format</span><p>Puts operator truth in front of the people who feel it, where one reshare reaches half the buying committee. Doubles as a cheap test for the longer article.</p></div>
+      <div class="card"><span class="role">Where it fits</span><p>Top of funnel. The spark the article, the DFW story, and the Manual Rebuild Audit sit behind. ABM-targetable.</p></div>
+      <div class="card"><span class="role">The objective</span><p>Not leads. Recognition. The win is an ops director thinking "that's my Tuesday" and replying. Measured by qualified engagement from target accounts.</p></div>
+    </div>
+    <p class="note">The quotes around "intelligent, real-time optimization" are a deliberate jab at your own e-book copy, the strategy in one line. Voice rules: American English, no em dashes, set up an inflated premise and puncture it with a smaller, harder truth.</p>
+  </div>
+</section>
+
+<!-- ===== G05 · TASK 4 · AI USAGE ===== -->
+<section class="gate" id="g05">
+  <div class="wrap reveal">
+    <div class="gate-tag"><span class="gate-num">G05</span><span class="gate-route">Generation <span class="arrow">→</span> Judgment</span><span class="gate-chip chip-task">Task 4 · AI usage</span></div>
+    <h2 class="gate-title">How AI was used, and where it wasn't trusted</h2>
+    <p class="lede">My first instinct with AI isn't to generate. It's to distrust. Before I built anything, I used it to check what I'd been handed.</p>
+    <p>I ran the source pack against itself and the public record, across two models (Claude and ChatGPT), because the fastest way to catch a confident machine is to make another one disagree with it. That caught two things.</p>
+    <div class="grid two">
+      <div class="card"><span class="role">Catch 01 · the stat that fights itself</span><p>The nurture flow cites a Denver result of "33%" and "95% automation." Your own published case study says 30% and "near-total." A small gap, but it's your number, in your funnel, contradicting itself.</p></div>
+      <div class="card"><span class="role">Catch 02 · the confident upgrade</span><p>I asked AI to verify a spokesperson's credential. It promoted her from "Advisory Board member" to "Chair of the Advisory Board." Real person, real board, real-sounding, wrong. Neither model flagged it; a human cross-reference did.</p></div>
+    </div>
+    <p>That's the whole lesson: AI handed me a credible, specific, false detail and felt great about it. The value wasn't the answer, it was not trusting the answer.</p>
+    <div class="dd">
+      <div class="dd-col dd-do"><h4>Leaned on it for</h4><ul>
+        <li>Reading the full document pack in one pass</li>
+        <li>Pressure-testing my logic, arguing the other side</li>
+        <li>Generating options to react to</li>
+        <li>Building. This site was built AI-native, in days.</li>
+      </ul></div>
+      <div class="dd-col dd-dont"><h4>Wouldn't hand it</h4><ul>
+        <li>The strategic bets: champion-first, the contrarian spine, naming the manual rebuild</li>
+        <li>Any fact, unverified</li>
+        <li>The voice. It drafts confident, forgettable copy all day.</li>
+        <li>Reading the room: how hard to critique your own marketing</li>
+      </ul></div>
+    </div>
+    <h3>Not a chatbot. Purpose-built skills.</h3>
+    <p>The leverage wasn't in prompting a chat window. I ran the work through specialized AI skills I'd already built: a <strong>content-strategist editor</strong> that re-audited the deck against the brief, swept it for repetition, and forced the cuts that took it from twelve sections to six, and a <strong>voice skill trained on my own writing</strong> that drafted the LinkedIn sample so it sounds like me, not like a model. That's the difference between using AI and building with it: the judgment is encoded in the tools, not borrowed from the default.</p>
+    <p>One more call AI would never make for me. I first built a full company-wide content hub with AI in a few days, then decided not to use it: it was scoped to the whole company, not RMS, and it was exactly the polished artifact this brief de-emphasizes. Knowing when the impressive output is the wrong move is also judgment. That hub is <a href="https://jasonwdonnelly.vercel.app/copopt.html" target="_blank" rel="noopener noreferrer">viewable here</a>, as process, not product.</p>
+    <h3>Where AI scales the engine, going forward</h3>
+    <p>The brief also asks where AI scales the operation. This is what makes the North Star realistic: localizing at grand scale only works because AI does the scaling, one interview into a week of cuts in multiple languages, a GEO page factory of definitional and comparison pages. The line that doesn't move: AI drafts, repurposes, and scales, but never owns the fact-check, the bet, or the voice. Scale without judgment is just slop, faster.</p>
+    <p class="ns"><strong>The win:</strong> AI is how one strategist builds a global network's worth of content. It didn't make a single decision in this deck. That was the point.</p>
+  </div>
+</section>
+
+<!-- ===== G06 · THE LANDING ===== -->
+<section class="gate" id="g06">
+  <div class="wrap reveal">
+    <div class="gate-tag"><span class="gate-num">★</span><span class="gate-route">Wheels down <span class="arrow">→</span> Your call</span><span class="gate-chip chip-ontime">The landing</span></div>
+    <h2 class="gate-title">The landing: a better seat, the descent, and the win</h2>
+    <p class="lede">Not graded, just the good stuff for the conversation. Where I land on your five open debates, the first ninety days, and the destination it all serves.</p>
+
+    <h3>Seat upgrade · your five debates, answered</h3>
+    <ul class="ticklist">
+      <li><strong>Thought leadership vs product marketing?</strong> Insights, and real voices. You aren't a product, you're the authority on how airports run. Lead with what the best operators see, not a feature list. That connection is the content.</li>
+      <li><strong>Awareness vs demand?</strong> Not a trade-off, a sequence. Awareness is the proof you actually do this. Demand is what happens the moment a buyer believes it.</li>
+      <li><strong>Global vs regional?</strong> Localized content at global scale: find the real experts in every region and turn their stories into content. The operator in Thailand teaches the planner in the US. Paid lifts harder where awareness is thin, like APAC.</li>
+      <li><strong>Customer stories vs expert-led?</strong> A false choice. The customers are the experts. The best expert-led content is the customer's story, told by the person who lived it. Same person.</li>
+      <li><strong>AI search visibility?</strong> A no-brainer. Make content do double work: written for the operator, structured for the machine, so when a buyer asks an LLM who's best at airport operations, the answer is Copenhagen Optimization, by name.</li>
+    </ul>
+
+    <h3>The descent · first 90 days</h3>
+    <div class="phases">
+      <div class="phase"><div class="phase-when">Weeks 1–4<span class="sub">Taxi</span></div><ul><li>Validate demand against your Fathom sales-call library and target-account search</li><li>Quick wins: fix the nurture stat slips, lead the e-book with the manual rebuild</li><li>Stand up the "manual rebuild" through-line; EGC pilot with two or three consultant voices</li></ul></div>
+      <div class="phase"><div class="phase-when">Weeks 5–8<span class="sub">Takeoff</span></div><ul><li>Ship the flagship article, the DFW story, and the LinkedIn post</li><li>Build the Manual Rebuild Audit for reps; first GEO definition and comparison pages</li><li>First ABM cut for three named target accounts</li></ul></div>
+      <div class="phase"><div class="phase-when">Weeks 9–12<span class="sub">Climb</span></div><ul><li>First APAC play through ACI; scale EGC to six to eight voices on a live calendar</li><li>Stand up account-level measurement: penetration, multi-threading, influenced pipeline</li></ul></div>
+    </div>
+
+    <div class="op-card" style="margin-top:2.2rem;">
+      <div class="op-top">
+        <span class="tag">The North Star</span>
+        <span>Where this really lands</span>
+        <span class="safe">● The win</span>
+      </div>
+      <div class="op-inner">
+        <p class="op-pitch">Turn the world's airport operators into one connected expert network, and become the <span class="hl">global standard</span> for airport optimization.</p>
+        <p class="op-pitch-sub">The operator in Thailand teaches the planner in the US. Every regional voice makes your authority heavier. The network compounds with every account you sign, the only growth engine a finite market rewards.</p>
+        <div class="op-grid">
+          <div class="op-block">
+            <h3>The asset</h3>
+            <ul class="op-list">
+              <li>~700 airports, and the <strong>real experts inside them.</strong> You already take their calls. No competitor can assemble that list.</li>
+            </ul>
+          </div>
+          <div class="op-block">
+            <h3>The move</h3>
+            <ul class="op-list">
+              <li><strong>Localize at grand scale, distribute globally.</strong> Every voice you publish is another brick in the standard.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="op-foot">
+        <span class="lbl">That's the North Star.</span> Everything before this gate is how you reach it. When the industry defines what good airport operations means, the definition is yours.
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===== FOOTER / ARRIVALS ===== -->
+<footer>
+  <div class="wrap">
+    <p class="arrivals-tag">● Arrivals</p>
+    <h2>You already have the best story in the category. The job is telling it, until you're the global standard.</h2>
+    <p>One idea, four tasks, one destination: name the manual rebuild, bring the operator truth outward, and turn the world's airport operators into one network, until the industry's definition of good operations is yours. In a finite market, authority is the only growth lever that scales. Cleared for departure whenever you are.</p>
+    <p class="sig">Prepared by Jason Donnelly · Content Strategist case for Copenhagen Optimization · <a href="https://www.jasonwdonnelly.com" target="_blank" rel="noopener noreferrer">jasonwdonnelly.com</a><br>Built with an AI-native workflow. All company facts drawn from the case material pack and public sources; customer figures quoted as provided and flagged where they need reconciliation.</p>
+  </div>
+</footer>
+
+<script>
+(function(){ if (document.getElementById("editor-toolbar")) return; /* editing: animations & nav off */
+
+  // ===== LOCAL CLOCK =====
+  (function clock() {
+    var el = document.getElementById('clock');
+    if (!el) return;
+    function tick() {
+      var d = new Date();
+      var p = function (n) { return String(n).padStart(2, '0'); };
+      el.textContent = p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds());
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+
+  // ===== SPLIT-FLAP HERO =====
+  (function splitFlap() {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ.";
+    function build(el) {
+      var text = el.getAttribute('aria-label') || el.textContent;
+      el.textContent = '';
+      var cells = [];
+      text.split(' ').forEach(function (word) {
+        if (!word.length) return;
+        var w = document.createElement('span');
+        w.className = 'flap-word';
+        w.setAttribute('aria-hidden', 'true');
+        for (var i = 0; i < word.length; i++) {
+          var span = document.createElement('span');
+          span.className = 'flap';
+          span.textContent = reduce ? word[i] : charset[0];
+          w.appendChild(span);
+          cells.push({ node: span, target: word[i].toUpperCase() });
+        }
+        el.appendChild(w);
+      });
+      return cells;
+    }
+    function animate(cells) {
+      cells.forEach(function (cell, idx) {
+        var steps = 16 + (idx % 9);
+        setTimeout(function () {
+          var count = 0;
+          var iv = setInterval(function () {
+            count++;
+            if (count >= steps) {
+              cell.node.textContent = cell.target;
+              clearInterval(iv);
+            } else {
+              cell.node.textContent = charset[Math.floor(Math.random() * (charset.length - 1))];
+            }
+          }, 40);
+        }, idx * 22);
+      });
+    }
+    ['flap1', 'flap2'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var cells = build(el);
+      if (!reduce) animate(cells);
+    });
+  })();
+
+  // ===== DEPARTURE BOARD NAV =====
+  (function boardNav() {
+    document.querySelectorAll('.dep-row').forEach(function (row) {
+      row.addEventListener('click', function () {
+        var target = document.getElementById(row.getAttribute('data-go'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  })();
+
+  // ===== THEIR COPY vs REWRITE DEMO =====
+  (function copyDemo() {
+    var data = {
+      0: {
+        now: "“Move beyond simple allocation to intelligent, real-time optimization, so your airport is built to adapt and thrive.”",
+        after: "Your plan dies the second the day starts moving. We rebuild it automatically, so your team never does it by hand again."
+      },
+      1: {
+        now: "“A cloud-based RMS provides a single source of truth for the entire airport.”",
+        after: "One plan the whole airport works from, stand to gate to bag belt. We'll show you where that's real today and where it's still the goal."
+      },
+      2: {
+        now: "“Built for all airport sizes. Right-sized deployments, rapid onboarding, scalable modules.”",
+        after: "A real hub takes real time. DFW ran ten months, not the three we scoped, because we built around their operation instead of forcing them into a template."
+      }
+    };
+    var state = 'now';
+    var q = '0';
+    var answerEl = document.getElementById('demo-answer');
+    var labelEl = document.getElementById('demo-label');
+    function render() {
+      if (!answerEl) return;
+      answerEl.textContent = data[q][state]; // fixed lookup, not user input
+      if (labelEl) {
+        if (state === 'now') {
+          labelEl.textContent = 'Published copy';
+          labelEl.className = 'demo-label is-now';
+        } else {
+          labelEl.textContent = 'Operator-truth rewrite';
+          labelEl.className = 'demo-label is-after';
+        }
+      }
+    }
+    document.querySelectorAll('.demo-q').forEach(function (b) {
+      b.addEventListener('click', function () {
+        document.querySelectorAll('.demo-q').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+        b.setAttribute('aria-pressed', 'true');
+        q = b.getAttribute('data-q');
+        render();
+      });
+    });
+    ['t-now', 't-after'].forEach(function (id) {
+      var btn = document.getElementById(id);
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        document.getElementById('t-now').setAttribute('aria-pressed', 'false');
+        document.getElementById('t-after').setAttribute('aria-pressed', 'false');
+        btn.setAttribute('aria-pressed', 'true');
+        state = btn.getAttribute('data-state');
+        render();
+      });
+    });
+    render();
+  })();
+
+  // ===== SCROLL REVEAL =====
+  (function reveal() {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var items = document.querySelectorAll('.reveal');
+    if (reduce || !('IntersectionObserver' in window)) {
+      items.forEach(function (el) { el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0, rootMargin: '0px 0px 25% 0px' });
+    items.forEach(function (el) { io.observe(el); });
+  })();
+
+})();
+</script>
+
+
+
+</body></html>
