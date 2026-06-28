@@ -374,10 +374,13 @@
     cursor: pointer;
   }
   .demo-q[aria-pressed="true"] { border-color: var(--amber); color: var(--amber); }
-  .demo-toggle { margin-left: auto; display: flex; border: 1px solid var(--navy-line); border-radius: 6px; overflow: hidden; }
-  .demo-toggle button { background: none; border: none; color: var(--muted); font-family: var(--mono); font-size: 0.72rem; padding: 0.3rem 0.7rem; cursor: pointer; }
-  .demo-toggle button[aria-pressed="true"] { background: var(--amber); color: #0c1628; font-weight: 700; }
-  .demo-body { padding: 1.2rem 1.2rem; min-height: 8rem; }
+  .demo-reveal { margin-left: auto; background: var(--navy); border: 1px solid var(--amber); color: var(--amber); font-family: var(--mono); font-size: 0.72rem; padding: 0.35rem 0.85rem; border-radius: 6px; cursor: pointer; letter-spacing: 0.04em; }
+  .demo-reveal:hover:not([disabled]) { background: var(--amber); color: #0c1628; font-weight: 700; }
+  .demo-reveal[disabled] { opacity: 0.45; cursor: default; }
+  .demo-cols { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--navy-line); }
+  .demo-cols.revealed { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 600px) { .demo-cols.revealed { grid-template-columns: 1fr; } }
+  .demo-col { background: var(--navy-card); padding: 1.2rem 1.2rem; min-height: 7rem; }
   .demo-label { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 0.5rem; }
   .demo-label.is-now { color: var(--red); }
   .demo-label.is-after { color: var(--green); }
@@ -654,7 +657,6 @@
         <span class="lbl">If you remember one thing:</span> the manual rebuild is how you start the conversation. Becoming the global standard is where it lands. You already own the story; this is the system that tells it. The board below is your map.
       </div>
     </div>
-    <p class="note">A note on format: this is a website, not a slide file, so the deck is also a living artifact you can open and keep the strategy inside. The brief asked for clear thinking over polish. The aim here is both.</p>
   </div>
 </section>
 
@@ -771,23 +773,26 @@
     <p><strong>The wedge, in one line:</strong> your e-book argues an airport should switch RMS vendors. Your best reference customer spent seventeen years and a ten-month build proving how hard that is. The most persuasive content you could publish is the true version of that story, already sitting in a transcript.</p>
 
     <h3>Proof of the fix: your copy, rewritten</h3>
-    <p>Toggle between the line as published and the same claim told as operator truth.</p>
+    <p>Pick a line to see their published copy, then reveal the operator-truth rewrite beside it.</p>
     <div class="demo" aria-label="Their copy versus a rewrite">
       <div class="demo-bar">
         <span class="prompt">line&nbsp;▸</span>
         <button class="demo-q" data-q="0" aria-pressed="true">the promise</button>
         <button class="demo-q" data-q="1" aria-pressed="false">single source of truth</button>
         <button class="demo-q" data-q="2" aria-pressed="false">rapid onboarding</button>
-        <span class="demo-toggle" role="group" aria-label="Toggle version">
-          <button id="t-now" data-state="now" aria-pressed="true">PUBLISHED</button>
-          <button id="t-after" data-state="after" aria-pressed="false">REWRITE</button>
-        </span>
+        <button class="demo-reveal" id="demo-reveal" aria-expanded="false">Show the rewrite&nbsp;▸</button>
       </div>
-      <div class="demo-body">
-        <p class="demo-label is-now" id="demo-label">Published copy</p>
-        <p class="demo-answer" id="demo-answer">Pick a line.</p>
+      <div class="demo-cols" id="demo-cols">
+        <div class="demo-col">
+          <p class="demo-label is-now">Published copy</p>
+          <p class="demo-answer" id="demo-now">Pick a line.</p>
+        </div>
+        <div class="demo-col demo-col-after" id="demo-after-col" hidden>
+          <p class="demo-label is-after">Operator-truth rewrite</p>
+          <p class="demo-answer" id="demo-after"></p>
+        </div>
       </div>
-      <p class="demo-note">"Published" lines are quoted from the current RMS e-book. "Rewrite" is illustrative.</p>
+      <p class="demo-note">"Published" lines are quoted from the current RMS e-book. "Rewrite" is illustrative. Pick a line, then reveal the rewrite beside it.</p>
     </div>
     <p class="ns"><strong>The win:</strong> every account you go deep on becomes another node in the global network.</p>
   </div>
@@ -1037,43 +1042,41 @@
         after: "A real hub takes real time. DFW ran ten months, not the three we scoped, because we built around their operation instead of forcing them into a template."
       }
     };
-    var state = 'now';
     var q = '0';
-    var answerEl = document.getElementById('demo-answer');
-    var labelEl = document.getElementById('demo-label');
-    function render() {
-      if (!answerEl) return;
-      answerEl.textContent = data[q][state]; // fixed lookup, not user input
-      if (labelEl) {
-        if (state === 'now') {
-          labelEl.textContent = 'Published copy';
-          labelEl.className = 'demo-label is-now';
-        } else {
-          labelEl.textContent = 'Operator-truth rewrite';
-          labelEl.className = 'demo-label is-after';
-        }
-      }
+    var nowEl = document.getElementById('demo-now');
+    var afterEl = document.getElementById('demo-after');
+    var afterCol = document.getElementById('demo-after-col');
+    var cols = document.getElementById('demo-cols');
+    var revealBtn = document.getElementById('demo-reveal');
+    if (!nowEl || !revealBtn) return;
+    function hideRewrite() {
+      if (afterCol) afterCol.hidden = true;
+      if (cols) cols.classList.remove('revealed');
+      revealBtn.setAttribute('aria-expanded', 'false');
+      revealBtn.textContent = 'Show the rewrite \u25B8';
+      revealBtn.disabled = false;
+    }
+    function showLine(nq) {
+      q = nq;
+      nowEl.textContent = data[q].now; // fixed lookup, not user input
+      if (afterEl) afterEl.textContent = data[q].after;
+      hideRewrite();
     }
     document.querySelectorAll('.demo-q').forEach(function (b) {
       b.addEventListener('click', function () {
         document.querySelectorAll('.demo-q').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
         b.setAttribute('aria-pressed', 'true');
-        q = b.getAttribute('data-q');
-        render();
+        showLine(b.getAttribute('data-q'));
       });
     });
-    ['t-now', 't-after'].forEach(function (id) {
-      var btn = document.getElementById(id);
-      if (!btn) return;
-      btn.addEventListener('click', function () {
-        document.getElementById('t-now').setAttribute('aria-pressed', 'false');
-        document.getElementById('t-after').setAttribute('aria-pressed', 'false');
-        btn.setAttribute('aria-pressed', 'true');
-        state = btn.getAttribute('data-state');
-        render();
-      });
+    revealBtn.addEventListener('click', function () {
+      if (afterCol) afterCol.hidden = false;
+      if (cols) cols.classList.add('revealed');
+      revealBtn.setAttribute('aria-expanded', 'true');
+      revealBtn.textContent = 'Rewrite shown';
+      revealBtn.disabled = true;
     });
-    render();
+    showLine('0');
   })();
 
   // ===== SCROLL REVEAL =====
