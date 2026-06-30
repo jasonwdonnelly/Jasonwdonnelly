@@ -293,6 +293,21 @@
   .gate p { max-width: 66ch; color: var(--paper-dim); }
   .gate p strong { color: var(--paper); font-weight: 600; }
   .pull { color: var(--amber); }
+
+  /* true accordion: each departures row opens its section inline */
+  .dep-fold { border-bottom: 1px solid var(--navy-line); }
+  .dep-fold > summary { list-style: none; }
+  .dep-fold > summary::-webkit-details-marker { display: none; }
+  .dep-fold > summary.dep-row { grid-template-columns: 3.6rem 1fr 7rem 1.4rem; border-bottom: none; }
+  .dep-fold[open] > summary.dep-row { background: var(--navy-card); padding-left: 0.9rem; }
+  .dep-chev { color: var(--amber); text-align: right; font-size: 0.8rem; transition: transform 0.2s ease; }
+  .dep-fold[open] > summary .dep-chev { transform: rotate(90deg); }
+  .dep-fold > .gate { padding: 0; scroll-margin-top: 64px; border-left: 2px solid var(--navy-line); background: rgba(0,0,0,0.12); }
+  .dep-fold > .gate > .wrap { max-width: none; margin: 0; padding: 1.4rem clamp(0.9rem,3vw,1.8rem) 2.6rem; }
+  .dep-fold .gate > .wrap > .gate-tag { display: none; }
+  .dep-fold .gate .reveal { opacity: 1; transform: none; }
+  @media (max-width: 600px){ .dep-fold > summary.dep-row { grid-template-columns: 2.9rem 1fr 4.8rem 1.2rem; } }
+  .board-hint { font-family: var(--mono); font-size: 0.74rem; color: var(--muted); margin: 0.9rem 0.4rem 0; letter-spacing: 0.03em; }
   blockquote.quote {
     margin: 1.6rem 0;
     padding: 0.2rem 0 0.2rem 1.4rem;
@@ -591,13 +606,13 @@
     <p class="eyebrow">Final approach · RMS content strategy for Copenhagen Optimization</p>
     <h1 class="flap-line l1" id="flap1" aria-label="THE END OF THE">THE END OF THE</h1>
     <p class="flap-line l2" id="flap2" aria-label="MANUAL REBUILD." role="presentation">MANUAL REBUILD.</p>
-    <p class="hero-sub">RMS is one of your strategic focus areas. This is a content strategy to grow its awareness and demand, and it runs on a single idea: your best content sounds least like a software ad. So we lead with the truest story you already own, <strong>the end of the manual rebuild</strong>, the daily grind of redoing the resource plan by hand every time a flight slips or a belt breaks. Everything in this deck builds from there.</p>
+    <p class="hero-sub">RMS is one of your strategic focus areas. This is a content strategy to grow its awareness and demand, and it runs on a single idea: your best content sounds less like a software ad and more like a human operator.&nbsp;</p><p class="hero-sub">We lead with the truest story you already own, <strong>the end of the manual rebuild</strong>, the daily grind of redoing the resource plan by hand every time a flight slips or a belt breaks. Everything in this deck builds from there.</p>
 
     <div class="pass" style="margin-top:1.9rem;">
       <div class="pass-body">
         <span class="k">Pre-flight check</span>
-        <span class="v">Before the strategy, I distrusted the documents</span>
-        <p style="color:var(--paper-dim); margin:0.7rem 0 0; max-width:62ch;">The first thing I did with this brief wasn't strategy. It was a fact-check. I ran your own materials against the public record, across two AI models, and found two errors in your own numbers. So everything that follows has been checked the same way. The full story is in Gate 05, but it sets up everything before it.</p>
+        <span class="v">Before the strategy, I checked your documents</span>
+        <p style="color:var(--paper-dim); margin:0.7rem 0 0; max-width:62ch;">The first thing I did with this brief wasn't strategy. It was fact-checking. I ran your own materials against the public record, across two AI models, and found errors in your own numbers.&nbsp;</p><p style="color:var(--paper-dim); margin:0.7rem 0 0; max-width:62ch;">This isn't to call you out, it's to show you that AI has a way of playing with the "facts." So everything that follows has been checked the same way. The full story is in Gate 05.</p>
       </div>
     </div>
 
@@ -639,15 +654,15 @@
         <span class="safe">● One idea</span>
       </div>
       <div class="op-inner">
-        <p class="op-pitch">The best content you can make is the content that <span class="hl">sounds least like a software ad.</span></p>
-        <p class="op-pitch-sub">Your internal messaging is sharper and more honest than your public copy. The whole strategy is one move: take that real, internal truth and say it out loud.</p>
+        <p class="op-pitch">The best content you can make is the content that <span class="hl">sounds less like a software ad.</span></p>
+        <p class="op-pitch-sub">Your internal messaging is sharper and more honest than your public copy, so the whole strategy is one move: say that real, internal truth out loud. And every piece of it is built to earn its keep commercially, to start a conversation with a target airport, move a deal, or grow an account, not to fill a calendar. Above all, sound human.</p>
 
         <div class="op-grid">
           <div class="op-block span">
             <h3>The three calls this deck makes</h3>
             <ul class="op-list">
               <li><strong>Start with the operator.</strong> Lead with the person who feels the pain, not the C-suite. In a market of about 700 airports, that operator is who gets you in front of everyone else who has a say.</li>
-              <li><strong>Go deep, not wide.</strong> You can't buy reach in a market this small, so trust and authority are how you grow. Be the most credible voice in the field.</li>
+              <li><strong>Go deep, not wide.</strong> You can't buy reach in a market this small, so trust and authority are how you grow. Be the most credible voice in the field. We're not going for massive numbers, we're going for the right people.</li>
               <li><strong>Own a problem, not a benefit.</strong> Give the problem a name, the manual rebuild, so everything ties back to one idea instead of a random content calendar.</li>
             </ul>
           </div>
@@ -668,37 +683,17 @@
       <span class="count">4 TASKS · ONE DESTINATION</span>
     </div>
     <nav class="departures" aria-label="Jump to section">
-      <div class="dep-group is-aux"><span class="gtask">Pre-flight</span><span class="gname">orientation</span><span class="grule"></span></div>
-      <button class="dep-row" data-go="g00"><span class="dep-gate">G00</span><span class="dep-dest">The bet<span class="sub">The idea, the calls, the win</span></span><span class="dep-status s-sched">BRIEFING</span></button>
-
       <div class="dep-group"><span class="gtask">Task 1</span><span class="gname">RMS content strategy</span><span class="grule"></span></div>
-      <button class="dep-row" data-go="g01"><span class="dep-gate">G01</span><span class="dep-dest">The play<span class="sub">The insight, the audience, the engine</span></span><span class="dep-status s-board">BOARDING</span></button>
-      <button class="dep-row" data-go="g02"><span class="dep-gate">G02</span><span class="dep-dest">Ship it, fix it<span class="sub">Distribution, measurement, and the audit</span></span><span class="dep-status s-ontime">ON TIME</span></button>
-
-      <div class="dep-group"><span class="gtask">Task 2</span><span class="gname">Customer insight to content</span><span class="grule"></span></div>
-      <button class="dep-row" data-go="g03"><span class="dep-gate">G03</span><span class="dep-dest">Transcript to assets<span class="sub">Three insights, one built three ways</span></span><span class="dep-status s-board">BOARDING</span></button>
-
-      <div class="dep-group"><span class="gtask">Task 3</span><span class="gname">Writing exercise</span><span class="grule"></span></div>
-      <button class="dep-row" data-go="g04"><span class="dep-gate">G04</span><span class="dep-dest">The writing sample<span class="sub">One post, under 300 words</span></span><span class="dep-status s-final">FINAL CALL</span></button>
-
-      <div class="dep-group"><span class="gtask">Task 4</span><span class="gname">AI usage</span><span class="grule"></span></div>
-      <button class="dep-row" data-go="g05"><span class="dep-gate">G05</span><span class="dep-dest">How AI was used<span class="sub">Distrust first, then leverage</span></span><span class="dep-status s-board">BOARDING</span></button>
-
-      <div class="dep-group is-aux"><span class="gtask">The landing</span><span class="gname">your call, after wheels-down</span><span class="grule"></span></div>
-      <button class="dep-row dep-star" data-go="g06"><span class="dep-gate">★</span><span class="dep-dest">Seat upgrade<span class="sub">Five debates, first 90 days, the win</span></span><span class="dep-status s-ontime">ARRIVING</span></button>
-    </nav>
-  </div>
-</section>
-
-<!-- ===== G01 · TASK 1 · THE PLAY ===== -->
-<section class="gate" id="g01">
+      <details class="dep-fold" name="deck">
+        <summary class="dep-row" data-go="g01"><span class="dep-gate">G01</span><span class="dep-dest">The play<span class="sub">The insight, the audience, the engine</span></span><span class="dep-status s-board">BOARDING</span><span class="dep-chev">▸</span></summary>
+        <section class="gate" id="g01">
   <div class="wrap reveal">
     <div class="gate-tag"><span class="gate-num">G01</span><span class="gate-route">Marketing buzzwords <span class="arrow">→</span> The real story</span><span class="gate-chip chip-task">Task 1 · the play</span></div>
     <h2 class="gate-title">Your sharpest story is the one you only tell internally</h2>
-    <p class="lede">The whole strategy in one line: your best content is the content that sounds least like a software ad. Tell the real, on-the-ground story your operators already know.</p>
+    <p class="lede">Your best content is the content that sounds less like a software ad and more like the people who live it. Tell the real, on-the-ground story your operators already know.</p>
 
     <h3>The insight</h3>
-    <p>Your public e-book leads with buzzwords: "intelligent, real-time optimization," "single source of truth," "adapt and thrive." The messaging your team wrote for itself is sharper and more honest: <strong>"Anyone can create a plan. We make sure decisions hold when it matters."</strong> It even warns the team not to sound like "a planning tool, an optimization engine, or an AI system," which is exactly what the public copy does. Your team is also clearer about the product. As one internal note says, "the RMS in itself is not a thing. It's only a common denominator." In plain terms: RMS is the layer that keeps decisions lined up across your modules (Stand &amp; Gate, Baggage, Check-in) as the day changes. You're not selling a tool. You're selling an operation that holds together. The problem worth naming and owning: <span class="pull">the manual rebuild.</span></p>
+    <p>Your public e-book leads with buzzwords: "intelligent, real-time optimization," "single source of truth," "adapt and thrive." The messaging your team wrote for itself is sharper and more honest: <strong>"Anyone can create a plan. We make sure decisions hold when it matters."</strong> It even warns the team not to sound like "a planning tool, an optimization engine, or an AI system," which is exactly what the public copy does.&nbsp;</p><p>Your team is also clearer about the product. As one internal note says, "the RMS in itself is not a thing. It's only a common denominator." In plain terms: RMS is the layer that keeps decisions lined up across your modules (Better Stand &amp; Gate, Better Baggage, Better Check-in) as the day changes.&nbsp;</p><p>You're not selling a tool. You're selling an operation that holds together. The problem worth naming and owning: <span class="pull">the manual rebuild.</span></p>
 
     <h3>Who to talk to first: the operator, not the boss</h3>
     <p>The DFW deal didn't start with a COO. It started with one operator who asked so many sharp questions that he became the decision-maker, then the expert user. Start with that person, the one who feels the manual rebuild every week. They sell it inside the company, they have credibility no salesperson can match, and they pull you up to the COO and IT.</p>
@@ -709,18 +704,19 @@
     </div>
 
     <h3>How the content is built: one idea, many pieces</h3>
-    <p>Start with one big idea, the manual rebuild, and build everything off it. The stories worth telling all come from there: ending the manual rebuild, proving you can add capacity without pouring concrete, and freeing operators from babysitting the board so they can handle the exceptions that actually need a person. Each story becomes three things: a thought-leadership piece (to build authority), a customer story (to build trust), and a sales tool (to help reps close). The raw material is already in the building, exactly where the brief says it lives: customer calls, consultants, solution architects, product experts, and sales notes. The flagship is a weekly series, <strong>Behind the Board:</strong> one real operator, in their own words. You don't ask them to write. You record a short interview and turn it into a week of posts.</p>
+    <p>Start with one big idea, the manual rebuild, and build everything off it. The stories worth telling all come from there: ending the manual rebuild, proving you can add capacity without pouring concrete, and freeing operators from babysitting the board so they can handle the exceptions that actually need a person.&nbsp;</p><p>Each story becomes three things: a thought-leadership piece (to build authority), a customer story (to build trust), and a sales tool (to help reps close). The raw material is already in the building, exactly where the brief says it lives: customer calls, consultants, solution architects, product experts, and sales notes.&nbsp;</p><p>The flagship is a weekly series, <strong>Behind the Board:</strong> one real operator, in their own words. You don't ask them to write (although we can also ask for pieces like this). You record a short interview and turn it into a week of posts.</p><p>*Imagine a story about "gate gadgets," using the API like the guy from DFW</p>
     <div class="statband">
-      <div class="stat"><div class="num">17 yrs</div><div class="lbl">How long DFW searched for a real RMS. Not budget. Nothing on the market could handle a real hub.</div></div>
+      <div class="stat"><div class="num">17+/- yrs</div><div class="lbl">How long DFW searched for a real RMS. Not budget. Nothing on the market could handle a real hub.</div></div>
       <div class="stat"><div class="num">7 days</div><div class="lbl">Weekly resource plotting was a full-time, seven-day job for one person. As one plan shipped, the next began.</div></div>
       <div class="stat"><div class="num">5–27%</div><div class="lbl">Staff hours cut in a proof-of-concept, in the customer's own words (Brisbane).</div></div>
     </div>
     <p class="ns"><strong>The payoff:</strong> every operator you feature is one more voice in the network you're building. That's the North Star, and it lands at the end.</p>
   </div>
 </section>
-
-<!-- ===== G02 · TASK 1 · SHIP IT, FIX IT ===== -->
-<section class="gate" id="g02">
+      </details>
+      <details class="dep-fold" name="deck">
+        <summary class="dep-row" data-go="g02"><span class="dep-gate">G02</span><span class="dep-dest">Ship it, fix it<span class="sub">Distribution, measurement, and the audit</span></span><span class="dep-status s-ontime">ON TIME</span><span class="dep-chev">▸</span></summary>
+        <section class="gate" id="g02">
   <div class="wrap reveal">
     <div class="gate-tag"><span class="gate-num">G02</span><span class="gate-route">Reach <span class="arrow">→</span> Relevance</span><span class="gate-chip chip-task">Task 1 · ship it, fix it</span></div>
     <h2 class="gate-title">In a small market, go deep, not wide</h2>
@@ -731,7 +727,7 @@
       <li><strong>LinkedIn, from real people.</strong> Founders and consultants, not the company logo. A trusted name on the post is something no competitor can copy.</li>
       <li><strong>Industry bodies like ACI.</strong> Webinars, publications, panels. In a relationship-driven market these carry real weight, especially in Asia-Pacific.</li>
       <li><strong>Content aimed at specific airports.</strong> Take one idea and tailor it to a named target airport. Targeting named accounts is the distribution here, not a side project.</li>
-      <li><strong>Show up in AI answers.</strong> When an operations director asks ChatGPT "best airport resource management system," you should be in the answer. That matters more than ranking on Google when you're defending a short list.</li>
+      <li><strong>Show up in AI answers.</strong> When an operations director asks ChatGPT "best airport resource management system," you should be the top answer. That matters more than ranking on Google when you're defending a short list.</li>
     </ul>
 
     <h3>This isn't taste. The data agrees.</h3>
@@ -743,11 +739,17 @@
     </div>
     <p class="stat-src">Source: <a href="https://www.socialinsider.io/social-media-benchmarks/linkedin" target="_blank" rel="noopener noreferrer">Socialinsider 2026 LinkedIn Benchmarks</a> (1.3M posts across 16,645 pages).</p>
 
-    <h3>Marketing and sales, one scoreboard</h3>
-    <p>The same content works for both teams: thought leadership builds awareness, customer stories build trust, and sales tools (built to answer the objections reps already hear, "we already use Excel," "we already have an RMS," "what if you disappear") help close. Give value most of the time and only sell occasionally. Stop counting raw leads. Instead measure <strong>how many target airports you're reaching, how many people inside each one, how much pipeline the content touched,</strong> and <strong>how fast deals move.</strong> Tie content to results at the account level. That's the scoreboard your investors care about.</p>
+    <h3>How content drives marketing and commercial goals</h3>
+    <p>This is the heart of the brief: the content here isn't brand decoration. Every piece does a marketing job that ladders straight to a commercial one.</p>
+    <ul class="ticklist">
+      <li><strong>Thought leadership</strong> builds awareness and authority, which puts you on the shortlist and earns inbound.</li>
+      <li><strong>Customer stories</strong> build credibility, which de-risks the buy and shortens the sales cycle.</li>
+      <li><strong>Sales tools</strong> answer the objections reps already hear ("we already use Excel," "we already have an RMS," "what if you disappear"), which helps win and grow the account.</li>
+    </ul>
+    <p>Give value most of the time and only sell occasionally. And measure it commercially: not raw leads, but <strong>how many target airports you're reaching, how many people inside each, how much pipeline the content touched,</strong> and <strong>how fast deals move</strong>, all tied to results at the account level. That's the scoreboard your investors care about.</p>
 
     <h3>The audit: keep, improve, stop, missing</h3>
-    <p>Every current asset has the same problem: no proof and no voice. Not a single customer shows up anywhere. For a company run by real airport operators, the marketing reads like it was written by people who've never worked one.</p>
+    <p>You're not short on customers. You've got a case-studies page full of airports, emails that name Denver and MSP, logos and quotes. The problem is depth.&nbsp;</p><p>The proof you publish stays at the surface, logos and one-line quotes, while the story that actually convinces, an operator's full account of the pain and the day it ended, never gets told. Your flagship RMS e-book doesn't even name a customer. The best proof you have is sitting unused in a transcript.</p>
     <div class="audit">
       <div class="audit-cell audit-keep"><h4>● Keep</h4><ul>
         <li>Your <strong>customer-story program and the DFW relationship.</strong> The richest raw material you own.</li>
@@ -760,12 +762,12 @@
         <li>Your <strong>landing and ad copy.</strong> Interchangeable with any cloud vendor. Point it at "decisions that hold."</li>
       </ul></div>
       <div class="audit-cell audit-stop"><h4>▲ Stop</h4><ul>
-        <li><strong>"Single source of truth"</strong> sold as delivered. Your e-book claims it three times; DFW lists it as an unsolved wish.</li>
+        <li><strong>"Single source of truth"</strong> sold as delivered. Your e-book promises it; DFW lists it as an unsolved wish.</li>
         <li><strong>"Rapid onboarding, built for all airport sizes."</strong> It sits next to a customer whose build ran ten months.</li>
         <li>Leading with <strong>AI and "intelligent, real-time optimization."</strong> Your own framework says that's not where you win.</li>
       </ul></div>
       <div class="audit-cell audit-missing"><h4>＋ Missing</h4><ul>
-        <li><strong>Customers.</strong> The whole set has no proof: no DFW, no Brisbane, no operator voice.</li>
+        <li><strong>Depth in the proof you have.</strong> You've got logos and quotes; what's missing is the full operator story, like the DFW transcript, actually told in the content.</li>
         <li><strong>Content led by your own experts,</strong> the one thing a competitor can't copy.</li>
         <li><strong>Sales tools, AI-search visibility, Asia-Pacific content,</strong> and a <strong>tool that proves capacity and ROI.</strong></li>
       </ul></div>
@@ -777,7 +779,8 @@
     <div class="demo" aria-label="Their copy versus a rewrite">
       <div class="demo-bar">
         <span class="prompt">line&nbsp;▸</span>
-        <button class="demo-q" data-q="0" aria-pressed="true">the promise</button>
+        <button class="demo-q" data-q="3" aria-pressed="true">capacity congestion</button>
+        <button class="demo-q" data-q="0" aria-pressed="false">the promise</button>
         <button class="demo-q" data-q="1" aria-pressed="false">single source of truth</button>
         <button class="demo-q" data-q="2" aria-pressed="false">rapid onboarding</button>
         <button class="demo-reveal" id="demo-reveal" aria-expanded="false">Show the rewrite&nbsp;▸</button>
@@ -787,56 +790,62 @@
           <p class="demo-label is-now">Published copy</p>
           <p class="demo-answer" id="demo-now">Pick a line.</p>
         </div>
-        <div class="demo-col demo-col-after" id="demo-after-col" hidden>
+        <div class="demo-col demo-col-after" id="demo-after-col" hidden="">
           <p class="demo-label is-after">The honest rewrite</p>
           <p class="demo-answer" id="demo-after"></p>
         </div>
       </div>
-      <p class="demo-note">"Published" lines are quoted from the current RMS e-book. "Rewrite" is illustrative. Pick a line, then reveal the rewrite beside it.</p>
+      <p class="demo-note">"Published" lines are quoted from current Copenhagen Optimization copy. "Rewrite" is illustrative. Pick a line, then reveal the rewrite beside it.</p>
     </div>
     <p class="ns"><strong>The payoff:</strong> every airport you go deep with becomes another node in the global network.</p>
   </div>
 </section>
+      </details>
 
-<!-- ===== G03 · TASK 2 ===== -->
-<section class="gate" id="g03">
+      <div class="dep-group"><span class="gtask">Task 2</span><span class="gname">Customer insight to content</span><span class="grule"></span></div>
+      <details class="dep-fold" name="deck">
+        <summary class="dep-row" data-go="g03"><span class="dep-gate">G03</span><span class="dep-dest">Transcript to assets<span class="sub">Three insights, one built three ways</span></span><span class="dep-status s-board">BOARDING</span><span class="dep-chev">▸</span></summary>
+        <section class="gate" id="g03">
   <div class="wrap reveal">
     <div class="gate-tag"><span class="gate-num">G03</span><span class="gate-route">An interview <span class="arrow">→</span> Content that sells</span><span class="gate-chip chip-task">Task 2 · insight to content</span></div>
     <h2 class="gate-title">Three insights from the DFW interview, one built three ways</h2>
-    <p class="lede">Part A: the three insights worth the most commercially. Part B: take the best one and turn it into three different pieces.</p>
+    <p class="lede">Part A: the three insights worth the most commercially.&nbsp;</p><p class="lede">Part B: take the best one and turn it into three different pieces.</p>
 
     <h3>Part A · the three insights</h3>
     <div class="grid three">
       <div class="card"><span class="role">01 · the flagship</span><h4>The end of the manual rebuild</h4><p>Every allocation needed human hands. Weekly plotting was a seven-day job. A 17-year search. "Describing it to a colleague is like putting myself out of a job."</p><p><strong>Why it matters:</strong> the clearest version of the value, in an operator's own words. <strong>Who cares:</strong> the operator, then the COO. <strong>How it helps:</strong> answers "we already use Excel."</p></div>
       <div class="card"><span class="role">02 · the buying criterion</span><h4>Won on trust, not features</h4><p>DFW was burned twice; their fear was a capable system with no support. The partnership won it: "a vendor focused on a quick deployment would have walked away. They didn't."</p><p><strong>Why it matters:</strong> the real reason they buy, and your public copy works against it. <strong>Who cares:</strong> COO, IT. <strong>How it helps:</strong> turns a ten-month build into proof you stick around.</p></div>
-      <div class="card"><span class="role">03 · the expansion engine</span><h4>Your best customers build on you</h4><p>DFW's expert user built his own tools on your software and measures success by how many more modules he adopts. A customer who builds on you doesn't leave.</p><p><strong>Why it matters:</strong> in a small market, you grow by selling more to each customer, not by adding logos. <strong>Who cares:</strong> CIO, commercial. <strong>How it helps:</strong> grows each account over time.</p></div>
+      <div class="card"><span class="role">03 · the expansion engine</span><h4>Your best customers build on you</h4><p>DFW's expert user built his own "gate gadgets" on your software and measures success by how many more modules he adopts. A customer who builds on you doesn't leave.</p><p><strong>Why it matters:</strong> in a small market, you grow by selling more to each customer, not by adding logos. <strong>Who cares:</strong> CIO, commercial. <strong>How it helps:</strong> grows each account over time.</p></div>
     </div>
 
     <h3>Part B · the manual rebuild, built three ways</h3>
     <div class="grid three">
-      <div class="card"><span class="role">1 · Thought leadership</span><h4>"The End of the Manual Rebuild"</h4><p>Written with one of your ex-operators, since their name on it is something no competitor can fake. The argument: airports don't struggle to make a plan, they struggle because the plan dies the second the day moves and a human rebuilds it by hand.</p><p><strong>Opening line:</strong> "The best RMS isn't the one with the smartest plan. It's the one nobody has to rebuild."</p></div>
+      <div class="card"><span class="role">1 · Thought leadership</span><h4>"The End of the Manual Rebuild"</h4><p>Written with one of your ex-operators, since their name on it is something no competitor can fake.&nbsp;</p><p>The argument: airports don't struggle to make a plan, they struggle because the plan dies the second the day moves and a human rebuilds it by hand.</p><p><strong>Opening line:</strong> "The best RMS isn't the one with the smartest plan. It's the one nobody has to rebuild."</p></div>
       <div class="card"><span class="role">2 · Customer story</span><h4>The airport that ended it</h4><p>Not a glossy "DFW loves us." The honest version a burned buyer believes, framed as the search: seventeen years looking, abandoned twice, then the ten-month build that finally retired the rebuild.</p><p><strong>The outcome to land:</strong> not a vanity stat, the human one. One person's seven-day plotting job became exception handling, and that time moved to airline relationships in the terminal.</p></div>
-      <div class="card"><span class="role">3 · Sales enablement</span><h4>The Manual Rebuild Audit</h4><p>A one-page checklist reps use early in a deal. It walks a prospect through every point where their plan breaks and gets rebuilt by hand, each tied to a real DFW example, and turns their current process into a number.</p><p><strong>The five lines:</strong> monthly schedule uploads, weekly counter plots, day-of tracking across three flight-status feeds, the manual billing spreadsheet, delays that cascade with no reallocation. Flips "do you want software" into "here's what your process costs you," the counter to "we already have an RMS."</p></div>
+      <div class="card"><span class="role">3 · Sales enablement</span><h4>The Manual Rebuild Audit</h4><p>A one-page checklist reps use early in a deal. It walks a prospect through every point where their plan breaks and gets rebuilt by hand, each tied to a real DFW example, and turns their current process into a number.</p><p><strong>The five lines:</strong> monthly schedule uploads, weekly counter plots, day-of tracking across three flight-status feeds, the manual billing spreadsheet, delays that cascade with no reallocation.&nbsp;</p><p>This all flips "do you want software" into "here's what your process costs you," the counter to "we already have an RMS."</p></div>
     </div>
     <p class="ns"><strong>The payoff:</strong> this is the whole content engine in miniature, and Behind the Board runs it every week.</p>
   </div>
 </section>
+      </details>
 
-<!-- ===== G04 · TASK 3 ===== -->
-<section class="gate" id="g04">
+      <div class="dep-group"><span class="gtask">Task 3</span><span class="gname">Writing exercise</span><span class="grule"></span></div>
+      <details class="dep-fold" name="deck">
+        <summary class="dep-row" data-go="g04"><span class="dep-gate">G04</span><span class="dep-dest">The writing sample<span class="sub">One post, under 300 words</span></span><span class="dep-status s-final">FINAL CALL</span><span class="dep-chev">▸</span></summary>
+        <section class="gate" id="g04">
   <div class="wrap reveal">
     <div class="gate-tag"><span class="gate-num">G04</span><span class="gate-route">A draft <span class="arrow">→</span> A position</span><span class="gate-chip chip-task">Task 3 · writing exercise</span></div>
     <h2 class="gate-title">The writing sample: one post, under 300 words</h2>
-    <p class="lede">A LinkedIn post, in plain operator language, built on the manual-rebuild insight.</p>
+    <p class="lede">A LinkedIn post, in plain operator language, built on the manual-rebuild insight. These types of posts can be posted by the brand, but better yet, by the people.</p>
     <div class="sample">
-      <div class="meta">LinkedIn · Copenhagen Optimization · ~210 words</div>
+      <div class="meta">LinkedIn · Copenhagen Optimization · ~215 words</div>
       <p class="lead-line">One of our customers told us that explaining our software to a colleague felt like putting himself out of a job.</p>
-      <p>That line should worry every vendor in our category. It doesn't. We put it on a slide.</p>
-      <p>Before this airport found a system that worked, one person spent seven days a week plotting resources by hand. Counters. Gates. Baggage. Makeup units. Every week. The moment one week's plan was published, the next one started.</p>
-      <p>They searched seventeen years for something better. Not because they lacked budget. Because nothing on the market could handle the mess of a real hub operation.</p>
-      <p>Here's what no one in this category likes to admit. Airports don't struggle to make a plan. They struggle because the plan dies the second the day starts moving. A flight lands early. A belt breaks. And a person rebuilds the whole thing by hand. Again.</p>
+      <p>That line should worry every vendor in our category. It doesn't. We put it right up front.</p>
+      <p>Before DFW found a system that worked, one person spent seven days a week plotting resources by hand. Counters. Gates. Baggage. Makeup units. Every week. The moment one week's plan was published, the next one started.</p>
+      <p>They searched for years for something better. Not because they lacked budget. Because nothing on the market could handle the mess of a real hub operation.</p>
+      <p>Airports don't struggle to make a plan. They struggle because the plan dies the second the day starts moving. A flight lands early. A belt breaks. And a person rebuilds the whole thing by hand. Again.</p>
       <p>There's a name for that. The manual rebuild.</p>
-      <p>Most vendors sell you a faster one and call it "intelligent, real-time optimization." We don't think the smartest thing this software can do is run the rebuild faster.</p>
+      <p>Most vendors sell you a faster one and call it "intelligent, real-time optimization." We don't think the smartest thing this software can do is to run the rebuild faster.</p>
       <p>It's to make sure no one runs it again.</p>
       <p>He didn't lose his job. He got it back. The part that needs a human. On the floor, with the airlines, on the exceptions a machine shouldn't touch.</p>
       <p>That's the end of the manual rebuild.</p>
@@ -849,9 +858,12 @@
     <p class="note">The quotes around "intelligent, real-time optimization" are a deliberate jab at your own e-book copy, the strategy in one line. Voice rules: American English, no em dashes, set up an inflated premise and puncture it with a smaller, harder truth.</p>
   </div>
 </section>
+      </details>
 
-<!-- ===== G05 · TASK 4 · AI USAGE ===== -->
-<section class="gate" id="g05">
+      <div class="dep-group"><span class="gtask">Task 4</span><span class="gname">AI usage</span><span class="grule"></span></div>
+      <details class="dep-fold" name="deck">
+        <summary class="dep-row" data-go="g05"><span class="dep-gate">G05</span><span class="dep-dest">How AI was used<span class="sub">Distrust first, then leverage</span></span><span class="dep-status s-board">BOARDING</span><span class="dep-chev">▸</span></summary>
+        <section class="gate" id="g05">
   <div class="wrap reveal">
     <div class="gate-tag"><span class="gate-num">G05</span><span class="gate-route">Generation <span class="arrow">→</span> Judgment</span><span class="gate-chip chip-task">Task 4 · AI usage</span></div>
     <h2 class="gate-title">How AI was used, and where it wasn't trusted</h2>
@@ -870,23 +882,26 @@
         <li>Building. This site was built with an AI-first workflow, in days.</li>
       </ul></div>
       <div class="dd-col dd-dont"><h4>Wouldn't hand it</h4><ul>
-        <li>The strategy calls: start with the operator, sound least like an ad, name the manual rebuild</li>
+        <li>The strategy calls: start with the operator, sound less like an ad, name the manual rebuild</li>
         <li>Any fact, unverified</li>
-        <li>The voice. It drafts confident, forgettable copy all day.</li>
+        <li>The voice itself. It can draft, it can't deliver final copy (even this line was edited by me).</li>
         <li>Reading the room: how hard to critique your own marketing</li>
       </ul></div>
     </div>
     <h3>Not a chatbot. Purpose-built skills.</h3>
-    <p>The leverage wasn't in prompting a chat window. I ran the work through specialized AI skills I'd already built: a <strong>content-strategist editor</strong> that re-audited the deck against the brief, swept it for repetition, and forced the cuts that took it from twelve sections to six, and a <strong>voice skill trained on my own writing</strong> that drafted the LinkedIn sample so it sounds like me, not like a model. That's the difference between using AI and building with it: the judgment is encoded in the tools, not borrowed from the default.</p>
-    <p>One more call AI would never make for me. I first built a full company-wide content hub with AI in a few days, then decided not to use it: it was scoped to the whole company, not RMS, and it was exactly the polished artifact this brief de-emphasizes. Knowing when the impressive output is the wrong move is also judgment. That hub is <a href="https://jasonwdonnelly.vercel.app/copopt.html" target="_blank" rel="noopener noreferrer">viewable here</a>, as process, not product.</p>
+    <p>The leverage wasn't in prompting a chat window. I ran the work through specialized AI skills I'd already built: a <strong>content-strategist, creative director, copywriter, and more</strong>&nbsp;that re-audited the deck against the brief, swept it for repetition, and forced the cuts that took it from twelve sections to six, and a <strong>voice skill trained on over 2000 posts of my own writing</strong> that drafted the LinkedIn sample so it sounds like a real person, not like a model. That's the difference between using AI and building with it: the judgment is encoded in the tools, not borrowed from the default.</p>
+    <p>One more call AI would never make. Extra work...&nbsp;</p><p>I first built a full company-wide content hub with AI in a day, then decided not to use it: it was scoped to the whole company, not RMS, and it was exactly the polished artifact this brief de-emphasizes. Knowing when the impressive output is the wrong move is also judgment. That hub is <a href="https://jasonwdonnelly.vercel.app/copopt.html" target="_blank" rel="noopener noreferrer">viewable here</a>, as process, not product.</p><p>In doing this, I had a mile-high view of what I wanted, not just a centered focus on RMS.&nbsp;</p>
     <h3>Where AI scales the engine, going forward</h3>
-    <p>The brief also asks where AI can scale the work. This is what makes the global goal realistic: doing it everywhere only works because AI does the heavy lifting. One interview becomes a week of posts in several languages, plus a steady stream of plain "what is..." and comparison pages that AI tools quote. The rule that never changes: AI drafts, repackages, and scales, but never owns the fact-check, the strategy, or the voice. Scale without judgment is just more bad content, faster.</p>
-    <p class="ns"><strong>The win:</strong> AI is how one strategist builds a global network's worth of content. It didn't make a single decision in this deck. That was the point.</p>
+    <p>The brief also asks where AI can scale the work. This is what makes the global goal realistic: doing it everywhere only works because AI does the heavy lifting. One interview becomes a week of posts in several languages, plus a steady stream of plain "what is..." and comparison pages that AI tools quote. The rule that never changes: AI drafts, repackages, and scales, but never owns the entire fact-check, the strategy, or the voice. Scale without judgment is just more bad content, faster.</p>
+    <p class="ns"><strong>The win:</strong> AI is how one strategist builds a global network's worth of content. It didn't make a single decision autonomously in this deck. That's the point.</p>
   </div>
 </section>
+      </details>
 
-<!-- ===== G06 · THE LANDING ===== -->
-<section class="gate" id="g06">
+      <div class="dep-group is-aux"><span class="gtask">The landing</span><span class="gname">your call, after wheels-down</span><span class="grule"></span></div>
+      <details class="dep-fold" name="deck">
+        <summary class="dep-row dep-star" data-go="g06"><span class="dep-gate">★</span><span class="dep-dest">Seat upgrade<span class="sub">Five debates, first 90 days, the win</span></span><span class="dep-status s-ontime">ARRIVING</span><span class="dep-chev">▸</span></summary>
+        <section class="gate" id="g06">
   <div class="wrap reveal">
     <div class="gate-tag"><span class="gate-num">★</span><span class="gate-route">Wheels down <span class="arrow">→</span> Your call</span><span class="gate-chip chip-ontime">The landing</span></div>
     <h2 class="gate-title">The landing: a better seat, the descent, and the win</h2>
@@ -903,7 +918,7 @@
 
     <h3>The descent · first 90 days</h3>
     <div class="phases">
-      <div class="phase"><div class="phase-when">Weeks 1–4<span class="sub">Taxi</span></div><ul><li>Validate demand against your Fathom sales-call library and target-account search</li><li>Quick wins: fix the nurture stat slips, lead the e-book with the manual rebuild</li><li>Set up the "manual rebuild" through-line; pilot expert content with two or three consultants</li></ul></div>
+      <div class="phase"><div class="phase-when">Weeks 1–4<span class="sub">Taxi</span></div><ul><li>Learning. Learning. And more learning...&nbsp;</li><li>Validate demand against your Fathom sales-call library and target-account search</li><li>Quick wins: fix the nurture stat slips, lead the e-book with the manual rebuild</li><li>Set up the "manual rebuild" through-line; pilot expert content with two or three consultants</li></ul></div>
       <div class="phase"><div class="phase-when">Weeks 5–8<span class="sub">Takeoff</span></div><ul><li>Ship the flagship article, the DFW story, and the LinkedIn post</li><li>Build the Manual Rebuild checklist for reps; first plain "what is..." and comparison pages for AI search</li><li>First targeted content for three named airports</li></ul></div>
       <div class="phase"><div class="phase-when">Weeks 9–12<span class="sub">Climb</span></div><ul><li>First Asia-Pacific play through ACI; scale expert content to six to eight voices on a live calendar</li><li>Set up account-level measurement: airports reached, people reached inside each, pipeline influenced</li></ul></div>
     </div>
@@ -938,6 +953,17 @@
     </div>
   </div>
 </section>
+      </details>
+    </nav>
+    <p class="board-hint">Click any section to open it inline. Opening one closes the last.</p>
+  </div>
+</section>
+
+
+
+
+
+
 
 </main>
 
@@ -945,8 +971,8 @@
 <footer>
   <div class="wrap">
     <p class="arrivals-tag">● Arrivals</p>
-    <h2>You already have the best story in your industry. The job is telling it, until you're the global standard.</h2>
-    <p>One idea, four tasks, one destination: name the manual rebuild, tell the real story, and turn the world's airport operators into one network, until the industry's definition of good operations is yours. In a small market, authority is the only thing that scales. Cleared for departure whenever you are.</p>
+    <h2>You already have the best story in your industry. The job is telling it out loud.</h2>
+    <p>One idea, four tasks, one destination: name the manual rebuild, tell the real story, and turn the world's airport operators into one network. In a small market, authority is the only thing that scales. Cleared for departure whenever you are.</p>
     <p class="sig">Prepared by Jason Donnelly · Content Strategist case for Copenhagen Optimization · <a href="https://www.jasonwdonnelly.com" target="_blank" rel="noopener noreferrer">jasonwdonnelly.com</a><br>Built with an AI-native workflow. All company facts drawn from the case material pack and public sources; customer figures quoted as provided and flagged where they need reconciliation.</p>
   </div>
 </footer>
@@ -1017,15 +1043,6 @@
   })();
 
   // ===== DEPARTURE BOARD NAV =====
-  (function boardNav() {
-    document.querySelectorAll('.dep-row').forEach(function (row) {
-      row.addEventListener('click', function () {
-        var target = document.getElementById(row.getAttribute('data-go'));
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    });
-  })();
-
   // ===== THEIR COPY vs REWRITE DEMO =====
   (function copyDemo() {
     var data = {
@@ -1040,6 +1057,10 @@
       2: {
         now: "“Built for all airport sizes. Right-sized deployments, rapid onboarding, scalable modules.”",
         after: "A real hub isn't a template. We scope to your actual operation and stay through the hard parts: the integrations, the edge cases, the stakeholders you didn't know you'd need."
+      },
+      3: {
+        now: "“We help airports mitigate capacity congestion with insights only airport people can bring.”",
+        after: "We're airport people, not a software company that learned airports. We help you get more flights through the gates and counters you already have, no new concrete required."
       }
     };
     var q = '0';
@@ -1076,7 +1097,24 @@
       revealBtn.textContent = 'Rewrite shown';
       revealBtn.disabled = true;
     });
-    showLine('0');
+    showLine('3');
+  })();
+
+  // ===== ACCORDION: settle each opened section under the sticky bar =====
+  (function accordionScroll() {
+    if (document.getElementById('editor-toolbar')) return;
+    var bar = document.querySelector('.statusbar');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('details.dep-fold').forEach(function (d) {
+      d.addEventListener('toggle', function () {
+        if (!d.open) return;
+        requestAnimationFrame(function () {
+          var off = (bar ? bar.offsetHeight : 0) + 10;
+          var y = d.getBoundingClientRect().top + window.pageYOffset - off;
+          window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+        });
+      });
+    });
   })();
 
   // ===== SCROLL REVEAL =====
