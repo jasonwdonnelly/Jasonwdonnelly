@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meet Your Maker · Too Good To Go Case Study · Jason Donnelly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FAF3E5;
+    --cream-2:#F0E5CF;
+    --ink:#2A1A0C;
+    --evergreen:#0A4A38;
+    --crust:#4A2E1B;
+    --green:#1FA971;
+    --mint:#5FD9A0;
+    --coral:#FF6A4D;
+    --amber:#FFB638;
+    --shadow:rgba(42,26,12,.14);
+    --maxw:1080px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .anton{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;line-height:.92;letter-spacing:.005em}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+
+  /* HEADER: bakery light, 4 a.m. warmth */
+  header.top{
+    padding:64px 0 30px;
+    background:
+      radial-gradient(120% 90% at 85% 0%, rgba(255,182,56,.32), transparent 55%),
+      radial-gradient(120% 90% at 0% 100%, rgba(255,106,77,.15), transparent 55%),
+      var(--cream);
+    border-bottom:1px solid rgba(42,26,12,.08);
+  }
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--evergreen);background:rgba(255,182,56,.22);padding:7px 14px;border-radius:100px;margin-bottom:22px}
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--amber)}
+  header.top h1{font-size:clamp(48px,10vw,118px);color:var(--crust)}
+  header.top h1 em{color:var(--evergreen);font-style:normal}
+  header.top .sub{margin-top:20px;max-width:640px;font-size:clamp(16px,2vw,20px);font-weight:500;opacity:.88}
+  header.top .sub b{color:var(--evergreen)}
+
+  /* PRESENTER CONTROLS */
+  .controls{display:flex;align-items:center;gap:10px;margin-top:30px;flex-wrap:wrap}
+  .controls .hint{font-size:12.5px;opacity:.55;font-weight:600;letter-spacing:.02em}
+  .controls button{
+    border:1px solid rgba(42,26,12,.18);background:transparent;color:var(--evergreen);
+    font-family:'Inter';font-weight:700;font-size:12.5px;padding:8px 14px;border-radius:100px;cursor:pointer;transition:.18s;
+  }
+  .controls button:hover{background:var(--evergreen);color:var(--cream);border-color:var(--evergreen)}
+
+  /* ACCORDION */
+  .stack{padding:34px 0 90px;display:flex;flex-direction:column;gap:14px}
+  details{
+    background:#fff;border:1px solid rgba(42,26,12,.10);border-radius:18px;overflow:hidden;
+    box-shadow:0 2px 0 rgba(42,26,12,.03);transition:box-shadow .25s,border-color .25s;
+  }
+  details[open]{box-shadow:0 22px 50px var(--shadow);border-color:rgba(255,182,56,.55)}
+  summary{
+    list-style:none;cursor:pointer;padding:22px 24px;display:flex;align-items:center;gap:18px;
+    user-select:none;transition:background .18s;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary:hover{background:rgba(255,182,56,.07)}
+  .s-num{font-family:'Anton';font-size:22px;color:var(--amber);min-width:54px;line-height:1}
+  details[open] .s-num{color:var(--coral)}
+  .s-main{flex:1;min-width:0}
+  .s-label{font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--evergreen);margin-bottom:3px}
+  .s-title{font-size:clamp(18px,2.4vw,23px);font-weight:800;color:var(--crust);letter-spacing:-.01em;line-height:1.15}
+  .s-desc{font-size:13.5px;opacity:.6;margin-top:3px}
+  .chev{flex:0 0 auto;width:34px;height:34px;border-radius:50%;background:var(--cream-2);display:flex;align-items:center;justify-content:center;transition:.28s}
+  .chev svg{width:16px;height:16px;color:var(--evergreen);transition:transform .28s}
+  details[open] .chev{background:var(--coral)}
+  details[open] .chev svg{color:#fff;transform:rotate(180deg)}
+  .body{padding:6px 24px 34px;animation:slidein .4s ease}
+  @keyframes slidein{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+  .body .inner{border-top:1px solid rgba(42,26,12,.08);padding-top:26px}
+
+  /* shared bits */
+  .kick{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--coral);margin-bottom:14px}
+  .note{font-size:14px;opacity:.72;max-width:64ch;margin-bottom:18px}
+  .honest{margin-top:20px;background:rgba(255,182,56,.12);border:1px solid rgba(255,182,56,.5);border-radius:13px;padding:15px 18px;font-size:13.5px;line-height:1.55}
+  .honest b{color:var(--crust)}
+  .honest .lab{display:block;font-size:10.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--crust);margin-bottom:6px}
+
+  /* BRIEF */
+  .ask-lead{font-size:clamp(17px,2vw,19px);line-height:1.6;max-width:66ch;margin-bottom:26px}
+  .ask-lead b{color:var(--evergreen)}
+  .fact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:680px){.fact-grid{grid-template-columns:1fr}}
+  .fact{background:var(--cream);border:1px solid rgba(42,26,12,.08);border-radius:13px;padding:16px 18px}
+  .fact h5{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--evergreen);margin-bottom:6px}
+  .fact p{font-size:14px;opacity:.86;line-height:1.5}
+  .trap{margin-top:18px;display:flex;gap:14px;align-items:flex-start;background:rgba(255,106,77,.1);border:1px solid rgba(255,106,77,.34);border-radius:13px;padding:16px 18px}
+  .trap .tag{font-family:'Anton';font-size:12px;color:var(--coral);background:rgba(255,106,77,.14);padding:6px 10px;border-radius:7px;white-space:nowrap}
+  .trap p{font-size:14px;line-height:1.55}
+  .trap b{color:var(--evergreen)}
+
+  /* IDEA */
+  .idea-flex{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+  @media(max-width:760px){.idea-flex{grid-template-columns:1fr;gap:26px}}
+  .idea-flex .big{font-size:clamp(26px,4vw,42px);font-weight:800;color:var(--crust);line-height:1.06}
+  .idea-flex .big em{color:var(--coral);font-style:normal}
+  .idea-flex p{font-size:16px;opacity:.9;margin-top:16px}
+  .shift{display:flex;flex-direction:column;gap:12px}
+  .pill-old{background:var(--cream-2);color:#9c8d77;padding:11px 16px;border-radius:11px;font-weight:700;font-size:16px;text-decoration:line-through;text-decoration-color:var(--coral);text-decoration-thickness:2px}
+  .arrow{color:var(--coral);font-weight:900;font-size:20px;padding-left:6px}
+  .pill-new{background:var(--evergreen);color:#fff;padding:11px 16px;border-radius:11px;font-weight:700;font-size:16px;box-shadow:0 10px 24px rgba(10,74,56,.28)}
+  .lock{margin-top:24px;font-family:'Anton';font-size:clamp(28px,5vw,46px);color:var(--crust);text-transform:uppercase;line-height:.95}
+  .lock em{color:var(--evergreen);font-style:normal}
+
+  /* MANIFESTO */
+  .mani{background:var(--crust);color:var(--cream);border-radius:16px;padding:40px 34px}
+  .mani p{font-size:clamp(19px,2.6vw,27px);font-weight:600;line-height:1.34;margin-bottom:20px;max-width:26ch}
+  .mani .caps{font-family:'Anton';color:var(--amber);font-size:1.1em;text-transform:uppercase;display:inline}
+  .mani .hl{color:var(--amber)}
+  .mani .end{font-family:'Anton';color:var(--amber);text-transform:uppercase;font-size:1.15em;display:block;margin-top:6px;line-height:1}
+  .wc{margin-top:18px;font-size:12px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;opacity:.5}
+
+  /* OOH boards (designed in-page; shoot direction in captions) */
+  .boards{display:flex;flex-direction:column;gap:22px}
+  .board{border-radius:16px;overflow:hidden;box-shadow:0 16px 40px var(--shadow);display:grid;grid-template-columns:1.35fr .8fr}
+  @media(max-width:680px){.board{grid-template-columns:1fr}}
+  .board .face{padding:36px 32px;display:flex;flex-direction:column;justify-content:space-between;min-height:280px;position:relative;gap:24px}
+  .board .hl-txt{font-family:'Anton';text-transform:uppercase;font-size:clamp(26px,4vw,44px);line-height:.96}
+  .maker-chip{display:flex;align-items:center;gap:12px}
+  .maker-chip .ava{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Anton';font-size:20px;flex:0 0 auto;border:2px solid rgba(255,255,255,.5)}
+  .maker-chip .who b{display:block;font-size:14px;font-weight:800;line-height:1.25}
+  .maker-chip .who span{font-size:12px;opacity:.8;line-height:1.3;display:block}
+  .board .brandline{display:flex;align-items:center;gap:9px;font-weight:800;font-size:13px}
+  .board .brandline .leaf{width:19px;height:19px}
+  .board .ctx{padding:24px 26px;font-size:13.5px;line-height:1.55;display:flex;flex-direction:column;justify-content:center;gap:9px;background:rgba(42,26,12,.04);border-left:1px solid rgba(42,26,12,.08)}
+  .board .ctx .lab{font-size:10.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--evergreen)}
+  .board .ctx .vis{font-weight:600}
+  .board .ctx .place{opacity:.7}
+  .b1 .face{background:linear-gradient(135deg,var(--evergreen),#083826);color:var(--cream)}
+  .b1 .ava{background:var(--amber);color:var(--crust)}
+  .b2 .face{background:linear-gradient(135deg,var(--amber),#f5a41f);color:var(--crust)}
+  .b2 .ava{background:var(--evergreen);color:#fff;border-color:rgba(42,26,12,.3)}
+  .b2 .hl-txt em{color:#fff;font-style:normal}
+  .b3 .face{background:linear-gradient(135deg,var(--coral),#e8503a);color:#fff}
+  .b3 .ava{background:#fff;color:var(--coral)}
+  .stamp{position:absolute;top:18px;right:22px;font-family:'Anton';font-size:11px;background:rgba(0,0,0,.18);color:#fff;padding:5px 10px;border-radius:7px;letter-spacing:.04em}
+  .b2 .stamp{background:rgba(42,26,12,.16);color:var(--crust)}
+  .shoot{margin-top:2px;font-size:13px;opacity:.68;max-width:62ch;line-height:1.55}
+  .shoot b{color:var(--evergreen);opacity:1}
+
+  /* EMAIL */
+  .mail{max-width:560px;margin:0 auto;background:#fff;border:1px solid rgba(42,26,12,.1);border-radius:16px;overflow:hidden;box-shadow:0 16px 40px var(--shadow)}
+  .mail-top{padding:16px 22px;border-bottom:1px solid #efe7d6;display:flex;align-items:center;gap:11px}
+  .mail-top .av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--evergreen));display:flex;align-items:center;justify-content:center}
+  .mail-top .av .leaf{width:21px;height:21px}
+  .mail-top .from b{display:block;font-size:14px;color:var(--ink)}
+  .mail-top .from span{font-size:12.5px;color:#8f8471}
+  .mfield{padding:7px 22px;border-bottom:1px solid #f4eddd}
+  .mfield .lab{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--evergreen);margin-bottom:2px}
+  .mfield.subj .val{font-size:16px;font-weight:700;color:var(--ink)}
+  .mfield.pre .val{font-size:13.5px;color:#8f8471}
+  .mbody{padding:24px 22px 6px}
+  .mbody p{font-size:15px;margin-bottom:13px;color:#2e2416}
+  .mbody .hi{font-weight:700;color:var(--ink)}
+  .mcta-lab{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--evergreen);padding:4px 22px 0}
+  .mcta{display:block;text-align:center;background:var(--coral);color:#fff;font-weight:800;font-size:15px;text-decoration:none;padding:15px;border-radius:11px;margin:8px 22px;box-shadow:0 10px 22px rgba(255,106,77,.3)}
+  .mfoot{padding:12px 22px 24px;font-size:11.5px;color:#a5987f;text-align:center}
+
+  /* SOCIAL */
+  .toggle{display:inline-flex;background:var(--cream-2);border-radius:100px;padding:5px;gap:4px;margin-bottom:22px}
+  .toggle button{border:0;background:transparent;color:var(--evergreen);font-family:'Inter';font-weight:700;font-size:13.5px;padding:9px 18px;border-radius:100px;cursor:pointer;transition:.2s;opacity:.7}
+  .toggle button.on{background:var(--coral);color:#fff;opacity:1}
+  .pane{display:none}.pane.show{display:block;animation:slidein .35s ease}
+  .frames{display:grid;grid-template-columns:repeat(5,1fr);gap:11px}
+  @media(max-width:860px){.frames{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.frames{grid-template-columns:1fr}}
+  .frame{border:1px solid rgba(42,26,12,.1);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+  .frame .scr{aspect-ratio:9/12;display:flex;align-items:center;justify-content:center;text-align:center;padding:14px;font-family:'Anton';text-transform:uppercase;font-size:13.5px;line-height:1.05;position:relative}
+  .frame .t{position:absolute;top:7px;left:9px;font-family:'Inter';font-size:9.5px;font-weight:800;letter-spacing:.06em;opacity:.85}
+  .f1 .scr{background:linear-gradient(160deg,#3a2513,#241507);color:var(--amber)}
+  .f2 .scr{background:linear-gradient(160deg,#FFB638,#ff9a2e);color:var(--ink)}
+  .f3 .scr{background:linear-gradient(160deg,var(--evergreen),#083826);color:#fff}
+  .f4 .scr{background:linear-gradient(160deg,var(--coral),#e8503a);color:#fff}
+  .f5 .scr{background:var(--cream-2);color:var(--evergreen)}
+  .frame .cap{padding:12px;font-size:11.5px;line-height:1.45;opacity:.82}
+  .frame .cap b{display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase;opacity:.6;margin-bottom:4px}
+  .audio{margin-top:18px;font-size:13px;opacity:.7;display:flex;gap:9px;align-items:center}
+  .audio .tag{font-weight:800;color:var(--evergreen);letter-spacing:.07em;text-transform:uppercase;font-size:10.5px}
+  .vlabel{margin:34px 0 14px;padding-top:22px;border-top:1px solid rgba(42,26,12,.12);font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--coral)}
+  .vlabel.first{border-top:0;padding-top:2px;margin-top:6px}
+  .vlabel span{color:var(--evergreen)}
+  .together{margin-top:30px;background:rgba(31,169,113,.1);border:1px solid rgba(31,169,113,.4);border-radius:14px;padding:20px 22px;font-size:14px;line-height:1.6}
+  .together .lab{display:block;font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--evergreen);margin-bottom:9px}
+  .together b{color:var(--evergreen)}
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+  @media(max-width:860px){.cards{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.cards{grid-template-columns:1fr}}
+  .card{aspect-ratio:4/5;border-radius:15px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+  .card .num{font-family:'Anton';font-size:12px;opacity:.5}
+  .card .ctxt{font-family:'Anton';text-transform:uppercase;font-size:clamp(16px,2vw,21px);line-height:1.04}
+  .card small{font-size:11px;font-weight:600;opacity:.7;letter-spacing:.08em;text-transform:uppercase}
+  .cc1{background:var(--evergreen);color:var(--cream)}.cc1 .ctxt{color:#fff}.cc1 em{color:var(--amber);font-style:normal}
+  .cc2{background:var(--amber);color:var(--ink)}
+  .cc3{background:var(--cream-2);color:var(--crust)}
+  .cc4{background:var(--coral);color:#fff}
+  .leaf-sm{width:22px;height:22px}
+  .caption{margin-top:22px;background:var(--cream);border:1px solid rgba(42,26,12,.1);border-radius:12px;padding:18px 20px;font-size:14.5px;line-height:1.6;max-width:680px}
+  .caption .lab{font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--evergreen);margin-bottom:9px}
+  .caption .hash{color:var(--evergreen);font-weight:700}
+
+  /* EPISODE WALL */
+  .wall{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px}
+  @media(max-width:860px){.wall{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.wall{grid-template-columns:1fr}}
+  .ep{background:var(--cream);border:1px solid rgba(42,26,12,.09);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+  .ep .epn{font-family:'Anton';font-size:11px;color:var(--coral);letter-spacing:.05em}
+  .ep b{font-size:14px;color:var(--crust);line-height:1.3}
+  .ep .who{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--evergreen)}
+  .ep.you{background:var(--evergreen);border-color:var(--evergreen)}
+  .ep.you .epn{color:var(--amber)}
+  .ep.you b{color:#fff}
+  .ep.you .who{color:var(--mint)}
+
+  /* TWO CUTS */
+  .cuts{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:22px}
+  @media(max-width:680px){.cuts{grid-template-columns:1fr}}
+  .cut{border-radius:14px;padding:20px 22px}
+  .cut h4{font-size:12px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;margin-bottom:10px}
+  .cut p{font-size:14px;line-height:1.55}
+  .cut-shop{background:var(--cream-2);color:var(--ink)}
+  .cut-shop h4{color:var(--crust)}
+  .cut-tgtg{background:var(--evergreen);color:var(--cream)}
+  .cut-tgtg h4{color:var(--mint)}
+  .cut b{font-weight:800}
+
+  /* EMAIL VIDEO EMBED */
+  .vidcard{position:relative;border-radius:12px;overflow:hidden;margin:6px 22px 4px;aspect-ratio:16/9;background:linear-gradient(160deg,#3a2513,#1d1004);display:flex;align-items:center;justify-content:center}
+  .vidcard .play{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(0,0,0,.35)}
+  .vidcard .play svg{width:20px;height:20px;margin-left:3px}
+  .vidcard .meta{position:absolute;left:14px;bottom:12px;color:#fff;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+  .vidcard .dur{position:absolute;right:12px;bottom:12px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:5px}
+  .vidcard .glow{position:absolute;inset:0;background:radial-gradient(80% 70% at 30% 40%, rgba(255,182,56,.28), transparent 60%)}
+
+  /* board kicker */
+  .hl-kick{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;opacity:.75;margin-bottom:10px}
+
+  /* KIT */
+  .kit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:6px}
+  @media(max-width:760px){.kit-grid{grid-template-columns:1fr}}
+  .kit-card{background:var(--cream);border:1px solid rgba(42,26,12,.09);border-radius:14px;padding:20px}
+  .kit-card h4{font-size:12px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:var(--evergreen);margin-bottom:12px}
+  .kit-card ol,.kit-card ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+  .kit-card li{font-size:14px;line-height:1.5;padding-left:26px;position:relative}
+  .kit-card li::before{content:attr(data-n);position:absolute;left:0;top:1px;font-family:'Anton';font-size:13px;color:var(--coral)}
+  .kit-card .prompt{font-size:16px;font-weight:700;color:var(--crust);line-height:1.5}
+  .kit-card .prompt em{color:var(--coral);font-style:normal}
+  .kit-rules{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+  .rule{font-size:12px;font-weight:700;color:var(--evergreen);background:rgba(31,169,113,.12);border:1px solid rgba(31,169,113,.3);padding:6px 12px;border-radius:100px}
+
+  /* RATIONALE */
+  .rat{max-width:680px;font-size:clamp(16px,1.9vw,19px);line-height:1.55;font-weight:500}
+  .rat p{margin-bottom:15px}
+  .rat .open{font-weight:800;color:var(--crust);font-size:1.05em}
+  .rat .hl{color:var(--coral);font-weight:700}
+  .sig{margin-top:22px;display:flex;align-items:center;gap:12px;font-size:13px}
+  .sig .ln{flex:1;height:1px;background:rgba(42,26,12,.16)}
+  .sig b{color:var(--evergreen)}
+
+  /* PANEL */
+  .pn-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:680px){.pn-grid{grid-template-columns:1fr}}
+  .pncard{background:var(--cream);border:1px solid rgba(42,26,12,.08);border-radius:13px;padding:18px 20px}
+  .pncard h4{color:var(--crust);font-size:13.5px;margin-bottom:6px}
+  .pncard h4 span{color:var(--coral)}
+  .pncard p{font-size:14px;opacity:.86;line-height:1.5}
+
+  footer{background:var(--crust);color:var(--cream);text-align:center;padding:56px 0 48px}
+  footer .big{font-family:'Anton';text-transform:uppercase;font-size:clamp(34px,8vw,88px);color:var(--amber);line-height:.9}
+  footer .big em{color:var(--cream);font-style:normal}
+  footer p{margin-top:18px;opacity:.55;font-size:13px}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="leaf" viewBox="0 0 48 48">
+  <path d="M24 6c-7 6-13 11-13 20a13 13 0 0 0 26 0c0-9-6-14-13-20z" fill="currentColor" opacity=".25"/>
+  <path d="M30 9c-6 5-11 9-11 17a11 11 0 0 0 22 0c0-8-5-12-11-17z" fill="currentColor"/>
+</symbol>
+<symbol id="chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<header class="top">
+  <div class="wrap">
+    <span class="eyebrow"><span class="dot"></span> Too Good To Go · Brand Campaign · Copywriter Case Study</span>
+    <h1 class="anton">Meet Your<br><em>Maker.</em></h1>
+    <p class="sub">You know your barista's name, her dog's name, her stance on oat milk. You have no idea who makes your dinner. A campaign that gives surplus food its <b>authors</b> back. Not a film. A format any shop on earth can shoot.</p>
+    <div class="controls">
+      <span class="hint">Presenter mode · everything starts closed. Open each as you go.</span>
+      <button onclick="setAll(true)">Open all</button>
+      <button onclick="setAll(false)">Close all</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="stack" id="stack">
+
+    <!-- BRIEF -->
+    <details>
+      <summary>
+        <span class="s-num">00</span>
+        <span class="s-main">
+          <span class="s-label">Start here</span>
+          <span class="s-title">The Brief</span>
+          <span class="s-desc">What Too Good To Go actually asked for, in plain English.</span>
+        </span>
+        <span class="chev"><svg><use href="#chevron"/></svg></span>
+      </summary>
+      <div class="body"><div class="inner">
+        <p class="ask-lead">Too Good To Go wants to lean less on paid ads and grow the <b>organic</b> way: by winning back the pile of people who heard of it years ago, maybe tried it once, then drifted. The job is one <b>brand campaign</b> built on a single idea, stretched across a manifesto, billboards, an email and social, with a short rationale. It's a behavioral nudge, <b>not</b> a discount-and-download conversion push.</p>
+        <div class="fact-grid">
+          <div class="fact"><h5>Objective</h5><p>Foster organic growth and re-engagement. Ease reliance on paid UA, which loses efficiency as markets mature.</p></div>
+          <div class="fact"><h5>Audience</h5><p>The Conscious Shopper. Urban, 25–35. Lapsed, aware non-users.</p></div>
+          <div class="fact"><h5>The insight</h5><p>Shift surplus from "stigmatized leftovers" to amazing things waiting to be discovered.</p></div>
+          <div class="fact"><h5>Main message</h5><p>There's an abundance of good stuff waiting with Too Good To Go. (Express it, don't repeat it.)</p></div>
+          <div class="fact"><h5>Tone</h5><p>Witty not sarcastic. Playful not childish. Confident not arrogant. Rebellious not provocative.</p></div>
+          <div class="fact"><h5>What they don't want</h5><p>No lower-funnel tactics. No niche-activist positioning. No charity or food-insecurity framing.</p></div>
+        </div>
+        <div class="trap">
+          <span class="tag">The trap</span>
+          <p>The brief says <b>brand campaign, not conversion</b>, then lists "registrations and first orders rise" as a goal. Weak entries sneak in promo codes and "download now." This one holds the brand line and lets the idea do the converting.</p>
+        </div>
+      </div></div>
+    </details>
+
+    <!-- IDEA -->
+    <details>
+      <summary>
+        <span class="s-num">01</span>
+        <span class="s-main">
+          <span class="s-label">The platform</span>
+          <span class="s-title">The Idea: "Meet Your Maker"</span>
+          <span class="s-desc">Surplus food isn't stigmatized because it's old. It's stigmatized because it's anonymous.</span>
+        </span>
+        <span class="chev"><svg><use href="#chevron"/></svg></span>
+      </summary>
+      <div class="body"><div class="inner">
+        <div class="idea-flex">
+          <div>
+            <div class="big">People don't avoid surplus food because it's bad. They avoid it because it's <em>nobody's.</em></div>
+            <p>"Leftovers" is what we call food with no author. It belongs to no one, so no one misses it. But no food is actually anonymous. Somebody proofed that dough at four in the morning. Somebody rolled that rice at eleven. Give the food its maker back and the stigma has nowhere to live.</p>
+            <p>So the unit of this campaign isn't an ad. It's an <b>episode</b>: fifteen seconds, a face, a name, a craft, one dry line, end card. Every shop is its own hero, in its own neighborhood, in its own words. Everything else in this deck (the billboards, the email, all of it) is that episode, re-expressed. The pun is played completely straight; the phrase brings its own dark little grin and we never once acknowledge it.</p>
+            <div class="lock anton">Meet Your <em>Maker.</em></div>
+          </div>
+          <div class="shift">
+            <span class="pill-old">Authorless "leftovers"</span>
+            <span class="arrow">↓</span>
+            <span class="pill-new">Somebody's best work. Signed.</span>
+            <p style="font-size:14px;opacity:.7;margin-top:14px">No casting hierarchy, no hero food, no campaign clock. Every shop is its own hero episode. The footage flows to TGTG, gets our branding, and runs on our channels city by city; the shop gets its own cut back for its own promotion. See sections 05 and 06.</p>
+            <p style="font-size:14px;margin-top:12px;color:var(--crust);font-weight:600">Too Good To Go works with 180,000+ food businesses in 21 countries. Most campaigns are one idea stretched thin. This one is 180,000 introductions that haven't happened yet.</p>
+          </div>
+        </div>
+        <div class="trap" style="margin-top:24px;background:rgba(31,169,113,.1);border-color:rgba(31,169,113,.4)">
+          <span class="tag" style="color:var(--evergreen);background:rgba(31,169,113,.18)">Guardrail</span>
+          <p>The maker is <b>never a victim.</b> The second this campaign asks anyone to feel sorry for a baker, it dies and becomes the charity ad the brief banned. Makers are proud, mildly annoyed, and right. Nobody here needs saving. The food just needs eating.</p>
+        </div>
+      </div></div>
+    </details>
+
+    <!-- MANIFESTO -->
+    <details>
+      <summary>
+        <span class="s-num">02</span>
+        <span class="s-main">
+          <span class="s-label">Deliverable 01 · Manifesto</span>
+          <span class="s-title">The north star</span>
+          <span class="s-desc">121 words, in the makers' collective voice.</span>
+        </span>
+        <span class="chev"><svg><use href="#chevron"/></svg></span>
+      </summary>
+      <div class="body"><div class="inner">
+        <div class="mani">
+          <p>We're the ones behind the counter.</p>
+          <p>We proof the dough. We roll the rice. We press the tortillas. We stack the fresh counter. You've been eating our work for years. Nice to finally meet you.</p>
+          <p>Funny thing about your city: you know your barista's name, her dog's name, her stance on oat milk. Meanwhile our food is in your kitchen right now. Nothing.</p>
+          <p>And whatever's left at closing? We made that too. Same hands. Same recipe. Same standards. <span class="hl">There is no second, worse version of us that clocks in at 5 p.m.</span></p>
+          <p>So we're done being anonymous. Pick up a bag before we close. See whose work it is.</p>
+          <p>Nobody here needs saving. The food just needs eating.<span class="end">Meet your maker.</span></p>
+        </div>
+        <div class="wc">121 / 150 words</div>
+      </div></div>
+    </details>
+
+    <!-- OOH -->
+    <details>
+      <summary>
+        <span class="s-num">03</span>
+        <span class="s-main">
+          <span class="s-label">Deliverable 02a · Out-of-Home</span>
+          <span class="s-title">Three billboards</span>
+          <span class="s-desc">Stills from the episodes. The maker's line is the headline.</span>
+        </span>
+        <span class="chev"><svg><use href="#chevron"/></svg></span>
+      </summary>
+      <div class="body"><div class="inner">
+        <p class="note">Every board is a still from that shop's episode: the maker's face, the maker's own line as the headline, and the campaign lockup as the constant sign-off. Because the boards are pulled from episode footage, OOH production collapses to a media buy, and every board can run within walking distance of its own shop. Three examples from the Copenhagen network:</p>
+        <div class="boards">
+
+          <div class="board b1">
+            <div class="face">
+              <span class="stamp">Still · EP 001</span>
+              <div>
+                <div class="hl-kick">The 6 p.m. croissant is the same croissant.</div>
+                <div class="hl-txt">"I made both. I would know."</div>
+              </div>
+              <div class="maker-chip">
+                <span class="ava">K</span>
+                <span class="who"><b>Kasper · Lagkagehuset, Dampfærgevej</b><span>Croissants. Up since 4 a.m. Not sorry.</span></span>
+              </div>
+              <div class="brandline"><svg class="leaf" style="color:var(--mint)"><use href="#leaf"/></svg> Meet your maker. · Too Good To Go</div>
+            </div>
+            <div class="ctx">
+              <span class="lab">The job</span>
+              <span class="vis">Win the argument.</span>
+              <span class="place">The quality claim, made by the only person qualified to make it. The brand never has to say the food is good; the author does, dryly, with his name on it.</span>
+            </div>
+          </div>
+
+          <div class="board b2">
+            <div class="face">
+              <span class="stamp">Still · EP 014</span>
+              <div class="hl-txt">"Two years you've eaten my sushi. We've never met."</div>
+              <div class="maker-chip">
+                <span class="ava">M</span>
+                <span class="who"><b>Mia · SushiMania</b><span>Three hundred rolls a day. Zero made for the trash.</span></span>
+              </div>
+              <div class="brandline" style="color:var(--crust)"><svg class="leaf" style="color:var(--evergreen)"><use href="#leaf"/></svg> Meet your maker. · Too Good To Go</div>
+            </div>
+            <div class="ctx">
+              <span class="lab">The job</span>
+              <span class="vis">Make it personal.</span>
+              <span class="place">Street furniture near the shop itself, so the introduction is literal: she's thirty meters away. The board does what the whole campaign does, in one line, with one name.</span>
+            </div>
+          </div>
+
+          <div class="board b3">
+            <div class="face">
+              <span class="stamp">Still · EP 038</span>
+              <div class="hl-txt">"Shift's over. The standards aren't."</div>
+              <div class="maker-chip">
+                <span class="ava">J</span>
+                <span class="who"><b>Jonas · Meny, Nordhavn</b><span>Fresh counter. Closes at 8. Judges no one who shows up at 7:55.</span></span>
+              </div>
+              <div class="brandline"><svg class="leaf" style="color:#fff"><use href="#leaf"/></svg> Meet your maker. · Too Good To Go</div>
+            </div>
+            <div class="ctx">
+              <span class="lab">The job</span>
+              <span class="vis">Charm the commute.</span>
+              <span class="place">High-traffic stations at commute hours, when "the end of the day" is everyone's shared context. The maker's dry complaint carries the whole campaign's attitude in five words.</span>
+            </div>
+          </div>
+
+        </div>
+        <p class="shoot" style="margin-top:20px"><b>Why this never wears out:</b> "Meet your maker" is the constant, but a different human says something new on every board, in every neighborhood, in every market. The campaign line can run for years because it never has to carry a board alone. <b>Shoot direction:</b> stills pulled from each episode, direct to camera, lit like album covers, not like NGO reports. Pride, not plea.</p>
+        <div class="honest">
+          <span class="lab">Real, and said out loud</span>
+          All three shops are real, publicly documented Too Good To Go partners in Copenhagen. The makers' first names are stand-ins until an actual human signs a release. <b>The shops are real. The pride is real. The names are waiting for their owners.</b>
+        </div>
+      </div></div>
+    </details>
+
+    <!-- EMAIL -->
+    <details>
+      <summary>
+        <span class="s-num">04</span>
+        <span class="s-main">
+          <span class="s-label">Deliverable 02b · CRM Email</span>
+          <span class="s-title">Re-engagement email</span>
+          <span class="s-desc">Your nearest maker's episode, embedded. Three lines of copy. That's it.</span>
+        </span>
+        <span class="chev"><svg><use href="#chevron"/></svg></span>
+      </summary>
+      <div class="body"><div class="inner">
+        <div class="mail">
+          <div class="mail-top">
+            <div class="av"><svg class="leaf" style="color:#fff"><use href="#leaf"/></svg></div>
+            <div class="from"><b>Too Good To Go</b><span>hello@toogoodtogo.com</span></div>
+          </div>
+          <div class="mfield subj"><div class="lab">Subject line</div><div class="val">Someone four blocks away has been making your dinner.</div></div>
+          <div class="mfield pre"><div class="lab">Pre-header</div><div class="val">You two have never met. That's the only thing wrong here.</div></div>
+          <div class="mbody">
+            <p class="hi">Hi. It's been about a year.</p>
+            <p>This is Kasper. He runs the ovens four blocks from you, and his best work gets boxed at closing and offered to whoever shows up. You have not been showing up.</p>
+            <p>Fifteen seconds. Then dinner.</p>
+          </div>
+          <div class="vidcard">
+            <span class="glow"></span>
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#2A1A0C"/></svg></span>
+            <span class="meta">EP 001 · Kasper · Lagkagehuset, Dampfærgevej</span>
+            <span class="dur">0:15</span>
+          </div>
+          <div class="mcta-lab">Call to action</div>
+          <a class="mcta" href="#">Meet your maker →</a>
+          <div class="mfoot">Real people. Real food. No violins. · You're getting this because you two should meet.</div>
+        </div>
+        <p class="note" style="margin-top:20px;max-width:560px;margin-left:auto;margin-right:auto">The shortest email TGTG has ever sent a lapsed user, on purpose. CRM pulls the episode from the recipient's nearest active partner, so every lapsed user gets a different, true introduction, and the episode does the persuading instead of the copy. The structure is fixed; the neighbor changes.</p>
+      </div></div>
+    </details>
+
+    <!-- SOCIAL -->
+    <details>
+      <summary>
+        <span class="s-num">05</span>
+        <span class="s-main">
+          <span class="s-label">Deliverable 02c · Social / Paid</span>
+          <span class="s-title">The Episodes + Carousel</span>
+          <span class="s-desc">One scripted episode, a wall of the rest, and the two-cut system.</span>
+        </span>
+        <span class="chev"><svg><use href="#chevron"/></svg></span>
+      </summary>
+      <div class="body"><div class="inner">
+        <div class="toggle">
+          <button class="on" data-p="video">🎬 Video series</button>
+          <button data-p="carousel">🖼 Carousel</button>
+        </div>
+
+        <div class="pane show" id="p-video">
+          <p class="note">The brief said pick one. The episodes are the pick; the carousel is the same idea standing still, for paid placements that can't move. One concept, not two.</p>
+          <p class="note">"Meet Your Maker" is not a film. It's a recurring 15-second vertical format: face, name, craft, one dry line, end card. Every shop is its own hero episode, in its own neighborhood's flavor. One episode is scripted below to prove the beats; the wall underneath is what the network looks like at scale. No campaign clock, no hero food, no casting hierarchy. Local taste is the casting director.</p>
+
+          <div class="vlabel first">Episode 001 · Kasper &nbsp;·&nbsp; <span>15 seconds, vertical, brand-produced</span></div>
+          <div class="frames">
+            <div class="frame f1"><div class="scr"><span class="t">0–3s · the face</span>"This is Kasper."</div><div class="cap"><b>Visual</b>4:00 a.m. on screen. Oven light, flour in the air, Kasper mid-shift. He glances at the camera like it's late.</div></div>
+            <div class="frame f2"><div class="scr"><span class="t">3–7s · the resume</span>You've eaten his croissants for years. He's never met you.</div><div class="cap"><b>Visual</b>The morning case filling up, hands laminating dough. Text on screen carries the line; no VO yet.</div></div>
+            <div class="frame f3"><div class="scr"><span class="t">7–11s · the line</span>"The 6 p.m. croissant is the same croissant. I made both. I would know."</div><div class="cap"><b>Visual</b>Kasper, deadpan, straight to camera. This is the whole argument, delivered by the only person qualified to make it.</div></div>
+            <div class="frame f4"><div class="scr"><span class="t">11–14s · the handoff</span>A bag crosses the counter at closing.</div><div class="cap"><b>Visual</b>Real Surprise Bag, real customer, first names exchanged. Small smile, no music swell.</div></div>
+            <div class="frame f5"><div class="scr"><span class="t">14–15s · the button</span>Meet your maker.</div><div class="cap"><b>End card</b>The campaign lockup over the Too Good To Go logo. Same shared end card every episode, every shop.</div></div>
+          </div>
+          <div class="audio"><span class="tag">Audio</span> Ambient shop sound only. The format bans music swells on purpose; the ban is what keeps a hundred thousand partner-made episodes from going sentimental.</div>
+
+          <div class="vlabel">The wall &nbsp;·&nbsp; <span>what the network looks like at scale</span></div>
+          <p class="note" style="margin-bottom:14px">Same format, every market, nobody's hero but their own neighborhood's. A sample of the episode list:</p>
+          <div class="wall">
+            <div class="ep"><span class="epn">EP 001 · COPENHAGEN</span><b>"I made both. I would know."</b><span class="who">Kasper · Croissants</span></div>
+            <div class="ep"><span class="epn">EP 014 · VESTERBRO</span><b>"Two years you've eaten my sushi. We've never met."</b><span class="who">Mia · Sushi</span></div>
+            <div class="ep"><span class="epn">EP 038 · NORDHAVN</span><b>"Shift's over. The standards aren't."</b><span class="who">Jonas · Fresh counter</span></div>
+            <div class="ep"><span class="epn">EP 097 · LYON</span><b>"In France, wasting this is against the law. I agree with the law."</b><span class="who">Luc · Baguettes</span></div>
+            <div class="ep"><span class="epn">EP 121 · MADRID</span><b>"The recipe is my grandmother's. The standards are mine."</b><span class="who">Rosa · Tortilla</span></div>
+            <div class="ep"><span class="epn">EP 178 · TOKYO</span><b>"The rice doesn't know the shop is closing."</b><span class="who">Ken · Bento</span></div>
+            <div class="ep"><span class="epn">EP 202 · LONDON</span><b>"My jollof doesn't answer to 'leftovers.'"</b><span class="who">Amara · Jollof</span></div>
+            <div class="ep"><span class="epn">EP 233 · MILAN</span><b>"Filled at four. Perfect at eight. Ask the ricotta."</b><span class="who">Sofia · Cannoli</span></div>
+            <div class="ep"><span class="epn">EP 259 · AMSTERDAM</span><b>"Warm is a suggestion, not a deadline."</b><span class="who">Piet · Stroopwafels</span></div>
+            <div class="ep"><span class="epn">EP 301 · BERLIN</span><b>"Five hundred a day. None of them for the trash."</b><span class="who">Lena · Pretzels</span></div>
+            <div class="ep"><span class="epn">EP 356 · NEW YORK</span><b>"Eight million critics. No survivors by closing."</b><span class="who">Nadia · Bagels</span></div>
+            <div class="ep you"><span class="epn">EP 180,001 · YOUR CITY</span><b>Your name. Your craft. Your dry line.</b><span class="who">Shot with the kit · Section 06</span></div>
+          </div>
+
+          <div class="vlabel">The two cuts &nbsp;·&nbsp; <span>footage flows in, both cuts flow out</span></div>
+          <p class="note" style="margin-bottom:0">Every episode is edited twice. Identical fifteen seconds; only the last frame changes. The footage is sent to us; we make both cuts.</p>
+          <div class="cuts">
+            <div class="cut cut-tgtg">
+              <h4>The TGTG cut · the campaign</h4>
+              <p>Ends on the <b>Meet Your Maker</b> end card. Published on <b>our</b> channels, our logo, our voice, localized city by city so Copenhagen sees Copenhagen's makers and Lyon sees Lyon's. The brand's organic reach grows with every episode, and paid enters last, boosting only what's already proven.</p>
+            </div>
+            <div class="cut cut-shop">
+              <h4>The shop's cut · the thank-you</h4>
+              <p>Same film, ends on <b>their</b> name, hours, and "come by at closing." Theirs to post and promote, free advertising they would never budget for. It's the perk that makes sending footage in a no-brainer, not the distribution plan.</p>
+            </div>
+          </div>
+
+          <div class="together">
+            <span class="lab">Why a format beats a film</span>
+            A film gets watched. A format gets <b>copied</b>. The campaign opens with a public ask to every partner: introduce yourself, send it in. Brand crews shoot the flagship episodes in each market to set the bar; every other shop answers with the kit, and the footage comes <b>to us</b>. TGTG brands and publishes every episode on its own channels, localized to the shop's city, so the campaign builds the brand's organic reach instead of renting attention. Best answers earn the crew visit, so being filmed becomes a status thing among partners. <b>Brand asks → shops send → we publish, our name on it → paid boosts only proven winners.</b> That's the lean-off-paid-UA answer, built into the creative itself.
+          </div>
+        </div>
+
+        <div class="pane" id="p-carousel">
+          <p class="note">4 slides, paid social. The introduction, told as a swipe.</p>
+          <div class="cards">
+            <div class="card cc1"><div class="num">01 / 04</div><div class="ctxt">You know your barista's name. <em>Her dog's name.</em></div><small>swipe →</small></div>
+            <div class="card cc2"><div class="num">02 / 04</div><div class="ctxt">You don't know who makes your dinner.</div><small>swipe →</small></div>
+            <div class="card cc3"><div class="num">03 / 04</div><div class="ctxt">Mia. Three hundred rolls a day. Her best work is still there at closing.</div><small>swipe →</small></div>
+            <div class="card cc4"><div class="num">04 / 04</div><div class="ctxt">Meet your maker.</div><svg class="leaf leaf-sm" style="color:#fff"><use href="#leaf"/></svg></div>
+          </div>
+          <div class="caption">
+            <div class="lab">Caption</div>
+            The city feeds you every day and you've never been introduced. Fixing that, one shift at a time. See who's near you. <span class="hash">#MeetYourMaker</span>
+          </div>
+        </div>
+      </div></div>
+    </details>
+
+    <!-- KIT -->
+    <details>
+      <summary>
+        <span class="s-num">06</span>
+        <span class="s-main">
+          <span class="s-label">The organic engine</span>
+          <span class="s-title">The Ask</span>
+          <span class="s-desc">The campaign launches as an open call: introduce yourself.</span>
+        </span>
+        <span class="chev"><svg><use href="#chevron"/></svg></span>
+      </summary>
+      <div class="body"><div class="inner">
+        <p class="note">This campaign doesn't distribute creative to shops. It asks them for something: <b style="color:var(--crust)">introduce yourself.</b> A public, open call to every partner, all at once. The ask itself is the launch event (the world's largest introduction, and the press writes that headline for us), the brand-shot flagships answer first to set the bar, and the kit below is simply how everyone else answers. Partners already post; they have phones, regulars, and pride. The kit doesn't create that behavior, it formats the answer. <b style="color:var(--crust)">Most campaigns rent a film crew. This one comes with 180,000 of them.</b></p>
+        <div class="kit-grid">
+          <div class="kit-card">
+            <h4>The 3-shot list</h4>
+            <ol>
+              <li data-n="1">Your face, where you work. Look at the camera.</li>
+              <li data-n="2">Your hands, doing the thing you're best at.</li>
+              <li data-n="3">The bag, at closing. Hand it to someone if you can.</li>
+            </ol>
+          </div>
+          <div class="kit-card">
+            <h4>The prompt card</h4>
+            <p class="prompt">Say your name. Say what you make. Then tell us <em>the one thing customers get wrong about the end of your day.</em></p>
+          </div>
+          <div class="kit-card">
+            <h4>The two tiers</h4>
+            <ol>
+              <li data-n="1"><b>Brand-shot flagships.</b> A lean crew films hero shops per market. Two cuts each: the shop's and ours. These carry the localized paid pushes.</li>
+              <li data-n="2"><b>Kit-shot, everyone else.</b> Shops film themselves and send it in. TGTG brands and publishes on its own channels; top performers earn the crew visit.</li>
+            </ol>
+          </div>
+        </div>
+        <div class="kit-rules">
+          <span class="rule">15 seconds</span>
+          <span class="rule">Vertical</span>
+          <span class="rule">Real maker, not a spokesperson</span>
+          <span class="rule">First name on screen</span>
+          <span class="rule">One dry line</span>
+          <span class="rule">Shared end card</span>
+          <span class="rule">No music swells. Ever.</span>
+        </div>
+        <p class="note" style="margin-top:18px">One template to design, near-zero production cost per episode, and every episode lands twice: on our channels with our name on it, and on the shop's with theirs. The shop's cut is the incentive, the format rules are the brand police, and the feed never runs dry.</p>
+      </div></div>
+    </details>
+
+    <!-- RATIONALE -->
+    <details>
+      <summary>
+        <span class="s-num">07</span>
+        <span class="s-main">
+          <span class="s-label">Deliverable 03 · Rationale</span>
+          <span class="s-title">Why this, and why it works</span>
+          <span class="s-desc">In my voice, under 250 words.</span>
+        </span>
+        <span class="chev"><svg><use href="#chevron"/></svg></span>
+      </summary>
+      <div class="body"><div class="inner">
+        <div class="rat">
+          <p class="open">Every surplus campaign makes the same mistake: it markets the food. The food was never the problem.</p>
+          <p>Surplus feels sad because it feels authorless. A bag of "leftovers" belongs to nobody, so nobody misses it. But no food is actually anonymous. Somebody proofed that dough at four in the morning. Somebody rolled that rice at eleven. Give the food its maker back and "stigmatized leftovers" becomes impossible. <span class="hl">You can dismiss surplus. It's much harder to dismiss Kasper.</span></p>
+          <p>That's the mechanism: anonymity is the stigma. Fix one, the other goes.</p>
+          <p>So I didn't write a film. I wrote an ask: introduce yourself. Fifteen seconds: face, name, craft, one dry line, end card. Every shop answers as its own hero, in its own neighborhood. And the footage flows to us. We brand it and run it on our channels, city by city, organically. Their cut comes back to them, free advertising they'd never budget for. <span class="hl">Partners aren't doing us a favor. They're getting an ad out of it.</span> That's why it scales. Paid boosts only what's proven.</p>
+          <p>On tone: the pun does the rebellious work, so everything else plays it straight. Deadpan, warm, zero violins. The makers are proud, mildly annoyed, and right, which is the exact register of every great baker I've ever met.</p>
+          <p>And the don'ts hold. No codes, no activism, no charity. Just the oldest sales technique, an introduction, aimed at dinner. <span class="hl">You show up differently for a person than for a price.</span></p>
+        </div>
+        <div class="sig"><span class="ln"></span><span>244 / 250 words · <b>Jason Donnelly</b></span><span class="ln"></span></div>
+      </div></div>
+    </details>
+
+    <!-- PANEL -->
+    <details>
+      <summary>
+        <span class="s-num">08</span>
+        <span class="s-main">
+          <span class="s-label">For the walk-through</span>
+          <span class="s-title">How I'd defend it in the room</span>
+          <span class="s-desc">The five questions a creative director will ask, hardest first.</span>
+        </span>
+        <span class="chev"><svg><use href="#chevron"/></svg></span>
+      </summary>
+      <div class="body"><div class="inner">
+        <div class="pn-grid">
+          <div class="pncard"><h4><span>"Will shops actually make these?"</span></h4><p>Wrong worry. The shop's cut is free advertising they'd never budget for, made about the thing they're proudest of. Shops will compete to be episodes. The kit formats behavior that already exists, the end card keeps it ours, and recut rights mean we never police a hundred thousand edits.</p></div>
+          <div class="pncard"><h4><span>"Why does a lapsed user care who made it?"</span></h4><p>Because anonymity is the stigma. "Leftovers" is the word for food with no author. Once the author shows up, the dismissal stops working, and a person is harder to swipe past than a price.</p></div>
+          <div class="pncard"><h4><span>"Isn't this just every craft-food ad?"</span></h4><p>Craft ads point pride at the 9 a.m. shelf. We point the same pride at closing time, the exact moment the whole category is embarrassed about. Nobody else is standing there, which is what makes it ownable.</p></div>
+          <div class="pncard"><h4><span>"Where's the nudge?"</span></h4><p>An introduction creates a small social pull that a discount never does. You show up differently for a person than for a price. That's the behavioral mechanism, and it converts without a single promo code in sight.</p></div>
+          <div class="pncard"><h4><span>"You do know what that phrase means, right?"</span></h4><p>Yes. That's the joke, and we never tell it. Played straight, the dark read is a smirk the audience gets to have all by themselves. Acknowledged even once, it becomes a brand being edgy. "Rebellious, not provocative" comes down to who's allowed to wink: here it's them, never us.</p></div>
+        </div>
+      </div></div>
+    </details>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="big anton">Meet Your<br><em>Maker.</em></div>
+    <p>Too Good To Go · Copywriter Case Study · Concept, copy & build by Jason Donnelly</p>
+  </div>
+</footer>
+
+<script>
+  function setAll(open){document.querySelectorAll('#stack details').forEach(d=>d.open=open)}
+  document.querySelectorAll('.toggle button').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('.toggle button').forEach(x=>x.classList.remove('on'));
+      b.classList.add('on');
+      document.querySelectorAll('.pane').forEach(p=>p.classList.remove('show'));
+      document.getElementById('p-'+b.dataset.p).classList.add('show');
+    });
+  });
+</script>
+</body>
+</html>
