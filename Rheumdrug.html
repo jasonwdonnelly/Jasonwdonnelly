@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RHEUMDRUG · Osteoarthritis Launch · Case Response</title>
+<style>
+  :root{
+    --bg:#0a0a0b; --bg2:#111114; --ink:#f4f4f2; --mut:#9a9aa2; --line:#26262c;
+    --accent:#00e08a;
+    --accent2:#4d7cff;
+    --warn:#ffb020;
+    --maxw:960px;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --sans:"Helvetica Neue",Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--accent);color:#000}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:center;
+      background:rgba(10,10,11,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  nav .in{max-width:var(--maxw);width:100%;display:flex;align-items:center;gap:20px;padding:12px 24px}
+  nav .brand{font-weight:800;letter-spacing:.02em;font-size:14px}
+  nav .brand b{color:var(--accent)}
+  nav .links{margin-left:auto;display:flex;gap:18px;flex-wrap:wrap}
+  nav a{color:var(--mut);text-decoration:none;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;transition:color .2s}
+  nav a:hover{color:var(--ink)}
+  @media(max-width:760px){nav .links{display:none}}
+
+  section{max-width:var(--maxw);margin:0 auto;padding:92px 24px 40px}
+  .kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:16px}
+  h1{font-family:var(--sans);font-weight:800;letter-spacing:-.02em;line-height:1.02;font-size:clamp(40px,7vw,76px)}
+  h2{font-weight:800;letter-spacing:-.015em;line-height:1.06;font-size:clamp(28px,4.4vw,44px);margin-bottom:18px}
+  h3{font-weight:700;font-size:20px;letter-spacing:-.01em;margin-bottom:8px}
+  p{color:#d8d8d6;font-size:17px;margin-bottom:16px}
+  p.lead{font-size:20px;color:var(--ink)}
+  .mut{color:var(--mut)}
+  .serif{font-family:var(--serif)}
+  strong{color:#fff}
+
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+  .hero .grid-bg{position:absolute;inset:0;z-index:0;opacity:.5;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:48px 48px;mask-image:radial-gradient(circle at 30% 40%,#000 0%,transparent 72%)}
+  .hero .content{position:relative;z-index:1}
+  .hero h1 span{color:var(--accent)}
+  .heartbeat{width:100%;max-width:520px;height:60px;margin:26px 0 6px}
+  .heartbeat path{fill:none;stroke:var(--accent);stroke-width:2.5;
+    stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 3.2s ease forwards .3s}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .meta-row{display:flex;gap:28px;flex-wrap:wrap;margin-top:30px;color:var(--mut);font-size:14px}
+  .meta-row b{color:var(--ink)}
+
+  .tags{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 4px}
+  .tag{font-size:12px;padding:5px 11px;border:1px solid var(--line);border-radius:999px;color:var(--mut);letter-spacing:.03em}
+  .tag.on{border-color:var(--accent);color:var(--accent)}
+
+  .cards{display:grid;gap:16px;margin-top:22px}
+  .c2{grid-template-columns:1fr 1fr}
+  .c3{grid-template-columns:1fr 1fr 1fr}
+  @media(max-width:720px){.c2,.c3{grid-template-columns:1fr}}
+  .card{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .card h3{color:#fff}
+  .card .num{font-family:var(--serif);font-size:13px;color:var(--accent);letter-spacing:.1em;margin-bottom:10px}
+  .card p{font-size:15px;margin-bottom:0;color:#c8c8c6}
+
+  .qbox{border:1px solid var(--line);border-left:3px solid var(--accent2);background:rgba(77,124,255,.06);
+        border-radius:0 10px 10px 0;padding:14px 20px;margin:0 0 22px}
+  .qbox .ql{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent2);font-weight:700;margin-bottom:4px}
+  .qbox p{font-size:16px;color:#eaeaf2;margin:0;font-style:italic}
+  .callout{border-left:3px solid var(--accent);padding:6px 0 6px 22px;margin:24px 0}
+  .callout p{font-size:19px;color:#fff}
+
+  .phase{display:grid;grid-template-columns:150px 1fr;gap:0;border-top:1px solid var(--line)}
+  .phase:last-child{border-bottom:1px solid var(--line)}
+  .phase .when{padding:22px 18px 22px 0;border-right:1px solid var(--line)}
+  .phase .when b{display:block;font-size:16px;color:var(--accent)}
+  .phase .when span{font-size:12.5px;color:var(--mut)}
+  .phase .what{padding:22px 0 22px 22px}
+  .phase .what h3{font-size:17px}
+  .phase .what p{font-size:14.5px;color:#c4c4c2;margin-bottom:0}
+  @media(max-width:600px){.phase{grid-template-columns:1fr}.phase .when{border-right:none;border-bottom:1px dashed var(--line);padding-bottom:10px}.phase .what{padding-left:0}}
+
+  .engine{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:26px;margin-top:22px}
+  .engine .row{display:flex;align-items:stretch;gap:12px;flex-wrap:wrap}
+  .engine .box{flex:1;min-width:150px;border:1px solid var(--line);border-radius:12px;padding:16px;background:#0e0e11}
+  .engine .box .t{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent2);font-weight:700;margin-bottom:8px}
+  .engine .box p{font-size:13.5px;margin-bottom:0;color:#c4c4c2}
+  .engine .arrow{align-self:center;color:var(--mut);font-size:22px}
+  @media(max-width:720px){.engine .arrow{transform:rotate(90deg)}}
+
+  .browser{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:22px;background:#fff;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .browser .bar{background:#e9e9ec;display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid #d4d4d8}
+  .browser .dot{width:11px;height:11px;border-radius:50%}
+  .browser .url{margin-left:12px;background:#fff;border-radius:6px;padding:5px 12px;font-size:12px;color:#555;flex:1;font-family:var(--sans)}
+  .site{color:#1a1a1a;font-family:var(--sans)}
+  .site .topbar{display:flex;align-items:center;padding:16px 26px;border-bottom:1px solid #ececec}
+  .site .logo{font-weight:800;font-size:19px;letter-spacing:-.01em;color:#0b3d2e}
+  .site .logo b{color:#00a86b}
+  .site .topnav{margin-left:auto;display:flex;gap:20px;font-size:13px;color:#555;font-weight:600}
+  .site .topnav .active{color:#00a86b}
+  .site .hcp{margin-left:18px;font-size:11px;background:#eef7f2;color:#0b3d2e;padding:4px 9px;border-radius:5px;font-weight:700}
+  @media(max-width:600px){.site .topnav{display:none}}
+  .site .hero2{padding:40px 26px;background:linear-gradient(135deg,#f4fbf7,#eafaf2);position:relative}
+  .site .newpill{display:inline-block;background:#00a86b;color:#fff;font-size:11px;font-weight:800;letter-spacing:.08em;padding:5px 11px;border-radius:999px;text-transform:uppercase}
+  .site .hero2 h4{font-size:30px;color:#0b3d2e;font-weight:800;letter-spacing:-.02em;margin:14px 0 8px;line-height:1.08}
+  .site .hero2 p{color:#3a5b4f;font-size:15px;max-width:560px;margin-bottom:16px}
+  .site .cta{display:inline-block;background:#00a86b;color:#fff;font-weight:700;font-size:14px;padding:11px 20px;border-radius:8px;text-decoration:none}
+  .site .cta.ghost{background:transparent;color:#00a86b;border:1.5px solid #00a86b;margin-left:8px}
+  .site .band{display:flex;gap:0;border-top:1px solid #ececec;border-bottom:1px solid #ececec}
+  .site .stat{flex:1;padding:20px 22px;border-right:1px solid #ececec}
+  .site .stat:last-child{border-right:none}
+  .site .stat .big{font-size:26px;font-weight:800;color:#00a86b}
+  .site .stat .cap{font-size:12px;color:#777;margin-top:2px}
+  .site .body2{padding:26px}
+  .site .body2 h5{font-size:16px;color:#0b3d2e;margin-bottom:6px;font-weight:800}
+  .site .body2 p{font-size:13.5px;color:#555;margin-bottom:14px}
+  .site .safety{background:#faf7f0;border:1px solid #efe6d2;border-radius:8px;padding:14px 16px;font-size:11.5px;color:#7a6a45;line-height:1.5}
+  .site .safety b{color:#5a4d30}
+  .annot{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+  .annot .a{font-size:12px;color:var(--accent);border:1px dashed rgba(0,224,138,.4);border-radius:8px;padding:8px 12px;background:rgba(0,224,138,.05)}
+
+  details{border:1px solid var(--line);border-radius:12px;background:var(--bg2);margin-top:12px;overflow:hidden}
+  details summary{cursor:pointer;padding:18px 20px;font-weight:700;font-size:16px;list-style:none;display:flex;align-items:center;gap:12px}
+  details summary::-webkit-details-marker{display:none}
+  details summary .plus{color:var(--accent);font-size:20px;transition:transform .2s;flex-shrink:0}
+  details[open] summary .plus{transform:rotate(45deg)}
+  details .in{padding:0 20px 20px 52px}
+  details .in p{font-size:14.5px;margin-bottom:8px}
+  details .in .move{color:var(--warn);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+  details .in .cnt{color:var(--accent);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-top:10px;display:block}
+
+  /* brief pulldown */
+  .brief-in{padding:4px 22px 22px 22px}
+  .brief-in .bl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);font-weight:700;margin:16px 0 6px}
+  .brief-in p{font-size:14.5px;color:#cdcdcb;margin-bottom:10px}
+  .brief-in ol{margin:6px 0 6px 20px;color:#cdcdcb;font-size:14.5px}
+  .brief-in ol li{margin-bottom:7px}
+  .brief-in .src{font-size:12px;color:var(--mut);margin-top:14px}
+
+  .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
+  @media(max-width:720px){.kpi{grid-template-columns:1fr 1fr}}
+  .kpi .k{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--bg2)}
+  .kpi .k .stage{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);font-weight:700}
+  .kpi .k p{font-size:13px;color:#c4c4c2;margin:6px 0 0}
+
+  footer{max-width:var(--maxw);margin:0 auto;padding:50px 24px 90px;border-top:1px solid var(--line);color:var(--mut);font-size:13px}
+  footer .disc{font-size:11.5px;color:#6a6a72;margin-top:18px;line-height:1.6}
+  .speak{background:rgba(0,224,138,.06);border:1px solid rgba(0,224,138,.3);border-radius:10px;padding:16px 20px;margin-top:18px}
+  .speak .lbl{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:6px}
+  .speak p{font-size:17px;color:#eaeae8;margin:0}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="in">
+    <div class="brand">RHEUM<b>DRUG</b> · OA Launch</div>
+    <div class="links">
+      <a href="#brief">The brief</a>
+      <a href="#read">The read</a>
+      <a href="#intel">Intel</a>
+      <a href="#strategy">Strategy</a>
+      <a href="#site">The site</a>
+      <a href="#measure">Measure</a>
+      <a href="#wargame">War-game</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="grid-bg"></div>
+  <div class="content">
+    <div class="kicker">Globant · GUT · Insight and Strategy Case</div>
+    <h1>Follow<br>the <span>data.</span></h1>
+    <svg class="heartbeat" viewBox="0 0 520 60" preserveAspectRatio="none">
+      <path d="M0,30 L150,30 L165,30 L180,8 L200,52 L218,30 L360,30 L372,30 L386,14 L402,46 L416,30 L520,30"/>
+    </svg>
+    <p class="lead" style="max-width:660px">A plan for how RHEUMDRUG should tell arthritis specialists about its new use in osteoarthritis. It is built around the one thing PHARMA truly owns: new proof from a clinical study, in a disease where doctors currently have almost nothing that works.</p>
+    <div class="meta-row">
+      <div><b>Jason Donnelly</b><br><span class="mut">Digital Strategist candidate</span></div>
+      <div><b>For</b><br><span class="mut">GUT Copenhagen · Insight and Strategy</span></div>
+      <div><b>Focus</b><br><span class="mut">New osteoarthritis data, for specialists</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- THE BRIEF -->
+<section id="brief">
+  <div class="kicker">Where this comes from</div>
+  <h2>The brief.</h2>
+  <p class="mut" style="font-size:16px">The exact case as it was given. Everything after this is my response to it. Click to open.</p>
+  <details>
+    <summary><span class="plus">+</span> Globant · GUT Insight &amp; Strategy · Case: RHEUMDRUG</summary>
+    <div class="brief-in">
+      <div class="bl">The setup</div>
+      <p>The purpose of this hypothetical case is to gauge analytical and strategic thinking. There is no single right answer, but many ways to approach a solution. It is deliberately broad. The goal is a good discussion of the thinking, not one concrete result.</p>
+      <div class="bl">Case description</div>
+      <p>PHARMA, a pharmaceutical company, has an established product on the market called RHEUMDRUG. RHEUMDRUG is a prescription drug, indicated for rheumatoid arthritis and for psoriatic arthritis. In 2026 PHARMA is launching its third indication: osteoarthritis.</p>
+      <p>A clinical study will be published to support RHEUMDRUG's efficacy in osteoarthritis. PHARMA wants to prepare for the launch and needs an impactful way of communicating the new data to rheumatologists once it is released. You are the Globant Strategist tasked with defining a multichannel content strategy and working with Copy and Design teams to craft the creative assets.</p>
+      <div class="bl">The three questions</div>
+      <ol>
+        <li>What type of information would be relevant to obtain on customers and competitors specifically?</li>
+        <li>How would you define the content strategy to communicate the new data once released?</li>
+        <li>How would you update the existing RHEUMDRUG website to reflect the new indication?</li>
+      </ol>
+      <p class="src">Plain-language note: "indication" means an official approved use. Rheumatoid and psoriatic arthritis are autoimmune types where the body attacks the joints. Osteoarthritis is the wear-and-tear type. "Rheumatologists" are the arthritis specialists this is aimed at.</p>
+    </div>
+  </details>
+</section>
+
+<!-- THE READ -->
+<section id="read">
+  <div class="kicker">How I read the brief</div>
+  <h2>This isn't just adding a new use.<br>It's new proof landing in an empty room.</h2>
+  <p class="lead">RHEUMDRUG is already part of the arthritis specialist's world. It is approved for two other kinds of arthritis, so the trust, the familiarity, and the sales relationships are already there. That is what we start with. The job is not to introduce a drug. It is to make one study land.</p>
+
+  <div class="callout">
+    <p class="serif">Osteoarthritis is the arthritis doctors mostly stopped expecting to fix. The usual care is painkillers, steroid injections, exercise and weight loss. Things that ease the symptoms but do not change the disease itself. Right now there are no approved drugs that actually slow it down.</p>
+  </div>
+
+  <p>So when a study shows RHEUMDRUG working in osteoarthritis, the real question is not "how do we announce it?" It is "how big is the claim allowed to be, and how do we make specialists feel the size of it without ever overstating what the data proves?" That tension runs through the whole case. Lead with the science, and let the ambition sit underneath it.</p>
+
+  <div class="tags">
+    <span class="tag on">Science first</span>
+    <span class="tag on">Doctors only, no patient ads</span>
+    <span class="tag on">AI-powered, every channel</span>
+    <span class="tag">Global, Europe-first</span>
+    <span class="tag">Discipline over hype</span>
+  </div>
+</section>
+
+<!-- Q1: INTEL -->
+<section id="intel">
+  <div class="kicker">Question 1 · Customers and competitors</div>
+  <div class="qbox"><div class="ql">The question, as asked</div><p>"What type of information do you think would be relevant to obtain on customers and competitors specifically?"</p></div>
+  <h2>What I'd want to know before writing a single word.</h2>
+  <p>Two buckets. I am not gathering information to fill a slide. I am after the few things that would actually change the plan if the answer surprised me.</p>
+
+  <h3 style="margin-top:26px;color:var(--accent)">The customer: arthritis specialists (and who is around them)</h3>
+  <div class="cards c3">
+    <div class="card"><div class="num">01</div><h3>What they believe</h3><p>Do they even see osteoarthritis as theirs to treat, or as someone else's problem they have quietly handed off? The gap between what they believe now and what the new data says is the size of the job.</p></div>
+    <div class="card"><div class="num">02</div><h3>Where they get convinced</h3><p>Medical conferences, the specialists they respect, journals, official guidelines, or the sales rep? That map decides which channels get the weight, not our preferences.</p></div>
+    <div class="card"><div class="num">03</div><h3>How high the bar is</h3><p>What would a doctor like this need to see in the results to actually change a habit? Skeptical specialists here are a good thing, not a problem.</p></div>
+    <div class="card"><div class="num">04</div><h3>Who moves first</h3><p>Doctors who already prescribe RHEUMDRUG are the easiest win. Then: comfortable-with-digital versus rep-loyal, and fast movers versus those who wait for the guidelines to change.</p></div>
+    <div class="card"><div class="num">05</div><h3>The real-world friction</h3><p>How osteoarthritis patients even reach these specialists, and what gets in the way between a doctor wanting to prescribe and actually doing it, like cost and access.</p></div>
+    <div class="card"><div class="num">06</div><h3>Who else matters</h3><p>Family doctors, bone-and-joint surgeons, insurers, patient groups. Specialists are the target, but they do not decide in a vacuum.</p></div>
+  </div>
+
+  <h3 style="margin-top:30px;color:var(--accent)">The competition: what osteoarthritis gets compared to today</h3>
+  <p class="mut" style="font-size:15px">The honest competition is not only other brands. It is the current habit: cheap generic painkillers, steroid injections, and doctors sticking with what they know. Everything we say gets measured against "what I already do that works fine."</p>
+  <div class="cards c2">
+    <div class="card"><div class="num">THE HABIT</div><h3>Painkillers, injections, exercise and weight loss</h3><p>Cheap, familiar, backed by the guidelines, and focused on symptoms. This is our real rival. The answer is not "that is bad." It is "that does not change where the disease is heading."</p></div>
+    <div class="card"><div class="num">SAME CATEGORY</div><h3>Other advanced arthritis drugs</h3><p>Drugs in the same tier as RHEUMDRUG own the specialists' attention today. Worth tracking how they talk about their results and safety, and whether any of them are eyeing osteoarthritis too.</p></div>
+    <div class="card"><div class="num">IN DEVELOPMENT</div><h3>The drugs still being tested</h3><p>Dozens of companies (55 or more, per industry trackers) are racing to build the first drug that truly changes osteoarthritis. None have crossed the line yet. If we move first with real proof, we can define the category before it gets crowded.</p></div>
+    <div class="card"><div class="num">THE NOISE</div><h3>Where the conversation already happens</h3><p>Conferences, journals, search, and increasingly what AI assistants say when a doctor asks about osteoarthritis options. Worth knowing how loud each rival already is.</p></div>
+  </div>
+</section>
+
+<!-- Q2: STRATEGY -->
+<section id="strategy">
+  <div class="kicker">Question 2 · The content strategy</div>
+  <div class="qbox"><div class="ql">The question, as asked</div><p>"How would you go about defining the content strategy to communicate the new data once released?"</p></div>
+  <h2>One idea, built to travel: <span style="color:var(--accent)">"Follow the Data."</span></h2>
+  <p class="lead">The study is the campaign. Not a slogan wrapped around the study, but the study itself made easy to explore and hard to skim past. It is also the safest route. When the proof is genuinely new, the most honest message and the most convincing one turn out to be the same message.</p>
+
+  <div class="callout"><p class="serif">The promise to the audience: we will never ask you to believe more than the data supports, but we will make sure you feel exactly how much it does support.</p></div>
+
+  <h3 style="margin-top:14px">Built in three gears, set by one rule: you can't promote it until it's approved</h3>
+  <p class="mut" style="font-size:15px">In this world you cannot market a new use before it is officially approved. So the plan moves in three stages. What is useful and allowed shifts at each gate.</p>
+
+  <div style="margin-top:18px">
+    <div class="phase">
+      <div class="when"><b>Stage 0</b><span>Before approval</span></div>
+      <div class="what">
+        <h3>Set the stage</h3>
+        <p>Before the drug is approved for osteoarthritis, we cannot promote it. But we can raise awareness of the problem itself, and how big the unmet need is. Line up the leading specialists, the medical team, and the conference slots. Build all the content and the data visuals now, so launch day is a release, not a scramble.</p>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="when"><b>Stage 1</b><span>The data goes live</span></div>
+      <div class="what">
+        <h3>Make the proof land</h3>
+        <p>One coordinated drop: a conference presentation, the published study, an interactive way for doctors to explore the results, sales follow-up, and the updated website, all live the same day. One story, every channel, the same hour.</p>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="when"><b>Stage 2</b><span>Keep it going</span></div>
+      <div class="what">
+        <h3>Turn interest into prescriptions</h3>
+        <p>Different content for different doctors. Deeper detail for the skeptics, practical "which patients is this right for" guidance for those ready to try it, and proof from respected peers for the ones on the fence. What each doctor engages with tells the sales team what to talk about next.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:34px">The engine underneath, where Globant's AI earns its place</h3>
+  <p class="mut" style="font-size:15px">This is not a buzzword. It is how a small, specialist audience gets a message that feels relevant to each doctor, without building forty separate versions by hand. Content goes in as reusable blocks, the system coordinates it, and it sends the right next thing based on what is working.</p>
+  <div class="engine">
+    <div class="row">
+      <div class="box"><div class="t">Reusable blocks</div><p>One approved content library, broken into building blocks: claims, charts, references. Each block gets its legal and medical sign-off once.</p></div>
+      <div class="arrow">→</div>
+      <div class="box"><div class="t">AI coordination</div><p>Assembles the right blocks for each doctor and channel, drafts versions for a human to review, and reads what is landing to suggest the best next piece.</p></div>
+      <div class="arrow">→</div>
+      <div class="box"><div class="t">Delivery</div><p>Website, email, conferences and sales all fire from the same signals. A doctor who dug into the long-term results gets a matching talking point from their rep, not a random blast.</p></div>
+    </div>
+  </div>
+  <p class="mut" style="font-size:14px;margin-top:14px">The rule that keeps this safe: <strong style="color:#fff">the AI speeds up how the message is built and personalized. It never writes a medical claim on its own.</strong> Every building block is approved by a human, and by legal and medical, before it can be used. That is what keeps "impactful" and "compliant" on the same team.</p>
+</section>
+
+<!-- Q3: THE SITE -->
+<section id="site">
+  <div class="kicker">Question 3 · Updating the website</div>
+  <div class="qbox"><div class="ql">The question, as asked</div><p>"How would you go about updating the existing RHEUMDRUG website to reflect the new indication?"</p></div>
+  <h2>Show, don't tell. Here's the page.</h2>
+  <p>The current site is built around two uses, so a third can't just be bolted on as an extra link. The principle: the site should match how a specialist now thinks about RHEUMDRUG. One trusted drug, three approved uses. The new osteoarthritis data stays properly controlled, and the two existing sections stay intact. Below is a rough mock of the new osteoarthritis page. Because this one is aimed at doctors, the language on it is deliberately more clinical.</p>
+
+  <div class="browser">
+    <div class="bar">
+      <span class="dot" style="background:#ff5f57"></span>
+      <span class="dot" style="background:#febc2e"></span>
+      <span class="dot" style="background:#28c840"></span>
+      <span class="url">🔒 rheumdrug-hcp.com/osteoarthritis</span>
+    </div>
+    <div class="site">
+      <div class="topbar">
+        <div class="logo">RHEUM<b>DRUG</b></div>
+        <div class="topnav">
+          <span>Rheumatoid&nbsp;Arthritis</span>
+          <span>Psoriatic&nbsp;Arthritis</span>
+          <span class="active">Osteoarthritis</span>
+          <span>Safety</span>
+          <span>Resources</span>
+        </div>
+        <span class="hcp">FOR HCPs</span>
+      </div>
+      <div class="hero2">
+        <span class="newpill">New indication · 2026</span>
+        <h4>A third indication, backed by new data.</h4>
+        <p>RHEUMDRUG is now studied in osteoarthritis. Explore the clinical evidence behind the new indication, including endpoints, effect size and durability, in an interactive data view built for rheumatologists.</p>
+        <a href="#" class="cta">Explore the data</a>
+        <a href="#" class="cta ghost">Download the publication</a>
+      </div>
+      <div class="band">
+        <div class="stat"><div class="big">3</div><div class="cap">Approved indications, one molecule</div></div>
+        <div class="stat"><div class="big">[STUDY]</div><div class="cap">Primary endpoint result</div></div>
+        <div class="stat"><div class="big">[STUDY]</div><div class="cap">Patients randomised</div></div>
+      </div>
+      <div class="body2">
+        <h5>Why this matters in OA</h5>
+        <p>A short, referenced overview of the unmet need in osteoarthritis and where the new evidence fits. Written to inform a specialist, not to oversell.</p>
+        <h5>The data, made explorable</h5>
+        <p>Interactive charts for primary and secondary endpoints and key subgroups, with full references and a one-click path to the publication and prescribing information.</p>
+        <div class="safety"><b>Important safety information and prescribing information.</b> [Placeholder] indication statement, warnings if applicable, and full safety information appear here and stay visible across the site. This is a promotional page for healthcare professionals and would carry the required balance and regulatory approval before going live.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="annot">
+    <div class="a">↑ New use labelled and held back until it is approved</div>
+    <div class="a">↑ "One drug, three uses" reframe in the menu</div>
+    <div class="a">↑ [STUDY] means placeholder. No made-up results</div>
+    <div class="a">↑ Safety and balance always visible, legally approved</div>
+  </div>
+
+  <p style="margin-top:22px" class="mut">Behind the scenes, the same building-block system runs this page. The osteoarthritis data block shown here is the exact same approved asset used in email and by the sales team. Update it once and it updates everywhere. And what doctors explore here feeds straight back into the system that decides the next message.</p>
+</section>
+
+<!-- MEASURE -->
+<section id="measure">
+  <div class="kicker">How we'd know it worked</div>
+  <h2>Measuring a data launch, not a banner ad.</h2>
+  <p class="mut" style="font-size:15px">Impression counts are the wrong scoreboard for a specialist audience of a few thousand. I would measure how deeply doctors engage and whether they actually move, mapped to the three stages.</p>
+  <div class="kpi">
+    <div class="k"><div class="stage">Reach</div><p>The share of the <strong>target specialist list</strong> we actually reached, not raw impressions.</p></div>
+    <div class="k"><div class="stage">Depth</div><p>Did they <strong>explore the data</strong> (clicks, time spent, study downloads), or just open an email?</p></div>
+    <div class="k"><div class="stage">Signs of interest</div><p>Requests for more information, meetings booked with reps, resources pulled, repeat visits.</p></div>
+    <div class="k"><div class="stage">Prescribing</div><p>New osteoarthritis prescriptions over time, tracked <strong>by doctor type</strong>. The number that actually counts.</p></div>
+  </div>
+</section>
+
+<!-- WAR GAME -->
+<section id="wargame">
+  <div class="kicker">For deeper discussion</div>
+  <h2>Competitive war-gaming.</h2>
+  <p class="mut" style="font-size:15px">If the conversation turns to "what happens when the market reacts," here is how I would think about each competitor's likely move and our answer. Open each one.</p>
+
+  <details>
+    <summary><span class="plus">+</span> The cheap painkillers doctors already use</summary>
+    <div class="in">
+      <span class="move">Their move</span>
+      <p>No campaign needed. They win by default through low price, habit, and "what I do already works well enough." Insurers may back them by pushing cheap generics first.</p>
+      <span class="cnt">Our answer</span>
+      <p>Do not attack symptom relief. Reframe the whole category. Make it a question of "just managing the symptoms" versus "actually treating the disease," tied strictly to what the data shows. Cost-effectiveness and long-term-benefit content for the insurers.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="plus">+</span> Other advanced arthritis drugs</summary>
+    <div class="in">
+      <span class="move">Their move</span>
+      <p>A rival in the same drug tier could rush its own osteoarthritis study, lean on a safety comparison, or simply outspend us at conferences and drown out our message.</p>
+      <span class="cnt">Our answer</span>
+      <p>Own "first with real osteoarthritis proof" while it is true. Being first and defining the category is the advantage. Pair the results story with an honest, upfront safety and "right patient" message so a rival can't win the safety comparison by default.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="plus">+</span> The experimental drugs still in development</summary>
+    <div class="in">
+      <span class="move">Their move</span>
+      <p>Dozens of companies are racing to build the first true disease-changer for osteoarthritis. If one posts strong late-stage results, our "we defined the category" story suddenly has competition, and headlines.</p>
+      <span class="cnt">Our answer</span>
+      <p>Use the head start. Plant RHEUMDRUG in the osteoarthritis conversation now. Build relationships with leading specialists and guideline bodies, and an evidence-led brand story, before the field fills up. Be the known name while the newcomers are still "promising."</p>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="plus">+</span> The rules, and the legal and medical sign-off</summary>
+    <div class="in">
+      <span class="move">The obstacle</span>
+      <p>Not a competitor, but the toughest gate. Nothing can be promoted before approval, every claim needs proof and balance, and AI-built content invites extra scrutiny.</p>
+      <span class="cnt">Our answer</span>
+      <p>Build the legal and medical sign-off into the system from day one. Approve once, reuse many times. Keep "before approval" awareness content and "after approval" product content strictly separate. The AI only assembles from pre-approved blocks. Handled this way, the rules become a speed advantage instead of a brake.</p>
+    </div>
+  </details>
+</section>
+
+<footer>
+  <div class="speak">
+    <div class="lbl">The close</div>
+    <p class="serif">PHARMA doesn't need us to make osteoarthritis sound exciting. It needs us to make one study impossible to miss, easy to trust, and everywhere the specialist looks, all in the same week and the same voice. That is a content problem, and it is the kind I'd love to solve here.</p>
+  </div>
+  <p style="margin-top:22px"><strong style="color:#fff">Jason Donnelly</strong> · Digital Strategist candidate · Case response for GUT Copenhagen, Insight and Strategy.</p>
+  <p class="disc">A note on rigour: RHEUMDRUG and PHARMA are made up, as the brief states. Every result on the mock page is shown as a [STUDY] placeholder on purpose. Inventing clinical numbers would be exactly the wrong instinct here. The market context (no approved drugs that change the course of osteoarthritis; usual care is painkillers, injections, exercise and weight loss; an active field of 55 or more companies developing new treatments; real drugs in RHEUMDRUG's category already approved for the two autoimmune types of arthritis) comes from public 2025 to 2026 sources, including rheumatology guideline summaries, an industry pipeline report, and published medical literature. The plan assumes a global, Europe-first setting aimed only at doctors, with no direct-to-patient advertising.</p>
+</footer>
+
+<script>
+  const secs=[...document.querySelectorAll('section[id]')];
+  const links=[...document.querySelectorAll('nav a')];
+  const obs=new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting){
+      links.forEach(l=>l.style.color='');
+      const a=document.querySelector('nav a[href="#'+e.target.id+'"]');
+      if(a)a.style.color='var(--accent)';
+    }});
+  },{rootMargin:'-45% 0px -50% 0px'});
+  secs.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
