@@ -119,6 +119,15 @@
   .site .body2 p{font-size:13.5px;color:#555;margin-bottom:14px}
   .site .safety{background:#faf7f0;border:1px solid #efe6d2;border-radius:8px;padding:14px 16px;font-size:11.5px;color:#7a6a45;line-height:1.5}
   .site .safety b{color:#5a4d30}
+  .site .faq{padding:26px;border-top:1px solid #ececec;background:#fafbfa}
+  .site .faq .fh{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#00a86b;font-weight:800;margin-bottom:4px}
+  .site .faq h5{font-size:18px;color:#0b3d2e;margin-bottom:14px;font-weight:800}
+  .site .faq .qa{border-top:1px solid #e6e6e6;padding:13px 0}
+  .site .faq .qa:last-child{border-bottom:1px solid #e6e6e6}
+  .site .faq .q{font-size:13.5px;font-weight:700;color:#183b30;display:flex;gap:8px}
+  .site .faq .q::before{content:"Q";color:#00a86b;font-weight:800}
+  .site .faq .a{font-size:12.5px;color:#5a6b63;margin-top:5px;padding-left:18px}
+  .site .faq .a em{color:#8a8a8a;font-style:normal;background:#eef3f0;padding:1px 5px;border-radius:4px}
   .annot{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
   .annot .a{font-size:12px;color:var(--accent);border:1px dashed rgba(0,224,138,.4);border-radius:8px;padding:8px 12px;background:rgba(0,224,138,.05)}
 
@@ -165,7 +174,6 @@
       <a href="#strategy">Strategy</a>
       <a href="#site">The site</a>
       <a href="#measure">Measure</a>
-      <a href="#wargame">War-game</a>
     </div>
   </div>
 </nav>
@@ -238,25 +246,20 @@
   <div class="kicker">Question 1 · Customers and competitors</div>
   <div class="qbox"><div class="ql">The question, as asked</div><p>"What type of information do you think would be relevant to obtain on customers and competitors specifically?"</p></div>
   <h2>What I'd want to know before writing a single word.</h2>
-  <p>Two buckets. I am not gathering information to fill a slide. I am after the few things that would actually change the plan if the answer surprised me.</p>
+  <p>I'd start with five plain questions. Not to fill a slide, but because the answer to any one of them could change the whole plan. Two are about the competition, three are about the doctors themselves.</p>
 
-  <h3 style="margin-top:26px;color:var(--accent)">The customer: arthritis specialists (and who is around them)</h3>
-  <div class="cards c3">
-    <div class="card"><div class="num">01</div><h3>What they believe</h3><p>Do they even see osteoarthritis as theirs to treat, or as someone else's problem they have quietly handed off? The gap between what they believe now and what the new data says is the size of the job.</p></div>
-    <div class="card"><div class="num">02</div><h3>Where they get convinced</h3><p>Medical conferences, the specialists they respect, journals, official guidelines, or the sales rep? That map decides which channels get the weight, not our preferences.</p></div>
-    <div class="card"><div class="num">03</div><h3>How high the bar is</h3><p>What would a doctor like this need to see in the results to actually change a habit? Skeptical specialists here are a good thing, not a problem.</p></div>
-    <div class="card"><div class="num">04</div><h3>Who moves first</h3><p>Doctors who already prescribe RHEUMDRUG are the easiest win. Then: comfortable-with-digital versus rep-loyal, and fast movers versus those who wait for the guidelines to change.</p></div>
-    <div class="card"><div class="num">05</div><h3>The real-world friction</h3><p>How osteoarthritis patients even reach these specialists, and what gets in the way between a doctor wanting to prescribe and actually doing it, like cost and access.</p></div>
-    <div class="card"><div class="num">06</div><h3>Who else matters</h3><p>Family doctors, bone-and-joint surgeons, insurers, patient groups. Specialists are the target, but they do not decide in a vacuum.</p></div>
-  </div>
-
-  <h3 style="margin-top:30px;color:var(--accent)">The competition: what osteoarthritis gets compared to today</h3>
-  <p class="mut" style="font-size:15px">The honest competition is not only other brands. It is the current habit: cheap generic painkillers, steroid injections, and doctors sticking with what they know. Everything we say gets measured against "what I already do that works fine."</p>
+  <h3 style="margin-top:26px;color:var(--accent)">The competition: who's out there, and what doctors do today</h3>
   <div class="cards c2">
-    <div class="card"><div class="num">THE HABIT</div><h3>Painkillers, injections, exercise and weight loss</h3><p>Cheap, familiar, backed by the guidelines, and focused on symptoms. This is our real rival. The answer is not "that is bad." It is "that does not change where the disease is heading."</p></div>
-    <div class="card"><div class="num">SAME CATEGORY</div><h3>Other advanced arthritis drugs</h3><p>Drugs in the same tier as RHEUMDRUG own the specialists' attention today. Worth tracking how they talk about their results and safety, and whether any of them are eyeing osteoarthritis too.</p></div>
-    <div class="card"><div class="num">IN DEVELOPMENT</div><h3>The drugs still being tested</h3><p>Dozens of companies (55 or more, per industry trackers) are racing to build the first drug that truly changes osteoarthritis. None have crossed the line yet. If we move first with real proof, we can define the category before it gets crowded.</p></div>
-    <div class="card"><div class="num">THE NOISE</div><h3>Where the conversation already happens</h3><p>Conferences, journals, search, and increasingly what AI assistants say when a doctor asks about osteoarthritis options. Worth knowing how loud each rival already is.</p></div>
+    <div class="card"><div class="num">01</div><h3>Who the competitors are, and what they're doing</h3><p>The full field: other advanced arthritis drugs in RHEUMDRUG's tier, how they position themselves, what they claim, and how loud they are. And critically, whether any of them are already eyeing osteoarthritis too. I want to know that now, not after launch.</p></div>
+    <div class="card"><div class="num">02</div><h3>What doctors are prescribing right now</h3><p>The honest incumbent is the current habit: cheap generic painkillers, steroid injections, exercise and weight loss. Everything we say gets measured against "what I already do that works fine." I have to understand that habit before I can shift it.</p></div>
+  </div>
+  <p class="mut" style="font-size:14px;margin-top:14px">Worth noting alongside these: dozens of companies (55 or more, per industry trackers) are racing to build the first drug that truly changes osteoarthritis, and none have crossed the line yet. If we move first with real proof, we can plant our flag before the field gets crowded.</p>
+
+  <h3 style="margin-top:32px;color:var(--accent)">The doctors: what moves them, and what stops them</h3>
+  <div class="cards c3">
+    <div class="card"><div class="num">03</div><h3>Where they get their information</h3><p>Before I pick a single channel, I need to know where these specialists actually get their information to begin with. Medical conferences, journals, the peers they trust, official guidelines, or the sales rep? Get this wrong and I'm just guessing at where to show up.</p></div>
+    <div class="card"><div class="num">04</div><h3>What it would take to switch</h3><p>What would this data actually need to show for a doctor to change what they prescribe? These are skeptical specialists with a high bar, and that's a good thing. I want to know exactly what clears it, so the content leads with that.</p></div>
+    <div class="card"><div class="num">05</div><h3>What would stop them prescribing it</h3><p>Just as important as what pulls them in: what holds them back. Cost, access, safety worries, patients not reaching them, or plain habit. Every one of those is a barrier the content has to answer head-on, not hope they don't notice.</p></div>
   </div>
 </section>
 
@@ -278,6 +281,7 @@
       <div class="what">
         <h3>Set the stage</h3>
         <p>Before the drug is approved for osteoarthritis, we cannot promote it. But we can raise awareness of the problem itself, and how big the unmet need is. Line up the leading specialists, the medical team, and the conference slots. Build all the content and the data visuals now, so launch day is a release, not a scramble.</p>
+        <p style="font-size:12.5px;margin-top:10px"><strong style="color:var(--accent2)">Where it's delivered:</strong> <span class="mut">medical education, disease-awareness content, early conversations with leading specialists, internal build. No product messaging yet.</span></p>
       </div>
     </div>
     <div class="phase">
@@ -285,6 +289,7 @@
       <div class="what">
         <h3>Make the proof land</h3>
         <p>One coordinated drop: a conference presentation, the published study, an interactive way for doctors to explore the results, sales follow-up, and the updated website, all live the same day. One story, every channel, the same hour.</p>
+        <p style="font-size:12.5px;margin-top:10px"><strong style="color:var(--accent2)">Where it's delivered:</strong> <span class="mut">the conference stage, the published paper, the website, email to the target specialist list, and reps in the room, all at once.</span></p>
       </div>
     </div>
     <div class="phase">
@@ -292,6 +297,7 @@
       <div class="what">
         <h3>Turn interest into prescriptions</h3>
         <p>Different content for different doctors. Deeper detail for the skeptics, practical "which patients is this right for" guidance for those ready to try it, and proof from respected peers for the ones on the fence. What each doctor engages with tells the sales team what to talk about next.</p>
+        <p style="font-size:12.5px;margin-top:10px"><strong style="color:var(--accent2)">Where it's delivered:</strong> <span class="mut">email nurture, the website's deeper content, rep follow-up, and peer proof, each tuned to where that doctor is.</span></p>
       </div>
     </div>
   </div>
@@ -337,23 +343,51 @@
         <span class="hcp">FOR HCPs</span>
       </div>
       <div class="hero2">
-        <span class="newpill">New indication · 2026</span>
-        <h4>A third indication, backed by new data.</h4>
-        <p>RHEUMDRUG is now studied in osteoarthritis. Explore the clinical evidence behind the new indication, including endpoints, effect size and durability, in an interactive data view built for rheumatologists.</p>
+        <span class="newpill">New approved use · 2026</span>
+        <h4>A third approved use, backed by new data.</h4>
+        <p>RHEUMDRUG is now studied in osteoarthritis. Explore the clinical evidence behind the new approved use, including how well it worked, how long the benefit lasted, and in which patients, in an interactive data view built for rheumatologists.</p>
         <a href="#" class="cta">Explore the data</a>
         <a href="#" class="cta ghost">Download the publication</a>
       </div>
       <div class="band">
-        <div class="stat"><div class="big">3</div><div class="cap">Approved indications, one molecule</div></div>
-        <div class="stat"><div class="big">[STUDY]</div><div class="cap">Primary endpoint result</div></div>
-        <div class="stat"><div class="big">[STUDY]</div><div class="cap">Patients randomised</div></div>
+        <div class="stat"><div class="big">3</div><div class="cap">Approved uses, one drug</div></div>
+        <div class="stat"><div class="big">[STUDY]</div><div class="cap">Main study result</div></div>
+        <div class="stat"><div class="big">[STUDY]</div><div class="cap">Patients in the study</div></div>
       </div>
       <div class="body2">
-        <h5>Why this matters in OA</h5>
+        <h5>Why this matters in osteoarthritis</h5>
         <p>A short, referenced overview of the unmet need in osteoarthritis and where the new evidence fits. Written to inform a specialist, not to oversell.</p>
         <h5>The data, made explorable</h5>
-        <p>Interactive charts for primary and secondary endpoints and key subgroups, with full references and a one-click path to the publication and prescribing information.</p>
-        <div class="safety"><b>Important safety information and prescribing information.</b> [Placeholder] indication statement, warnings if applicable, and full safety information appear here and stay visible across the site. This is a promotional page for healthcare professionals and would carry the required balance and regulatory approval before going live.</div>
+        <p>Interactive charts for the main and secondary results and key patient groups, with full references and a one-click path to the publication and prescribing information.</p>
+        <div class="safety"><b>Important safety information and prescribing information.</b> [Placeholder] approved-use statement, warnings if applicable, and full safety information appear here and stay visible across the site. This is a promotional page for healthcare professionals and would carry the required balance and regulatory approval before going live.</div>
+      </div>
+      <div class="faq">
+        <div class="fh">For healthcare professionals</div>
+        <h5>Frequently asked questions</h5>
+        <div class="qa">
+          <div class="q">Which osteoarthritis patients is RHEUMDRUG appropriate for?</div>
+          <div class="a">Per the approved label. <em>[Patient population placeholder]</em> The interactive data view breaks results down by key patient group.</div>
+        </div>
+        <div class="qa">
+          <div class="q">How does it compare to current standard of care?</div>
+          <div class="a">Refer to the published study. <em>[Comparison and results placeholder]</em> No head-to-head claim is made beyond what the data supports.</div>
+        </div>
+        <div class="qa">
+          <div class="q">What is the recommended dosing for this use?</div>
+          <div class="a">See full prescribing information. <em>[Dosing placeholder]</em></div>
+        </div>
+        <div class="qa">
+          <div class="q">What does the safety profile look like in this population?</div>
+          <div class="a">Consistent with the known RHEUMDRUG profile. <em>[Safety data placeholder]</em> Full safety information is linked above and always visible.</div>
+        </div>
+        <div class="qa">
+          <div class="q">Where can I read the full clinical data?</div>
+          <div class="a">The complete publication is available to download, with references and the study design in full.</div>
+        </div>
+        <div class="qa">
+          <div class="q">Is this new use approved in my market yet?</div>
+          <div class="a">Approval status varies by market. <em>[Market-specific status placeholder]</em> This page reflects the use only where approved.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -363,6 +397,7 @@
     <div class="a">↑ "One drug, three uses" reframe in the menu</div>
     <div class="a">↑ [STUDY] means placeholder. No made-up results</div>
     <div class="a">↑ Safety and balance always visible, legally approved</div>
+    <div class="a">↑ FAQ answers real doctor questions, answers still placeholder</div>
   </div>
 
   <p style="margin-top:22px" class="mut">Behind the scenes, the same building-block system runs this page. The osteoarthritis data block shown here is the exact same approved asset used in email and by the sales team. Update it once and it updates everywhere. And what doctors explore here feeds straight back into the system that decides the next message.</p>
@@ -379,53 +414,6 @@
     <div class="k"><div class="stage">Signs of interest</div><p>Requests for more information, meetings booked with reps, resources pulled, repeat visits.</p></div>
     <div class="k"><div class="stage">Prescribing</div><p>New osteoarthritis prescriptions over time, tracked <strong>by doctor type</strong>. The number that actually counts.</p></div>
   </div>
-</section>
-
-<!-- WAR GAME -->
-<section id="wargame">
-  <div class="kicker">For deeper discussion</div>
-  <h2>Competitive war-gaming.</h2>
-  <p class="mut" style="font-size:15px">If the conversation turns to "what happens when the market reacts," here is how I would think about each competitor's likely move and our answer. Open each one.</p>
-
-  <details>
-    <summary><span class="plus">+</span> The cheap painkillers doctors already use</summary>
-    <div class="in">
-      <span class="move">Their move</span>
-      <p>No campaign needed. They win by default through low price, habit, and "what I do already works well enough." Insurers may back them by pushing cheap generics first.</p>
-      <span class="cnt">Our answer</span>
-      <p>Do not attack symptom relief. Reframe the whole category. Make it a question of "just managing the symptoms" versus "actually treating the disease," tied strictly to what the data shows. Cost-effectiveness and long-term-benefit content for the insurers.</p>
-    </div>
-  </details>
-
-  <details>
-    <summary><span class="plus">+</span> Other advanced arthritis drugs</summary>
-    <div class="in">
-      <span class="move">Their move</span>
-      <p>A rival in the same drug tier could rush its own osteoarthritis study, lean on a safety comparison, or simply outspend us at conferences and drown out our message.</p>
-      <span class="cnt">Our answer</span>
-      <p>Own "first with real osteoarthritis proof" while it is true. Being first and defining the category is the advantage. Pair the results story with an honest, upfront safety and "right patient" message so a rival can't win the safety comparison by default.</p>
-    </div>
-  </details>
-
-  <details>
-    <summary><span class="plus">+</span> The experimental drugs still in development</summary>
-    <div class="in">
-      <span class="move">Their move</span>
-      <p>Dozens of companies are racing to build the first true disease-changer for osteoarthritis. If one posts strong late-stage results, our "we defined the category" story suddenly has competition, and headlines.</p>
-      <span class="cnt">Our answer</span>
-      <p>Use the head start. Plant RHEUMDRUG in the osteoarthritis conversation now. Build relationships with leading specialists and guideline bodies, and an evidence-led brand story, before the field fills up. Be the known name while the newcomers are still "promising."</p>
-    </div>
-  </details>
-
-  <details>
-    <summary><span class="plus">+</span> The rules, and the legal and medical sign-off</summary>
-    <div class="in">
-      <span class="move">The obstacle</span>
-      <p>Not a competitor, but the toughest gate. Nothing can be promoted before approval, every claim needs proof and balance, and AI-built content invites extra scrutiny.</p>
-      <span class="cnt">Our answer</span>
-      <p>Build the legal and medical sign-off into the system from day one. Approve once, reuse many times. Keep "before approval" awareness content and "after approval" product content strictly separate. The AI only assembles from pre-approved blocks. Handled this way, the rules become a speed advantage instead of a brake.</p>
-    </div>
-  </details>
 </section>
 
 <footer>
