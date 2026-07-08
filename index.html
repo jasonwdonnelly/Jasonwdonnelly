@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="color-scheme" content="light dark" />
+<meta name="color-scheme" content="dark" />
 <title>Jason Donnelly — Writer & Creative Director</title>
 <meta name="description" content="Jason Donnelly — writer and creative director. A decade of copywriting and creative direction, plus two novels." />
 <style>
@@ -46,7 +46,7 @@
      social in-app browsers (Facebook, Instagram) that force-darken. */
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; background: var(--paper); color-scheme: light dark; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; background: var(--paper); color-scheme: dark; }
 
   body {
     background: var(--paper);
@@ -524,6 +524,16 @@
   .carousel-rail img { flex: 0 0 auto; width: 280px; max-width: 72vw; height: auto; scroll-snap-align: start; border: 1.5px solid var(--line); border-radius: 6px; display: block; }
   .carousel-hint { font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.14em; color: var(--muted); margin-top: 8px; text-transform: uppercase; }
   @media (max-width: 760px) { .ai-grid { grid-template-columns: 1fr; } }
+  /* click-to-load video facades (defer third-party player JS until interaction) */
+  .video-facade{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;width:100%;height:100%;padding:0;border:0;cursor:pointer;background-color:var(--paper-2);background-size:cover;background-position:center;}
+  .video-facade::before{content:"";position:absolute;inset:0;background:rgba(11,11,10,.38);transition:background .25s var(--ease);}
+  .video-facade:hover::before,.video-facade:focus-visible::before{background:rgba(11,11,10,.16);}
+  .video-facade:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;}
+  .vf-play{position:relative;z-index:1;width:64px;height:64px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 22px rgba(0,0,0,.4);transition:transform .25s var(--ease);}
+  .video-facade:hover .vf-play{transform:scale(1.08);}
+  .vf-play svg{width:24px;height:24px;fill:var(--paper);margin-left:3px;}
+  .vf-label{position:absolute;left:14px;bottom:12px;z-index:1;max-width:82%;font-family:"JetBrains Mono",monospace;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);text-align:left;text-shadow:0 1px 5px rgba(0,0,0,.7);}
+  @media (prefers-reduced-motion: reduce){.video-facade:hover .vf-play{transform:none;}}
 </style>
 </head>
 <body>
@@ -555,7 +565,7 @@
           <a class="btn-hire-lg" href="mailto:jasonwdonnelly@gmail.com?subject=I%20want%20to%20hire%20you">Reach out <span class="arrow">&rarr;</span></a>
         </div>
       </div>
-      <figure class="hv-video"><div class="hero-video"><iframe src="https://www.youtube.com/embed/ps1DPKTx8L4?modestbranding=1&rel=0&playsinline=1" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></figure>
+      <figure class="hv-video"><div class="hero-video"><iframe title="Jason Donnelly intro video" data-src="https://www.youtube.com/embed/ps1DPKTx8L4?modestbranding=1&rel=0&playsinline=1" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></figure>
     </div>
   </div>
 </header>
@@ -835,12 +845,12 @@
       <div class="cf-block">
         <p class="cf-text">A content calendar in 7-Eleven's cheeky voice, built to drive people into stores.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="https://static.wixstatic.com/media/fbf0c8_87b16ea16c84484190d65dce914d2d61~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_53943e18202c48f0b54ef8fec4d00d12~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_7971d2b2c72e4b0186cd80d00da6988f~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_61fde031b5164bd399d7b9bc16f8eb1f~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_ad53087788a24560a1c159cc19a91e3b~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_54e8c3c118544c6baa274ca868bd66a2~mv2.png" loading="lazy" alt="" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_87b16ea16c84484190d65dce914d2d61~mv2.png" loading="lazy" alt="7-Eleven: A content calendar in 7-Eleven's cheeky voice, built to drive people into stores. (1 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_53943e18202c48f0b54ef8fec4d00d12~mv2.png" loading="lazy" alt="7-Eleven: A content calendar in 7-Eleven's cheeky voice, built to drive people into stores. (2 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_7971d2b2c72e4b0186cd80d00da6988f~mv2.png" loading="lazy" alt="7-Eleven: A content calendar in 7-Eleven's cheeky voice, built to drive people into stores. (3 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_61fde031b5164bd399d7b9bc16f8eb1f~mv2.png" loading="lazy" alt="7-Eleven: A content calendar in 7-Eleven's cheeky voice, built to drive people into stores. (4 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_ad53087788a24560a1c159cc19a91e3b~mv2.png" loading="lazy" alt="7-Eleven: A content calendar in 7-Eleven's cheeky voice, built to drive people into stores. (5 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_54e8c3c118544c6baa274ca868bd66a2~mv2.png" loading="lazy" alt="7-Eleven: A content calendar in 7-Eleven's cheeky voice, built to drive people into stores. (6 of 6)" />
         </div></div>
       </div>
   </section>
@@ -868,7 +878,7 @@
       <div class="cf-block">
         <p class="cf-text">Simple word puzzles about water. They asked, we delivered.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="https://static.wixstatic.com/media/fbf0c8_718282bae8dd4ee3a29ca4e573e0b234~mv2.png" loading="lazy" alt="" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_718282bae8dd4ee3a29ca4e573e0b234~mv2.png" loading="lazy" alt="Aquafina: Simple word puzzles about water. They asked, we delivered." />
         </div></div>
       </div>
   </section>
@@ -896,17 +906,17 @@
       <div class="cf-block">
         <p class="cf-text">Delicious-looking content: recipes, turns of phrase, and perfect pairings.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="https://static.wixstatic.com/media/fbf0c8_6e41e885eadd4e5a8043c6e23bc8d5ee~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_eb9c8e2c30c3404ebd06050a82c65712~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_4456f678fbae4c88ae64f1cf31e2888c~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_b2b68aff69ee41d28a0c5ef6f97ef331~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_f66127263b294847ba9dca2c2ac58f73~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_c8952991f7ee47879e42c8fdf19237e4~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_f03733e9decf4c73839d8dcb8f3f5bc9~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_42b7324896e74b40bc5a9a7a33002239~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_6eeb4e923abf417e800de041542be81a~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_0f6b5bd0496442469d3a16bfaa8a828e~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_09276a94531f45a19b5a13c5c9dfbe06~mv2.png" loading="lazy" alt="" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_6e41e885eadd4e5a8043c6e23bc8d5ee~mv2.png" loading="lazy" alt="Avión: Delicious-looking content: recipes, turns of phrase, and perfect pairings. (1 of 11)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_eb9c8e2c30c3404ebd06050a82c65712~mv2.png" loading="lazy" alt="Avión: Delicious-looking content: recipes, turns of phrase, and perfect pairings. (2 of 11)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_4456f678fbae4c88ae64f1cf31e2888c~mv2.png" loading="lazy" alt="Avión: Delicious-looking content: recipes, turns of phrase, and perfect pairings. (3 of 11)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_b2b68aff69ee41d28a0c5ef6f97ef331~mv2.png" loading="lazy" alt="Avión: Delicious-looking content: recipes, turns of phrase, and perfect pairings. (4 of 11)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_f66127263b294847ba9dca2c2ac58f73~mv2.png" loading="lazy" alt="Avión: Delicious-looking content: recipes, turns of phrase, and perfect pairings. (5 of 11)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_c8952991f7ee47879e42c8fdf19237e4~mv2.png" loading="lazy" alt="Avión: Delicious-looking content: recipes, turns of phrase, and perfect pairings. (6 of 11)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_f03733e9decf4c73839d8dcb8f3f5bc9~mv2.png" loading="lazy" alt="Avión: Delicious-looking content: recipes, turns of phrase, and perfect pairings. (7 of 11)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_42b7324896e74b40bc5a9a7a33002239~mv2.png" loading="lazy" alt="Avión: Delicious-looking content: recipes, turns of phrase, and perfect pairings. (8 of 11)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_6eeb4e923abf417e800de041542be81a~mv2.png" loading="lazy" alt="Avión: Delicious-looking content: recipes, turns of phrase, and perfect pairings. (9 of 11)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_0f6b5bd0496442469d3a16bfaa8a828e~mv2.png" loading="lazy" alt="Avión: Delicious-looking content: recipes, turns of phrase, and perfect pairings. (10 of 11)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_09276a94531f45a19b5a13c5c9dfbe06~mv2.png" loading="lazy" alt="Avión: Delicious-looking content: recipes, turns of phrase, and perfect pairings. (11 of 11)" />
         </div></div>
       </div>
   </section>
@@ -934,12 +944,12 @@
       <div class="cf-block">
         <p class="cf-text">UX copy for Brisk's new cans, written to be read at arm's length.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="https://static.wixstatic.com/media/fbf0c8_8e429886f0f345f49d802660cd827090~mv2_d_2048_2550_s_2.jpg" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_86c72d11c915409b9ee881e40bc17d0f~mv2_d_2048_2550_s_2.jpg" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_121ffda8cba94946850ecfff08f53cda~mv2_d_2048_2550_s_2.jpg" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_d161f6393e374182bf6c194d452dbc54~mv2_d_2048_2550_s_2.jpg" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_a9768cf453784766957e0d178d220d0c~mv2_d_2048_2550_s_2.jpg" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_b8586d2e676c4324aa38ceadb73d8310~mv2_d_2048_2550_s_2.jpg" loading="lazy" alt="" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_8e429886f0f345f49d802660cd827090~mv2_d_2048_2550_s_2.jpg" loading="lazy" alt="Brisk: UX copy for Brisk's new cans, written to be read at arm's length. (1 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_86c72d11c915409b9ee881e40bc17d0f~mv2_d_2048_2550_s_2.jpg" loading="lazy" alt="Brisk: UX copy for Brisk's new cans, written to be read at arm's length. (2 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_121ffda8cba94946850ecfff08f53cda~mv2_d_2048_2550_s_2.jpg" loading="lazy" alt="Brisk: UX copy for Brisk's new cans, written to be read at arm's length. (3 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_d161f6393e374182bf6c194d452dbc54~mv2_d_2048_2550_s_2.jpg" loading="lazy" alt="Brisk: UX copy for Brisk's new cans, written to be read at arm's length. (4 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_a9768cf453784766957e0d178d220d0c~mv2_d_2048_2550_s_2.jpg" loading="lazy" alt="Brisk: UX copy for Brisk's new cans, written to be read at arm's length. (5 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_b8586d2e676c4324aa38ceadb73d8310~mv2_d_2048_2550_s_2.jpg" loading="lazy" alt="Brisk: UX copy for Brisk's new cans, written to be read at arm's length. (6 of 6)" />
         </div></div>
       </div>
   </section>
@@ -967,22 +977,22 @@
       <div class="cf-block">
         <p class="cf-text">NFL spots introducing the redesigned cans, built to feel like a tradition rather than a launch.</p>
         <div class="cf-media"><div class="case-videos">
-          <div class="case-video"><iframe src="https://player.vimeo.com/video/230365122" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
-          <div class="case-video"><iframe src="https://player.vimeo.com/video/230363459" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
-          <div class="case-video"><iframe src="https://player.vimeo.com/video/231073896" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="case-video"><iframe title="Bud Light NFL can-launch spot 1 of 3" data-src="https://player.vimeo.com/video/230365122" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="case-video"><iframe title="Bud Light NFL can-launch spot 2 of 3" data-src="https://player.vimeo.com/video/230363459" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="case-video"><iframe title="Bud Light NFL can-launch spot 3 of 3" data-src="https://player.vimeo.com/video/231073896" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
         </div></div>
       </div>
       <div class="cf-block">
         <p class="cf-text">Whatever, USA, a town Bud Light took over for a weekend. Working with an art director and Mosaic, I directed the video and photo crews on the ground and mapped the entire content calendar before we arrived.</p>
         <div class="cf-media"><div class="case-videos">
-          <div class="case-video"><iframe src="https://www.youtube.com/embed/w9qreuwmOws" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-          <div class="case-video"><iframe src="https://www.youtube.com/embed/VpAeqPZSwYY" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="case-video"><iframe title="Bud Light Whatever USA film 1 of 2" data-src="https://www.youtube.com/embed/w9qreuwmOws" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="case-video"><iframe title="Bud Light Whatever USA film 2 of 2" data-src="https://www.youtube.com/embed/VpAeqPZSwYY" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
         </div></div>
       </div>
       <div class="cf-block">
         <p class="cf-text">The Bud-E Fridge launch, a fridge that tells you when the beer is cold. I wrote the spot, helped direct, and was on set throughout.</p>
         <div class="cf-media"><div class="case-videos">
-          <div class="case-video"><iframe src="https://www.youtube.com/embed/8pXVBNEiE0g" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="case-video"><iframe title="Bud Light Bud-E Fridge launch spot" data-src="https://www.youtube.com/embed/8pXVBNEiE0g" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
         </div></div>
       </div>
   </section>
@@ -1009,9 +1019,9 @@
       <div class="cf-block">
         <p class="cf-text">Show reviews for the theater's website. Tap a photo to read one.</p>
         <div class="cf-media"><div class="case-gallery">
-          <a href="https://www.thecapitoltheatre.com/2018/07/31/recap-glen-hansard-2018-07-27/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/fbf0c8_cfdef80e117f4c43b07aa55c6580fa07~mv2.jpg" loading="lazy" alt="" /></a>
-          <a href="https://www.thecapitoltheatre.com/2018/08/19/recap-jeff-beck-2018-08-15/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/fbf0c8_4e35259fcb5d48eaad2bf5e207365787~mv2.jpg" loading="lazy" alt="" /></a>
-          <a href="http://www.thecapitoltheatre.com/2018/10/29/recap-the-avett-brothers-2018-10-27-the-capitol-theatre/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/fbf0c8_94c9e0e99d134beaa1c86f769715803a~mv2.jpg" loading="lazy" alt="" /></a>
+          <a href="https://www.thecapitoltheatre.com/2018/07/31/recap-glen-hansard-2018-07-27/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/fbf0c8_cfdef80e117f4c43b07aa55c6580fa07~mv2.jpg" loading="lazy" alt="The Capitol Theatre: Show reviews for the theater's website. Tap a photo to read one. (1 of 3)" /></a>
+          <a href="https://www.thecapitoltheatre.com/2018/08/19/recap-jeff-beck-2018-08-15/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/fbf0c8_4e35259fcb5d48eaad2bf5e207365787~mv2.jpg" loading="lazy" alt="The Capitol Theatre: Show reviews for the theater's website. Tap a photo to read one. (2 of 3)" /></a>
+          <a href="http://www.thecapitoltheatre.com/2018/10/29/recap-the-avett-brothers-2018-10-27-the-capitol-theatre/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/fbf0c8_94c9e0e99d134beaa1c86f769715803a~mv2.jpg" loading="lazy" alt="The Capitol Theatre: Show reviews for the theater's website. Tap a photo to read one. (3 of 3)" /></a>
         </div></div>
       </div>
   </section>
@@ -1039,9 +1049,9 @@
       <div class="cf-block">
         <p class="cf-text">The Studio Manager Series: guides, playbooks, and tips that made a thankless job feel lighter.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="case-creative-force-img.jpg" loading="lazy" alt="" />
-          <img src="case-creative-force-img-2.jpg" loading="lazy" alt="" />
-          <img src="case-creative-force-img-3.jpg" loading="lazy" alt="" />
+          <img src="case-creative-force-img.jpg" loading="lazy" alt="Creative Force: The Studio Manager Series: guides, playbooks, and tips that made a thankless job feel lighter. (1 of 3)" />
+          <img src="case-creative-force-img-2.jpg" loading="lazy" alt="Creative Force: The Studio Manager Series: guides, playbooks, and tips that made a thankless job feel lighter. (2 of 3)" />
+          <img src="case-creative-force-img-3.jpg" loading="lazy" alt="Creative Force: The Studio Manager Series: guides, playbooks, and tips that made a thankless job feel lighter. (3 of 3)" />
         </div></div>
       </div>
       <div class="cf-block">
@@ -1073,7 +1083,7 @@
       <div class="cf-block">
         <p class="cf-text">A five-part AI series for the dreem sub-brand, pulled from a webinar nobody wanted to sit through twice.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="case-creative-force-img-4.jpg" loading="lazy" alt="" />
+          <img src="case-creative-force-img-4.jpg" loading="lazy" alt="Creative Force: A five-part AI series for the dreem sub-brand, pulled from a webinar nobody wanted to sit…" />
         </div></div>
       </div>
   </section>
@@ -1101,30 +1111,30 @@
       <div class="cf-block">
         <p class="cf-text">An intro video for Family Dollar's new combo stores in small towns across the country. Written, designed, edited, and directed with fully remote teams.</p>
         <div class="cf-media"><div class="case-videos">
-          <div class="case-video"><iframe src="https://www.youtube.com/embed/p7J7U3TX7mY" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="case-video"><iframe title="Family Dollar combo-stores intro film" data-src="https://www.youtube.com/embed/p7J7U3TX7mY" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
         </div></div>
       </div>
       <div class="cf-block">
         <p class="cf-text">Three commercials I wrote for Family Dollar.</p>
         <div class="cf-media"><div class="case-videos">
-          <div class="case-video"><iframe src="https://www.youtube.com/embed/Z1Hd84nj-Rs" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-          <div class="case-video"><iframe src="https://www.youtube.com/embed/d-0qq4dVLiw" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-          <div class="case-video"><iframe src="https://www.youtube.com/embed/JjEz_Tg4sv0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="case-video"><iframe title="Family Dollar commercial 1 of 3" data-src="https://www.youtube.com/embed/Z1Hd84nj-Rs" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="case-video"><iframe title="Family Dollar commercial 2 of 3" data-src="https://www.youtube.com/embed/d-0qq4dVLiw" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="case-video"><iframe title="Family Dollar commercial 3 of 3" data-src="https://www.youtube.com/embed/JjEz_Tg4sv0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
         </div></div>
       </div>
       <div class="cf-block">
         <p class="cf-text">Seasonal activations across in-store, digital, social, and print, built out as complete programs throughout the year.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="https://static.wixstatic.com/media/fbf0c8_6b1baa0adbdd4c078f3754ab401402d2~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_616781bcfc6448688929ba71572c3314~mv2.png" loading="lazy" alt="" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_6b1baa0adbdd4c078f3754ab401402d2~mv2.png" loading="lazy" alt="Family Dollar: Seasonal activations across in-store, digital, social, and print, built out as complete programs throughout the year. (1 of 2)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_616781bcfc6448688929ba71572c3314~mv2.png" loading="lazy" alt="Family Dollar: Seasonal activations across in-store, digital, social, and print, built out as complete programs throughout the year. (2 of 2)" />
         </div></div>
       </div>
       <div class="cf-block">
         <p class="cf-text">A complete rebrand built around one word: MORE. Showing the country just how much more they can get at Family Dollar.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="https://static.wixstatic.com/media/fbf0c8_f7cfd1e6421f4af29aef889b0c370d10~mv2.jpg" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_b7abab241413473fa4e349fdc5dd7250~mv2.jpg" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_62bfd58997ab4cf6943321d03ab23401~mv2.jpg" loading="lazy" alt="" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_f7cfd1e6421f4af29aef889b0c370d10~mv2.jpg" loading="lazy" alt="Family Dollar: A complete rebrand built around one word: MORE. Showing the country just how much more they… (1 of 3)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_b7abab241413473fa4e349fdc5dd7250~mv2.jpg" loading="lazy" alt="Family Dollar: A complete rebrand built around one word: MORE. Showing the country just how much more they… (2 of 3)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_62bfd58997ab4cf6943321d03ab23401~mv2.jpg" loading="lazy" alt="Family Dollar: A complete rebrand built around one word: MORE. Showing the country just how much more they… (3 of 3)" />
         </div></div>
       </div>
   </section>
@@ -1156,19 +1166,19 @@
       <div class="cf-block">
         <p class="cf-text">A social calendar with three audiences: the brand, the bartenders who back it, and brand-new Fernet drinkers.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="https://static.wixstatic.com/media/fbf0c8_2f03b8bca19e4ce885e728fbd6b15fd5~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_b6ef219476ac4a4db91373bb5c91996a~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_218fcc13f9744801987ad5551452ad28~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_affd7852e38f43f4a77a0ad8f904e769~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_2cf302635ed942238d47416f81fb1e9a~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_1a20756f11894bea83387a0bc6ea2955~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_26d48e52466c4177a81c20b6b5092fe9~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_98982f3e45ad4585b6880649836cfa54~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_a1a68e10cc0f48d898b276341ef1b42f~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_f5b3a93285294b9da50b5a7763522f6d~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_7907f541722c4ec181f22bbe5e7c544e~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_45bbb73453c7479c8e035cb8cd4137ed~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_712c5404887c4f719c02c9aa81681f11~mv2.png" loading="lazy" alt="" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_2f03b8bca19e4ce885e728fbd6b15fd5~mv2.png" loading="lazy" alt="Fernet-Branca: A social calendar with three audiences: the brand, the bartenders who back it, and brand-new Fernet… (1 of 13)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_b6ef219476ac4a4db91373bb5c91996a~mv2.png" loading="lazy" alt="Fernet-Branca: A social calendar with three audiences: the brand, the bartenders who back it, and brand-new Fernet… (2 of 13)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_218fcc13f9744801987ad5551452ad28~mv2.png" loading="lazy" alt="Fernet-Branca: A social calendar with three audiences: the brand, the bartenders who back it, and brand-new Fernet… (3 of 13)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_affd7852e38f43f4a77a0ad8f904e769~mv2.png" loading="lazy" alt="Fernet-Branca: A social calendar with three audiences: the brand, the bartenders who back it, and brand-new Fernet… (4 of 13)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_2cf302635ed942238d47416f81fb1e9a~mv2.png" loading="lazy" alt="Fernet-Branca: A social calendar with three audiences: the brand, the bartenders who back it, and brand-new Fernet… (5 of 13)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_1a20756f11894bea83387a0bc6ea2955~mv2.png" loading="lazy" alt="Fernet-Branca: A social calendar with three audiences: the brand, the bartenders who back it, and brand-new Fernet… (6 of 13)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_26d48e52466c4177a81c20b6b5092fe9~mv2.png" loading="lazy" alt="Fernet-Branca: A social calendar with three audiences: the brand, the bartenders who back it, and brand-new Fernet… (7 of 13)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_98982f3e45ad4585b6880649836cfa54~mv2.png" loading="lazy" alt="Fernet-Branca: A social calendar with three audiences: the brand, the bartenders who back it, and brand-new Fernet… (8 of 13)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_a1a68e10cc0f48d898b276341ef1b42f~mv2.png" loading="lazy" alt="Fernet-Branca: A social calendar with three audiences: the brand, the bartenders who back it, and brand-new Fernet… (9 of 13)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_f5b3a93285294b9da50b5a7763522f6d~mv2.png" loading="lazy" alt="Fernet-Branca: A social calendar with three audiences: the brand, the bartenders who back it, and brand-new Fernet… (10 of 13)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_7907f541722c4ec181f22bbe5e7c544e~mv2.png" loading="lazy" alt="Fernet-Branca: A social calendar with three audiences: the brand, the bartenders who back it, and brand-new Fernet… (11 of 13)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_45bbb73453c7479c8e035cb8cd4137ed~mv2.png" loading="lazy" alt="Fernet-Branca: A social calendar with three audiences: the brand, the bartenders who back it, and brand-new Fernet… (12 of 13)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_712c5404887c4f719c02c9aa81681f11~mv2.png" loading="lazy" alt="Fernet-Branca: A social calendar with three audiences: the brand, the bartenders who back it, and brand-new Fernet… (13 of 13)" />
         </div></div>
       </div>
   </section>
@@ -1196,18 +1206,18 @@
       <div class="cf-block">
         <p class="cf-text">A monthly social calendar spanning graphene, wind turbines, biogas engines, and brain scans. Every post took something most people can&#x27;t pronounce and made it click.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="case-ge-img.jpg" loading="lazy" alt="" />
-          <img src="case-ge-img-2.jpg" loading="lazy" alt="" />
-          <img src="case-ge-img-3.jpg" loading="lazy" alt="" />
-          <img src="case-ge-img-4.jpg" loading="lazy" alt="" />
-          <img src="case-ge-img-5.jpg" loading="lazy" alt="" />
-          <img src="case-ge-img-6.jpg" loading="lazy" alt="" />
-          <img src="case-ge-img-7.jpg" loading="lazy" alt="" />
-          <img src="case-ge-img-8.jpg" loading="lazy" alt="" />
-          <img src="case-ge-img-9.jpg" loading="lazy" alt="" />
-          <img src="case-ge-img-10.jpg" loading="lazy" alt="" />
-          <img src="case-ge-img-11.jpg" loading="lazy" alt="" />
-          <img src="case-ge-img-12.jpg" loading="lazy" alt="" />
+          <img src="case-ge-img.jpg" loading="lazy" alt="GE: A monthly social calendar spanning graphene, wind turbines, biogas engines, and brain scans. Every post took… (1 of 12)" />
+          <img src="case-ge-img-2.jpg" loading="lazy" alt="GE: A monthly social calendar spanning graphene, wind turbines, biogas engines, and brain scans. Every post took… (2 of 12)" />
+          <img src="case-ge-img-3.jpg" loading="lazy" alt="GE: A monthly social calendar spanning graphene, wind turbines, biogas engines, and brain scans. Every post took… (3 of 12)" />
+          <img src="case-ge-img-4.jpg" loading="lazy" alt="GE: A monthly social calendar spanning graphene, wind turbines, biogas engines, and brain scans. Every post took… (4 of 12)" />
+          <img src="case-ge-img-5.jpg" loading="lazy" alt="GE: A monthly social calendar spanning graphene, wind turbines, biogas engines, and brain scans. Every post took… (5 of 12)" />
+          <img src="case-ge-img-6.jpg" loading="lazy" alt="GE: A monthly social calendar spanning graphene, wind turbines, biogas engines, and brain scans. Every post took… (6 of 12)" />
+          <img src="case-ge-img-7.jpg" loading="lazy" alt="GE: A monthly social calendar spanning graphene, wind turbines, biogas engines, and brain scans. Every post took… (7 of 12)" />
+          <img src="case-ge-img-8.jpg" loading="lazy" alt="GE: A monthly social calendar spanning graphene, wind turbines, biogas engines, and brain scans. Every post took… (8 of 12)" />
+          <img src="case-ge-img-9.jpg" loading="lazy" alt="GE: A monthly social calendar spanning graphene, wind turbines, biogas engines, and brain scans. Every post took… (9 of 12)" />
+          <img src="case-ge-img-10.jpg" loading="lazy" alt="GE: A monthly social calendar spanning graphene, wind turbines, biogas engines, and brain scans. Every post took… (10 of 12)" />
+          <img src="case-ge-img-11.jpg" loading="lazy" alt="GE: A monthly social calendar spanning graphene, wind turbines, biogas engines, and brain scans. Every post took… (11 of 12)" />
+          <img src="case-ge-img-12.jpg" loading="lazy" alt="GE: A monthly social calendar spanning graphene, wind turbines, biogas engines, and brain scans. Every post took… (12 of 12)" />
         </div></div>
       </div>
   </section>
@@ -1235,25 +1245,25 @@
       <div class="cf-block">
         <p class="cf-text">A 24-page Black Friday report and its companion webinar, written with our data scientist and designer. Hard numbers, made genuinely readable.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="case-hello-retail-img.jpg" loading="lazy" alt="" />
-          <img src="case-hello-retail-img-2.jpg" loading="lazy" alt="" />
+          <img src="case-hello-retail-img.jpg" loading="lazy" alt="Hello Retail: A 24-page Black Friday report and its companion webinar, written with our data scientist and designer… (1 of 2)" />
+          <img src="case-hello-retail-img-2.jpg" loading="lazy" alt="Hello Retail: A 24-page Black Friday report and its companion webinar, written with our data scientist and designer… (2 of 2)" />
         </div></div>
       </div>
       <div class="cf-block">
         <p class="cf-text">The full website redesign and voice overhaul, built to stand out in a category where every competitor sounds identical.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="case-hello-retail-img-3.jpg" loading="lazy" alt="" />
-          <img src="case-hello-retail-img-4.jpg" loading="lazy" alt="" />
+          <img src="case-hello-retail-img-3.jpg" loading="lazy" alt="Hello Retail: The full website redesign and voice overhaul, built to stand out in a category where every… (1 of 2)" />
+          <img src="case-hello-retail-img-4.jpg" loading="lazy" alt="Hello Retail: The full website redesign and voice overhaul, built to stand out in a category where every… (2 of 2)" />
         </div></div>
       </div>
       <div class="cf-block">
         <p class="cf-text">Social posts, written and designed, that admit online shopping is broken and then point straight at the fix.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="case-hello-retail-img-5.jpg" loading="lazy" alt="" />
-          <img src="case-hello-retail-img-6.jpg" loading="lazy" alt="" />
-          <img src="case-hello-retail-img-7.jpg" loading="lazy" alt="" />
-          <img src="case-hello-retail-img-8.jpg" loading="lazy" alt="" />
-          <img src="case-hello-retail-img-9.jpg" loading="lazy" alt="" />
+          <img src="case-hello-retail-img-5.jpg" loading="lazy" alt="Hello Retail: Social posts, written and designed, that admit online shopping is broken and then point straight at… (1 of 5)" />
+          <img src="case-hello-retail-img-6.jpg" loading="lazy" alt="Hello Retail: Social posts, written and designed, that admit online shopping is broken and then point straight at… (2 of 5)" />
+          <img src="case-hello-retail-img-7.jpg" loading="lazy" alt="Hello Retail: Social posts, written and designed, that admit online shopping is broken and then point straight at… (3 of 5)" />
+          <img src="case-hello-retail-img-8.jpg" loading="lazy" alt="Hello Retail: Social posts, written and designed, that admit online shopping is broken and then point straight at… (4 of 5)" />
+          <img src="case-hello-retail-img-9.jpg" loading="lazy" alt="Hello Retail: Social posts, written and designed, that admit online shopping is broken and then point straight at… (5 of 5)" />
         </div></div>
       </div>
   </section>
@@ -1281,38 +1291,38 @@
       <div class="cf-block">
         <p class="cf-text">They needed a writer who could jump from brand voice to personality voice to strategy in seconds. These are some of the brands and shows I wrote for. Examples on request.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="https://static.wixstatic.com/media/fbf0c8_937b9964e475421c95014a4482e976d0~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_530f61a25eda47f6a22225ff143745a9~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_423f02404b6c408082ef98a8a8c5a7c1~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_111aead0d51349d28d9cbf284a74c83f~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_e6b3d3d1abcf48d7aefbfc386006fcb8~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_e5028a2daf054c61a36ff39b91cf1b64~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_c39a51dd79c240c6abbdeeaa4476b691~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_c8b8e693b19240628fded8be80459b59~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_c26218cb8b54421e90059be2582dc84e~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_e83cd397d0ef41e29d6a8eb688fc3030~mv2.jpg" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_35d75cf8de5947f3b5187b66f419d635~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_1ab70a4ff3c94d809ecb18efe7cb1ba7~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_d002d4d6fd3345fcaf00faa80443ac64~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_a5301c80590a4a0f8a13d49a42bb4cff~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_6c81a508464b4e75866ac3641dc2d4ca~mv2.jpg" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_b6ca279ef2ed4490975694e118dd8d43~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_e87938fa00e24099a4deb5c7067d3e6a~mv2.jpg" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_e63c8e8413ae4439b2694372cf643c74~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_74351ad0566c4542aad20b273e11efbc~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_2a17155b8afa4ca2a7e28de6a22df469~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_b24a7e8fbd474d64b1793086798a44ca~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_e0f4ef05a4994a238d5978bc8f63410f~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_f58fde8193694d1ab75a0089953f75ec~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_374cb1a3699e43a5974a0871f33df085~mv2.png" loading="lazy" alt="" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_937b9964e475421c95014a4482e976d0~mv2.png" loading="lazy" alt="iHeartMedia: They needed a writer who could jump from brand voice to personality voice to strategy in… (1 of 24)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_530f61a25eda47f6a22225ff143745a9~mv2.png" loading="lazy" alt="iHeartMedia: They needed a writer who could jump from brand voice to personality voice to strategy in… (2 of 24)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_423f02404b6c408082ef98a8a8c5a7c1~mv2.png" loading="lazy" alt="iHeartMedia: They needed a writer who could jump from brand voice to personality voice to strategy in… (3 of 24)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_111aead0d51349d28d9cbf284a74c83f~mv2.png" loading="lazy" alt="iHeartMedia: They needed a writer who could jump from brand voice to personality voice to strategy in… (4 of 24)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_e6b3d3d1abcf48d7aefbfc386006fcb8~mv2.png" loading="lazy" alt="iHeartMedia: They needed a writer who could jump from brand voice to personality voice to strategy in… (5 of 24)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_e5028a2daf054c61a36ff39b91cf1b64~mv2.png" loading="lazy" alt="iHeartMedia: They needed a writer who could jump from brand voice to personality voice to strategy in… (6 of 24)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_c39a51dd79c240c6abbdeeaa4476b691~mv2.png" loading="lazy" alt="iHeartMedia: They needed a writer who could jump from brand voice to personality voice to strategy in… (7 of 24)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_c8b8e693b19240628fded8be80459b59~mv2.png" loading="lazy" alt="iHeartMedia: They needed a writer who could jump from brand voice to personality voice to strategy in… (8 of 24)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_c26218cb8b54421e90059be2582dc84e~mv2.png" loading="lazy" alt="iHeartMedia: They needed a writer who could jump from brand voice to personality voice to strategy in… (9 of 24)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_e83cd397d0ef41e29d6a8eb688fc3030~mv2.jpg" loading="lazy" alt="iHeartMedia: They needed a writer who could jump from brand voice to personality voice to strategy in… (10 of 24)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_35d75cf8de5947f3b5187b66f419d635~mv2.png" loading="lazy" alt="iHeartMedia: They needed a writer who could jump from brand voice to personality voice to strategy in… (11 of 24)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_1ab70a4ff3c94d809ecb18efe7cb1ba7~mv2.png" loading="lazy" alt="iHeartMedia: They needed a writer who could jump from brand voice to personality voice to strategy in… (12 of 24)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_d002d4d6fd3345fcaf00faa80443ac64~mv2.png" loading="lazy" alt="iHeartMedia: They needed a writer who could jump from brand voice to personality voice to strategy in… (13 of 24)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_a5301c80590a4a0f8a13d49a42bb4cff~mv2.png" loading="lazy" alt="iHeartMedia: They needed a writer who could jump from brand voice to personality voice to strategy in… (14 of 24)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_6c81a508464b4e75866ac3641dc2d4ca~mv2.jpg" loading="lazy" alt="iHeartMedia: They needed a writer who could jump from brand voice to personality voice to strategy in… (15 of 24)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_b6ca279ef2ed4490975694e118dd8d43~mv2.png" loading="lazy" alt="iHeartMedia: They needed a writer who could jump from brand voice to personality voice to strategy in… (16 of 24)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_e87938fa00e24099a4deb5c7067d3e6a~mv2.jpg" loading="lazy" alt="iHeartMedia: They needed a writer who could jump from brand voice to personality voice to strategy in… (17 of 24)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_e63c8e8413ae4439b2694372cf643c74~mv2.png" loading="lazy" alt="iHeartMedia: They needed a writer who could jump from brand voice to personality voice to strategy in… (18 of 24)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_74351ad0566c4542aad20b273e11efbc~mv2.png" loading="lazy" alt="iHeartMedia: They needed a writer who could jump from brand voice to personality voice to strategy in… (19 of 24)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_2a17155b8afa4ca2a7e28de6a22df469~mv2.png" loading="lazy" alt="iHeartMedia: They needed a writer who could jump from brand voice to personality voice to strategy in… (20 of 24)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_b24a7e8fbd474d64b1793086798a44ca~mv2.png" loading="lazy" alt="iHeartMedia: They needed a writer who could jump from brand voice to personality voice to strategy in… (21 of 24)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_e0f4ef05a4994a238d5978bc8f63410f~mv2.png" loading="lazy" alt="iHeartMedia: They needed a writer who could jump from brand voice to personality voice to strategy in… (22 of 24)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_f58fde8193694d1ab75a0089953f75ec~mv2.png" loading="lazy" alt="iHeartMedia: They needed a writer who could jump from brand voice to personality voice to strategy in… (23 of 24)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_374cb1a3699e43a5974a0871f33df085~mv2.png" loading="lazy" alt="iHeartMedia: They needed a writer who could jump from brand voice to personality voice to strategy in… (24 of 24)" />
         </div></div>
       </div>
       <div class="cf-block">
         <p class="cf-text">They also built a platform for businesses to create their own audio ads. I was there from the start: naming, branding, design direction, and the UX copy for the site.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="https://static.wixstatic.com/media/fbf0c8_93966ec14cd64ed683f692b21cc70716~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_3821063aff5e4e82a48607851e313e23~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_33270e76b2aa4b05a8520ea7f8620037~mv2.png" loading="lazy" alt="" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_93966ec14cd64ed683f692b21cc70716~mv2.png" loading="lazy" alt="iHeartMedia: They also built a platform for businesses to create their own audio ads. I was there… (1 of 3)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_3821063aff5e4e82a48607851e313e23~mv2.png" loading="lazy" alt="iHeartMedia: They also built a platform for businesses to create their own audio ads. I was there… (2 of 3)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_33270e76b2aa4b05a8520ea7f8620037~mv2.png" loading="lazy" alt="iHeartMedia: They also built a platform for businesses to create their own audio ads. I was there… (3 of 3)" />
         </div></div>
       </div>
   </section>
@@ -1340,35 +1350,35 @@
       <div class="cf-block">
         <p class="cf-text">Long-form SEO content to grow subscribers across 16 markets. I wrote over 300 articles, including one that went viral past 250k views. Tap a cover to read.</p>
         <div class="cf-media"><div class="case-gallery">
-          <a href="https://www.fouroverfour.jukely.com/culture/going-to-concerts-alone/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/fbf0c8_9e830c84836b4096b0315590a00ed29c~mv2.jpeg" loading="lazy" alt="" /></a>
-          <a href="https://www.fouroverfour.jukely.com/culture/get-chills-from-music/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/fbf0c8_29c0736714b345ab98e06d206490b413~mv2.jpeg" loading="lazy" alt="" /></a>
-          <a href="https://www.fouroverfour.jukely.com/culture/66-bands-that-changed-their-name/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/fbf0c8_b90e17b3312a4d70b4370d4f1745d6fd~mv2.jpeg" loading="lazy" alt="" /></a>
-          <a href="https://www.fouroverfour.jukely.com/culture/7-ways-music-is-good-for-you/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/fbf0c8_9ff347e50a144e20b18b97485a6d3443~mv2.jpg" loading="lazy" alt="" /></a>
-          <a href="https://www.fouroverfour.jukely.com/culture/better-relationship-live-music/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/fbf0c8_21efe5caf88348ba9cb3ba2cab3cd48d~mv2.jpeg" loading="lazy" alt="" /></a>
-          <a href="https://www.fouroverfour.jukely.com/culture/playlist-psychopath-watchlist/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/fbf0c8_8621653eb5b6443ea88baeb22cc81903~mv2.jpeg" loading="lazy" alt="" /></a>
+          <a href="https://www.fouroverfour.jukely.com/culture/going-to-concerts-alone/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/fbf0c8_9e830c84836b4096b0315590a00ed29c~mv2.jpeg" loading="lazy" alt="Jukely: Long-form SEO content to grow subscribers across 16 markets. I wrote over 300 articles, including one… (1 of 6)" /></a>
+          <a href="https://www.fouroverfour.jukely.com/culture/get-chills-from-music/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/fbf0c8_29c0736714b345ab98e06d206490b413~mv2.jpeg" loading="lazy" alt="Jukely: Long-form SEO content to grow subscribers across 16 markets. I wrote over 300 articles, including one… (2 of 6)" /></a>
+          <a href="https://www.fouroverfour.jukely.com/culture/66-bands-that-changed-their-name/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/fbf0c8_b90e17b3312a4d70b4370d4f1745d6fd~mv2.jpeg" loading="lazy" alt="Jukely: Long-form SEO content to grow subscribers across 16 markets. I wrote over 300 articles, including one… (3 of 6)" /></a>
+          <a href="https://www.fouroverfour.jukely.com/culture/7-ways-music-is-good-for-you/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/fbf0c8_9ff347e50a144e20b18b97485a6d3443~mv2.jpg" loading="lazy" alt="Jukely: Long-form SEO content to grow subscribers across 16 markets. I wrote over 300 articles, including one… (4 of 6)" /></a>
+          <a href="https://www.fouroverfour.jukely.com/culture/better-relationship-live-music/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/fbf0c8_21efe5caf88348ba9cb3ba2cab3cd48d~mv2.jpeg" loading="lazy" alt="Jukely: Long-form SEO content to grow subscribers across 16 markets. I wrote over 300 articles, including one… (5 of 6)" /></a>
+          <a href="https://www.fouroverfour.jukely.com/culture/playlist-psychopath-watchlist/" target="_blank" rel="noopener"><img src="https://static.wixstatic.com/media/fbf0c8_8621653eb5b6443ea88baeb22cc81903~mv2.jpeg" loading="lazy" alt="Jukely: Long-form SEO content to grow subscribers across 16 markets. I wrote over 300 articles, including one… (6 of 6)" /></a>
         </div></div>
       </div>
       <div class="cf-block">
         <p class="cf-text">Jukely Live: concerts at the office, invented to make fresh content for fans and give up-and-coming bands a stage, on a budget of zero.</p>
         <div class="cf-media"><div class="case-videos">
-          <div class="case-video"><iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fjukelyapp%2Fvideos%2F1331171113695216&show_text=false" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-          <div class="case-video"><iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fjukelyapp%2Fvideos%2F1162137000598629&show_text=false" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-          <div class="case-video"><iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fjukelyapp%2Fvideos%2F1306878589457802&show_text=false" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-          <div class="case-video"><iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fjukelyapp%2Fvideos%2F1144883675657295&show_text=false" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="case-video"><iframe title="Jukely Live concert video 1 of 4" data-src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fjukelyapp%2Fvideos%2F1331171113695216&show_text=false" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="case-video"><iframe title="Jukely Live concert video 2 of 4" data-src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fjukelyapp%2Fvideos%2F1162137000598629&show_text=false" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="case-video"><iframe title="Jukely Live concert video 3 of 4" data-src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fjukelyapp%2Fvideos%2F1306878589457802&show_text=false" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="case-video"><iframe title="Jukely Live concert video 4 of 4" data-src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fjukelyapp%2Fvideos%2F1144883675657295&show_text=false" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
         </div></div>
       </div>
       <div class="cf-block">
         <p class="cf-text">Micro-content that introduced new app features to users, written and designed to be simple and good-looking.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="https://static.wixstatic.com/media/fbf0c8_05d431d3c76a4ce0a8f8f232977c4cdf~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_8a764afb54424f31b15fc88eb5b48637~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_402e17a278e341a7bfac232dff70a530~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_f985178119d64966b145fe3f7ad676b6~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_afa303007dcf410abd0d1f822b51bc2c~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_fec50d5340b84435b9394cef95affd51~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_1167b8406ba04073a0ebd11c6cc3b249~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_b8c8e8a620e6496e9514e6471376d199~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_a737eb51be394287a0be5b3e286012c5~mv2.png" loading="lazy" alt="" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_05d431d3c76a4ce0a8f8f232977c4cdf~mv2.png" loading="lazy" alt="Jukely: Micro-content that introduced new app features to users, written and designed to be simple and good-looking. (1 of 9)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_8a764afb54424f31b15fc88eb5b48637~mv2.png" loading="lazy" alt="Jukely: Micro-content that introduced new app features to users, written and designed to be simple and good-looking. (2 of 9)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_402e17a278e341a7bfac232dff70a530~mv2.png" loading="lazy" alt="Jukely: Micro-content that introduced new app features to users, written and designed to be simple and good-looking. (3 of 9)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_f985178119d64966b145fe3f7ad676b6~mv2.png" loading="lazy" alt="Jukely: Micro-content that introduced new app features to users, written and designed to be simple and good-looking. (4 of 9)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_afa303007dcf410abd0d1f822b51bc2c~mv2.png" loading="lazy" alt="Jukely: Micro-content that introduced new app features to users, written and designed to be simple and good-looking. (5 of 9)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_fec50d5340b84435b9394cef95affd51~mv2.png" loading="lazy" alt="Jukely: Micro-content that introduced new app features to users, written and designed to be simple and good-looking. (6 of 9)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_1167b8406ba04073a0ebd11c6cc3b249~mv2.png" loading="lazy" alt="Jukely: Micro-content that introduced new app features to users, written and designed to be simple and good-looking. (7 of 9)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_b8c8e8a620e6496e9514e6471376d199~mv2.png" loading="lazy" alt="Jukely: Micro-content that introduced new app features to users, written and designed to be simple and good-looking. (8 of 9)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_a737eb51be394287a0be5b3e286012c5~mv2.png" loading="lazy" alt="Jukely: Micro-content that introduced new app features to users, written and designed to be simple and good-looking. (9 of 9)" />
         </div></div>
       </div>
   </section>
@@ -1396,11 +1406,11 @@
       <div class="cf-block">
         <p class="cf-text">Micro-content for Kindle Direct Publishing, written from the one perspective I didn't have to fake: an author's.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="https://static.wixstatic.com/media/fbf0c8_2140d0ee1cd941c9baebd6ee9750161e.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_c9f3cb18dab144b48aee7016a39b30bc.jpg" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_1fe55ff31a9d4c73ba0ab65134ecc161.jpg" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_71515cafb87e4b798a09708d48d42ae4.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_552c913d4d994feea4685710bcc6d897.jpg" loading="lazy" alt="" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_2140d0ee1cd941c9baebd6ee9750161e.png" loading="lazy" alt="Kindle: Micro-content for Kindle Direct Publishing, written from the one perspective I didn't have to fake: an… (1 of 5)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_c9f3cb18dab144b48aee7016a39b30bc.jpg" loading="lazy" alt="Kindle: Micro-content for Kindle Direct Publishing, written from the one perspective I didn't have to fake: an… (2 of 5)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_1fe55ff31a9d4c73ba0ab65134ecc161.jpg" loading="lazy" alt="Kindle: Micro-content for Kindle Direct Publishing, written from the one perspective I didn't have to fake: an… (3 of 5)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_71515cafb87e4b798a09708d48d42ae4.png" loading="lazy" alt="Kindle: Micro-content for Kindle Direct Publishing, written from the one perspective I didn't have to fake: an… (4 of 5)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_552c913d4d994feea4685710bcc6d897.jpg" loading="lazy" alt="Kindle: Micro-content for Kindle Direct Publishing, written from the one perspective I didn't have to fake: an… (5 of 5)" />
         </div></div>
       </div>
   </section>
@@ -1428,31 +1438,31 @@
       <div class="cf-block">
         <p class="cf-text">An Icelandair case study with an AI voiceover that informed and, against the odds, actually entertained.</p>
         <div class="cf-media"><div class="case-videos">
-          <div class="case-video"><iframe src="https://player.vimeo.com/video/954699528?h=f82ddfdccb" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="case-video"><iframe title="Kubbco Icelandair case study video" data-src="https://player.vimeo.com/video/954699528?h=f82ddfdccb" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
         </div></div>
       </div>
       <div class="cf-block">
         <p class="cf-text">A run of #MarketingMath videos made with Brian Baumgartner. Kevin, from The Office.</p>
         <div class="cf-media"><div class="case-videos">
-          <div class="case-video vertical"><iframe src="https://www.youtube.com/embed/d7KccBAywK0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-          <div class="case-video vertical"><iframe src="https://www.youtube.com/embed/p0UAyWXXhmM" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-          <div class="case-video vertical"><iframe src="https://www.youtube.com/embed/A6dPscnepUE" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="case-video vertical"><iframe title="Kubbco MarketingMath video 1 of 3" data-src="https://www.youtube.com/embed/d7KccBAywK0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="case-video vertical"><iframe title="Kubbco MarketingMath video 2 of 3" data-src="https://www.youtube.com/embed/p0UAyWXXhmM" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="case-video vertical"><iframe title="Kubbco MarketingMath video 3 of 3" data-src="https://www.youtube.com/embed/A6dPscnepUE" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
         </div></div>
       </div>
       <div class="cf-block">
         <p class="cf-text">The Social Media Sucks podcast, repointed at the audience instead of at ourselves.</p>
-        <div class="cf-media"><div class="case-video"><iframe src="https://www.youtube.com/embed/Dvb4ltGb1g0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>
+        <div class="cf-media"><div class="case-video"><iframe title="Kubbco Social Media Sucks podcast" data-src="https://www.youtube.com/embed/Dvb4ltGb1g0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>
       </div>
       <div class="cf-block">
         <p class="cf-text">A steady stream of blog posts, built to let search do some of the selling.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="case-kubbco-img-2.jpg" loading="lazy" alt="" />
+          <img src="case-kubbco-img-2.jpg" loading="lazy" alt="Kubbco: A steady stream of blog posts, built to let search do some of the selling." />
         </div></div>
       </div>
       <div class="cf-block">
         <p class="cf-text">The website rework that gave the whole brand its Kind Rebel edge.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="case-kubbco-img-3.jpg" loading="lazy" alt="" />
+          <img src="case-kubbco-img-3.jpg" loading="lazy" alt="Kubbco: The website rework that gave the whole brand its Kind Rebel edge." />
         </div></div>
       </div>
   </section>
@@ -1480,7 +1490,7 @@
       <div class="cf-block">
         <p class="cf-text">All 40 episodes are available below, EP1 through EP40. Open the player, pick a side, press play.</p>
         <div class="cf-media"><div class="case-videos">
-          <div class="case-video"><iframe src="https://www.youtube.com/embed/S4afw1QFxw0?list=UUD7zFxFf87ASuaMP3O6RKZA" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="case-video"><iframe title="Marketing Combat full episode playlist" data-src="https://www.youtube.com/embed/S4afw1QFxw0?list=UUD7zFxFf87ASuaMP3O6RKZA" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
         </div></div>
       </div>
   </section>
@@ -1643,7 +1653,7 @@
       <div class="cf-block">
         <p class="cf-text">Kickstart is how the night begins. To prove it, we gave the party a mascot: the Kickstart Koala.</p>
         <div class="cf-media"><div class="case-videos">
-          <div class="case-video"><iframe src="https://www.youtube.com/embed/CnebH4gTUXc" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="case-video"><iframe title="Mountain Dew Kickstart Koala spot" data-src="https://www.youtube.com/embed/CnebH4gTUXc" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
         </div></div>
       </div>
   </section>
@@ -1671,22 +1681,22 @@
       <div class="cf-block">
         <p class="cf-text">Every brand came with its own mandatories. I ideated, wrote, and presented :15, :30, and :60 radio spots for each. Examples on request.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="https://static.wixstatic.com/media/fbf0c8_bcbd9b3cb6174577b2321116696cb853~mv2.jpeg" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_db57c5a3e48a4137a2dd12c499e510a0~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_32747c20b47846f7a885e7d014b0aa78~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_1f6d02219b1643b0969555bb2b75f290~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_588d19a80f2b432d88df51c0e2fba09b~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_088a4b098d0a41eea14a876b6578398b~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_51b75c7bbd52495c9bf09aae1b346408~mv2.jpg" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_239e7df60dea4266b189084252e2fd9a~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_0248043e647a4b8ab9a869f5b5c370b0~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_8bd36539fef94cb6a10cb9c5ec266ef5~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_8b38dcb88f034ea684b1caad2a0c30a4~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_73ee8088a428413081b0b63274e49ed7~mv2.jpg" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_4f221980a683479bab399c328baee384~mv2.jpg" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_212dfea2f8c94222a2e3f4dd1e955e96~mv2.jpg" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_3ec4dfe8268d446ab8c4debe42735e08~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_7bd5e8ffe7034efe90ba5dad74ab7528~mv2.png" loading="lazy" alt="" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_bcbd9b3cb6174577b2321116696cb853~mv2.jpeg" loading="lazy" alt="Pharmaceutical Radio: Every brand came with its own mandatories. I ideated, wrote, and presented :15, :30, and :60… (1 of 16)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_db57c5a3e48a4137a2dd12c499e510a0~mv2.png" loading="lazy" alt="Pharmaceutical Radio: Every brand came with its own mandatories. I ideated, wrote, and presented :15, :30, and :60… (2 of 16)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_32747c20b47846f7a885e7d014b0aa78~mv2.png" loading="lazy" alt="Pharmaceutical Radio: Every brand came with its own mandatories. I ideated, wrote, and presented :15, :30, and :60… (3 of 16)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_1f6d02219b1643b0969555bb2b75f290~mv2.png" loading="lazy" alt="Pharmaceutical Radio: Every brand came with its own mandatories. I ideated, wrote, and presented :15, :30, and :60… (4 of 16)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_588d19a80f2b432d88df51c0e2fba09b~mv2.png" loading="lazy" alt="Pharmaceutical Radio: Every brand came with its own mandatories. I ideated, wrote, and presented :15, :30, and :60… (5 of 16)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_088a4b098d0a41eea14a876b6578398b~mv2.png" loading="lazy" alt="Pharmaceutical Radio: Every brand came with its own mandatories. I ideated, wrote, and presented :15, :30, and :60… (6 of 16)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_51b75c7bbd52495c9bf09aae1b346408~mv2.jpg" loading="lazy" alt="Pharmaceutical Radio: Every brand came with its own mandatories. I ideated, wrote, and presented :15, :30, and :60… (7 of 16)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_239e7df60dea4266b189084252e2fd9a~mv2.png" loading="lazy" alt="Pharmaceutical Radio: Every brand came with its own mandatories. I ideated, wrote, and presented :15, :30, and :60… (8 of 16)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_0248043e647a4b8ab9a869f5b5c370b0~mv2.png" loading="lazy" alt="Pharmaceutical Radio: Every brand came with its own mandatories. I ideated, wrote, and presented :15, :30, and :60… (9 of 16)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_8bd36539fef94cb6a10cb9c5ec266ef5~mv2.png" loading="lazy" alt="Pharmaceutical Radio: Every brand came with its own mandatories. I ideated, wrote, and presented :15, :30, and :60… (10 of 16)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_8b38dcb88f034ea684b1caad2a0c30a4~mv2.png" loading="lazy" alt="Pharmaceutical Radio: Every brand came with its own mandatories. I ideated, wrote, and presented :15, :30, and :60… (11 of 16)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_73ee8088a428413081b0b63274e49ed7~mv2.jpg" loading="lazy" alt="Pharmaceutical Radio: Every brand came with its own mandatories. I ideated, wrote, and presented :15, :30, and :60… (12 of 16)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_4f221980a683479bab399c328baee384~mv2.jpg" loading="lazy" alt="Pharmaceutical Radio: Every brand came with its own mandatories. I ideated, wrote, and presented :15, :30, and :60… (13 of 16)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_212dfea2f8c94222a2e3f4dd1e955e96~mv2.jpg" loading="lazy" alt="Pharmaceutical Radio: Every brand came with its own mandatories. I ideated, wrote, and presented :15, :30, and :60… (14 of 16)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_3ec4dfe8268d446ab8c4debe42735e08~mv2.png" loading="lazy" alt="Pharmaceutical Radio: Every brand came with its own mandatories. I ideated, wrote, and presented :15, :30, and :60… (15 of 16)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_7bd5e8ffe7034efe90ba5dad74ab7528~mv2.png" loading="lazy" alt="Pharmaceutical Radio: Every brand came with its own mandatories. I ideated, wrote, and presented :15, :30, and :60… (16 of 16)" />
         </div></div>
       </div>
   </section>
@@ -1714,12 +1724,12 @@
       <div class="cf-block">
         <p class="cf-text">Simple, clear copy for social sweepstakes. No tricks, just entries.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="https://static.wixstatic.com/media/fbf0c8_44807c502a1e480798a46d381385a4a3~mv2.jpg" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_cf0429eecb8740d58dab4ec231c64091~mv2.jpg" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_4db680a0bd8741aa8edffc894488cd23~mv2.jpg" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_74da3af715b94d4a96ed39e19ba6b58c~mv2.jpg" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_18c4d8e9816b422b818b84f8b79ed73a~mv2.jpg" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_e697526eda574eafb90be31c87d9c986~mv2.jpg" loading="lazy" alt="" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_44807c502a1e480798a46d381385a4a3~mv2.jpg" loading="lazy" alt="Pure Leaf: Simple, clear copy for social sweepstakes. No tricks, just entries. (1 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_cf0429eecb8740d58dab4ec231c64091~mv2.jpg" loading="lazy" alt="Pure Leaf: Simple, clear copy for social sweepstakes. No tricks, just entries. (2 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_4db680a0bd8741aa8edffc894488cd23~mv2.jpg" loading="lazy" alt="Pure Leaf: Simple, clear copy for social sweepstakes. No tricks, just entries. (3 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_74da3af715b94d4a96ed39e19ba6b58c~mv2.jpg" loading="lazy" alt="Pure Leaf: Simple, clear copy for social sweepstakes. No tricks, just entries. (4 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_18c4d8e9816b422b818b84f8b79ed73a~mv2.jpg" loading="lazy" alt="Pure Leaf: Simple, clear copy for social sweepstakes. No tricks, just entries. (5 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_e697526eda574eafb90be31c87d9c986~mv2.jpg" loading="lazy" alt="Pure Leaf: Simple, clear copy for social sweepstakes. No tricks, just entries. (6 of 6)" />
         </div></div>
       </div>
   </section>
@@ -1747,9 +1757,9 @@
       <div class="cf-block">
         <p class="cf-text">A campaign that told a tired country to QuakerUp and re-energize.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="https://static.wixstatic.com/media/fbf0c8_d47e15364a7747aa9643f718919c2973~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_f739e7aaeef54052b967f97fcc249a16~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_89ac399a7a9a4a87bb741e8094b57ecd~mv2.png" loading="lazy" alt="" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_d47e15364a7747aa9643f718919c2973~mv2.png" loading="lazy" alt="Quaker: A campaign that told a tired country to QuakerUp and re-energize. (1 of 3)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_f739e7aaeef54052b967f97fcc249a16~mv2.png" loading="lazy" alt="Quaker: A campaign that told a tired country to QuakerUp and re-energize. (2 of 3)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_89ac399a7a9a4a87bb741e8094b57ecd~mv2.png" loading="lazy" alt="Quaker: A campaign that told a tired country to QuakerUp and re-energize. (3 of 3)" />
         </div></div>
       </div>
   </section>
@@ -1777,12 +1787,12 @@
       <div class="cf-block">
         <p class="cf-text">Elevated social content for a brand that lives on craft and status, written to actually engage.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="https://static.wixstatic.com/media/fbf0c8_083761acf2d74dfb9e77f5b90f8ebe10~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_da4c8cbe57fb4208b2b1dd90a0b337a5~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_4da02a8420c3473d8931f87043e1bdae~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_784d3ba7beed499781552f0055cab1e7~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_86e3af35eadc425e8ab0bd43f43b90a9~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_4340d587109e415188a82077b4e534ac~mv2.png" loading="lazy" alt="" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_083761acf2d74dfb9e77f5b90f8ebe10~mv2.png" loading="lazy" alt="Rémy Martin: Elevated social content for a brand that lives on craft and status, written to actually engage. (1 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_da4c8cbe57fb4208b2b1dd90a0b337a5~mv2.png" loading="lazy" alt="Rémy Martin: Elevated social content for a brand that lives on craft and status, written to actually engage. (2 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_4da02a8420c3473d8931f87043e1bdae~mv2.png" loading="lazy" alt="Rémy Martin: Elevated social content for a brand that lives on craft and status, written to actually engage. (3 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_784d3ba7beed499781552f0055cab1e7~mv2.png" loading="lazy" alt="Rémy Martin: Elevated social content for a brand that lives on craft and status, written to actually engage. (4 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_86e3af35eadc425e8ab0bd43f43b90a9~mv2.png" loading="lazy" alt="Rémy Martin: Elevated social content for a brand that lives on craft and status, written to actually engage. (5 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_4340d587109e415188a82077b4e534ac~mv2.png" loading="lazy" alt="Rémy Martin: Elevated social content for a brand that lives on craft and status, written to actually engage. (6 of 6)" />
         </div></div>
       </div>
   </section>
@@ -1810,14 +1820,14 @@
       <div class="cf-block">
         <p class="cf-text">Bright, tempting content built to get people to try the new clear spirit.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="https://static.wixstatic.com/media/fbf0c8_562521276817435baaed518140214e15~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_66213288344d431583a5d88bb5980cc9~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_cfd622c973064066b9cda91f750aae28~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_58cc7768d0d9490e8ecfe5c45f03cd7c~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_294312b9fcdb4e778f4d5c884b2aafed~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_7f32ce0ce4b94825ba50d2ff3dc39450~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_b9f5b4d1088543d289a23b91bcec3146~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_8c1f1199570e49b28e918bf12e098ba0~mv2.png" loading="lazy" alt="" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_562521276817435baaed518140214e15~mv2.png" loading="lazy" alt="Rémy V: Bright, tempting content built to get people to try the new clear spirit. (1 of 8)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_66213288344d431583a5d88bb5980cc9~mv2.png" loading="lazy" alt="Rémy V: Bright, tempting content built to get people to try the new clear spirit. (2 of 8)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_cfd622c973064066b9cda91f750aae28~mv2.png" loading="lazy" alt="Rémy V: Bright, tempting content built to get people to try the new clear spirit. (3 of 8)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_58cc7768d0d9490e8ecfe5c45f03cd7c~mv2.png" loading="lazy" alt="Rémy V: Bright, tempting content built to get people to try the new clear spirit. (4 of 8)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_294312b9fcdb4e778f4d5c884b2aafed~mv2.png" loading="lazy" alt="Rémy V: Bright, tempting content built to get people to try the new clear spirit. (5 of 8)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_7f32ce0ce4b94825ba50d2ff3dc39450~mv2.png" loading="lazy" alt="Rémy V: Bright, tempting content built to get people to try the new clear spirit. (6 of 8)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_b9f5b4d1088543d289a23b91bcec3146~mv2.png" loading="lazy" alt="Rémy V: Bright, tempting content built to get people to try the new clear spirit. (7 of 8)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_8c1f1199570e49b28e918bf12e098ba0~mv2.png" loading="lazy" alt="Rémy V: Bright, tempting content built to get people to try the new clear spirit. (8 of 8)" />
         </div></div>
       </div>
   </section>
@@ -1845,19 +1855,19 @@
       <div class="cf-block">
         <p class="cf-text">For 12 hours straight on Valentine's Day, I wrote songs for an improv team to sing to fans who answered three simple questions.</p>
         <div class="cf-media"><div class="case-videos">
-          <div class="case-video"><iframe src="https://www.youtube.com/embed/kZ83EzIVgSM" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="case-video"><iframe title="Shock Top campaign video" data-src="https://www.youtube.com/embed/kZ83EzIVgSM" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
         </div></div>
         <div class="cf-media"><div class="case-gallery">
-          <img src="https://static.wixstatic.com/media/fbf0c8_4e508086b11a4bc1a169e7d12b9c57a4~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_4880aa6747c74b3698b7bd383c0c2e9f~mv2.png" loading="lazy" alt="" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_4e508086b11a4bc1a169e7d12b9c57a4~mv2.png" loading="lazy" alt="Shock Top: For 12 hours straight on Valentine's Day, I wrote songs for an improv team to sing… (1 of 2)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_4880aa6747c74b3698b7bd383c0c2e9f~mv2.png" loading="lazy" alt="Shock Top: For 12 hours straight on Valentine's Day, I wrote songs for an improv team to sing… (2 of 2)" />
         </div></div>
       </div>
       <div class="cf-block">
         <p class="cf-text">A social calendar we wrote, designed, and shot in-house, delivered for every channel.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="https://static.wixstatic.com/media/fbf0c8_1099a8ca64284bc195f69acbd1c317f1~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_db96230555264edcb26cee3bc1c45540~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_48fcc3c0b7d040048638970f8d681854~mv2.png" loading="lazy" alt="" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_1099a8ca64284bc195f69acbd1c317f1~mv2.png" loading="lazy" alt="Shock Top: A social calendar we wrote, designed, and shot in-house, delivered for every channel. (1 of 3)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_db96230555264edcb26cee3bc1c45540~mv2.png" loading="lazy" alt="Shock Top: A social calendar we wrote, designed, and shot in-house, delivered for every channel. (2 of 3)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_48fcc3c0b7d040048638970f8d681854~mv2.png" loading="lazy" alt="Shock Top: A social calendar we wrote, designed, and shot in-house, delivered for every channel. (3 of 3)" />
         </div></div>
       </div>
   </section>
@@ -1888,9 +1898,9 @@
       <div class="cf-block">
         <p class="cf-text">Then I wrote, designed, and orchestrated a billboard partnership that put us up in Melbourne and Perth, Australia. Mock-ups by me too.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="https://static.wixstatic.com/media/fbf0c8_d1720cfcb0064950b3fb0cfc5cda3d0a~mv2.jpg" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_be95955ec8f143e5a493bb0fe3b50e30~mv2.jpg" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_0a698b4d2e544edbbeceda3e38ddd166~mv2.jpg" loading="lazy" alt="" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_d1720cfcb0064950b3fb0cfc5cda3d0a~mv2.jpg" loading="lazy" alt="Space Vikings: Then I wrote, designed, and orchestrated a billboard partnership that put us up in Melbourne and… (1 of 3)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_be95955ec8f143e5a493bb0fe3b50e30~mv2.jpg" loading="lazy" alt="Space Vikings: Then I wrote, designed, and orchestrated a billboard partnership that put us up in Melbourne and… (2 of 3)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_0a698b4d2e544edbbeceda3e38ddd166~mv2.jpg" loading="lazy" alt="Space Vikings: Then I wrote, designed, and orchestrated a billboard partnership that put us up in Melbourne and… (3 of 3)" />
         </div></div>
       </div>
   </section>
@@ -1918,16 +1928,16 @@
       <div class="cf-block">
         <p class="cf-text">The Piano Guys, shot, directed, and interviewed inside Spotify Studios.</p>
         <div class="cf-media"><div class="case-videos">
-          <div class="case-video"><iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fspotifyusa%2Fvideos%2F1402565309756444&show_text=false&width=560" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe></div>
+          <div class="case-video"><iframe title="Spotify branded content video 1 of 5" data-src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fspotifyusa%2Fvideos%2F1402565309756444&show_text=false&width=560" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe></div>
         </div></div>
       </div>
       <div class="cf-block">
         <p class="cf-text">A repeatable social format the street team and our designers could produce alone. We pitched twelve ideas. Spotify bought eight.</p>
         <div class="cf-media"><div class="case-videos">
-          <div class="case-video"><iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fspotifyusa%2Fvideos%2F1328831160463193&show_text=false&width=560" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe></div>
-          <div class="case-video"><iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fspotifyusa%2Fvideos%2F1301592006520442&show_text=false&width=560" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe></div>
-          <div class="case-video"><iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fspotifyusa%2Fvideos%2F1314216208591355&show_text=false&width=560" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe></div>
-          <div class="case-video"><iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fspotifyusa%2Fvideos%2F1329083807104595&show_text=false&width=560" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe></div>
+          <div class="case-video"><iframe title="Spotify branded content video 2 of 5" data-src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fspotifyusa%2Fvideos%2F1328831160463193&show_text=false&width=560" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe></div>
+          <div class="case-video"><iframe title="Spotify branded content video 3 of 5" data-src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fspotifyusa%2Fvideos%2F1301592006520442&show_text=false&width=560" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe></div>
+          <div class="case-video"><iframe title="Spotify branded content video 4 of 5" data-src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fspotifyusa%2Fvideos%2F1314216208591355&show_text=false&width=560" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe></div>
+          <div class="case-video"><iframe title="Spotify branded content video 5 of 5" data-src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fspotifyusa%2Fvideos%2F1329083807104595&show_text=false&width=560" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe></div>
         </div></div>
       </div>
   </section>
@@ -1954,14 +1964,14 @@
       <div class="cf-block">
         <p class="cf-text">Funny real-time and evergreen content, written to match a voice that was already having fun.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="https://static.wixstatic.com/media/fbf0c8_096c7446bc1c41199edb43b4c2c35f5d~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_3bb730442620480597b4a11f342194a0~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_119efca31c50419d89000b0bc678ec6c~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_bbd0c8de32cb41098d892c987319ddc9~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_8d10d803650b4a10aa74c003a283fb7e~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_599110f51df14029b14ff234d8766046~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_aff626cc908c4fdd8f0bf8ee75c5a96b~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_8171bca3e42a4baf8afc494b31ef4601~mv2.png" loading="lazy" alt="" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_096c7446bc1c41199edb43b4c2c35f5d~mv2.png" loading="lazy" alt="Twisted Tea: Funny real-time and evergreen content, written to match a voice that was already having fun. (1 of 8)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_3bb730442620480597b4a11f342194a0~mv2.png" loading="lazy" alt="Twisted Tea: Funny real-time and evergreen content, written to match a voice that was already having fun. (2 of 8)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_119efca31c50419d89000b0bc678ec6c~mv2.png" loading="lazy" alt="Twisted Tea: Funny real-time and evergreen content, written to match a voice that was already having fun. (3 of 8)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_bbd0c8de32cb41098d892c987319ddc9~mv2.png" loading="lazy" alt="Twisted Tea: Funny real-time and evergreen content, written to match a voice that was already having fun. (4 of 8)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_8d10d803650b4a10aa74c003a283fb7e~mv2.png" loading="lazy" alt="Twisted Tea: Funny real-time and evergreen content, written to match a voice that was already having fun. (5 of 8)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_599110f51df14029b14ff234d8766046~mv2.png" loading="lazy" alt="Twisted Tea: Funny real-time and evergreen content, written to match a voice that was already having fun. (6 of 8)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_aff626cc908c4fdd8f0bf8ee75c5a96b~mv2.png" loading="lazy" alt="Twisted Tea: Funny real-time and evergreen content, written to match a voice that was already having fun. (7 of 8)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_8171bca3e42a4baf8afc494b31ef4601~mv2.png" loading="lazy" alt="Twisted Tea: Funny real-time and evergreen content, written to match a voice that was already having fun. (8 of 8)" />
         </div></div>
       </div>
   </section>
@@ -1989,12 +1999,12 @@
       <div class="cf-block">
         <p class="cf-text">Social calendars for Falling Water and Eyewitness, written and built entirely from show photography.</p>
         <div class="cf-media"><div class="case-gallery">
-          <img src="https://static.wixstatic.com/media/fbf0c8_c3cf2dcfb44244c9a6f4eb96832d7e9b~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_edaf3ef241834d9882eafbb4b716c64e~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_d702f7b266784f489672dc2bedc19576~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_fee0cde38a04432d8a5751bf5bbb9723~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_648871e451a448fbb9dd027233853187~mv2.png" loading="lazy" alt="" />
-          <img src="https://static.wixstatic.com/media/fbf0c8_aa688216fa0d4a079102db283192543b~mv2.png" loading="lazy" alt="" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_c3cf2dcfb44244c9a6f4eb96832d7e9b~mv2.png" loading="lazy" alt="USA Network: Social calendars for Falling Water and Eyewitness, written and built entirely from show photography. (1 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_edaf3ef241834d9882eafbb4b716c64e~mv2.png" loading="lazy" alt="USA Network: Social calendars for Falling Water and Eyewitness, written and built entirely from show photography. (2 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_d702f7b266784f489672dc2bedc19576~mv2.png" loading="lazy" alt="USA Network: Social calendars for Falling Water and Eyewitness, written and built entirely from show photography. (3 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_fee0cde38a04432d8a5751bf5bbb9723~mv2.png" loading="lazy" alt="USA Network: Social calendars for Falling Water and Eyewitness, written and built entirely from show photography. (4 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_648871e451a448fbb9dd027233853187~mv2.png" loading="lazy" alt="USA Network: Social calendars for Falling Water and Eyewitness, written and built entirely from show photography. (5 of 6)" />
+          <img src="https://static.wixstatic.com/media/fbf0c8_aa688216fa0d4a079102db283192543b~mv2.png" loading="lazy" alt="USA Network: Social calendars for Falling Water and Eyewitness, written and built entirely from show photography. (6 of 6)" />
         </div></div>
       </div>
   </section>
@@ -2121,5 +2131,32 @@
   });
 })();
 </script>
+<script>
+(function(){
+  function ytId(u){var m=u.match(/(?:embed\/|v=)([\w-]{6,})/);return m?m[1]:null;}
+  function withAutoplay(u){return u+(u.indexOf('?')>-1?'&':'?')+'autoplay=1';}
+  var frames=document.querySelectorAll('iframe[data-src]');
+  Array.prototype.forEach.call(frames,function(f){
+    var wrap=f.parentElement; if(!wrap){return;}
+    if(getComputedStyle(wrap).position==='static'){wrap.style.position='relative';}
+    var url=f.getAttribute('data-src');
+    var title=f.getAttribute('title')||'Play video';
+    var btn=document.createElement('button');
+    btn.type='button'; btn.className='video-facade';
+    btn.setAttribute('aria-label','Play: '+title);
+    var yt=ytId(url);
+    if(yt){btn.style.backgroundImage="url('https://i.ytimg.com/vi/"+yt+"/hqdefault.jpg')";}
+    var label=title.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    btn.innerHTML='<span class="vf-play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span><span class="vf-label">'+label+'</span>';
+    btn.addEventListener('click',function(){
+      f.setAttribute('src',withAutoplay(url));
+      f.removeAttribute('data-src');
+      if(btn.parentNode){btn.parentNode.removeChild(btn);}
+    });
+    wrap.appendChild(btn);
+  });
+})();
+</script>
+
 </body>
 </html>
