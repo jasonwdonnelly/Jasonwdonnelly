@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<title>Blog | Jason Donnelly</title>
+<meta name="description" content="Essays by Jason Donnelly on writing, AI, satire, marketing, and the books behind them. Building with AI, the craft of writing, and telling the truth on purpose.">
+<link rel="canonical" href="https://jasonwdonnelly.com/blog.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Blog | Jason Donnelly">
+<meta property="og:description" content="Essays on writing, AI, satire, and marketing from author Jason Donnelly.">
+<meta property="og:url" content="https://jasonwdonnelly.com/blog.html">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;1,300;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:dark;--paper:#0b0b0a;--paper-2:#161614;--ink:#f1efe8;--ink-soft:#c8c5bb;--muted:#8b887d;--line:#2b2b27;--accent:#c6ff32;--maxw:1180px;--read:720px;--ease:cubic-bezier(0.22,1,0.36,1)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;background:var(--paper);color-scheme:dark}
+  body{background:var(--paper);color:var(--ink);font-family:"Archivo","Helvetica Neue",Arial,sans-serif;line-height:1.65}
+  a{color:inherit;text-decoration:none}
+  .mono{font-family:"JetBrains Mono",monospace}
+  ::selection{background:var(--accent);color:var(--paper)}
+  nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:22px 5vw;background:linear-gradient(to bottom,rgba(11,11,10,.94),rgba(11,11,10,.72));backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  nav .name{font-weight:800;letter-spacing:-.02em;font-size:1.05rem}
+  nav .name b{color:var(--accent)}
+  nav .links{display:flex;gap:26px;font-size:.82rem;letter-spacing:.04em}
+  nav .links a{color:var(--muted);transition:color .2s}
+  nav .links a:hover,nav .links a[aria-current]{color:var(--ink)}
+  nav .links a[aria-current]{color:var(--accent)}
+  @media(max-width:720px){nav .links{gap:15px;font-size:.72rem} nav .links a.hide-sm{display:none}}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 5vw}
+  .read{max-width:var(--read);margin:0 auto;padding:0 5vw}
+  /* index */
+  .bloghero{padding:88px 0 30px}
+  .eyebrow{color:var(--accent);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:20px}
+  .bloghero h1{font-size:clamp(2.6rem,7vw,5rem);line-height:.98;letter-spacing:-.03em;font-weight:800}
+  .bloghero h1 em{font-style:italic;font-weight:300;color:var(--accent)}
+  .bloghero p{margin-top:22px;max-width:60ch;font-size:1.1rem;color:var(--ink-soft)}
+  .posts{border-top:1px solid var(--line);margin-top:44px}
+  .post-row{display:block;padding:34px 0;border-bottom:1px solid var(--line);transition:padding-left .3s var(--ease)}
+  .post-row:hover{padding-left:10px}
+  .post-row .meta{font-family:"JetBrains Mono",monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+  .post-row h2{font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-.02em;font-weight:800;line-height:1.1;max-width:26ch}
+  .post-row:hover h2{color:var(--accent)}
+  .post-row .ex{margin-top:12px;color:var(--ink-soft);font-size:1rem;max-width:62ch}
+  .post-row .go{display:inline-block;margin-top:14px;font-family:"JetBrains Mono",monospace;font-size:.72rem;letter-spacing:.08em;color:var(--muted)}
+  .post-row:hover .go{color:var(--accent)}
+  /* article */
+  article{padding:70px 0 20px}
+  .art-head{max-width:var(--read);margin:0 auto;padding:0 5vw 10px}
+  .art-meta{font-family:"JetBrains Mono",monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:22px}
+  .art-meta a{color:var(--accent)}
+  .art-head h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.05;letter-spacing:-.02em;font-weight:800}
+  .art-body{max-width:var(--read);margin:26px auto 0;padding:0 5vw}
+  .art-body p{margin:0 0 22px;font-size:1.14rem;color:var(--ink-soft)}
+  .art-body h2{font-size:1.5rem;font-weight:800;letter-spacing:-.01em;color:var(--ink);margin:40px 0 14px}
+  .art-body a{color:var(--accent);border-bottom:1px solid rgba(198,255,50,.35)}
+  .art-body a:hover{border-color:var(--accent)}
+  .art-body em{color:var(--ink);font-style:italic}
+  .art-body strong{color:var(--ink)}
+  .art-body p:last-child{color:var(--muted);font-size:1rem;border-top:1px solid var(--line);padding-top:22px;margin-top:34px}
+  .art-nav{max-width:var(--read);margin:30px auto 0;padding:26px 5vw 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-family:"JetBrains Mono",monospace;font-size:.74rem;letter-spacing:.06em}
+  .art-nav a{color:var(--muted);transition:color .2s}
+  .art-nav a:hover{color:var(--accent)}
+  footer{border-top:1px solid var(--line);margin-top:56px}
+  footer .row{display:flex;justify-content:space-between;gap:16px;padding:26px 5vw;max-width:var(--maxw);margin:0 auto;font-size:.72rem;color:var(--muted);flex-wrap:wrap}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="name" href="/index.html#home">Jason Donnelly<b>.</b></a>
+  <div class="links mono">
+    <a class="hide-sm" href="/index.html#work">Work</a>
+    <a class="hide-sm" href="/index.html#voiceover">Voiceover</a>
+    <a href="/books.html">Books</a>
+    <a href="/blog.html" aria-current="page">Blog</a>
+    <a class="hide-sm" href="/index.html#ai">AI</a>
+    <a class="hide-sm" href="https://www.linkedin.com/in/fluential" target="_blank" rel="noopener">CV</a>
+  </div>
+</nav>
+<header class="bloghero">
+  <div class="wrap">
+    <p class="eyebrow mono">Words, on purpose</p>
+    <h1>The <em>blog</em></h1>
+    <p>Essays on writing, building with AI, satire, and the strange business of telling the truth for a living. The stories behind the books, and the arguments that started them.</p>
+  </div>
+</header>
+<main>
+  <div class="wrap posts">
+    <a class="post-row" href="/blog/brand-voice-legal-team.html">
+      <div class="meta">July 8, 2026</div>
+      <h2>Most Brand Voices Sound Like a Legal Team Wrote Them</h2>
+      <p class="ex">Why so much brand copy sounds identical and dead, and how to give a brand a voice with an actual pulse, from a copywriter who&#x27;s done it for the brands in your fridge.</p>
+      <span class="go">Read &rarr;</span>
+    </a>
+    <a class="post-row" href="/blog/pizza-linkedin-lesson.html">
+      <div class="meta">July 2, 2026</div>
+      <h2>I Grew Thousands of Followers Posting About Pizza. Here&#x27;s What It Taught Me About LinkedIn.</h2>
+      <p class="ex">The pizza experiment that grew my LinkedIn audience, and the four lessons about content that actually work, from a copywriter who tested them in public.</p>
+      <span class="go">Read &rarr;</span>
+    </a>
+    <a class="post-row" href="/blog/fake-doctors-name-pen-name.html">
+      <div class="meta">June 23, 2026</div>
+      <h2>Why I Publish Books Under a Fake Doctor&#x27;s Name</h2>
+      <p class="ex">I put out fourteen books as Dr. Sham Acumen, a doctor who does not exist. The pen name isn&#x27;t a disguise. It&#x27;s the most honest filing system I&#x27;ve ever built.</p>
+      <span class="go">Read &rarr;</span>
+    </a>
+    <a class="post-row" href="/blog/ai-taste-is-the-job.html">
+      <div class="meta">June 9, 2026</div>
+      <h2>AI Writes Confident Garbage. Taste Is the Only Thing That Saves You.</h2>
+      <p class="ex">Will AI replace writers? Wrong question. The real one is whether you built the taste to steer it, and the horror novel I wrote about what happens when nobody does.</p>
+      <span class="go">Read &rarr;</span>
+    </a>
+    <a class="post-row" href="/blog/write-a-book-in-24-hours-with-ai.html">
+      <div class="meta">May 26, 2026</div>
+      <h2>Can You Actually Write a Book in 24 Hours With AI? I Did It 14 Times.</h2>
+      <p class="ex">The honest answer to whether AI can write a book in a day, from someone who published fourteen of them. What&#x27;s real, what&#x27;s garbage, and what nobody selling the course will tell you.</p>
+      <span class="go">Read &rarr;</span>
+    </a>
+    <a class="post-row" href="/blog/writing-willful-thirteen-years.html">
+      <div class="meta">May 12, 2026</div>
+      <h2>I&#x27;ve Been Writing the Same Novel for Thirteen Years</h2>
+      <p class="ex">The strange, slow craft of writing one novel for thirteen years. How Willful began as a book called Oxygen, why it changed everything but its nerve, and why fiction that reads like a memoir is the hardest kind to write.</p>
+      <span class="go">Read &rarr;</span>
+    </a>
+    <a class="post-row" href="/blog/self-help-that-works.html">
+      <div class="meta">April 28, 2026</div>
+      <h2>Most Self-Help Is a Scam. Here&#x27;s the Version That Works.</h2>
+      <p class="ex">Why the self-help industry needs you to stay a little broken, and the profane, honest books I wrote to short-circuit it.</p>
+      <span class="go">Read &rarr;</span>
+    </a>
+    <a class="post-row" href="/blog/personality-tests-comfortable-lie.html">
+      <div class="meta">April 14, 2026</div>
+      <h2>Personality Tests Are a Comfortable Lie</h2>
+      <p class="ex">Why we love being told who we are, why the label is a cage, and the satire novel I wrote about it, Gripped.</p>
+      <span class="go">Read &rarr;</span>
+    </a>
+    <a class="post-row" href="/blog/adhd-different-operating-system.html">
+      <div class="meta">March 31, 2026</div>
+      <h2>ADHD Isn&#x27;t a Productivity Problem. It&#x27;s a Different Operating System.</h2>
+      <p class="ex">Most ADHD advice tries to fix you with someone else&#x27;s brain. Here&#x27;s the reframe that actually helped, and the book I wrote about it, ADHD ROCKS.</p>
+      <span class="go">Read &rarr;</span>
+    </a>
+    <a class="post-row" href="/blog/cold-plunge-385-days.html">
+      <div class="meta">March 18, 2026</div>
+      <h2>I Took a Cold Plunge Every Day for 385 Days. Then I Stopped on Purpose.</h2>
+      <p class="ex">The true story behind Cold Feat. What 385 straight days of cold plunges did to a midlife crisis, and why quitting on purpose was the whole point.</p>
+      <span class="go">Read &rarr;</span>
+    </a>
+  </div>
+</main>
+<footer><div class="row mono"><span>&copy; 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></div></footer>
+</body>
+</html>
