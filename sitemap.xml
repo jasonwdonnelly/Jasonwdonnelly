@@ -2,47 +2,107 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://jasonwdonnelly.com/</loc>
-    <lastmod>2026-07-09</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://jasonwdonnelly.com/books.html</loc>
-    <lastmod>2026-07-09</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://jasonwdonnelly.com/blog.html</loc>
+    <lastmod>2026-07-15</lastmod>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://jasonwdonnelly.com/bestburgers.html</loc>
-    <lastmod>2026-07-09</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://jasonwdonnelly.com/claude-school.html</loc>
-    <lastmod>2026-07-09</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://jasonwdonnelly.com/the-fold.html</loc>
-    <lastmod>2026-07-09</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://jasonwdonnelly.com/the-deck.html</loc>
-    <lastmod>2026-07-09</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://jasonwdonnelly.com/the-red-pen.html</loc>
-    <lastmod>2026-07-09</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://jasonwdonnelly.com/super-family.html</loc>
-    <lastmod>2026-07-09</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://jasonwdonnelly.com/denmark-residency-planner.html</loc>
-    <lastmod>2026-07-09</lastmod>
+    <lastmod>2026-07-15</lastmod>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://jasonwdonnelly.com/blog/cold-plunge-385-days.html</loc>
+    <lastmod>2026-03-18</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jasonwdonnelly.com/blog/adhd-different-operating-system.html</loc>
+    <lastmod>2026-03-31</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jasonwdonnelly.com/blog/personality-tests-comfortable-lie.html</loc>
+    <lastmod>2026-04-14</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jasonwdonnelly.com/blog/self-help-that-works.html</loc>
+    <lastmod>2026-04-28</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jasonwdonnelly.com/blog/writing-willful-thirteen-years.html</loc>
+    <lastmod>2026-05-12</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jasonwdonnelly.com/blog/write-a-book-in-24-hours-with-ai.html</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jasonwdonnelly.com/blog/ai-taste-is-the-job.html</loc>
+    <lastmod>2026-06-09</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jasonwdonnelly.com/blog/fake-doctors-name-pen-name.html</loc>
+    <lastmod>2026-06-23</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jasonwdonnelly.com/blog/pizza-linkedin-lesson.html</loc>
+    <lastmod>2026-07-02</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jasonwdonnelly.com/blog/brand-voice-legal-team.html</loc>
+    <lastmod>2026-07-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jasonwdonnelly.com/blog/fast-is-not-the-enemy-of-good.html</loc>
+    <lastmod>2026-07-15</lastmod>
+    <priority>0.7</priority>
   </url>
 </urlset>
