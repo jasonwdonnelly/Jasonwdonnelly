@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<title>I Build Ugly Little Tools Nobody Asked For. That&#x27;s the Point. | Jason Donnelly</title>
+<meta name="description" content="Why a creative director keeps shipping small, ugly AI tools nobody asked for, and what building fast teaches you that planning never will.">
+<link rel="canonical" href="https://jasonwdonnelly.com/blog/ugly-little-tools.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="I Build Ugly Little Tools Nobody Asked For. That&#x27;s the Point.">
+<meta property="og:description" content="Why a creative director keeps shipping small, ugly AI tools nobody asked for, and what building fast teaches you that planning never will.">
+<meta property="og:url" content="https://jasonwdonnelly.com/blog/ugly-little-tools.html">
+<meta property="article:published_time" content="2026-08-11">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;1,300;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BlogPosting",
+ "headline": "I Build Ugly Little Tools Nobody Asked For. That's the Point.",
+ "description": "Why a creative director keeps shipping small, ugly AI tools nobody asked for, and what building fast teaches you that planning never will.",
+ "datePublished": "2026-08-11",
+ "dateModified": "2026-08-11",
+ "author": {
+  "@type": "Person",
+  "name": "Jason Donnelly",
+  "url": "https://jasonwdonnelly.com/"
+ },
+ "publisher": {
+  "@type": "Person",
+  "name": "Jason Donnelly"
+ },
+ "mainEntityOfPage": "https://jasonwdonnelly.com/blog/ugly-little-tools.html",
+ "url": "https://jasonwdonnelly.com/blog/ugly-little-tools.html"
+}
+</script>
+<style>
+  :root{color-scheme:dark;--paper:#0b0b0a;--paper-2:#161614;--ink:#f1efe8;--ink-soft:#c8c5bb;--muted:#8b887d;--line:#2b2b27;--accent:#c6ff32;--maxw:1180px;--read:720px;--ease:cubic-bezier(0.22,1,0.36,1)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;background:var(--paper);color-scheme:dark}
+  body{background:var(--paper);color:var(--ink);font-family:"Archivo","Helvetica Neue",Arial,sans-serif;line-height:1.65}
+  a{color:inherit;text-decoration:none}
+  .mono{font-family:"JetBrains Mono",monospace}
+  ::selection{background:var(--accent);color:var(--paper)}
+  nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:22px 5vw;background:linear-gradient(to bottom,rgba(11,11,10,.94),rgba(11,11,10,.72));backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  nav .name{font-weight:800;letter-spacing:-.02em;font-size:1.05rem}
+  nav .name b{color:var(--accent)}
+  nav .links{display:flex;gap:26px;font-size:.82rem;letter-spacing:.04em}
+  nav .links a{color:var(--muted);transition:color .2s}
+  nav .links a:hover,nav .links a[aria-current]{color:var(--ink)}
+  nav .links a[aria-current]{color:var(--accent)}
+  @media(max-width:720px){nav .links{gap:15px;font-size:.72rem} nav .links a.hide-sm{display:none}}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 5vw}
+  .read{max-width:var(--read);margin:0 auto;padding:0 5vw}
+  .bloghero{padding:88px 0 30px}
+  .eyebrow{color:var(--accent);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:20px}
+  .bloghero h1{font-size:clamp(2.6rem,7vw,5rem);line-height:.98;letter-spacing:-.03em;font-weight:800}
+  .bloghero h1 em{font-style:italic;font-weight:300;color:var(--accent)}
+  .bloghero p{margin-top:22px;max-width:60ch;font-size:1.1rem;color:var(--ink-soft)}
+  .posts{border-top:1px solid var(--line);margin-top:44px}
+  .post-row{display:block;padding:34px 0;border-bottom:1px solid var(--line);transition:padding-left .3s var(--ease)}
+  .post-row:hover{padding-left:10px}
+  .post-row .meta{font-family:"JetBrains Mono",monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+  .post-row h2{font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-.02em;font-weight:800;line-height:1.1;max-width:26ch}
+  .post-row:hover h2{color:var(--accent)}
+  .post-row .ex{margin-top:12px;color:var(--ink-soft);font-size:1rem;max-width:62ch}
+  .post-row .go{display:inline-block;margin-top:14px;font-family:"JetBrains Mono",monospace;font-size:.72rem;letter-spacing:.08em;color:var(--muted)}
+  .post-row:hover .go{color:var(--accent)}
+  article{padding:70px 0 20px}
+  .art-head{max-width:var(--read);margin:0 auto;padding:0 5vw 10px}
+  .art-meta{font-family:"JetBrains Mono",monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:22px}
+  .art-meta a{color:var(--accent)}
+  .art-head h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.05;letter-spacing:-.02em;font-weight:800}
+  .art-body{max-width:var(--read);margin:26px auto 0;padding:0 5vw}
+  .art-body p{margin:0 0 22px;font-size:1.14rem;color:var(--ink-soft)}
+  .art-body h2{font-size:1.5rem;font-weight:800;letter-spacing:-.01em;color:var(--ink);margin:40px 0 14px}
+  .art-body a{color:var(--accent);border-bottom:1px solid rgba(198,255,50,.35)}
+  .art-body a:hover{border-color:var(--accent)}
+  .art-body em{color:var(--ink);font-style:italic}
+  .art-body strong{color:var(--ink)}
+  .art-body p:last-child{color:var(--muted);font-size:1rem;border-top:1px solid var(--line);padding-top:22px;margin-top:34px}
+  .art-nav{max-width:var(--read);margin:30px auto 0;padding:26px 5vw 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-family:"JetBrains Mono",monospace;font-size:.74rem;letter-spacing:.06em}
+  .art-nav a{color:var(--muted);transition:color .2s}
+  .art-nav a:hover{color:var(--accent)}
+  footer{border-top:1px solid var(--line);margin-top:56px}
+  footer .row{display:flex;justify-content:space-between;gap:16px;padding:26px 5vw;max-width:var(--maxw);margin:0 auto;font-size:.72rem;color:var(--muted);flex-wrap:wrap}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+</style>
+
+</head>
+<body>
+<nav>
+  <a class="name" href="/index.html#home">Jason Donnelly<b>.</b></a>
+  <div class="links mono">
+    <a class="hide-sm" href="/index.html#work">Work</a>
+    <a class="hide-sm" href="/index.html#voiceover">Voiceover</a>
+    <a href="/books.html">Books</a>
+    <a href="/blog.html" aria-current="page">Blog</a>
+    <a href="/about.html">About</a>
+    <a class="hide-sm" href="/index.html#ai">AI</a>
+    <a class="hide-sm" href="https://www.linkedin.com/in/fluential" target="_blank" rel="noopener">CV</a>
+  </div>
+</nav>
+<article>
+  <div class="art-head">
+    <p class="art-meta"><a href="/blog.html">Blog</a> &middot; August 11, 2026</p>
+    <h1>I Build Ugly Little Tools Nobody Asked For. That&#x27;s the Point.</h1>
+  </div>
+  <div class="art-body">
+<p>Nobody asked for a LinkedIn hook previewer.</p>
+<p>Nobody was lying awake thinking, "if only some guy in Copenhagen would build a tool that shows me where my post gets truncated."</p>
+<p>I built it anyway. It's called The Fold.</p>
+<p>Then I built The Red Pen, which reads your copy and tells you what's wrong with it. Then The Deck, which turns an idea into a carousel. Then a course. Then a browser game for my son. Then a tool that helps you plan Danish residency, which is a sentence I never expected to type about my own life.</p>
+<p>None of these had a business plan. Most of them are a little ugly.</p>
+<p>That's not a confession. That's the strategy.</p>
+<h2>The permission trap</h2>
+<p>Here's the thing.</p>
+<p>Most people are waiting for a reason to build something. A client. A boss. A market opportunity. Validation from a stranger on the internet.</p>
+<p>They want someone to ask first.</p>
+<p>And while they wait, they stay exactly as capable as they were last year. They read about AI. They bookmark threads about AI. They have OPINIONS about AI in meetings.</p>
+<p>But they haven't built anything with it. So their opinions are secondhand. They're reviewing a restaurant they've never eaten at.</p>
+<p>I decided a while ago that the ask was never coming, so I stopped waiting for it.</p>
+<p>I build the thing because the thing occurred to me. That's the whole approval process. One guy, one nod, done.</p>
+<h2>Ugly ships. Perfect doesn't.</h2>
+<p>Let me tell you what "ugly" buys you.</p>
+<p>An ugly tool exists. A beautiful idea does not.</p>
+<p>An ugly tool can be used, broken, fixed, and improved. A beautiful idea can only be described at parties.</p>
+<p>When I sit down with Claude to build something, I'm not trying to make a product. I'm trying to make a thing that works by tonight. It will have weird buttons. The spacing will offend a designer somewhere, and I say that with love, as someone who has worked next to designers for 13+ years.</p>
+<p>But it will WORK.</p>
+<p>And here's what nobody tells you: the moment it works, you learn more in ten minutes of using it than you learned in ten hours of thinking about it.</p>
+<p>The idea in your head is always elegant. The tool in your browser tells you the truth.</p>
+<h2>What the little tools actually teach</h2>
+<p>Every one of these ugly things taught me something I now use in my actual paid work.</p>
+<p>The Fold taught me how brutally little space a hook actually gets before the truncation eats it. I knew that abstractly. Now I FEEL it. Every line I write for a client passes through that feeling.</p>
+<p>The Red Pen taught me something better: to build it, I had to write down what bad copy actually looks like. Vague verbs. Hedged claims. Sentences that end weaker than they start. You cannot teach a machine to flinch at bad writing without first understanding, precisely, why you flinch.</p>
+<p>Building the tool forced me to turn taste into instructions.</p>
+<p>That exercise alone was worth more than most workshops I've paid for.</p>
+<p>And the browser game I made for my son? That one taught me that shipping something small for an audience of one is still shipping. He didn't review my code. He just played it. Best user feedback of my career.</p>
+<h2>"But I'm not technical"</h2>
+<p>I'm going to hold your hands when I say this...</p>
+<p>Neither am I.</p>
+<p>I'm a copywriter. I have three master's degrees and one of them is in FICTION. My professional background is making beer sound fun and snacks sound urgent.</p>
+<p>The tools got built anyway, because the barrier is no longer code. The barrier is knowing exactly what you want, describing it clearly, and having the taste to notice when what you got back isn't it.</p>
+<p>Which means the barrier is thinking.</p>
+<p>That's the uncomfortable part, honestly. "I'm not technical" used to be a real wall. Now it's a curtain. You can walk through it any afternoon you choose. And when the wall disappears, so does the excuse, and some people miss the excuse more than they'd like to admit.</p>
+<p>I get it. The excuse was comfortable.</p>
+<p>But the people who will be interesting in five years are the ones building weird little things right now. Not because the things are good. Because the BUILDING is good. It compounds. Every ugly tool makes the next one less ugly.</p>
+<h2>Nobody asked. That's the point.</h2>
+<p>If you wait for someone to ask, you'll build what they already imagined.</p>
+<p>Small, safe, expected.</p>
+<p>When you build unasked, you get to find the thing nobody imagined yet. Most of the time it's nothing. A toy. A dead end. A tool three people use, and one of them is your mom.</p>
+<p>Fine.</p>
+<p>The dead ends are the tuition. And the tuition is the cheapest it has ever been in the history of making things.</p>
+<p>So here's your homework, and I mean this: think of one small annoyance in your work week. One repetitive, dumb, papercut-sized problem. Then go build the ugliest possible tool that fixes it. This week. Don't plan it. Build it.</p>
+<p>You'll learn more about AI in that one evening than in a year of reading takes about it.</p>
+<p>And if you want proof that a non-technical word person can actually do this, <a href="/index.html#ai">the little tools are all right here</a>. Ugly and proud. You can also see what happens when the same energy gets pointed at 300 pages, because <a href="/books.html">the books</a> came from the exact same impulse: build the thing, ask permission never.</p>
+<p>Now go make something nobody asked for.</p>
+<p>Please and thank you. 😘</p>
+  </div>
+  <div class="art-nav">
+    <a href="/blog.html">&larr; All posts</a>
+    <a href="/books.html">The books &rarr;</a>
+  </div>
+</article>
+<footer><div class="row mono"><span>&copy; 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></div></footer>
+</body>
+</html>
