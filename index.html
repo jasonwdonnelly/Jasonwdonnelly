@@ -385,6 +385,9 @@
   .hv-sub { font-family: "Archivo", "Helvetica Neue", Arial, sans-serif; font-size: clamp(1.15rem, 2vw, 1.5rem); line-height: 1.5; color: var(--ink-soft); max-width: 36ch; }
   .hv-sub b { color: var(--ink); }
   .hv-video { margin: 0; justify-self: end; width: min(460px, 46vw); }
+  .hv-photo { margin: 0; justify-self: end; width: min(440px, 44vw); }
+  .hv-photo img { width: 100%; height: auto; display: block; }
+  @media (max-width: 700px) { .hv-photo { justify-self: center; width: min(340px, 78vw); } }
   @media (max-width: 700px) { .hv-grid { grid-template-columns: 1fr; gap: 36px; padding: 44px 0 48px; } .hv-video { justify-self: start; width: 100%; } }
 
   /* proof marquee band */
@@ -579,7 +582,7 @@
           <a class="btn-hire-lg" href="mailto:jasonwdonnelly@gmail.com?subject=I%20want%20to%20hire%20you">Reach out <span class="arrow">&rarr;</span></a>
         </div>
       </div>
-      <figure class="hv-video"><div class="hero-video"><iframe title="Jason Donnelly intro video" data-src="https://www.youtube.com/embed/ps1DPKTx8L4?modestbranding=1&rel=0&playsinline=1" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></figure>
+      <figure class="hv-photo"><img src="hero-jason.png" alt="Jason Donnelly, mid-jump in a black suit, tie, NY cap and Converse, cut out against black." /></figure>
     </div>
   </div>
 </header>
