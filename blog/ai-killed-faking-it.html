@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<title>AI Didn&#x27;t Kill Writing. It Killed Faking It. | Jason Donnelly</title>
+<meta name="description" content="AI didn&#x27;t end writing. It ended the hiding place for people who faked it. What actually survives when everyone can generate a draft, and how to build it.">
+<link rel="canonical" href="https://jasonwdonnelly.com/blog/ai-killed-faking-it.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI Didn&#x27;t Kill Writing. It Killed Faking It.">
+<meta property="og:description" content="AI didn&#x27;t end writing. It ended the hiding place for people who faked it. What actually survives when everyone can generate a draft, and how to build it.">
+<meta property="og:url" content="https://jasonwdonnelly.com/blog/ai-killed-faking-it.html">
+<meta property="article:published_time" content="2026-11-02">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;1,300;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BlogPosting",
+ "headline": "AI Didn't Kill Writing. It Killed Faking It.",
+ "description": "AI didn't end writing. It ended the hiding place for people who faked it. What actually survives when everyone can generate a draft, and how to build it.",
+ "datePublished": "2026-11-02",
+ "dateModified": "2026-11-02",
+ "author": {
+  "@type": "Person",
+  "name": "Jason Donnelly",
+  "url": "https://jasonwdonnelly.com/"
+ },
+ "publisher": {
+  "@type": "Person",
+  "name": "Jason Donnelly"
+ },
+ "mainEntityOfPage": "https://jasonwdonnelly.com/blog/ai-killed-faking-it.html",
+ "url": "https://jasonwdonnelly.com/blog/ai-killed-faking-it.html"
+}
+</script>
+<style>
+  :root{color-scheme:dark;--paper:#0b0b0a;--paper-2:#161614;--ink:#f1efe8;--ink-soft:#c8c5bb;--muted:#8b887d;--line:#2b2b27;--accent:#c6ff32;--maxw:1180px;--read:720px;--ease:cubic-bezier(0.22,1,0.36,1)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;background:var(--paper);color-scheme:dark}
+  body{background:var(--paper);color:var(--ink);font-family:"Archivo","Helvetica Neue",Arial,sans-serif;line-height:1.65}
+  a{color:inherit;text-decoration:none}
+  .mono{font-family:"JetBrains Mono",monospace}
+  ::selection{background:var(--accent);color:var(--paper)}
+  nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:22px 5vw;background:linear-gradient(to bottom,rgba(11,11,10,.94),rgba(11,11,10,.72));backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+  nav .name{font-weight:800;letter-spacing:-.02em;font-size:1.05rem}
+  nav .name b{color:var(--accent)}
+  nav .links{display:flex;gap:26px;font-size:.82rem;letter-spacing:.04em}
+  nav .links a{color:var(--muted);transition:color .2s}
+  nav .links a:hover,nav .links a[aria-current]{color:var(--ink)}
+  nav .links a[aria-current]{color:var(--accent)}
+  @media(max-width:720px){nav .links{gap:15px;font-size:.72rem} nav .links a.hide-sm{display:none}}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 5vw}
+  .read{max-width:var(--read);margin:0 auto;padding:0 5vw}
+  .bloghero{padding:88px 0 30px}
+  .eyebrow{color:var(--accent);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:20px}
+  .bloghero h1{font-size:clamp(2.6rem,7vw,5rem);line-height:.98;letter-spacing:-.03em;font-weight:800}
+  .bloghero h1 em{font-style:italic;font-weight:300;color:var(--accent)}
+  .bloghero p{margin-top:22px;max-width:60ch;font-size:1.1rem;color:var(--ink-soft)}
+  .posts{border-top:1px solid var(--line);margin-top:44px}
+  .post-row{display:block;padding:34px 0;border-bottom:1px solid var(--line);transition:padding-left .3s var(--ease)}
+  .post-row:hover{padding-left:10px}
+  .post-row .meta{font-family:"JetBrains Mono",monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+  .post-row h2{font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-.02em;font-weight:800;line-height:1.1;max-width:26ch}
+  .post-row:hover h2{color:var(--accent)}
+  .post-row .ex{margin-top:12px;color:var(--ink-soft);font-size:1rem;max-width:62ch}
+  .post-row .go{display:inline-block;margin-top:14px;font-family:"JetBrains Mono",monospace;font-size:.72rem;letter-spacing:.08em;color:var(--muted)}
+  .post-row:hover .go{color:var(--accent)}
+  article{padding:70px 0 20px}
+  .art-head{max-width:var(--read);margin:0 auto;padding:0 5vw 10px}
+  .art-meta{font-family:"JetBrains Mono",monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:22px}
+  .art-meta a{color:var(--accent)}
+  .art-head h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.05;letter-spacing:-.02em;font-weight:800}
+  .art-body{max-width:var(--read);margin:26px auto 0;padding:0 5vw}
+  .art-body p{margin:0 0 22px;font-size:1.14rem;color:var(--ink-soft)}
+  .art-body h2{font-size:1.5rem;font-weight:800;letter-spacing:-.01em;color:var(--ink);margin:40px 0 14px}
+  .art-body a{color:var(--accent);border-bottom:1px solid rgba(198,255,50,.35)}
+  .art-body a:hover{border-color:var(--accent)}
+  .art-body em{color:var(--ink);font-style:italic}
+  .art-body strong{color:var(--ink)}
+  .art-body p:last-child{color:var(--muted);font-size:1rem;border-top:1px solid var(--line);padding-top:22px;margin-top:34px}
+  .art-nav{max-width:var(--read);margin:30px auto 0;padding:26px 5vw 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-family:"JetBrains Mono",monospace;font-size:.74rem;letter-spacing:.06em}
+  .art-nav a{color:var(--muted);transition:color .2s}
+  .art-nav a:hover{color:var(--accent)}
+  footer{border-top:1px solid var(--line);margin-top:56px}
+  footer .row{display:flex;justify-content:space-between;gap:16px;padding:26px 5vw;max-width:var(--maxw);margin:0 auto;font-size:.72rem;color:var(--muted);flex-wrap:wrap}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+</style>
+
+</head>
+<body>
+<nav>
+  <a class="name" href="/index.html#home">Jason Donnelly<b>.</b></a>
+  <div class="links mono">
+    <a class="hide-sm" href="/index.html#work">Work</a>
+    <a class="hide-sm" href="/index.html#voiceover">Voiceover</a>
+    <a href="/books.html">Books</a>
+    <a href="/blog.html" aria-current="page">Blog</a>
+    <a href="/about.html">About</a>
+    <a class="hide-sm" href="/index.html#ai">AI</a>
+    <a class="hide-sm" href="https://www.linkedin.com/in/fluential" target="_blank" rel="noopener">CV</a>
+  </div>
+</nav>
+<article>
+  <div class="art-head">
+    <p class="art-meta"><a href="/blog.html">Blog</a> &middot; November 2, 2026</p>
+    <h1>AI Didn&#x27;t Kill Writing. It Killed Faking It.</h1>
+  </div>
+  <div class="art-body">
+<p>Everybody keeps announcing the funeral for writing.</p>
+<p>Methinks not.</p>
+<p>Writing is fine. What died is something else. The hiding place.</p>
+<h2>The hiding place</h2>
+<p>For a long time, you could fake it.</p>
+<p>Not completely. But enough.</p>
+<p>You could take a competent paragraph, put a confident tone on it, add a list with arrows, and call it thought leadership. Nobody checked whether anything was inside. The sentence looked like a sentence, so it passed.</p>
+<p>I spent 13+ years in advertising. I've seen a LOT of this. Decks full of words that sounded like strategy. Copy that had all the parts of copy and none of the pulse. Whole campaigns that were basically a nice font and a vibe.</p>
+<p>It worked, because producing the draft was hard enough that the draft itself counted as proof of effort.</p>
+<p>That's the part that broke.</p>
+<h2>The draft is now free</h2>
+<p>Anyone can generate a draft in four seconds. Clean grammar. Smooth rhythm. A little flourish on the end.</p>
+<p>So the draft stopped meaning anything.</p>
+<p>And here's the uncomfortable truth: if your whole skill was producing something that looks like writing, you got commoditized overnight. Not because AI is brilliant. Because "looks like writing" is the one thing it is truly, scarily good at.</p>
+<p>I'm going to hold your hands when I say this...</p>
+<p>The machine didn't take your job. It took your cover.</p>
+<h2>What it can't fake</h2>
+<p>So what's left?</p>
+<p>The stuff that was always the actual job.</p>
+<p>Knowing what you think before you start typing. Knowing who you're talking to and what they're sick of hearing. Knowing which sentence is the weird, true one and which nine are decoration.</p>
+<p>That last one is taste. And taste isn't a vibe. It's reps. It's writing badly for years and learning to feel a little sick about it. It's the flinch you get when a line is almost right but not quite.</p>
+<p>AI doesn't flinch. It'll hand you a perfectly smooth paragraph about nothing and feel great about itself all day.</p>
+<p>You're the one who has to feel the nothing. That's the job now. It's honestly the job it always was, just with the camouflage stripped off.</p>
+<h2>Both things are true</h2>
+<p>Now, I don't want to be the guy who tells you AI is a scam and real writers will rise from the ashes. That's a fairy tale, and it's a flattering one, which is how you know to distrust it.</p>
+<p>I use these tools. A lot. They're useful. They're fast. They're patient at 2am when no human would be.</p>
+<p>And they cost something.</p>
+<p>They cost you the struggle that used to build the flinch. If you let the machine do every first draft, every rough pass, every ugly attempt, you skip the exact reps that make you good. You get faster and emptier at the same time.</p>
+<p>Useful AND expensive. Both. At once. Sit in that for a second.</p>
+<p>That's the part nobody wants on a slide. Cheerleaders skip the cost. Doomers skip the use. The honest version has both in the same sentence.</p>
+<h2>The fake-it test</h2>
+<p>Here's a test. It takes thirty seconds.</p>
+<p>Take something you wrote, or something you had a machine write and then "lightly edited." Read it out loud and ask three questions.</p>
+<p>1. Could anyone have said this? If a competitor could paste it onto their site unchanged, you wrote nothing.</p>
+<p>2. Is there one line that surprised you? Not a clever line. A true one. If there's no line like that, you've got a draft. Not a piece.</p>
+<p>3. Did you change anything because it felt wrong? Not because a rule said so. Because it felt wrong in your gut. If you can't remember doing that once, you weren't editing. You were approving.</p>
+<p>Approving is the new faking.</p>
+<p>That's the trap I keep seeing. People aren't pasting raw output anymore. They're tweaking a word or two, nodding, and shipping. It feels like authorship. It's closer to a rubber stamp.</p>
+<h2>Why I wrote a horror novel about it</h2>
+<p>This is the thing that actually keeps me up.</p>
+<p>It isn't one person faking one post. It's a whole room doing it, together, politely, and nobody saying the quiet part.</p>
+<p>Everyone agrees the output is fine. Everyone's too busy to check. The machine sounds sure of itself, so the humans stop being sure of anything. Judgment doesn't get overruled. It just erodes, one agreed-upon meeting at a time.</p>
+<p>That's the premise of <em>No Action Required</em>, my novel about AI quietly eating human judgment inside a company. It's published under my very fake doctor of a pen name, Sham Acumen, which felt appropriate for the subject matter. If you've ever sat in a meeting where everyone nodded at something nobody had actually read, <a href="https://www.amazon.com/No-Action-Required-Sham-Acumen/dp/B0GFWHZVRB">you'll recognize the wallpaper</a>.</p>
+<p>It's a novel. It's fiction. But the conference room is real. 😜</p>
+<h2>What to actually do</h2>
+<p>Okay. Useful part. Here's how I'd spend the next month if I were you.</p>
+<p><strong>Write the ugly version yourself, first.</strong> Even if the machine will do it better. Especially then. Five minutes of your own bad draft keeps the muscle alive.</p>
+<p><strong>Use the machine as a sparring partner, not a ghost.</strong> Ask it to argue with you. Ask what's missing. Ask it to be mean. Then decide, with your own gut, who's right.</p>
+<p><strong>Cut more than you keep.</strong> A real edit leaves marks. If your before and after look almost identical, you didn't edit. You blessed it.</p>
+<p><strong>Say the specific thing.</strong> The number, the name, the weird detail only you would know. Specificity is the one fingerprint a general-purpose machine can't invent for you, because it wasn't there.</p>
+<p><strong>Stay in the room.</strong> Be the person who actually read the thing before it went out. That sounds tiny. It's now rare.</p>
+<h2>The good news</h2>
+<p>Here's the weirdly hopeful part.</p>
+<p>If the hiding place is gone, then the people who were never hiding just got a huge advantage. The ones who cared about the weird line. The ones who sweated the hook. The ones who could tell, from across the room, that something was off.</p>
+<p>They didn't get replaced. They got a lot less competition from people pretending.</p>
+<p>So no, writing isn't dead.</p>
+<p>Faking it is. And honestly? Good riddance.</p>
+<p>If you want to see what that erosion looks like when it goes all the way, <a href="https://www.amazon.com/No-Action-Required-Sham-Acumen/dp/B0GFWHZVRB"><em>No Action Required</em></a> is waiting. Read it in a conference room for the full effect.</p>
+<p>Write that down. 😘</p>
+  </div>
+  <div class="art-nav">
+    <a href="/blog.html">&larr; All posts</a>
+    <a href="/books.html">The books &rarr;</a>
+  </div>
+</article>
+<footer><div class="row mono"><span>&copy; 2026 Jason Donnelly. Written by a human.</span><span>Copenhagen, DK</span></div></footer>
+</body>
+</html>
